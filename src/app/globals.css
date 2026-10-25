@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ───────────────── Design tokens (DESIGN.md §1, §5) ───────────────── */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: 7 8 11;            /* #07080B */
+  --bg-raised: 13 15 20;   /* #0D0F14 */
+  --bg-overlay: 19 22 29;  /* #13161D */
+  --text: 242 244 247;     /* #F2F4F7 */
+  --text-muted: 154 163 178; /* #9AA3B2 */
+  --text-subtle: 122 130 148; /* #7A8294 */
+  --accent: 182 255 59;    /* #B6FF3B */
+  --accent-ink: 10 13 2;   /* #0A0D02 */
+  --accent-text: 182 255 59;
+  --depth: 110 123 255;    /* #6E7BFF */
+  --danger: 255 107 107;
+  --warning: 255 181 71;
+
+  --glass: rgba(255, 255, 255, 0.04);
+  --glass-strong: rgba(255, 255, 255, 0.07);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --grid-line: rgba(255, 255, 255, 0.035);
+  --noise-opacity: 0.035;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-micro: 120ms;
+  --dur-fast: 200ms;
+  --dur-base: 400ms;
+  --dur-slow: 700ms;
+  --dur-hero: 1400ms;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: 245 246 242;       /* #F5F6F2 */
+  --bg-raised: 255 255 255;
+  --bg-overlay: 255 255 255;
+  --text: 11 13 18;        /* #0B0D12 */
+  --text-muted: 74 82 99;  /* #4A5263 */
+  --text-subtle: 95 103 119; /* #5F6777 */
+  --accent: 182 255 59;    /* fills only in light mode */
+  --accent-ink: 10 13 2;
+  --accent-text: 63 107 0; /* #3F6B00 */
+  --depth: 75 87 230;      /* #4B57E6 */
+  --danger: 217 58 58;
+  --warning: 184 110 0;
+
+  --glass: rgba(255, 255, 255, 0.65);
+  --glass-strong: rgba(255, 255, 255, 0.85);
+  --border: rgba(7, 8, 11, 0.08);
+  --border-strong: rgba(7, 8, 11, 0.16);
+  --grid-line: rgba(7, 8, 11, 0.045);
+  --noise-opacity: 0.025;
+}
+
+/* ───────────────── Base ───────────────── */
+@layer base {
+  html {
+    background: rgb(var(--bg));
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply bg-bg font-sans text-body text-fg;
+    min-height: 100svh;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: rgb(var(--accent));
+    color: rgb(var(--accent-ink));
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  [data-theme="light"] :focus-visible {
+    outline-color: rgb(var(--accent-text));
+  }
+}
+
+/* Faint 64px grid + soft noise, used on full-bleed sections */
+@layer components {
+  .bg-grid {
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    background-position: center top;
+  }
+  .noise::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: var(--noise-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+  .glass {
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(16px) saturate(1.5);
+    backdrop-filter: blur(16px) saturate(1.5);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), inset 0 0 0 1px var(--border);
+  }
+  [data-theme="light"] .glass {
+    box-shadow: inset 0 0 0 1px var(--border), 0 8px 24px -8px rgba(7, 8, 11, 0.12);
+  }
+  .eyebrow {
+    @apply font-mono text-label uppercase text-fg-subtle;
+  }
+}
+
+/* ───────────────── Hero headline mask reveal ─────────────────
+   CSS (not JS) so it starts before hydration and doesn't delay LCP. */
+.mask-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.mask-word > span {
+  display: inline-block;
+  transform: translateY(105%);
+  animation: mask-up var(--dur-slow) var(--ease) forwards;
+  animation-delay: calc(120ms + var(--i, 0) * 60ms);
+}
+.fade-up {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fade-up var(--dur-slow) var(--ease) forwards;
+  animation-delay: var(--d, 0ms);
+}
+/* Scan toast: re-keyed per scan so the entrance replays */
+.toast-in {
+  animation: toast-in var(--dur-base) var(--ease) both;
+}
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes mask-up {
+  to { transform: translateY(0); }
+}
+@keyframes fade-up {
+  to { opacity: 1; transform: none; }
+}
+
+/* ───────────────── Reduced motion: simple fades only ───────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .mask-word > span { transform: none; animation: none; }
+  .fade-up { transform: none; animation: fade-only var(--dur-fast) linear forwards; }
+  .toast-in { animation: fade-only var(--dur-fast) linear both; opacity: 0; }
+  @keyframes fade-only { to { opacity: 1; } }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+  }
+}

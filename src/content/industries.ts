@@ -63,7 +63,7 @@ export const INDUSTRIES: Industry[] = [
     ],
     stat: { value: "3,000+", label: "badges printed once" },
     faq: [
-      { q: "Can I schedule a destination change?", a: "Yes. Set the time and the code switches on its own, from agenda to feedback form." },
+      { q: "Can I schedule a destination change?", a: "Scheduled switching is on our roadmap. Today you change the destination in a few seconds from your phone, and every printed badge follows straight away." },
       { q: "Is there a scan limit for big events?", a: "No. Every plan has unlimited scans." },
     ],
   },
@@ -81,7 +81,7 @@ export const INDUSTRIES: Industry[] = [
     ],
     stat: { value: "5 years", label: "of shelf life, one code" },
     faq: [
-      { q: "Can I add our logo?", a: "Yes. Pro and Lifetime let you place your logo in the centre of the code." },
+      { q: "Can I add our logo?", a: "Yes, on every plan, including free static codes. The code switches to its highest error correction so it still scans with the logo in place." },
       { q: "What if a product is discontinued?", a: "Redirect its code to the replacement product so old packaging still sells." },
     ],
   },
@@ -100,7 +100,7 @@ export const INDUSTRIES: Industry[] = [
     stat: { value: "100%", label: "of leaflets on the current form" },
     faq: [
       { q: "Do you collect patient data?", a: "No. StayQR only counts anonymous scans: device type, city and time. Forms stay on your own systems." },
-      { q: "Can staff edit codes?", a: "Yes. Share folders with your team so reception can update links." },
+      { q: "Can staff edit codes?", a: "Team seats with their own logins are on our roadmap. Today one account manages your codes, and an update from any device takes seconds." },
     ],
   },
   {
@@ -147,14 +147,14 @@ export const INDUSTRIES: Industry[] = [
     intro: "Create codes for every campaign, organise them by client, and send the analytics. If a client leaves, their codes keep working.",
     destinations: ["campaign.brand.com/launch", "campaign.brand.com/contest", "brand.com/thank-you"],
     useCases: [
-      { title: "Folders per client", body: "Keep every client's codes, destinations and reports in their own folder." },
+      { title: "Folders per client", body: "Keep every client's codes and destinations in their own folder." },
       { title: "Campaign switches", body: "Move a printed campaign from teaser to launch to thank-you page." },
       { title: "Client-safe", body: "Codes never break if you or the client stop paying, so print runs are never at risk." },
     ],
     stat: { value: "Unlimited", label: "codes across every client" },
     faq: [
-      { q: "Can I export analytics for clients?", a: "Yes. Export any code's scans as CSV or share a read-only report link." },
-      { q: "Can clients edit their own codes?", a: "Invite them to their folder with edit or view-only access." },
+      { q: "Can I export analytics for clients?", a: "Yes. Export any code's scans as CSV. Shareable read-only report links are on our roadmap." },
+      { q: "Can clients edit their own codes?", a: "Not yet. Client access to their own folder, with edit or view-only rights, is on our roadmap." },
     ],
   },
 ];

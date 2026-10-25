@@ -7,10 +7,10 @@ import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
 
 const NAV = [
-  { href: "/#generator", label: "Free generator" },
+  { href: "/qr-code-generator", label: "Free generator" },
   { href: "/#features", label: "Features" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/#industries", label: "Industries" },
+  { href: "/guides", label: "Guides" },
   { href: "/#compare", label: "Compare" },
 ];
 
@@ -75,7 +75,7 @@ export function SiteHeader() {
           <Link href="/login" className="hidden h-10 items-center px-3.5 text-body-sm font-medium text-fg-muted transition-colors hover:text-fg sm:inline-flex">
             Log in
           </Link>
-          <ButtonLink href="/#generator" size="sm" className="hidden sm:inline-flex">
+          <ButtonLink href="/qr-code-generator" size="sm" className="hidden sm:inline-flex">
             Create free QR
           </ButtonLink>
           <button
@@ -105,7 +105,7 @@ export function SiteHeader() {
             </Link>
           ))}
           <Link href="/login" className="flex h-12 items-center text-body font-medium text-fg-muted">Log in</Link>
-          <ButtonLink href="/#generator" className="mt-3 w-full">Create free QR</ButtonLink>
+          <ButtonLink href="/qr-code-generator" className="mt-3 w-full">Create free QR</ButtonLink>
         </nav>
       </div>
     </header>

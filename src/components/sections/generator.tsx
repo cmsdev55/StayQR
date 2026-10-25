@@ -13,7 +13,7 @@ export function Generator() {
           id="generator-title"
           eyebrow="Free QR code generator"
           title="Make a QR code in *seconds.*"
-          intro="Free forever: no sign-up, no watermark, and static codes never expire. Style it, then download SVG or PNG."
+          intro="Free forever: no sign-up, no watermark, and static codes never expire. Add your logo, then download PNG, SVG, JPEG or PDF."
         />
         <GeneratorApp placeholder={placeholder} />
       </div>

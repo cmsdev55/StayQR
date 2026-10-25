@@ -139,6 +139,8 @@ export const PRIVACY: LegalDoc = {
         "Code data: destinations, names, folders and designs you create.",
         "Scan data: when a dynamic code is scanned we record the time, approximate location derived from the IP address (to city level), device type and operating system. [Confirm whether IP addresses are stored, truncated or discarded, and for how long].",
         "Website data: [analytics provider] measures page visits on stayqr.com. [Cookie list or link to cookie notice].",
+        "Free generator: what you type and any logo you upload are processed in your browser to draw the code and build the file. They are not sent to our servers.",
+        "Advertising: the free generator and guide pages show ads from Google AdSense. Google and its partners may use cookies to show and measure ads, personalised only where you have consented. Ads never appear in your dashboard. [Link to Google's ad policy page and the consent settings once AdSense is live].",
       ],
     },
     {
@@ -156,6 +158,7 @@ export const PRIVACY: LegalDoc = {
       title: "Who we share it with",
       body: [
         "Service providers that host and run StayQR on our behalf: [hosting provider], [email provider], [payment processor], [analytics provider].",
+        "Google, as advertising provider on the free tool and guide pages, under its own privacy policy. [Confirm the CCPA/CPRA 'sharing' wording with counsel before ads go live].",
         "Authorities, where required by law.",
         "We never sell personal data.",
       ],

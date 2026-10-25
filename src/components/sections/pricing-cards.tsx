@@ -48,7 +48,7 @@ export function PricingCards({ headingLevel = 3 }: { headingLevel?: 2 | 3 }) {
           price={<span className="font-display text-display-md font-semibold text-fg">$0</span>}
           note="Free forever, no account"
           features={PLAN_FEATURES.free}
-          cta={<ButtonLink href="/#generator" variant="secondary" className="w-full">Create free QR</ButtonLink>}
+          cta={<ButtonLink href="/qr-code-generator" variant="secondary" className="w-full">Create free QR</ButtonLink>}
         />
         <Plan
           h={headingLevel}

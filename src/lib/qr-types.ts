@@ -27,7 +27,7 @@ export type Values = Record<string, string>;
 
 export type QrTypeDef = {
   slug: QrTypeSlug;
-  /** Short name used in pickers ("Wi-Fi"). */
+  /** Short name used in pickers ("WiFi"). */
   name: string;
   /** Group in the picker. */
   group: "Popular" | "Contact" | "Social" | "More";
@@ -133,7 +133,7 @@ export const QR_TYPES: QrTypeDef[] = [
       v.ssid
         ? `WIFI:T:${v.security || "WPA"};S:${wifiEscape(v.ssid)};${v.security === "nopass" ? "" : `P:${wifiEscape(v.password ?? "")};`}${v.hidden ? "H:true;" : ""};`
         : "",
-    describe: (v) => (v.ssid ? `Wi-Fi · ${v.ssid}` : "Add a network name"),
+    describe: (v) => (v.ssid ? `WiFi · ${v.ssid}` : "Add a network name"),
     validate: (v) => req(v, "ssid", "Add the network name") ?? (v.security !== "nopass" && !v.password ? "Add the password, or choose an open network." : null),
   },
   {

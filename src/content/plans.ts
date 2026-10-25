@@ -11,7 +11,7 @@ export const LIFETIME = 79;
 export const YEARLY_SAVING = Math.round((1 - PRO.yearly / (PRO.monthly * 12)) * 100); // 39%
 
 export const PLAN_FEATURES = {
-  free: ["Unlimited static QR codes", "PNG + SVG downloads", "Colours, dot styles and corners", "No sign-up needed"],
+  free: ["Unlimited static QR codes, 17 types", "Your logo and a call-to-action frame", "PNG, SVG, JPEG and PDF up to 4096 px", "No sign-up, no watermark"],
   pro: [
     "Unlimited dynamic QR codes",
     "Unlimited scans, no caps",
@@ -45,8 +45,9 @@ export const MATRIX: { group: string; rows: { label: string; free: string | bool
     group: "Design",
     rows: [
       { label: "Colours, dots and corner styles", free: true, pro: true, lifetime: true },
-      { label: "Logo in the centre", free: false, pro: true, lifetime: true },
-      { label: "SVG, PNG and print-ready PDF", free: "SVG + PNG", pro: true, lifetime: true },
+      { label: "Logo in the centre", free: true, pro: true, lifetime: true },
+      { label: "Frames with a call to action", free: true, pro: true, lifetime: true },
+      { label: "PNG, SVG, JPEG and print-ready PDF", free: true, pro: true, lifetime: true },
     ],
   },
   {

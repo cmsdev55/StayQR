@@ -15,7 +15,7 @@ export const FAQ: Faq[] = [
   },
   {
     q: "Is the free generator really free?",
-    a: "Yes. Make as many static codes as you like, style them, and download SVG or PNG without signing up. There's no watermark and they never expire.",
+    a: "Yes. Make as many static codes as you like, for links, WiFi, contact cards, WhatsApp and more. Add your logo and a frame, then download PNG, SVG, JPEG or PDF without signing up. There's no watermark and they never expire.",
   },
   {
     q: "How does the lifetime plan work?",

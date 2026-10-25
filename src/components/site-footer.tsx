@@ -3,16 +3,24 @@ import { Logo } from "@/components/logo";
 import { Pausable } from "@/components/motion/pausable";
 import { COMPETITORS } from "@/content/competitors";
 import { INDUSTRIES } from "@/content/industries";
+import { QR_TYPES } from "@/lib/qr-types";
 
 const COLUMNS = [
   {
     title: "Product",
     links: [
-      { href: "/#generator", label: "Free QR generator" },
       { href: "/#features", label: "Features" },
       { href: "/pricing", label: "Pricing" },
       { href: "/#compare", label: "Compare" },
+      { href: "/guides", label: "Guides" },
       { href: "/#faq", label: "FAQ" },
+    ],
+  },
+  {
+    title: "Free tools",
+    links: [
+      { href: "/qr-code-generator", label: "QR code generator" },
+      ...QR_TYPES.filter((t) => ["url", "wifi", "vcard", "whatsapp", "instagram"].includes(t.slug)).map((t) => ({ href: `/qr-code-generator/${t.slug}`, label: `${t.name} QR code` })),
     ],
   },
   {
@@ -43,7 +51,7 @@ export function SiteFooter() {
       </Pausable>
 
       <div className="mx-auto max-w-wide px-4 pb-10 pt-20 sm:px-6 lg:px-12 lg:pt-28">
-        <div className="grid gap-12 lg:grid-cols-[1.3fr_repeat(4,1fr)] lg:gap-8">
+        <div className="grid gap-12 lg:grid-cols-[1.3fr_repeat(5,1fr)] lg:gap-8">
           <div className="max-w-[300px]">
             <Link href="/" className="flex items-center gap-2.5 text-fg" aria-label="StayQR home">
               <Logo />
@@ -53,7 +61,7 @@ export function SiteFooter() {
               Dynamic QR codes that keep working, even if you cancel. Edit after printing, scan without limits.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:col-span-4">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:col-span-5 lg:grid-cols-5">
             {COLUMNS.map((col) => (
               <nav key={col.title} aria-label={col.title}>
                 <p className="eyebrow">{col.title}</p>

@@ -58,7 +58,7 @@ export default async function IndustryPage({ params }: Props) {
             <p className="fade-up mt-6 max-w-[52ch] text-body-lg text-fg-muted" style={{ ["--d" as string]: "300ms" }}>{ind.intro}</p>
             <div className="fade-up mt-8 flex flex-col gap-3 sm:flex-row" style={{ ["--d" as string]: "380ms" }}>
               <ButtonLink href={`/signup?industry=${ind.slug}`} size="lg">Start free</ButtonLink>
-              <ButtonLink href="/#generator" size="lg" variant="secondary">Make a free QR code</ButtonLink>
+              <ButtonLink href="/qr-code-generator" size="lg" variant="secondary">Make a free QR code</ButtonLink>
             </div>
           </div>
 
@@ -111,7 +111,7 @@ export default async function IndustryPage({ params }: Props) {
           <ol className="mt-16 grid gap-8 md:grid-cols-3">
             {[
               ["Create", "Make a dynamic code and point it at today's page."],
-              ["Print", "Download print-ready SVG or PNG for menus, signs or packaging."],
+              ["Print", "Download print-ready SVG, PDF or PNG for menus, signs or packaging."],
               ["Change any time", "Update where it goes, pause it, or see who scanned. No reprints."],
             ].map(([t, b], i) => (
               <li key={t} className="flex gap-4" data-reveal="" style={{ ["--stagger" as string]: i }}>

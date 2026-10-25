@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
  */
 export function Placeholder({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <span className={cn("rounded-[4px] bg-warning/[0.08] px-1 font-mono text-[0.85em] text-fg-subtle [box-decoration-break:clone] [text-decoration:underline_dashed_rgb(var(--warning)/0.5)] [text-underline-offset:4px]", className)}>
+    <span className={cn("rounded-[4px] bg-warning/[0.08] px-1 font-mono text-[0.85em] text-fg-muted [box-decoration-break:clone] [text-decoration:underline_dashed_rgb(var(--warning)/0.5)] [text-underline-offset:4px]", className)}>
       [{children}]
     </span>
   );

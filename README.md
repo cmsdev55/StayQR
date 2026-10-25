@@ -18,9 +18,13 @@ ANALYZE=true npm run build   # bundle analyzer
 | `/alternatives/[slug]` | "Alternative to" template: `qr-code-generator-pro`, `bitly`, `flowcode` |
 | `/paused` | What a scanner sees when a code is paused (noindex) |
 | `/login`, `/signup` | Mock auth (`/signup?plan=lifetime` carries the plan) |
+| `/terms`, `/privacy` | Shared legal layout (tabs, short version, section index). Draft text: replace with the Legal board copy |
+| `/opengraph-image`, `/twitter-image` | 1200×630 social image (`next/og`, fonts in `src/assets/og`) |
 | `/dashboard` | Codes with folders + search (`?q=`) · `/dashboard/codes/[id]` editor (`/new`) · `/dashboard/analytics` (`?code=`) · `/dashboard/billing` |
 
-Content lives in `src/content/` (plans, FAQ, industries, competitor facts with sources, dashboard fake data).
+Content lives in `src/content/` (plans, FAQ, industries, legal, competitor facts with sources and `confirmed` flags, dashboard fake data).
+Anything StayQR must still supply renders through `<Placeholder>` / `<PlaceholderSlot>` as visible `[brackets]`; never replace these with invented customers, quotes or numbers.
+Logo: mark A "The Lit Core" (`src/components/logo.tsx`, geometry in `MARK`); `node scripts/gen-icons.mjs` regenerates `icon.svg` and `apple-icon.png`.
 3D components are in `src/components/three/` (CubeQR, ScanBeam, ScanGlobe, ParticleField; shared cube material); every scene is
 lazy, tiered (`useLazyScene`) and has a same-size static fallback in `public/`.
 
@@ -37,6 +41,11 @@ lazy, tiered (`useLazyScene`) and has a same-size static fallback in `public/`.
 - `node scripts/render-fallbacks.mjs`: re-renders the static 3D fallbacks from the live scenes (hero desktop + the tight phone crop and its position in `hero-fallback.json`). Run after changing the 3D look. Env: `BASE_URL`, `ONLY=desktop|mobile`.
 - `node scripts/lighthouse.mjs [path] [runs=3]`: Lighthouse mobile, median of N runs, plus the LCP element and its phases. `THROTTLE=devtools` applies real throttling instead of the Lantern simulation.
 - `node scripts/lcp.mjs [path]`: lists LCP candidates on a Lighthouse-sized phone (412×823, 4× CPU).
+- `node scripts/gen-icons.mjs`: favicon + apple touch icon from the mark geometry.
+- `node scripts/gen-land-mask.mjs`: rebuilds the ScanGlobe land bitmap from Natural Earth data.
+
+Scrolling note: test smoothness on a production build. In `next dev`, each lazy chunk is compiled the first time its
+section scrolls into view, which shows up as hitches the production build doesn't have.
 
 ### Dev and prod side by side
 `NEXT_DIST_DIR` moves the build output, so a production build can run next to `next dev`:

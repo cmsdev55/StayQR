@@ -9,7 +9,8 @@ import { ButtonLink } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { FAQ } from "@/content/faq";
 import { INDUSTRIES, industryBySlug } from "@/content/industries";
-import { qrMatrix, qrPath } from "@/lib/qr";
+import { QrSvg } from "@/components/qr/qr-svg";
+import { qrMatrix } from "@/lib/qr";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -70,9 +71,7 @@ export default async function IndustryPage({ params }: Props) {
                 <span className="inline-flex items-center gap-2 font-mono text-[12px] text-fg-subtle"><span className="size-1.5 rounded-full bg-accent" /> Live</span>
               </div>
               <div className="mx-auto mt-6 w-fit rounded-lg bg-white p-5 shadow-lg">
-                <svg viewBox={`-0.5 -0.5 ${m.length + 1} ${m.length + 1}`} className="size-[180px] text-[#0B0D12]">
-                  <path d={qrPath(m, "rounded")} fill="currentColor" />
-                </svg>
+                <QrSvg m={m} shape="rounded" className="size-[180px] text-[#0B0D12]" />
               </div>
               <p className="mt-6 text-center text-body-sm text-fg-muted">Scan for</p>
               <div className="mx-auto mt-2 flex h-11 w-fit max-w-full items-center gap-2 rounded-full bg-glass-strong px-4 font-mono text-[12px] sm:text-[13px]">

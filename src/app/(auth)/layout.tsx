@@ -24,6 +24,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
             alt=""
             width={1360}
             height={660}
+            loading="lazy"
+            decoding="async"
             className={`pointer-events-none absolute inset-x-0 top-[8%] h-[56%] w-full select-none object-contain [mask-image:radial-gradient(ellipse_48%_52%_at_50%_50%,#000_55%,transparent_100%)] ${t === "dark" ? "[[data-theme=light]_&]:hidden" : "hidden [[data-theme=light]_&]:block"}`}
           />
         ))}

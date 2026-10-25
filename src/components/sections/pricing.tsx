@@ -21,7 +21,7 @@ export function Pricing({ page = false }: { page?: boolean }) {
           intro="Start free. Upgrade when you need to edit codes after printing. Cancel any time and your codes keep working."
         />
         <div className="mt-12 lg:mt-16">
-          <PricingCards />
+          <PricingCards headingLevel={page ? 2 : 3} />
         </div>
       </div>
     </section>

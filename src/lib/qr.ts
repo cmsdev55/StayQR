@@ -15,22 +15,27 @@ export function qrMatrix(text: string, typeNumber: TypeNumber = 4): boolean[][] 
   return rows;
 }
 
-/** One SVG path for every dark module (viewBox = 0 0 n n). Server-side, so mini codes cost no JS. */
-export function qrPath(m: boolean[][], shape: "square" | "rounded" | "dots" = "square", inset = 0.06): string {
-  const s = 1 - inset * 2;
-  const r = shape === "dots" ? s / 2 : shape === "rounded" ? s * 0.32 : 0;
-  const f = (v: number) => +v.toFixed(3);
+/**
+ * Compact SVG path: one centre-line segment per horizontal run of dark modules (viewBox -0.5 -0.5 n+1 n+1).
+ * The stroke draws the style (see components/qr/qr-svg.tsx): square caps for solid modules, round caps
+ * for pills, a 0/1 dash for dots. About 20x smaller than a subpath per module, which matters because
+ * server-rendered SVG ships twice (HTML + RSC payload).
+ */
+export function qrRuns(m: boolean[][]): string {
   let d = "";
-  m.forEach((row, y) =>
-    row.forEach((on, x) => {
-      if (!on) return;
-      const x0 = x + inset, y0 = y + inset;
-      if (!r) d += `M${f(x0)} ${f(y0)}h${f(s)}v${f(s)}h${f(-s)}z`;
-      else {
-        const e = f(s - 2 * r);
-        d += `M${f(x0 + r)} ${f(y0)}h${e}a${f(r)} ${f(r)} 0 0 1 ${f(r)} ${f(r)}v${e}a${f(r)} ${f(r)} 0 0 1 ${f(-r)} ${f(r)}h${f(-e)}a${f(r)} ${f(r)} 0 0 1 ${f(-r)} ${f(-r)}v${f(-e)}a${f(r)} ${f(r)} 0 0 1 ${f(r)} ${f(-r)}z`;
+  m.forEach((row, y) => {
+    let x = 0;
+    while (x < row.length) {
+      if (!row[x]) {
+        x++;
+        continue;
       }
-    }),
-  );
+      let len = 1;
+      while (row[x + len]) len++;
+      // +0.001: a dashed stroke drops zero-length runs and the dash at a run's exact end
+      d += `M${x + 0.5} ${y + 0.5}h${len - 0.999}`;
+      x += len;
+    }
+  });
   return d;
 }

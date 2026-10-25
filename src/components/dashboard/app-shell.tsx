@@ -106,7 +106,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </form>
             <div className="ml-auto flex items-center gap-1 sm:gap-2">
               <ThemeToggle />
-              <ButtonLink href="/dashboard/codes/new" size="sm" variant={onList ? "primary" : "secondary"} className="h-10 px-3 sm:px-4">
+              <ButtonLink href="/dashboard/codes/new" aria-label="New code" size="sm" variant={onList ? "primary" : "secondary"} className="h-10 px-3 sm:px-4">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden><path d="M7 2v10M2 7h10" /></svg>
                 <span className="hidden sm:inline">New code</span>
               </ButtonLink>

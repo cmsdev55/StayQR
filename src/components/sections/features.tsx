@@ -3,7 +3,8 @@ import { Pausable } from "@/components/motion/pausable";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { Card } from "@/components/ui/card";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { qrMatrix, qrPath } from "@/lib/qr";
+import { QrSvg } from "@/components/qr/qr-svg";
+import { qrMatrix } from "@/lib/qr";
 import { cn } from "@/lib/utils";
 import { GlobeVisual } from "./features/globe-card";
 
@@ -201,12 +202,7 @@ function Tile({ i, title, body, className, children }: { i: number; title: strin
 }
 
 function MiniQR({ m, shape = "square", className, style }: { m: boolean[][]; shape?: "square" | "rounded" | "dots"; className?: string; style?: React.CSSProperties }) {
-  const n = m.length;
-  return (
-    <svg viewBox={`-0.5 -0.5 ${n + 1} ${n + 1}`} className={className} style={style} aria-hidden>
-      <path d={qrPath(m, shape)} fill="currentColor" />
-    </svg>
-  );
+  return <QrSvg m={m} shape={shape} className={className} style={style} />;
 }
 
 function Store({ name, os, side }: { name: string; os: string; side: "left" | "right" }) {

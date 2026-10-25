@@ -10,7 +10,7 @@ import { LIFETIME, PLAN_FEATURES, PRO, YEARLY_SAVING, type Billing } from "@/con
 import { cn } from "@/lib/utils";
 
 /** Free / Pro / Lifetime. The billing toggle rolls the Pro price on the odometer. */
-export function PricingCards() {
+export function PricingCards({ headingLevel = 3 }: { headingLevel?: 2 | 3 }) {
   const [billing, setBilling] = useState<Billing>("yearly");
   const yearly = billing === "yearly";
   const perMonth = yearly ? Math.round(PRO.yearlyPerMonth * 100) / 100 : PRO.monthly;
@@ -41,6 +41,7 @@ export function PricingCards() {
 
       <Pausable className="mt-10 grid items-stretch gap-4 md:grid-cols-3 lg:mt-12 lg:gap-5">
         <Plan
+          h={headingLevel}
           i={0}
           name="Free"
           blurb="Static codes for anything you print once."
@@ -50,6 +51,7 @@ export function PricingCards() {
           cta={<ButtonLink href="/#generator" variant="secondary" className="w-full">Create free QR</ButtonLink>}
         />
         <Plan
+          h={headingLevel}
           i={1}
           name="Pro"
           blurb="Dynamic codes you can edit, track and keep."
@@ -66,6 +68,7 @@ export function PricingCards() {
         <div className="lifetime-ring relative rounded-xl p-px" data-reveal="" style={{ ["--stagger" as string]: 2 }}>
           <div aria-hidden className="pointer-events-none absolute -inset-8 -z-10 rounded-[40px] opacity-60 [background:radial-gradient(closest-side,rgb(var(--depth)/0.22),transparent)]" />
           <Plan
+            h={headingLevel}
             name="Lifetime"
             flat
             badge={<Badge variant="accent">Best value</Badge>}
@@ -91,6 +94,7 @@ export function PricingCards() {
 }
 
 function Plan({
+  h,
   i,
   name,
   badge,
@@ -101,6 +105,7 @@ function Plan({
   cta,
   flat,
 }: {
+  h: 2 | 3;
   i?: number;
   name: string;
   badge?: React.ReactNode;
@@ -119,7 +124,7 @@ function Plan({
       className={cn("flex h-full flex-col rounded-xl p-6 sm:p-8", flat ? "bg-bg-raised" : "glass")}
     >
       <div className="flex items-center justify-between gap-3">
-        <h3 className="font-display text-h3 font-semibold text-fg">{name}</h3>
+        {h === 2 ? <h2 className="font-display text-h3 font-semibold text-fg">{name}</h2> : <h3 className="font-display text-h3 font-semibold text-fg">{name}</h3>}
         {badge}
       </div>
       <p className="mt-2 text-body-sm text-fg-muted">{blurb}</p>

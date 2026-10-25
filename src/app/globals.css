@@ -359,6 +359,31 @@
 }
 [data-in] .bar-grow { transform: none; }
 
+/* Comparison ticks: drawn in when their row is revealed */
+.js .draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset var(--dur-slow) var(--ease);
+}
+.js [data-in] .draw { stroke-dashoffset: 0; }
+
+/* Lifetime plan: a lime arc orbiting the card's 1px border */
+@property --orbit {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+.lifetime-ring {
+  background:
+    conic-gradient(from var(--orbit), transparent 0deg, rgb(var(--accent) / 0.95) 40deg, rgb(var(--accent) / 0.2) 100deg, transparent 150deg),
+    linear-gradient(var(--border-strong), var(--border-strong));
+  animation: orbit 5s var(--ease) infinite;
+}
+.lifetime-ring > div:last-child { border-radius: 23px; }
+@keyframes orbit {
+  to { --orbit: 360deg; }
+}
+
 /* Anchored sections clear the fixed header */
 section[id] {
   scroll-margin-top: 72px;
@@ -388,6 +413,8 @@ html.lenis body {
   .toast-in { animation: fade-only var(--dur-fast) linear both; opacity: 0; }
   .marquee-dup { display: none; }
   .ping, .footer-scan, .shine { animation: none; opacity: 0; }
+  .lifetime-ring { animation: none; --orbit: 200deg; }
+  .js .draw { stroke-dashoffset: 0; transition: none; }
   .marquee-track,
   .marquee-track > div { flex-wrap: wrap; width: auto; justify-content: center; transform: none !important; }
   [data-loop] *,

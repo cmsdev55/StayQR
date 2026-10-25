@@ -104,9 +104,10 @@ export function AnimatedCounter({
     suffix;
 
   return (
-    <span ref={ref} className={cn("relative inline-flex tabular-nums leading-[1.1em]", className)}>
+    <span ref={ref} className={cn("relative inline-flex tabular-nums", className)}>
       <span className="sr-only">{label ?? formatted}</span>
-      <span aria-hidden className="inline-flex items-start">
+      {/* leading lives here, not on the root: a caller's font-size token would override it there */}
+      <span aria-hidden className="inline-flex items-start leading-[1.1em]">
         {prefix && <span className="h-[1.1em]">{prefix}</span>}
         {places.map((k) => {
           const intPlace = k - decimals; // 0 = ones
@@ -118,10 +119,12 @@ export function AnimatedCounter({
           const sep = group && intPlace > 0 && intPlace % 3 === 0;
           return (
             <span key={k} className="inline-flex items-start">
+              {/* the invisible 0 sizes the cell to this font's widest digit; max-width collapses leading zeros */}
               <span
-                className="relative inline-block h-[1.1em] overflow-hidden text-center leading-[1.1em] transition-[width,opacity] duration-base ease-stay"
-                style={{ width: hidden ? 0 : "0.62em", opacity: hidden ? 0 : 1 }}
+                className="relative inline-block h-[1.1em] overflow-hidden text-center transition-[max-width,opacity] duration-base ease-stay"
+                style={{ maxWidth: hidden ? 0 : "1em", opacity: hidden ? 0 : 1 }}
               >
+                <span className="invisible block h-[1.1em]">0</span>
                 <span className="absolute inset-x-0 top-0 flex flex-col" style={{ transform: `translateY(${(-pos * 1.1).toFixed(4)}em)` }}>
                   {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((d, i) => (
                     <span key={i} className="block h-[1.1em]">{d}</span>

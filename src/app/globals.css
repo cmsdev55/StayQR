@@ -394,6 +394,15 @@
 .spinner { animation: spin 0.9s var(--ease) infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* Dashboard: route fade + loading skeletons */
+.route-fade { animation: fade-only 150ms var(--ease) both; }
+@keyframes fade-only { from { opacity: 0; } to { opacity: 1; } }
+.skeleton {
+  background: linear-gradient(90deg, var(--glass) 0%, var(--glass-strong) 50%, var(--glass) 100%) 0 0 / 200% 100%;
+  animation: skeleton 1.4s var(--ease) infinite;
+}
+@keyframes skeleton { to { background-position: -200% 0; } }
+
 /* Anchored sections clear the fixed header */
 section[id] {
   scroll-margin-top: 72px;
@@ -423,7 +432,7 @@ html.lenis body {
   .toast-in { animation: fade-only var(--dur-fast) linear both; opacity: 0; }
   .marquee-dup { display: none; }
   .ping, .footer-scan, .shine { animation: none; opacity: 0; }
-  .paused-breathe { animation: none; }
+  .paused-breathe, .skeleton { animation: none; }
   .lifetime-ring { animation: none; --orbit: 200deg; }
   .js .draw { stroke-dashoffset: 0; transition: none; }
   .marquee-track,

@@ -89,7 +89,7 @@ export const QrPreview = forwardRef<QrPreviewHandle, {
   const n = placeholder.length;
   return (
     <div ref={box} className={cn("relative", className)} style={{ width: size, height: size }} aria-hidden>
-      {!ready && (
+      {!ready && n > 0 && (
         <svg viewBox={`0 0 ${n} ${n}`} width={size} height={size} className="absolute inset-0" shapeRendering="crispEdges">
           <rect width={n} height={n} fill={design.bg} />
           {placeholder.flatMap((row, r) =>

@@ -14,7 +14,7 @@ const NAV = [
   { href: "/#compare", label: "Compare" },
 ];
 
-function ThemeToggle() {
+export function ThemeToggle() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   useEffect(() => setTheme(document.documentElement.dataset.theme === "light" ? "light" : "dark"), []);
   const flip = () => {

@@ -257,6 +257,16 @@
   }
 }
 
+/* Light sweeping across a card (generator preview, after each change) */
+.shine {
+  background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.5) 50%, transparent 62%);
+  transform: translateX(-120%);
+  animation: shine 900ms var(--ease) forwards;
+}
+@keyframes shine {
+  to { transform: translateX(120%); }
+}
+
 /* Anchored sections clear the fixed header */
 section[id] {
   scroll-margin-top: 72px;
@@ -285,7 +295,7 @@ html.lenis body {
   .fade-up { transform: none; animation: fade-only var(--dur-fast) linear forwards; }
   .toast-in { animation: fade-only var(--dur-fast) linear both; opacity: 0; }
   .marquee-dup { display: none; }
-  .ping, .footer-scan { animation: none; opacity: 0; }
+  .ping, .footer-scan, .shine { animation: none; opacity: 0; }
   .marquee-track,
   .marquee-track > div { flex-wrap: wrap; width: auto; justify-content: center; transform: none !important; }
   .js [data-reveal],

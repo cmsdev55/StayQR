@@ -8,6 +8,7 @@ import { Hero } from "@/components/sections/hero";
 import { IndustriesMarquee } from "@/components/sections/industries";
 import { NeverDies } from "@/components/sections/never-dies";
 import { Pricing } from "@/components/sections/pricing";
+import { SocialProof } from "@/components/sections/social-proof";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { FAQ } from "@/content/faq";
 import { INDUSTRIES } from "@/content/industries";
@@ -21,6 +22,7 @@ export default function Home() {
       <Features />
       <Compare />
       <Pricing />
+      <SocialProof />
       <section id="industries" aria-labelledby="industries-title" className="relative overflow-hidden border-t border-line py-24 lg:py-40">
         <div className="mx-auto max-w-container px-4 sm:px-6">
           <SectionHeading

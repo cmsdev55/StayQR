@@ -22,3 +22,12 @@ export function PlaceholderSlot({ label, className, children }: { label: ReactNo
     </div>
   );
 }
+
+/** Marks a claim about another company that isn't confirmed on their current pricing page. */
+export function VerifyTag({ className }: { className?: string }) {
+  return (
+    <span className={cn("ml-1 inline-flex h-5 items-center rounded-[4px] bg-warning/[0.12] px-1.5 align-middle font-mono text-[10px] uppercase tracking-[0.06em] text-warning", className)}>
+      [verify]
+    </span>
+  );
+}

@@ -362,16 +362,21 @@ export function NeverDiesStage({ theirs, ours }: { theirs: string[]; ours: strin
               className="mx-auto mt-4 max-w-[40ch] text-body text-fg-muted sm:mt-6 sm:text-body-lg lg:mx-0"
               style={{ opacity: "calc(1 - var(--b-end) * 1.6)" }}
             >
-              Stop paying most QR services and every code you printed stops working. Menus, signs and packaging all
-              break overnight.
+              With some QR services, stop paying and the codes you printed pause or freeze where they are. Menus,
+              signs and packaging stop doing their job.
             </p>
           </div>
+
+          <p className="sr-only">
+            With some dynamic QR services, cancelling pauses printed codes or freezes them so they can no longer be
+            edited. When you cancel StayQR, your codes keep redirecting to their last destination, for life.
+          </p>
 
           {/* The two printed codes */}
           <div aria-hidden className="relative mx-auto mt-6 flex min-h-0 w-full max-w-[760px] flex-1 items-center sm:mt-10 lg:mt-0 lg:h-full">
           <div className="relative grid w-full grid-cols-2 gap-3 sm:gap-6">
             <StoryCard
-              label="Typical dynamic QR"
+              label="A rented dynamic QR"
               status={dead ? { text: "Dead", tone: "danger" } : cancelled ? { text: "Plan cancelled", tone: "warning" } : { text: "Live", tone: "neutral" }}
               footer={
                 <>

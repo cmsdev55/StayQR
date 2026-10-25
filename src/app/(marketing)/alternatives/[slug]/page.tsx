@@ -8,7 +8,7 @@ import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { QrSvg } from "@/components/qr/qr-svg";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
-import { Placeholder, PlaceholderSlot } from "@/components/ui/placeholder";
+import { Placeholder, PlaceholderSlot, VerifyTag } from "@/components/ui/placeholder";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CHECKED, COMPETITORS, STAYQR_ROW, competitorBySlug } from "@/content/competitors";
 import { FAQ } from "@/content/faq";
@@ -36,21 +36,21 @@ export default async function AlternativePage({ params }: Props) {
   const c = competitorBySlug((await params).slug);
   if (!c) notFound();
   const saving = c.pricePerYear - STAYQR_ROW.pricePerYear;
-  const title = `The ${c.name} alternative that never breaks your codes`;
-  const words = title.split(" ");
+  const words = c.headline.split(" ");
+  let accentOn = false;
 
-  // [label, theirs, ours, StayQR is clearly better, confirmed on their pricing page]
-  const rows: [string, string, string, boolean, boolean][] = [
-    ["Price per year", `$${c.pricePerYear} (${c.plan})`, `$${STAYQR_ROW.pricePerYear} (${STAYQR_ROW.plan})`, true, c.confirmed.price],
-    ["Codes included", c.codesIncluded, STAYQR_ROW.codesIncluded, true, c.confirmed.codes],
-    ["Scan limits", c.scanLimit, STAYQR_ROW.scanLimit, !c.scanLimitOk, c.confirmed.scans],
-    ["Edit after printing", c.editAfterPrint, STAYQR_ROW.editAfterPrint, true, c.confirmed.edit],
-    ["After you cancel", c.afterCancelShort, STAYQR_ROW.afterCancelShort, true, c.confirmed.cancel],
+  // [label, their fact, ours, StayQR is clearly better here]
+  const rows: [string, (typeof c)["price"], string, boolean][] = [
+    ["Price per year", c.price, `${STAYQR_ROW.price} (${STAYQR_ROW.plan})`, true],
+    ["Codes included", c.codes, STAYQR_ROW.codes, true],
+    ["Scan limits", c.scans, STAYQR_ROW.scans, c.scans.verdict !== "yes"],
+    ["Edit after printing", c.edit, STAYQR_ROW.edit, c.edit.verdict !== "yes"],
+    ["What happens when you cancel", c.cancel, STAYQR_ROW.cancel, true],
   ];
 
   const faq = [
     { q: `Is StayQR affiliated with ${c.name}?`, a: `No. StayQR is an independent product. ${c.name} is a trademark of its owner; we compare plans using their public pricing and help pages, checked ${CHECKED}.` },
-    { q: `What happens to my ${c.name} codes if I cancel?`, a: c.afterCancelLong },
+    { q: `What happens to my ${c.name} codes if I cancel?`, a: `${c.cancelLong} (Checked ${CHECKED}; confirm with ${c.name} before relying on it.)` },
     { q: `Can I import my ${c.name} codes?`, a: `You can't move a code that points at ${c.name}'s short links, but you can export your destinations, import them into StayQR as a CSV and reprint once. After that, you never need to reprint again.` },
     FAQ[0],
   ];
@@ -61,18 +61,22 @@ export default async function AlternativePage({ params }: Props) {
         <div className="mx-auto max-w-container px-4 sm:px-6">
           <p className="fade-up eyebrow" style={{ ["--d" as string]: "0ms" }}>{c.name} alternative</p>
           <h1 id="alt-title" className="mt-5 max-w-[20ch] font-display text-display-xl font-semibold text-fg [text-wrap:balance]">
-            {words.map((w, i) => (
-              <span key={i}>
-                <span className="mask-word">
-                  <span style={{ ["--i" as string]: i }} className={w === "never" ? "text-accent-text" : undefined}>{w}</span>
+            {words.map((w, i) => {
+              if (w.startsWith("*")) accentOn = true;
+              const accent = accentOn;
+              if (/\*[.,!?]?$/.test(w)) accentOn = false;
+              return (
+                <span key={i}>
+                  <span className="mask-word">
+                    <span style={{ ["--i" as string]: i }} className={accent ? "text-accent-text" : undefined}>{w.replace(/\*/g, "")}</span>
+                  </span>
+                  {i < words.length - 1 ? " " : null}
                 </span>
-                {i < words.length - 1 ? " " : null}
-              </span>
-            ))}
+              );
+            })}
           </h1>
           <p className="fade-up mt-6 max-w-[58ch] text-body-lg text-fg-muted" style={{ ["--d" as string]: "300ms" }}>
-            {c.name}&apos;s {c.plan} plan costs ${c.pricePerYear} a year. StayQR Pro is ${STAYQR_ROW.pricePerYear}, with unlimited codes and scans, and
-            every code you print keeps working even if you stop paying.
+            {c.pitch}
           </p>
           <div className="fade-up mt-8 flex flex-col gap-3 sm:flex-row" style={{ ["--d" as string]: "380ms" }}>
             <ButtonLink href={`/signup?from=${c.slug}`} size="lg">Switch to StayQR</ButtonLink>
@@ -96,7 +100,7 @@ export default async function AlternativePage({ params }: Props) {
                 <span className="font-mono text-[11px] text-fg-subtle">Captured <Placeholder>date</Placeholder> · <Placeholder>device / browser</Placeholder></span>
               </PlaceholderSlot>
               <figcaption className="mt-4 text-body-sm text-fg-muted">
-                <span className="font-medium text-fg">{c.name}</span> · their help centre says: {c.afterCancelLong} <Verify />
+                <span className="font-medium text-fg">{c.name}</span> · what their own pages say: {c.cancelLong} <VerifyTag />
               </figcaption>
             </figure>
             <figure className="flex flex-col" data-reveal="" style={{ ["--stagger" as string]: 1 }}>
@@ -127,11 +131,11 @@ export default async function AlternativePage({ params }: Props) {
                   </tr>
                 </thead>
                 <tbody>
-                  {rows.map(([label, theirs, ours, win, confirmed]) => (
+                  {rows.map(([label, theirs, ours, win]) => (
                     <tr key={label} className="border-b border-line last:border-0">
                       <th scope="row" className="px-5 py-4 align-top text-body-sm font-normal text-fg-muted sm:px-6">{label}</th>
                       <td className="px-3 py-4 align-top text-body-sm text-fg-muted sm:px-6">
-                        {theirs} {!confirmed && <Verify />}
+                        {theirs.text} {!theirs.confirmed && <VerifyTag />}
                       </td>
                       <td className={cn("bg-glass-strong px-3 py-4 align-top text-body-sm sm:px-6", win ? "font-medium text-fg" : "text-fg-muted")}>{ours}</td>
                     </tr>
@@ -145,10 +149,11 @@ export default async function AlternativePage({ params }: Props) {
                 <AnimatedCounter value={saving} from={0} prefix="$" duration={1600} label={`$${saving} per year`} className="mt-4 font-display text-display-lg font-semibold text-accent-text" />
                 <p className="mt-3 text-body-sm text-fg-muted">
                   Comparing {c.name} {c.plan} with StayQR Pro, both billed yearly. Or pay $79 once and never renew.
+                  {c.priceNote && <span className="mt-2 block text-fg-subtle">{c.priceNote}</span>}
                 </p>
               </div>
               <p className="mt-8 border-t border-line pt-6 text-body-sm text-fg-subtle">
-                <Verify /> means the fact isn&apos;t shown on {c.name}&apos;s current pricing page. Confirm it before publishing.
+                <VerifyTag className="ml-0" /> means the fact isn&apos;t shown on {c.name}&apos;s current pricing page. Confirm it before publishing.
               </p>
             </div>
           </div>
@@ -156,7 +161,7 @@ export default async function AlternativePage({ params }: Props) {
             Checked {CHECKED}:{" "}
             {c.sources.map((src, i) => (
               <span key={src.url}>
-                <a href={src.url} target="_blank" rel="nofollow noopener noreferrer" className="underline decoration-line-strong underline-offset-2 hover:text-fg">{c.name} {src.label.toLowerCase()}</a>
+                <a href={src.url} target="_blank" rel="nofollow noopener noreferrer" className="underline decoration-line-strong underline-offset-2 hover:text-fg">{c.short} {src.label.toLowerCase()}</a>
                 {i < c.sources.length - 1 ? ", " : "."}
               </span>
             ))}{" "}
@@ -194,16 +199,8 @@ export default async function AlternativePage({ params }: Props) {
       </section>
 
       <Faq items={faq} title="Switching *questions.*" />
-      <CtaBand title="Stop renting your QR codes." href={`/signup?from=${c.slug}`} cta="Switch to StayQR" />
+      <CtaBand title={c.ctaTitle} href={`/signup?from=${c.slug}`} cta="Switch to StayQR" />
     </main>
-  );
-}
-
-function Verify() {
-  return (
-    <span className="ml-1 inline-flex h-5 items-center rounded-[4px] bg-warning/[0.12] px-1.5 align-middle font-mono text-[10px] uppercase tracking-[0.06em] text-warning">
-      [verify]
-    </span>
   );
 }
 

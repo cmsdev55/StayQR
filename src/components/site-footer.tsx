@@ -21,7 +21,7 @@ const COLUMNS = [
   },
   {
     title: "Alternatives",
-    links: COMPETITORS.map((c) => ({ href: `/alternatives/${c.slug}`, label: `vs ${c.name}` })),
+    links: COMPETITORS.map((c) => ({ href: `/alternatives/${c.slug}`, label: `vs ${c.short}` })),
   },
   {
     title: "Account",

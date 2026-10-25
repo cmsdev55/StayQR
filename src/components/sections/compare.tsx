@@ -1,19 +1,18 @@
 import { Logo } from "@/components/logo";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { CHECKED, COMPETITORS, STAYQR_ROW, type Competitor } from "@/content/competitors";
+import { VerifyTag } from "@/components/ui/placeholder";
+import { CHECKED, COMPETITORS, STAYQR_ROW, type Competitor, type Verdict } from "@/content/competitors";
 import { cn } from "@/lib/utils";
 
-type Verdict = "yes" | "no" | "partial";
-type Cell = { text: string; verdict: Verdict };
+type Cell = { text: string; verdict?: Verdict; confirmed?: boolean };
 
-const afterCancel: Record<Competitor["afterCancel"], Verdict> = { stops: "no", partial: "partial", "keeps-locked": "partial" };
-
+// The cancel row is plain text on purpose: what happens varies too much for a tick or a cross.
 const ROWS: { label: string; ours: Cell; theirs: (c: Competitor) => Cell }[] = [
-  { label: "Codes included", ours: { text: STAYQR_ROW.codesIncluded, verdict: "yes" }, theirs: (c) => ({ text: c.codesIncluded, verdict: "partial" }) },
-  { label: "If you cancel", ours: { text: STAYQR_ROW.afterCancelShort, verdict: "yes" }, theirs: (c) => ({ text: c.afterCancelShort, verdict: afterCancel[c.afterCancel] }) },
-  { label: "Scan limits", ours: { text: STAYQR_ROW.scanLimit, verdict: "yes" }, theirs: (c) => ({ text: c.scanLimit, verdict: c.scanLimitOk ? "yes" : "no" }) },
-  { label: "Edit after printing", ours: { text: STAYQR_ROW.editAfterPrint, verdict: "yes" }, theirs: (c) => ({ text: c.editAfterPrint, verdict: "partial" }) },
+  { label: "Codes included", ours: { text: STAYQR_ROW.codes, verdict: "yes" }, theirs: (c) => c.codes },
+  { label: "What happens when you cancel", ours: { text: STAYQR_ROW.cancel }, theirs: (c) => c.cancel },
+  { label: "Scan limits", ours: { text: STAYQR_ROW.scans, verdict: "yes" }, theirs: (c) => c.scans },
+  { label: "Edit after printing", ours: { text: STAYQR_ROW.edit, verdict: "yes" }, theirs: (c) => c.edit },
 ];
 
 /** Section 5: StayQR vs the three best-known dynamic QR services (facts in src/content/competitors.ts). */
@@ -25,7 +24,7 @@ export function Compare() {
           id="compare-title"
           eyebrow="Compare"
           title="Same codes, for a *fraction* of the price."
-          intro={`The cheapest paid plan with editable codes on each service, and what happens to your printed codes when you stop paying. Checked ${CHECKED}.`}
+          intro={`The cheapest paid plan with editable codes on each service, and what happens to your printed codes when you stop paying. Checked ${CHECKED} against each company's own pages.`}
         />
 
         {/* md+: a real table */}
@@ -44,7 +43,7 @@ export function Compare() {
                 <th scope="col" className="pb-6 align-bottom"><span className="eyebrow">Price per year</span></th>
                 <th scope="col" className="rounded-t-xl border-x border-t border-line-strong bg-glass-strong px-5 pb-6 pt-6 align-bottom">
                   <span className="flex items-center gap-2 text-body font-semibold text-fg"><Logo size={18} /> StayQR</span>
-                  <span className="mt-0.5 block font-mono text-[12px] font-normal text-fg-subtle">{STAYQR_ROW.plan}</span>
+                  <span className="mt-0.5 block font-mono text-[12px] font-normal text-fg-subtle">{STAYQR_ROW.plan} · or $79 once</span>
                   <AnimatedCounter value={STAYQR_ROW.pricePerYear} from={300} prefix="$" duration={1800} label={`$${STAYQR_ROW.pricePerYear} per year`} className="mt-4 font-display text-display-md font-semibold text-accent-text" />
                 </th>
                 {COMPETITORS.map((c) => (
@@ -85,7 +84,7 @@ export function Compare() {
               </div>
               {COMPETITORS.map((c) => (
                 <div key={c.slug}>
-                  <dt className="truncate text-body-sm text-fg-muted">{c.name}</dt>
+                  <dt className="truncate text-body-sm text-fg-muted">{c.short}</dt>
                   <dd><AnimatedCounter value={c.pricePerYear} from={0} prefix="$" duration={1800} label={`$${c.pricePerYear} per year`} className="font-display text-[34px] font-semibold text-fg-muted" /></dd>
                 </div>
               ))}
@@ -101,7 +100,7 @@ export function Compare() {
                 </div>
                 {COMPETITORS.map((c) => (
                   <div key={c.slug} className="flex items-start justify-between gap-4 px-3">
-                    <dt className="shrink-0 text-body-sm text-fg-muted">{c.name}</dt>
+                    <dt className="shrink-0 text-body-sm text-fg-muted">{c.short}</dt>
                     <dd className="text-right"><Value cell={row.theirs(c)} delay={0} align="right" /></dd>
                   </div>
                 ))}
@@ -111,7 +110,8 @@ export function Compare() {
         </div>
 
         <p className="mt-8 max-w-[90ch] text-body-sm text-fg-subtle">
-          Cheapest paid plan that includes editable (dynamic) codes, billed annually, in USD before tax. Sources:{" "}
+          Cheapest paid plan that includes editable (dynamic) codes, billed annually, in USD before tax.{" "}
+          <VerifyTag className="ml-0" /> = not shown on that company&apos;s current pricing page; confirm before launch. Sources:{" "}
           {COMPETITORS.flatMap((c) => c.sources.map((s) => ({ ...s, who: c.name }))).map((s, i, all) => (
             <span key={s.url}>
               <a href={s.url} rel="nofollow noopener noreferrer" target="_blank" className="underline decoration-line-strong underline-offset-2 transition-colors hover:text-fg">
@@ -129,8 +129,11 @@ export function Compare() {
 function Value({ cell, delay, strong, align }: { cell: Cell; delay: number; strong?: boolean; align?: "right" }) {
   return (
     <span className={cn("flex items-start gap-2.5", align === "right" && "flex-row-reverse text-right")}>
-      <Mark verdict={cell.verdict} delay={delay} />
-      <span className={cn("text-body-sm", strong ? "font-medium text-fg" : "text-fg-muted")}>{cell.text}</span>
+      {cell.verdict && <Mark verdict={cell.verdict} delay={delay} />}
+      <span className={cn("text-body-sm", strong ? "font-medium text-fg" : "text-fg-muted")}>
+        {cell.text}
+        {cell.confirmed === false && <VerifyTag />}
+      </span>
     </span>
   );
 }

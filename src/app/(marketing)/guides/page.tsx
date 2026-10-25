@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/guides" },
 };
 
+const CATEGORIES = ["Basics", "Use cases", "Printing", "Design"] as const;
+
 const CRUMBS = [
   { name: "Home", path: "/" },
   { name: "Guides", path: "/guides" },
@@ -39,7 +41,15 @@ export default function GuidesIndexPage() {
             title="QR code *guides.*"
             intro="Short, practical answers to the questions people ask before they print a QR code."
           />
-          <div className="mt-14"><GuideCards guides={GUIDES} /></div>
+          {CATEGORIES.map((cat) => {
+            const list = GUIDES.filter((g) => g.category === cat);
+            return list.length ? (
+              <section key={cat} aria-labelledby={`cat-${cat}`} className="mt-16">
+                <h2 id={`cat-${cat}`} className="eyebrow">{cat}</h2>
+                <div className="mt-6"><GuideCards guides={list} /></div>
+              </section>
+            ) : null;
+          })}
         </div>
       </section>
       <CtaBand title="Make one now, free." body="No sign-up and no watermark. Add your logo, then download PNG, SVG, JPEG or PDF." href="/qr-code-generator" cta="Open the generator" />

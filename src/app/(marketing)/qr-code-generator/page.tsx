@@ -59,6 +59,7 @@ export default function GeneratorHubPage() {
             title="Free QR code *generator.*"
             intro={`${QR_TYPES.length} types, your logo, a frame, and print-ready downloads. No sign-up, no watermark, and static codes never expire.`}
           />
+          <h2 className="sr-only">Create your QR code</h2>
           <div className="mt-12">
             <GeneratorApp placeholder={placeholder} />
           </div>

@@ -60,6 +60,7 @@ export default async function QrTypePageRoute({ params }: Props) {
         <div className="mx-auto max-w-container px-4 sm:px-6">
           <Breadcrumbs items={crumbs} />
           <SectionHeading as="h1" id="type-title" immediate className="mt-6" title={page.h1} intro={page.intro} />
+          <h2 className="sr-only">Create your {def.name} QR code</h2>
           <div className="mt-12">
             <GeneratorApp placeholder={placeholder} initialType={page.slug} />
           </div>

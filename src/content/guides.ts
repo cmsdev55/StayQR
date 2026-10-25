@@ -1,3 +1,6 @@
+import { GUIDES_BASICS } from "./guides-basics";
+import { GUIDES_USES } from "./guides-uses";
+
 /** Inline text supports **bold** and [link text](/path) only. */
 export type GuideBlock =
   | { type: "p"; text: string }
@@ -29,7 +32,7 @@ export type Guide = {
   relatedTools: string[];
 };
 
-export const GUIDES: Guide[] = [
+const GUIDES_CORE: Guide[] = [
   // ── 1. Do QR codes expire? ──────────────────────────────────────────
   {
     slug: "do-qr-codes-expire",
@@ -817,5 +820,8 @@ export const GUIDES: Guide[] = [
     relatedTools: ["url", "vcard", "instagram"],
   },
 ];
+
+/** Every guide; basics first, so the hub and home page lead with the broadest answers. */
+export const GUIDES: Guide[] = [...GUIDES_BASICS.slice(0, 3), ...GUIDES_CORE, ...GUIDES_BASICS.slice(3), ...GUIDES_USES];
 
 export const guideBySlug = (slug: string) => GUIDES.find((g) => g.slug === slug);

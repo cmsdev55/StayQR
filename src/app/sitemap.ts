@@ -16,6 +16,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...GUIDES.map((g) => ({ url: `${BASE}/guides/${g.slug}`, lastModified: g.updated, priority: 0.7 })),
     { url: `${BASE}/signup`, priority: 0.5 },
     { url: `${BASE}/login`, priority: 0.3 },
+    { url: `${BASE}/about`, priority: 0.4 },
+    { url: `${BASE}/contact`, priority: 0.4 },
     { url: `${BASE}/terms`, priority: 0.2 },
     { url: `${BASE}/privacy`, priority: 0.2 },
     ...INDUSTRIES.map((i) => ({ url: `${BASE}/industries/${i.slug}`, priority: 0.7 })),

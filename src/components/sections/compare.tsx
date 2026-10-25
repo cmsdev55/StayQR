@@ -111,7 +111,7 @@ export function Compare() {
 
         <p className="mt-8 max-w-[90ch] text-body-sm text-fg-subtle">
           Cheapest paid plan that includes editable (dynamic) codes, billed annually, in USD before tax.{" "}
-          <VerifyTag className="ml-0" /> = not shown on that company&apos;s current pricing page; confirm before launch. Sources:{" "}
+          Sources:{" "}
           {COMPETITORS.flatMap((c) => c.sources.map((s) => ({ ...s, who: c.name }))).map((s, i, all) => (
             <span key={s.url}>
               <a href={s.url} rel="nofollow noopener noreferrer" target="_blank" className="underline decoration-line-strong underline-offset-2 transition-colors hover:text-fg">

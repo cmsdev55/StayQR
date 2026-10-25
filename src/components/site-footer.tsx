@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PrivacySettingsLink } from "@/components/ads/privacy-settings-link";
 import { Logo } from "@/components/logo";
 import { Pausable } from "@/components/motion/pausable";
 import { COMPETITORS } from "@/content/competitors";
@@ -82,8 +83,11 @@ export function SiteFooter() {
         <div className="mt-20 flex flex-col gap-4 border-t border-line pt-8 font-mono text-[12px] text-fg-subtle sm:flex-row sm:items-center sm:justify-between">
           <p className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <span>© 2026 StayQR. Codes that never die.</span>
+            <Link href="/about" className="transition-colors hover:text-fg">About</Link>
+            <Link href="/contact" className="transition-colors hover:text-fg">Contact</Link>
             <Link href="/terms" className="transition-colors hover:text-fg">Terms</Link>
             <Link href="/privacy" className="transition-colors hover:text-fg">Privacy</Link>
+            <PrivacySettingsLink className="transition-colors hover:text-fg" />
           </p>
           <p className="flex items-center gap-2">
             <span className="relative flex size-2">

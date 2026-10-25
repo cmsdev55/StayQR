@@ -38,7 +38,8 @@ export const metadata: Metadata = {
     description: "Edit after printing. Unlimited scans. Your codes keep working even if you cancel.",
   },
   twitter: { card: "summary_large_image" },
-  alternates: { canonical: "/" },
+  // AdSense site verification (the ad script itself only loads next to an ad slot)
+  ...(process.env.NEXT_PUBLIC_ADSENSE_CLIENT ? { other: { "google-adsense-account": process.env.NEXT_PUBLIC_ADSENSE_CLIENT } } : {}),
 };
 
 export const viewport: Viewport = {

@@ -12,18 +12,23 @@ ANALYZE=true npm run build   # bundle analyzer
 ## Routes
 | Route | What |
 |---|---|
-| `/` | Landing: hero, never-dies story (pinned), free generator, features bento, comparison, pricing, industries, FAQ, final CTA |
+| `/` | Landing: hero, never-dies story (pinned), free generator, features bento, comparison, pricing, free tools + guides, industries, FAQ, final CTA |
+| `/qr-code-generator`, `/qr-code-generator/[type]` | Free generator hub and one SEO page per type (17, from `src/lib/qr-types.ts` + `src/content/qr-type-pages.ts`) |
+| `/guides`, `/guides/[slug]` | Guide articles (`src/content/guides*.ts`) with TOC, Article JSON-LD and in-content ad slots |
+| `/about`, `/contact` | Company and contact pages (facts in `src/content/company.ts`) |
+| `/ads.txt` | AdSense publisher line from `NEXT_PUBLIC_ADSENSE_CLIENT` (404 until set) |
 | `/pricing` | Plans with the odometer toggle, full feature matrix, billing FAQ |
 | `/industries/[slug]` | Industry template (8 static pages from `src/content/industries.ts`) |
 | `/alternatives/[slug]` | "Alternative to" template: `bitly`, `qrfy` (facts in `src/content/competitors.ts`, price evidence in `docs/evidence/`) |
 | `/paused` | What a scanner sees when a code is paused (noindex) |
 | `/login`, `/signup` | Mock auth (`/signup?plan=lifetime` carries the plan) |
-| `/terms`, `/privacy` | Shared legal layout (tabs, short version, section index). Draft text: replace with the Legal board copy |
+| `/terms`, `/privacy` | Legal documents (short version, section index); operator and provider facts come from `src/content/company.ts` |
 | `/opengraph-image`, `/twitter-image` | 1200×630 social image (`next/og`, fonts in `src/assets/og`) |
 | `/dashboard` | Codes with folders + search (`?q=`) · `/dashboard/codes/[id]` editor (`/new`) · `/dashboard/analytics` (`?code=`) · `/dashboard/billing` |
 
 Content lives in `src/content/` (plans, FAQ, industries, legal, competitor facts with sources and `confirmed` flags, dashboard fake data).
-Anything StayQR must still supply renders through `<Placeholder>` / `<PlaceholderSlot>` as visible `[brackets]`; never replace these with invented customers, quotes or numbers.
+Never invent customers, quotes, logos or numbers. A competitor fact without a source on the vendor's own site stays `confirmed: false` and shows a [verify] tag.
+Ads: set `NEXT_PUBLIC_ADSENSE_CLIENT` plus `NEXT_PUBLIC_ADSENSE_SLOT_TOOL` / `NEXT_PUBLIC_ADSENSE_SLOT_GUIDE`; slots render only on generator and guide pages. See `docs/ROADMAP.md`.
 Logo: mark A "The Lit Core" (`src/components/logo.tsx`, geometry in `MARK`); `node scripts/gen-icons.mjs` regenerates `icon.svg` and `apple-icon.png`.
 3D components are in `src/components/three/` (CubeQR, ScanBeam, ScanGlobe, ParticleField; shared cube material); every scene is
 lazy, tiered (`useLazyScene`) and has a same-size static fallback in `public/`.

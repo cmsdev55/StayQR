@@ -8,7 +8,7 @@ import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { QrSvg } from "@/components/qr/qr-svg";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
-import { Placeholder, PlaceholderSlot, VerifyTag } from "@/components/ui/placeholder";
+import { VerifyTag } from "@/components/ui/placeholder";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CHECKED, COMPETITORS, STAYQR_ROW, competitorBySlug } from "@/content/competitors";
 import { FAQ } from "@/content/faq";
@@ -92,15 +92,21 @@ export default async function AlternativePage({ params }: Props) {
             id="after-title"
             eyebrow="After cancelling"
             title="What a printed code does once you *stop paying.*"
-            intro={`The same day, the same printed code, two services. ${c.name}'s side is a screenshot we capture ourselves; ours is the dashboard you'd see.`}
+            intro={`What ${c.name}'s own help pages say happens to your codes, next to what you'd see in StayQR after cancelling.`}
           />
           <div className="mt-12 grid gap-4 lg:grid-cols-2 lg:gap-5">
             <figure className="flex flex-col" data-reveal="">
-              <PlaceholderSlot label={`Screenshot: a ${c.name} code scanned after cancelling`} className="aspect-[4/3] rounded-xl">
-                <span className="font-mono text-[11px] text-fg-subtle">Captured <Placeholder>date</Placeholder> · <Placeholder>device / browser</Placeholder></span>
-              </PlaceholderSlot>
+              <div className="glass flex aspect-[4/3] flex-col justify-between rounded-xl p-6 sm:p-8">
+                <p className="eyebrow">In {c.name}&apos;s own words</p>
+                <blockquote cite={c.quote.url} className="flex flex-col gap-4 font-display text-[clamp(1.05rem,0.95rem+0.5vw,1.35rem)] font-medium leading-snug text-fg [text-wrap:pretty]">
+                  {c.quote.text.map((t) => <p key={t}>&ldquo;{t}&rdquo;</p>)}
+                </blockquote>
+                <a href={c.quote.url} target="_blank" rel="nofollow noopener noreferrer" className="font-mono text-[11px] text-fg-subtle underline decoration-line-strong underline-offset-2 hover:text-fg">
+                  {c.quote.source} · read {CHECKED}
+                </a>
+              </div>
               <figcaption className="mt-4 text-body-sm text-fg-muted">
-                <span className="font-medium text-fg">{c.name}</span> · what their own pages say: {c.cancelLong} <VerifyTag />
+                <span className="font-medium text-fg">{c.name}</span> · after cancelling: {c.cancel.text.charAt(0).toLowerCase() + c.cancel.text.slice(1)}.
               </figcaption>
             </figure>
             <figure className="flex flex-col" data-reveal="" style={{ ["--stagger" as string]: 1 }}>
@@ -153,7 +159,7 @@ export default async function AlternativePage({ params }: Props) {
                 </p>
               </div>
               <p className="mt-8 border-t border-line pt-6 text-body-sm text-fg-subtle">
-                <VerifyTag className="ml-0" /> means the fact isn&apos;t shown on {c.name}&apos;s current pricing page. Confirm it before publishing.
+                Every {c.name} fact here comes from {c.name}&apos;s own pricing, help or FAQ pages, linked below.
               </p>
             </div>
           </div>

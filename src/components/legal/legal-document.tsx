@@ -1,19 +1,8 @@
 import Link from "next/link";
-import { Placeholder } from "@/components/ui/placeholder";
+import { RichText } from "@/components/content/rich-text";
 import type { LegalDoc } from "@/content/legal";
 
-/** Renders text with every [bracketed] fact as a visible placeholder. */
-function Text({ children }: { children: string }) {
-  return (
-    <>
-      {children.split(/(\[[^\]]+\])/g).map((part, i) =>
-        part.startsWith("[") && part.endsWith("]") ? <Placeholder key={i}>{part.slice(1, -1)}</Placeholder> : part,
-      )}
-    </>
-  );
-}
-
-/** One legal document: title, short-version card, sticky section index and the full text. */
+/** One legal document: title, short-version card, sticky section index, the full text and a link to the other document. */
 export function LegalDocument({ doc }: { doc: LegalDoc }) {
   return (
     <article aria-labelledby="legal-title">
@@ -22,10 +11,7 @@ export function LegalDocument({ doc }: { doc: LegalDoc }) {
           {doc.title}
         </h1>
         <p className="fade-up mt-4 font-mono text-[12px] text-fg-subtle" style={{ ["--d" as string]: "120ms" }}>
-          Effective <Text>{doc.effective}</Text> · Last updated <Text>{doc.updated}</Text>
-        </p>
-        <p role="note" className="fade-up mt-6 rounded-sm border border-dashed border-warning/40 bg-warning/[0.06] px-4 py-3 text-body-sm text-fg-muted" style={{ ["--d" as string]: "180ms" }}>
-          <span className="font-medium text-warning">Draft.</span> Replace with the approved text from the Legal board before launch. Every [bracket] is a fact StayQR must supply.
+          Effective {doc.effective} · Last updated {doc.updated}
         </p>
       </header>
 
@@ -37,7 +23,7 @@ export function LegalDocument({ doc }: { doc: LegalDoc }) {
               <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="mt-1 shrink-0 text-accent-text" aria-hidden>
                 <path d="M3 8.5l3 3 7-7" />
               </svg>
-              <span><Text>{s}</Text></span>
+              <span><RichText text={s} /></span>
             </li>
           ))}
         </ul>
@@ -68,13 +54,20 @@ export function LegalDocument({ doc }: { doc: LegalDoc }) {
               </h2>
               {s.body.map((p, j) => (
                 <p key={j} className="mt-4 text-body text-fg-muted">
-                  <Text>{p}</Text>
+                  <RichText text={p} />
                 </p>
               ))}
             </section>
           ))}
         </div>
       </div>
+
+      <p className="mt-6 border-t border-line pt-8 text-body-sm text-fg-muted">
+        {doc.slug === "terms" ? "How we handle your data: " : "The agreement for using StayQR: "}
+        <Link href={doc.slug === "terms" ? "/privacy" : "/terms"} className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">
+          {doc.slug === "terms" ? "Privacy Policy" : "Terms of Service"}
+        </Link>
+      </p>
     </article>
   );
 }

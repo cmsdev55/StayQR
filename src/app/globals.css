@@ -384,6 +384,16 @@
   to { --orbit: 360deg; }
 }
 
+/* Paused page: the sleeping code breathes slowly */
+.paused-breathe { animation: breathe 4.8s var(--ease) infinite alternate; }
+@keyframes breathe {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(0.97); opacity: 0.82; }
+}
+
+.spinner { animation: spin 0.9s var(--ease) infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
 /* Anchored sections clear the fixed header */
 section[id] {
   scroll-margin-top: 72px;
@@ -413,6 +423,7 @@ html.lenis body {
   .toast-in { animation: fade-only var(--dur-fast) linear both; opacity: 0; }
   .marquee-dup { display: none; }
   .ping, .footer-scan, .shine { animation: none; opacity: 0; }
+  .paused-breathe { animation: none; }
   .lifetime-ring { animation: none; --orbit: 200deg; }
   .js .draw { stroke-dashoffset: 0; transition: none; }
   .marquee-track,

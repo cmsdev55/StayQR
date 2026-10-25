@@ -115,7 +115,11 @@ export function AuthForm({ mode, plan }: { mode: "login" | "signup"; plan?: stri
         </Link>
       </p>
       {signup && (
-        <p className="mt-4 text-[12px] text-fg-subtle">By creating an account you agree to the Terms and Privacy Policy.</p>
+        <p className="mt-4 text-[12px] text-fg-subtle">
+          By creating an account you agree to the{" "}
+          <Link href="/terms" className="text-fg-muted underline decoration-line-strong underline-offset-2 hover:text-fg">Terms of Service</Link> and{" "}
+          <Link href="/privacy" className="text-fg-muted underline decoration-line-strong underline-offset-2 hover:text-fg">Privacy Policy</Link>.
+        </p>
       )}
     </div>
   );

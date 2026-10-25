@@ -72,7 +72,11 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-20 flex flex-col gap-4 border-t border-line pt-8 font-mono text-[12px] text-fg-subtle sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 StayQR. Codes that never die.</p>
+          <p className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <span>© 2026 StayQR. Codes that never die.</span>
+            <Link href="/terms" className="transition-colors hover:text-fg">Terms</Link>
+            <Link href="/privacy" className="transition-colors hover:text-fg">Privacy</Link>
+          </p>
           <p className="flex items-center gap-2">
             <span className="relative flex size-2">
               <span className="ping absolute inset-0 rounded-full bg-accent" />

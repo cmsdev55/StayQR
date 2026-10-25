@@ -10,6 +10,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/pricing`, priority: 0.9 },
     { url: `${BASE}/signup`, priority: 0.5 },
     { url: `${BASE}/login`, priority: 0.3 },
+    { url: `${BASE}/terms`, priority: 0.2 },
+    { url: `${BASE}/privacy`, priority: 0.2 },
     ...INDUSTRIES.map((i) => ({ url: `${BASE}/industries/${i.slug}`, priority: 0.7 })),
     ...COMPETITORS.map((c) => ({ url: `${BASE}/alternatives/${c.slug}`, priority: 0.7 })),
   ];

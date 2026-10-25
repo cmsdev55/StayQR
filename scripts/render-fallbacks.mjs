@@ -55,9 +55,9 @@ async function capture(page, theme, tier, { selector = "canvas", anchor = "", fr
 const layout = {};
 for (const theme of ["dark", "light"]) {
   if (only === "cta") {
-    // final CTA: the finished StayQR mark (t=10: reformed and lit, between beam passes)
+    // final CTA: mark A, ring formed and core lit (t=11, between beam passes)
     const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1 });
-    const { png } = await capture(page, theme, "high", { selector: '[data-scene="cta"] canvas', anchor: "#cta-title", freeze: 10 });
+    const { png } = await capture(page, theme, "high", { selector: '[data-scene="cta"] canvas', anchor: "#cta-title", freeze: 11 });
     const bg = theme === "dark" ? "#07080B" : "#F5F6F2";
     await sharp(png).flatten({ background: bg }).webp({ quality: 74, effort: 6 }).toFile(`public/cta-mark-${theme}.webp`);
     const meta = await sharp(png).metadata();

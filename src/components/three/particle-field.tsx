@@ -7,14 +7,37 @@ import { ease } from "@/lib/motion";
 import { createCubeGeometry, createCubeMaterial, createGlowAttribute, FREEZE, MAX_DT } from "./cube-material";
 import { SCAN_EVERY, ScanBeam, scanAt } from "./scan-beam";
 
-/** The 3×3 StayQR mark (same glyph as components/logo.tsx). */
-const MARK = [1, 1, 0, 1, 0, 1, 0, 1, 1];
-
 // Timeline (seconds)
-const HOLD = 1.6; // the QR, with one scan pass
 const EXPLODE = [1.9, 3.6] as const; // QR → particle field
-const REFORM = [4.4, 6.4] as const; // field → mark
-const MARK_SCANS = 7.2; // beam starts sweeping the mark
+const REFORM = [4.4, 6.2] as const; // field → the mark's ring
+const CORE_LAG = 1.0; // the core arrives after the ring…
+const CORE_LIGHT = [7.4, 8.2] as const; // …then lights up
+const MARK_SCANS = 8.4; // beam starts sweeping the mark
+
+/** Is (px, py) inside a rounded square [x0, x0+size]² with corner radius rx? (32-unit mark space) */
+function inRounded(px: number, py: number, x0: number, size: number, rx: number) {
+  const x1 = x0 + size;
+  if (px < x0 || px > x1 || py < x0 || py > x1) return false;
+  const cx = Math.min(Math.max(px, x0 + rx), x1 - rx), cy = Math.min(Math.max(py, x0 + rx), x1 - rx);
+  return (px - cx) ** 2 + (py - cy) ** 2 <= rx * rx;
+}
+
+/**
+ * Mark A ("The Lit Core", components/logo.tsx) as cube cells on a G×G grid: the finder ring
+ * (outer edge rx 9, stroke 4) and the 11×11 core (rx 3.2).
+ */
+function markCells(G: number) {
+  const s = 32 / G;
+  const ring: [number, number][] = [], core: [number, number][] = [];
+  for (let gy = 0; gy < G; gy++)
+    for (let gx = 0; gx < G; gx++) {
+      const px = (gx + 0.5) * s, py = (gy + 0.5) * s;
+      const pos: [number, number] = [gx - (G - 1) / 2, (G - 1) / 2 - gy];
+      if (inRounded(px, py, 10.5, 11, 3.2)) core.push(pos);
+      else if (inRounded(px, py, 0, 32, 9) && !inRounded(px, py, 4, 24, 5)) ring.push(pos);
+    }
+  return { ring, core };
+}
 
 export type ParticleFieldProps = {
   /** The QR the field starts from (dark modules become cubes). */
@@ -26,7 +49,7 @@ export type ParticleFieldProps = {
 
 /**
  * Final-CTA scene: the hero's cube QR returns, gently explodes into a drifting particle field,
- * then reforms into the StayQR mark, which the scan beam keeps lighting.
+ * then reforms into mark A: the ring first, then the core arrives and lights up lime.
  * Shares geometry/material with CubeQR so both scenes live in one chunk and look identical.
  */
 export function ParticleField({ matrix, theme, quality, paused = false }: ParticleFieldProps) {
@@ -40,28 +63,25 @@ export function ParticleField({ matrix, theme, quality, paused = false }: Partic
   const data = useMemo(() => {
     const qr: [number, number][] = [];
     matrix.forEach((row, r) => row.forEach((on, c) => on && qr.push([c - (n - 1) / 2, (n - 1) / 2 - r])));
-    // mark: each lit glyph cell is a k×k block of cubes, sized to use about as many cubes as the QR
-    const cells = MARK.filter(Boolean).length;
-    const k = Math.max(4, Math.round(Math.sqrt(qr.length / cells)));
-    const gap = Math.round(k * 0.4);
-    const span = 3 * k + 2 * gap;
-    const mark: [number, number][] = [];
-    MARK.forEach((on, i) => {
-      if (!on) return;
-      const cx = (i % 3) * (k + gap), cy = Math.floor(i / 3) * (k + gap);
-      for (let y = 0; y < k; y++) for (let x = 0; x < k; x++) mark.push([cx + x - (span - 1) / 2, (span - 1) / 2 - (cy + y)]);
-    });
+    // mark: sampled at a grid size that uses about as many cubes as the QR (the mark fills ~55% of its square)
+    // odd, so the 11-unit core is centred on a cell (an even grid puts cell centres on its edges)
+    const G = Math.max(17, Math.round(Math.sqrt(qr.length / 0.555)) | 1);
+    const { ring, core } = markCells(G);
+    const mark = [...ring, ...core];
+    const span = G;
     const count = Math.max(qr.length, mark.length);
     let seed = 4242;
     const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
     const from = new Float32Array(count * 3), field = new Float32Array(count * 3), to = new Float32Array(count * 3);
     const spin = new Float32Array(count * 3), phase = new Float32Array(count), delay = new Float32Array(count);
-    const hasFrom = new Uint8Array(count), hasTo = new Uint8Array(count);
+    const hasFrom = new Uint8Array(count), hasTo = new Uint8Array(count), isCore = new Uint8Array(count);
     // pair QR and mark cubes by vertical order so the reform reads as a gentle drift, not a shuffle
-    const order = (a: [number, number][]) => a.map((p, i) => ({ p, i, s: p[1] * 1000 - p[0] + rnd() * 400 })).sort((x, y) => y.s - x.s);
-    const qs = order(qr), ms = order(mark);
+    const order = (a: [number, number][]) => a.map((p) => ({ p, s: p[1] * 1000 - p[0] + rnd() * 400 })).sort((x, y) => y.s - x.s);
+    const qs = order(qr);
+    const ms = [...order(ring).map((o) => ({ ...o, core: 0 })), ...order(core).map((o) => ({ ...o, core: 1 }))];
     for (let i = 0; i < count; i++) {
       const q = qs[i]?.p, m = ms[i]?.p;
+      isCore[i] = ms[i]?.core ?? 0;
       hasFrom[i] = q ? 1 : 0;
       hasTo[i] = m ? 1 : 0;
       const qq = q ?? m!, mm = m ?? q!;
@@ -75,7 +95,7 @@ export function ParticleField({ matrix, theme, quality, paused = false }: Partic
       phase[i] = rnd() * Math.PI * 2;
       delay[i] = rnd() * 0.5;
     }
-    return { count, from, field, to, spin, phase, delay, hasFrom, hasTo, span };
+    return { count, from, field, to, spin, phase, delay, hasFrom, hasTo, isCore, span };
   }, [matrix, n]);
 
   const geometry = useMemo(() => createCubeGeometry(quality), [quality]);
@@ -105,7 +125,10 @@ export function ParticleField({ matrix, theme, quality, paused = false }: Partic
     const m = mesh.current;
     if (!m || !tilt.current || paused) return;
     const t = FREEZE ?? (clock.current += Math.min(delta, MAX_DT));
-    const { count, from, field, to, spin, phase, delay, hasFrom, hasTo } = data;
+    const { count, from, field, to, spin, phase, delay, hasFrom, hasTo, isCore } = data;
+    const coreLit = ease((t - CORE_LIGHT[0]) / (CORE_LIGHT[1] - CORE_LIGHT[0]));
+    // dark: emissive + bloom does the work; light: lime is a fill, so push the colour all the way
+    const coreGlow = theme === "dark" ? 0.45 : 1.05;
 
     // one beam over the QR, then repeating passes over the finished mark
     const qrScan = scanAt(t, 0.3, half + 2.5, -half - 2.5, 999);
@@ -118,7 +141,7 @@ export function ParticleField({ matrix, theme, quality, paused = false }: Partic
 
     for (let i = 0; i < count; i++) {
       const e = ease((t - EXPLODE[0] - delay[i]) / (EXPLODE[1] - EXPLODE[0]));
-      const r = ease((t - REFORM[0] - delay[i] * 0.6) / (REFORM[1] - REFORM[0]));
+      const r = ease((t - REFORM[0] - (isCore[i] ? CORE_LAG : 0) - delay[i] * 0.6) / (REFORM[1] - REFORM[0]));
       const drift = (e - r) > 0 ? Math.min(e, 1 - r) : 0; // 1 while floating in the field
       const fx = field[i * 3] + Math.sin(t * 0.5 + phase[i]) * 1.2 * drift;
       const fy = field[i * 3 + 1] + Math.cos(t * 0.4 + phase[i]) * 1.2 * drift;
@@ -131,12 +154,12 @@ export function ParticleField({ matrix, theme, quality, paused = false }: Partic
       if (beamY !== null && Math.abs(y0 - beamY) < 0.75 && (r >= 1 || e <= 0)) lastHit[i] = t;
       const since = t - lastHit[i];
       const pulse = since < 3 ? Math.exp(-since * 6) : 0;
-      // QR: faint tint once scanned · field: softly lit sparks · mark: steadily lit
-      const base = e <= 0 ? (lastHit[i] > 0 ? 0.03 : 0) : 0.06 * drift + 0.045 * r;
+      // QR: faint tint once scanned · field: softly lit sparks · mark: neutral ring, lime core
+      const base = e <= 0 ? (lastHit[i] > 0 ? 0.03 : 0) : 0.06 * drift + (isCore[i] ? 0.02 + coreGlow * coreLit : 0.015) * r;
       glow[i] = Math.max(base, (lastHit[i] > 0 ? 1.1 : 0) * pulse);
 
       // cubes that only exist in one shape grow in or fade out
-      // in the mark, cubes grow until each glyph cell reads as one bevelled tile
+      // in the mark, cubes grow until the ring and core read as solid bevelled shapes
       const size = (hasFrom[i] ? 1 - (hasTo[i] ? 0 : r) : r) * (1 - 0.45 * drift) * (1 + 0.17 * r);
       dummy.position.set(x, y, z + (pulse * 0.4));
       dummy.rotation.set(spin[i * 3] * drift, spin[i * 3 + 1] * drift, spin[i * 3 + 2] * drift);

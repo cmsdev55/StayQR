@@ -1,3 +1,4 @@
+import { Prewarm } from "@/components/motion/prewarm";
 import { Compare } from "@/components/sections/compare";
 import { Faq } from "@/components/sections/faq";
 import { Features } from "@/components/sections/features";
@@ -35,6 +36,7 @@ export default function Home() {
       </section>
       <Faq items={FAQ} />
       <FinalCta />
+      <Prewarm />
     </main>
   );
 }

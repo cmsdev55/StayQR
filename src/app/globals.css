@@ -254,7 +254,7 @@
    pinSpacing:false), so loading GSAP later never moves anything. No pin for reduced motion / no JS. */
 @media (prefers-reduced-motion: no-preference) {
   .js .story-track {
-    height: calc(100svh + 220vh);
+    height: calc(100svh + 170vh);
   }
 }
 

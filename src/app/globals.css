@@ -249,6 +249,14 @@
   70%, 100% { transform: translateY(0); opacity: 0; }
 }
 
+/* "Never dies" story: the track reserves the pinned scroll distance up front (GSAP pins with
+   pinSpacing:false), so loading GSAP later never moves anything. No pin for reduced motion / no JS. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .story-track {
+    height: calc(100svh + 220vh);
+  }
+}
+
 /* Anchored sections clear the fixed header */
 section[id] {
   scroll-margin-top: 72px;

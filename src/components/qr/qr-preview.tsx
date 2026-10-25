@@ -3,11 +3,12 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import type QRCodeStyling from "qr-code-styling";
 import { stylingOptions, type QrDesign } from "@/lib/qr-design";
+import { downloadQr } from "@/lib/qr-export";
 import { cn } from "@/lib/utils";
 
 export type QrPreviewHandle = {
   /** Export at print size with a quiet zone. */
-  download: (ext: "svg" | "png", name?: string) => Promise<void>;
+  download: (ext: "svg" | "png" | "jpeg" | "pdf", name?: string) => Promise<void>;
 };
 
 /**
@@ -27,7 +28,6 @@ export const QrPreview = forwardRef<QrPreviewHandle, {
   const live = useRef<HTMLDivElement>(null);
   const ghost = useRef<HTMLDivElement>(null);
   const qr = useRef<QRCodeStyling | null>(null);
-  const Lib = useRef<typeof QRCodeStyling | null>(null);
   const [ready, setReady] = useState(false);
   const latest = useRef({ data, design });
   latest.current = { data, design };
@@ -43,7 +43,6 @@ export const QrPreview = forwardRef<QrPreviewHandle, {
         io.disconnect();
         import("qr-code-styling").then(({ default: Q }) => {
           if (dead || !live.current) return;
-          Lib.current = Q;
           qr.current = new Q({ ...stylingOptions(latest.current.data, latest.current.design, size), type: "svg" });
           qr.current.append(live.current);
           setReady(true);
@@ -76,13 +75,12 @@ export const QrPreview = forwardRef<QrPreviewHandle, {
     }, 110);
     return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ready, data, design.dots, design.corners, design.fg, design.bg, size]);
+  }, [ready, data, design.dots, design.corners, design.fg, design.bg, design.logo, design.logoSize, design.ecl, size]);
 
   useImperativeHandle(ref, () => ({
     async download(ext, name = "stayqr-code") {
-      const Q = Lib.current ?? (await import("qr-code-styling")).default;
-      const out = new Q({ ...stylingOptions(latest.current.data, latest.current.design, 1024, 64), type: ext === "svg" ? "svg" : "canvas" });
-      await out.download({ name, extension: ext });
+      // same pipeline as the free generator: frame, quiet zone and formats included
+      await downloadQr(latest.current.data, latest.current.design, ext, 1024, name);
     },
   }));
 

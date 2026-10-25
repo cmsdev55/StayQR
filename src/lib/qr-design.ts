@@ -2,14 +2,43 @@
 
 export type DotStyle = "square" | "rounded" | "extra-rounded" | "dots" | "classy";
 export type CornerStyle = "square" | "extra-rounded" | "dot";
-export type ContentKind = "url" | "text" | "wifi" | "email";
+
+export type FrameStyle = "none" | "label" | "box" | "pill";
+export type Ecl = "L" | "M" | "Q" | "H";
 
 export type QrDesign = {
   dots: DotStyle;
   corners: CornerStyle;
   fg: string;
   bg: string;
+  /** Logo as a data URL (stays in the browser; never uploaded). */
+  logo?: string;
+  /** Logo width as a fraction of the code (0.15–0.35). */
+  logoSize?: number;
+  frame?: FrameStyle;
+  frameLabel?: string;
+  /** Error correction; a logo forces H. */
+  ecl?: Ecl;
+  /** Quiet zone in modules (4 is the spec minimum for print). */
+  quietZone?: number;
 };
+
+export const FRAME_STYLES: { value: FrameStyle; label: string }[] = [
+  { value: "none", label: "None" },
+  { value: "label", label: "Label" },
+  { value: "box", label: "Box" },
+  { value: "pill", label: "Pill" },
+];
+
+export const ECL_LEVELS: { value: Ecl; label: string; hint: string }[] = [
+  { value: "L", label: "L", hint: "7% recovery: smallest code" },
+  { value: "M", label: "M", hint: "15%: the usual default" },
+  { value: "Q", label: "Q", hint: "25%: rough surfaces" },
+  { value: "H", label: "H", hint: "30%: needed with a logo" },
+];
+
+/** Error correction actually used: a logo covers modules, so it always needs H. */
+export const effectiveEcl = (d: QrDesign): Ecl => (d.logo ? "H" : (d.ecl ?? "M"));
 
 export const DEFAULT_DESIGN: QrDesign = { dots: "rounded", corners: "extra-rounded", fg: "#0B0D12", bg: "#FFFFFF" };
 
@@ -44,59 +73,6 @@ export const BG_SWATCHES = [
   { value: "#ECFCCB", label: "Lime tint" },
 ];
 
-// ── Content encoding ──────────────────────────────────────────────────
-export type ContentFields = {
-  url: string;
-  text: string;
-  ssid: string;
-  password: string;
-  security: "WPA" | "WEP" | "nopass";
-  email: string;
-  subject: string;
-};
-
-export const DEFAULT_FIELDS: ContentFields = {
-  url: "https://stayqr.com",
-  text: "Table 12 · Ask us about today's specials",
-  ssid: "Cafe Guest",
-  password: "coffee2026",
-  security: "WPA",
-  email: "hello@stayqr.com",
-  subject: "Hello from your QR code",
-};
-
-const wifiEscape = (s: string) => s.replace(/([\\;,:"])/g, "\\$1");
-
-export function encodeContent(kind: ContentKind, f: ContentFields): string {
-  switch (kind) {
-    case "url": {
-      const u = f.url.trim();
-      if (!u) return "";
-      return /^[a-z][a-z0-9+.-]*:/i.test(u) ? u : `https://${u}`;
-    }
-    case "text":
-      return f.text;
-    case "wifi":
-      return f.ssid ? `WIFI:T:${f.security};S:${wifiEscape(f.ssid)};${f.security === "nopass" ? "" : `P:${wifiEscape(f.password)};`};` : "";
-    case "email":
-      return f.email ? `mailto:${f.email.trim()}${f.subject ? `?subject=${encodeURIComponent(f.subject)}` : ""}` : "";
-  }
-}
-
-/** Human summary shown under the preview. */
-export function describeContent(kind: ContentKind, f: ContentFields): string {
-  switch (kind) {
-    case "url":
-      return encodeContent("url", f).replace(/^https?:\/\//, "") || "Add a link";
-    case "text":
-      return f.text ? `${f.text.length} characters of text` : "Add some text";
-    case "wifi":
-      return f.ssid ? `Wi-Fi · ${f.ssid}` : "Add a network name";
-    case "email":
-      return f.email ? `Email · ${f.email}` : "Add an email address";
-  }
-}
-
 // ── Contrast (WCAG relative luminance) ────────────────────────────────
 function lum(hex: string) {
   const h = hex.replace("#", "");
@@ -120,7 +96,9 @@ export function stylingOptions(data: string, d: QrDesign, size: number, margin =
     height: size,
     margin,
     data: data || " ",
-    qrOptions: { errorCorrectionLevel: "M" as const },
+    qrOptions: { errorCorrectionLevel: effectiveEcl(d) },
+    image: d.logo,
+    imageOptions: { hideBackgroundDots: true, imageSize: d.logoSize ?? 0.28, margin: Math.round(size / 120), crossOrigin: "anonymous" },
     dotsOptions: { type: d.dots, color: d.fg },
     cornersSquareOptions: { type: d.corners, color: d.fg },
     cornersDotOptions: { type: d.corners === "dot" ? ("dot" as const) : ("square" as const), color: d.fg },

@@ -30,13 +30,13 @@ export function Compare() {
         {/* md+: a real table */}
         <div className="mt-12 hidden overflow-hidden md:block lg:mt-16">
           <table className="w-full table-fixed border-separate border-spacing-0 text-left">
-            <caption className="sr-only">StayQR compared with QR Code Generator Pro, Bitly and Flowcode</caption>
+            <caption className="sr-only">StayQR compared with {COMPETITORS.map((c) => c.name).join(" and ")}</caption>
             <colgroup>
-              <col className="w-[19%]" />
-              <col className="w-[21%]" />
-              <col />
-              <col />
-              <col />
+              <col className="w-[22%]" />
+              <col className="w-[26%]" />
+              {COMPETITORS.map((c) => (
+                <col key={c.slug} />
+              ))}
             </colgroup>
             <thead>
               <tr>

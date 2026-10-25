@@ -15,7 +15,7 @@ ANALYZE=true npm run build   # bundle analyzer
 | `/` | Landing: hero, never-dies story (pinned), free generator, features bento, comparison, pricing, industries, FAQ, final CTA |
 | `/pricing` | Plans with the odometer toggle, full feature matrix, billing FAQ |
 | `/industries/[slug]` | Industry template (8 static pages from `src/content/industries.ts`) |
-| `/alternatives/[slug]` | "Alternative to" template: `qr-code-generator-pro`, `bitly`, `flowcode` |
+| `/alternatives/[slug]` | "Alternative to" template: `bitly`, `qrfy` (facts in `src/content/competitors.ts`, price evidence in `docs/evidence/`) |
 | `/paused` | What a scanner sees when a code is paused (noindex) |
 | `/login`, `/signup` | Mock auth (`/signup?plan=lifetime` carries the plan) |
 | `/terms`, `/privacy` | Shared legal layout (tabs, short version, section index). Draft text: replace with the Legal board copy |

@@ -1,8 +1,9 @@
 // Renders the static hero fallback images from the live 3D scene (resting state, no beam).
-// Usage: node scripts/render-fallbacks.mjs   (dev server running; BASE_URL defaults to :3000)
+// Usage: node scripts/render-fallbacks.mjs   (dev server running; BASE_URL defaults to :3000; ONLY=desktop|mobile|globe)
 //   public/hero-qr-{dark,light}.webp     desktop, full frame (33×33, high tier)
 //   public/hero-qr-m-{dark,light}.webp   phones, tightly cropped (25×25, low tier, 390px wide)
 //   src/components/sections/hero-fallback.json  where the phone crop sits inside the hero box
+//   public/globe-{dark,light}.webp       features ScanGlobe (ONLY=globe)
 import { createRequire } from "node:module";
 import { writeFileSync } from "node:fs";
 const require = createRequire(import.meta.url);
@@ -15,15 +16,19 @@ const browser = await chromium.launch({
   args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"],
 });
 
-/** Load the scene frozen at t=9 (assembled, scanned once, softly lit) and capture just the canvas. */
-async function capture(page, theme, tier) {
-  await page.goto(`${base}/?tier=${tier}&capture&freeze=9&theme=${theme}`, { waitUntil: "networkidle" });
-  await page.waitForSelector("canvas");
+/**
+ * Load a scene frozen at `freeze` seconds and capture just its canvas (transparent background).
+ * Defaults to the hero (t=9: assembled, scanned once, softly lit, beam off-screen).
+ */
+async function capture(page, theme, tier, { selector = "canvas", anchor = "", freeze = 9 } = {}) {
+  await page.goto(`${base}/?tier=${tier}&capture&freeze=${freeze}&theme=${theme}${anchor}`, { waitUntil: "networkidle" });
+  if (anchor) await page.evaluate((a) => document.querySelector(a).scrollIntoView({ block: "center" }), anchor);
+  await page.waitForSelector(selector, { timeout: 60000 });
   await page.waitForTimeout(5000);
-  await page.evaluate(() => {
+  await page.evaluate((sel) => {
     document.documentElement.style.background = "transparent";
     document.body.style.background = "transparent";
-    const c = document.querySelector("canvas");
+    const c = document.querySelector(sel);
     // the page's grain overlay sits on an ancestor of the canvas; don't bake it into the image
     document.querySelectorAll(".noise").forEach((el) => el.classList.remove("noise"));
     for (let el = c.parentElement; el; el = el.parentElement) {
@@ -31,21 +36,33 @@ async function capture(page, theme, tier) {
       el.style.webkitMaskImage = "none";
       el.style.background = "transparent";
       el.style.backgroundImage = "none";
+      el.style.backdropFilter = "none";
+      el.style.boxShadow = "none";
     }
     document.querySelectorAll("body *").forEach((el) => {
       if (!el.contains(c) && el !== c) el.style.visibility = "hidden";
     });
-  });
-  const box = await page.evaluate(() => {
-    const r = document.querySelector("canvas").getBoundingClientRect();
+  }, selector);
+  const box = await page.evaluate((sel) => {
+    const r = document.querySelector(sel).getBoundingClientRect();
     return { x: r.left + scrollX, y: r.top + scrollY, width: r.width, height: r.height };
-  });
-  const png = await page.screenshot({ clip: box, omitBackground: true, timeout: 120000 });
+  }, selector);
+  const png = await page.screenshot({ clip: box, omitBackground: true, fullPage: true, timeout: 120000 });
   return { png, box };
 }
 
 const layout = {};
 for (const theme of ["dark", "light"]) {
+  if (only === "globe") {
+    // features bento: ScanGlobe at t=12.5 (Europe → Asia in view, cities lit, one ring mid-ping)
+    const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1.5 });
+    const { png } = await capture(page, theme, "high", { selector: '[data-scene="globe"] canvas', anchor: "#features", freeze: 12.5 });
+    await sharp(png).webp({ quality: 55, alphaQuality: 50, effort: 6 }).toFile(`public/globe-${theme}.webp`);
+    const meta = await sharp(png).metadata();
+    console.log("globe", theme, meta.width, "x", meta.height);
+    await page.close();
+    continue;
+  }
   if (only !== "mobile") {
     const page = await browser.newPage({ viewport: { width: 1440, height: 1700 }, deviceScaleFactor: 1 });
     const { png } = await capture(page, theme, "high");

@@ -173,22 +173,23 @@
 
 /* ───────────────── Scroll reveals (RevealObserver sets [data-in]) ─────────────────
    Hidden only under .js, so content is never stuck invisible without JS. */
+/* `translate` (not `transform`) so revealed cards can still tilt with `transform` */
 .js [data-reveal] {
   opacity: 0;
-  transform: translateY(24px);
+  translate: 0 24px;
   transition:
     opacity var(--dur-slow) var(--ease),
-    transform var(--dur-slow) var(--ease);
+    translate var(--dur-slow) var(--ease);
   transition-delay: calc(var(--stagger, 0) * 50ms);
 }
 .js [data-reveal][data-in] {
   opacity: 1;
-  transform: none;
+  translate: none;
 }
 /* Word masks: the container fades nothing; each word slides up out of its own mask */
 .js [data-reveal="words"] {
   opacity: 1;
-  transform: none;
+  translate: none;
 }
 .reveal-word {
   display: inline-block;
@@ -267,6 +268,97 @@
   to { transform: translateX(120%); }
 }
 
+/* ───────────────── Bento loops (features) ─────────────────
+   Base styles are the still frame used for reduced motion. */
+.url-morph { animation: url-morph 9s var(--ease) infinite; }
+@keyframes url-morph {
+  0%, 26% { transform: translateY(0); }
+  33%, 59% { transform: translateY(-25%); }
+  66%, 92% { transform: translateY(-50%); }
+  100% { transform: translateY(-75%); }
+}
+.url-saved { animation: url-saved 3s var(--ease) infinite; }
+@keyframes url-saved {
+  0% { opacity: 0; transform: translateY(4px); }
+  6%, 45% { opacity: 1; transform: none; }
+  60%, 100% { opacity: 0; transform: none; }
+}
+.url-dot { opacity: 0; animation: url-dot 3s var(--ease) infinite; }
+@keyframes url-dot {
+  0%, 38% { transform: translateX(0); opacity: 0; }
+  44% { opacity: 1; }
+  78% { transform: translateX(100%); opacity: 1; }
+  86%, 100% { transform: translateX(100%); opacity: 0; }
+}
+.style-cycle { opacity: 0; animation: style-cycle 9s var(--ease) infinite; }
+.style-cycle:first-child { opacity: 1; }
+@keyframes style-cycle {
+  0%, 30% { opacity: 1; transform: none; }
+  36%, 94% { opacity: 0; transform: scale(0.94); }
+  100% { opacity: 1; transform: none; }
+}
+.style-label { animation: style-label 9s var(--ease) infinite; }
+.style-label:first-child { color: rgb(var(--text)); }
+@keyframes style-label {
+  0%, 30% { color: rgb(var(--text)); }
+  36%, 94% { color: rgb(var(--text-subtle)); }
+  100% { color: rgb(var(--text)); }
+}
+.split-left, .split-right { opacity: 0; }
+.split-left { animation: split-left 4s var(--ease) infinite; }
+.split-right { animation: split-right 4s var(--ease) 2s infinite; }
+@keyframes split-left {
+  0% { transform: translateX(100%); opacity: 0; }
+  6% { opacity: 1; }
+  40% { transform: translateX(0); opacity: 1; }
+  46%, 100% { transform: translateX(0); opacity: 0; }
+}
+@keyframes split-right {
+  0% { transform: translateX(0); opacity: 0; }
+  6% { opacity: 1; }
+  40% { transform: translateX(100%); opacity: 1; }
+  46%, 100% { transform: translateX(100%); opacity: 0; }
+}
+.store-left { animation: store-hit 4s var(--ease) infinite; }
+.store-right { animation: store-hit 4s var(--ease) 2s infinite; }
+@keyframes store-hit {
+  0%, 38% { border-color: var(--border); box-shadow: none; }
+  44% { border-color: rgb(var(--accent) / 0.6); box-shadow: 0 0 0 4px rgb(var(--accent) / 0.1); }
+  75%, 100% { border-color: var(--border); box-shadow: none; }
+}
+.code-stack {
+  transform: translateY(calc(var(--k) * -10px)) scale(calc(1 - var(--k) * 0.05));
+  z-index: calc(4 - var(--k));
+  opacity: calc(1 - var(--k) * 0.22);
+  animation: code-stack 8s var(--ease) infinite;
+}
+@keyframes code-stack {
+  0% { transform: translateY(-30px) scale(0.85); opacity: 0; z-index: 1; }
+  12% { opacity: 0.45; }
+  25% { transform: translateY(-20px) scale(0.9); opacity: 0.55; z-index: 2; }
+  50% { transform: translateY(-10px) scale(0.95); opacity: 0.8; z-index: 3; }
+  75%, 86% { transform: translateY(0) scale(1); opacity: 1; z-index: 4; }
+  100% { transform: translate(60%, 8px) rotate(8deg); opacity: 0; z-index: 5; }
+}
+.csv-row { animation: csv-row 8s var(--ease) infinite; }
+@keyframes csv-row {
+  0% { background: transparent; }
+  3%, 10% { background: rgb(var(--accent) / 0.1); }
+  16%, 100% { background: transparent; }
+}
+.csv-code { animation: csv-code 8s var(--ease) infinite; }
+@keyframes csv-code {
+  0%, 3% { opacity: 0; transform: scale(0.8); }
+  9%, 72% { opacity: 1; transform: none; }
+  80%, 100% { opacity: 0; transform: scale(0.92); }
+}
+.bar-grow {
+  transform-origin: bottom;
+  transform: scaleY(0.15);
+  transition: transform var(--dur-slow) var(--ease);
+}
+[data-in] .bar-grow { transform: none; }
+
 /* Anchored sections clear the fixed header */
 section[id] {
   scroll-margin-top: 72px;
@@ -298,6 +390,10 @@ html.lenis body {
   .ping, .footer-scan, .shine { animation: none; opacity: 0; }
   .marquee-track,
   .marquee-track > div { flex-wrap: wrap; width: auto; justify-content: center; transform: none !important; }
+  [data-loop] *,
+  [data-loop] *::before,
+  [data-loop] *::after { animation: none !important; }
+  .js [data-reveal] { translate: none !important; }
   .js [data-reveal],
   .js [data-reveal="words"] .reveal-word > span {
     transform: none !important;

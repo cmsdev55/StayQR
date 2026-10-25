@@ -4,18 +4,18 @@ import Link from "next/link";
 import { useState } from "react";
 import { IndustryIcon } from "@/components/industry-icon";
 import { Marquee } from "@/components/ui/marquee";
-import { INDUSTRIES } from "@/content/industries";
 
 const USES = ["Table menus", "Yard signs", "Event badges", "Packaging", "Waiting-room posters", "Room cards", "Course handouts", "Campaign flyers", "Business cards", "Shop windows"];
 
-/** Section 7: two marquees, industries one way and the things people print the other. */
-export function IndustriesMarquee() {
+/** Section 7: two marquees, industries one way and the things people print the other.
+ *  Takes only what it shows, so the full industry content never ships to the client. */
+export function IndustriesMarquee({ items }: { items: { slug: string; name: string; line: string }[] }) {
   const [paused, setPaused] = useState(false);
   return (
     <div className="relative">
       <div className="[mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
         <Marquee speed={36} paused={paused} gap={16}>
-          {INDUSTRIES.map((ind) => (
+          {items.map((ind) => (
             <Link
               key={ind.slug}
               href={`/industries/${ind.slug}`}

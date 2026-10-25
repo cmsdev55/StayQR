@@ -9,6 +9,7 @@ import { NeverDies } from "@/components/sections/never-dies";
 import { Pricing } from "@/components/sections/pricing";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { FAQ } from "@/content/faq";
+import { INDUSTRIES } from "@/content/industries";
 
 export default function Home() {
   return (
@@ -29,7 +30,7 @@ export default function Home() {
           />
         </div>
         <div className="mt-12 lg:mt-16">
-          <IndustriesMarquee />
+          <IndustriesMarquee items={INDUSTRIES.map(({ slug, name, line }) => ({ slug, name, line }))} />
         </div>
       </section>
       <Faq items={FAQ} />

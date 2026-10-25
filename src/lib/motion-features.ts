@@ -1,3 +1,3 @@
-// Framer Motion's layout + animation features, fetched by <LazyMotion> after hydration
-// so they never sit in the initial JS.
-export { domMax as default } from "framer-motion";
+// Framer Motion's animation features (enter/exit, no layout), fetched by <LazyMotion> after
+// hydration. Only the dashboard uses Framer; the marketing site animates with CSS.
+export { domAnimation as default } from "framer-motion";

@@ -1,6 +1,5 @@
 "use client";
 
-import { AnimatePresence, LazyMotion, m } from "framer-motion";
 import { useRef, useState } from "react";
 import { QrPreview, type QrPreviewHandle } from "@/components/qr/qr-preview";
 import { StylePicker, SwatchPicker } from "@/components/qr/qr-controls";
@@ -9,7 +8,6 @@ import { Button, ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input, fieldClass } from "@/components/ui/input";
 import { SegmentedToggle } from "@/components/ui/toggle";
-import { EASE } from "@/lib/motion";
 import {
   BG_SWATCHES,
   CORNER_STYLES,
@@ -25,8 +23,6 @@ import {
   type QrDesign,
 } from "@/lib/qr-design";
 import { cn } from "@/lib/utils";
-
-const loadFeatures = () => import("@/lib/motion-features").then((r) => r.default);
 
 const KINDS: { value: ContentKind; label: string }[] = [
   { value: "url", label: "Link" },
@@ -56,7 +52,7 @@ export function GeneratorApp({ placeholder }: { placeholder: string[] }) {
   const upsell = downloaded !== null && !dismissed;
 
   return (
-    <LazyMotion features={loadFeatures} strict>
+    <>
       <div className="mt-12 grid items-start gap-6 lg:mt-16 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-8">
         {/* ── Controls ── */}
         <div className="glass order-2 rounded-xl p-5 sm:p-8 lg:order-1">
@@ -186,16 +182,13 @@ export function GeneratorApp({ placeholder }: { placeholder: string[] }) {
           </div>
           <p className="sr-only" aria-live="polite">{downloaded ? `Downloaded ${downloaded.toUpperCase()}` : ""}</p>
 
-          <AnimatePresence initial={false}>
-            {upsell && (
-              <m.div
-                key="upsell"
-                initial={{ opacity: 0, y: 32, height: 0 }}
-                animate={{ opacity: 1, y: 0, height: "auto" }}
-                exit={{ opacity: 0, y: 16, height: 0 }}
-                transition={{ duration: 0.7, ease: EASE }}
-                className="overflow-hidden"
-              >
+          {/* "Make it dynamic" slides up after the first download (height via grid rows, no JS measuring) */}
+          <div
+            className={cn("grid transition-[grid-template-rows] duration-slow ease-stay", upsell ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}
+            inert={!upsell}
+          >
+            <div className="overflow-hidden">
+              <div className={cn("transition-[opacity,transform] duration-slow ease-stay", upsell ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0")}>
                 <div className="glass relative rounded-xl p-6">
                   <span aria-hidden className="pointer-events-none absolute inset-0 rounded-xl [box-shadow:inset_0_0_0_1px_rgb(var(--accent)/0.35)]" />
                   <div className="flex items-start justify-between gap-4">
@@ -218,12 +211,12 @@ export function GeneratorApp({ placeholder }: { placeholder: string[] }) {
                     <span className="font-mono text-[12px] text-fg-subtle">$29/yr or $79 once</span>
                   </div>
                 </div>
-              </m.div>
-            )}
-          </AnimatePresence>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </LazyMotion>
+    </>
   );
 }
 

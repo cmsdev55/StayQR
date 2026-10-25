@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Toast } from "@/components/dashboard/toast";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CODES, INVOICES } from "@/content/dashboard";
@@ -136,13 +137,7 @@ export function BillingView() {
         )}
       </section>
 
-      <div aria-live="polite" className="pointer-events-none fixed bottom-6 left-1/2 z-50 -translate-x-1/2 lg:left-[calc(50%+124px)]">
-        {toast && (
-          <p key={toast} className="toast-in flex items-center gap-2 rounded-full border border-line bg-bg-overlay px-4 py-2.5 font-medium text-fg shadow-lg">
-            <Check /> {toast}
-          </p>
-        )}
-      </div>
+      <Toast message={toast} />
     </div>
   );
 }

@@ -1,8 +1,8 @@
 "use client";
 
-import { LazyMotion } from "framer-motion";
 import Link from "next/link";
 import { useMemo, useRef, useState } from "react";
+import { Toast } from "@/components/dashboard/toast";
 import { StylePicker, SwatchPicker } from "@/components/qr/qr-controls";
 import { QrPreview, type QrPreviewHandle } from "@/components/qr/qr-preview";
 import { Badge } from "@/components/ui/badge";
@@ -12,8 +12,6 @@ import { Toggle } from "@/components/ui/toggle";
 import { FOLDERS, type QrCode } from "@/content/dashboard";
 import { BG_SWATCHES, CORNER_STYLES, DOT_STYLES, FG_SWATCHES, scanWarning, type QrDesign } from "@/lib/qr-design";
 import { cn } from "@/lib/utils";
-
-const loadFeatures = () => import("@/lib/motion-features").then((r) => r.default);
 
 type Draft = {
   name: string;
@@ -63,7 +61,7 @@ export function CodeEditor({ code, isNew }: { code: QrCode; isNew?: boolean }) {
   };
 
   return (
-    <LazyMotion features={loadFeatures} strict>
+    <>
       <div className="pb-24">
         <Link href="/dashboard" className="inline-flex items-center gap-1.5 text-fg-muted transition-colors hover:text-fg">
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M10 3L5 8l5 5" /></svg>
@@ -214,16 +212,9 @@ export function CodeEditor({ code, isNew }: { code: QrCode; isNew?: boolean }) {
           </div>
         </div>
 
-        <div aria-live="polite" className="pointer-events-none fixed bottom-20 left-1/2 z-50 -translate-x-1/2 lg:left-[calc(50%+124px)]">
-          {toast && (
-            <p key={toast} className="toast-in flex items-center gap-2 rounded-full border border-line bg-bg-overlay px-4 py-2.5 font-medium text-fg shadow-lg">
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent-text" aria-hidden><path d="M3 8.5l3 3 7-7" /></svg>
-              {toast}
-            </p>
-          )}
-        </div>
+        <Toast message={toast} raised />
       </div>
-    </LazyMotion>
+    </>
   );
 }
 

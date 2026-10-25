@@ -7,8 +7,10 @@ const HEADLINE = [["QR", "codes", "that", "never"], ["stop", "working."]];
 
 /** Server component: all copy is real HTML, rendered before any 3D loads. */
 export function Hero() {
-  // The static code image is usually the LCP element; fetch it with the HTML.
-  preload("/hero-qr-dark.webp", { as: "image", fetchPriority: "high", type: "image/webp" });
+  // The static code image is the LCP element on every screen size, so fetch it with the HTML.
+  // Phones get their own crop via <picture> (hero-visual.tsx); each preload only fires for its own media.
+  preload("/hero-qr-dark.webp", { as: "image", fetchPriority: "high", type: "image/webp", media: "(min-width: 640px)" });
+  preload("/hero-qr-m-dark.avif", { as: "image", fetchPriority: "high", type: "image/avif", media: "(max-width: 639px)" });
   let i = 0;
   return (
     <section className="noise bg-grid relative isolate overflow-hidden pt-24 sm:pt-32" aria-labelledby="hero-title">

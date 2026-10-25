@@ -50,8 +50,8 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-/** Set the theme before first paint (no flash). Dark is the default. */
-const themeScript = `(function(){try{var t=localStorage.getItem('stayqr-theme');var q=new URLSearchParams(location.search).get('theme');if(q==='light'||q==='dark')t=q;document.documentElement.dataset.theme=t==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}})()`;
+/** Set the theme before first paint (no flash). Dark is the default. Also flags `.js` so reveal styles only hide content when JS can show it again. */
+const themeScript = `(function(){try{var t=localStorage.getItem('stayqr-theme');var q=new URLSearchParams(location.search).get('theme');if(q==='light'||q==='dark')t=q;var d=document.documentElement;d.classList.add('js');d.dataset.theme=t==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}})()`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

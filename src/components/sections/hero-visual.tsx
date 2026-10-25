@@ -4,6 +4,17 @@ import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { detectTier, useActive, useReducedMotion, useTheme, type DeviceTier } from "@/hooks/use-environment";
 import { cn } from "@/lib/utils";
+import FALLBACK from "./hero-fallback.json";
+
+/** Must match the media query the hero preload uses (hero.tsx) and the CSS in globals.css. */
+const PHONE = "(max-width: 639px)";
+// Phone crop geometry, written by scripts/render-fallbacks.mjs (fractions of the hero box).
+const fallbackVars = {
+  ["--fw" as string]: FALLBACK.width,
+  ["--fcx" as string]: FALLBACK.cx,
+  ["--fcy" as string]: FALLBACK.cy,
+  ["--far" as string]: `${FALLBACK.px[0]} / ${FALLBACK.px[1]}`,
+};
 
 // 3D lives in its own chunk, fetched only after the page's text has painted.
 const HeroScene = dynamic(() => import("@/components/three/hero-scene"), { ssr: false });
@@ -58,28 +69,35 @@ export function HeroVisual() {
       />
 
       {/* Static fallback: shown until the scene is ready, and always on reduced-motion / weak devices.
-          Dark is preloaded (it is often the LCP element); light only loads when light mode is on. */}
-      {(["dark", "light"] as const).map((t) => (
-        // Plain <img>: the files are already small, pre-sized webp (26–37 KB), so skipping the
-        // optimizer saves a redirect hop; dark gets fetchpriority=high as the usual LCP element.
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          key={t}
-          src={`/hero-qr-${t}.webp`}
-          alt=""
-          aria-hidden
-          width={1360}
-          height={660}
-          fetchPriority={t === "dark" ? "high" : "low"}
-          loading={t === "dark" ? "eager" : "lazy"}
-          decoding={t === "dark" ? "sync" : "async"}
-          className={cn(
-            "pointer-events-none absolute inset-0 h-full w-full select-none object-cover transition-opacity duration-slow ease-stay [mask-image:radial-gradient(ellipse_58%_62%_at_50%_58%,#000_60%,transparent_100%)]",
-            t === "dark" ? "[[data-theme=light]_&]:hidden" : "hidden [[data-theme=light]_&]:block",
-            use3D && ready ? "opacity-0" : "opacity-100",
-          )}
-        />
-      ))}
+          Phones get their own tight crop of the low-tier (25×25) scene, positioned exactly where the
+          live canvas draws the code, so it stays smaller than the headline instead of filling the box.
+          Plain <img>: the files are pre-sized and small, so skipping the optimizer saves a redirect hop. */}
+      <div
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute inset-0 select-none transition-opacity duration-slow ease-stay [mask-image:radial-gradient(ellipse_58%_62%_at_50%_58%,#000_60%,transparent_100%)]",
+          use3D && ready ? "opacity-0" : "opacity-100",
+        )}
+      >
+        {(["dark", "light"] as const).map((t) => (
+          <picture key={t} className={t === "dark" ? "[[data-theme=light]_&]:hidden" : "hidden [[data-theme=light]_&]:block"}>
+            <source media={PHONE} type="image/avif" srcSet={`/hero-qr-m-${t}.avif`} width={FALLBACK.px[0]} height={FALLBACK.px[1]} />
+            <source media={PHONE} type="image/webp" srcSet={`/hero-qr-m-${t}.webp`} width={FALLBACK.px[0]} height={FALLBACK.px[1]} />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`/hero-qr-${t}.webp`}
+              alt=""
+              width={1360}
+              height={660}
+              loading={t === "dark" ? "eager" : "lazy"}
+              fetchPriority={t === "dark" ? "high" : "low"}
+              decoding="async"
+              className="hero-fallback"
+              style={fallbackVars}
+            />
+          </picture>
+        ))}
+      </div>
 
       {use3D && (
         <div

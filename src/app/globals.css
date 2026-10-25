@@ -137,6 +137,25 @@
   animation: fade-up var(--dur-slow) var(--ease) forwards;
   animation-delay: var(--d, 0ms);
 }
+/* Hero static fallback: full frame on desktop, the tight phone crop placed where the canvas draws it */
+.hero-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (max-width: 639px) {
+  .hero-fallback {
+    inset: auto;
+    left: calc(var(--fcx) * 100%);
+    top: calc(var(--fcy) * 100%);
+    width: calc(var(--fw) * 100%);
+    height: auto;
+    aspect-ratio: var(--far);
+    transform: translate(-50%, -50%);
+  }
+}
 /* Scan toast: re-keyed per scan so the entrance replays */
 .toast-in {
   animation: toast-in var(--dur-base) var(--ease) both;
@@ -152,11 +171,121 @@
   to { opacity: 1; transform: none; }
 }
 
+/* ───────────────── Scroll reveals (RevealObserver sets [data-in]) ─────────────────
+   Hidden only under .js, so content is never stuck invisible without JS. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--dur-slow) var(--ease),
+    transform var(--dur-slow) var(--ease);
+  transition-delay: calc(var(--stagger, 0) * 50ms);
+}
+.js [data-reveal][data-in] {
+  opacity: 1;
+  transform: none;
+}
+/* Word masks: the container fades nothing; each word slides up out of its own mask */
+.js [data-reveal="words"] {
+  opacity: 1;
+  transform: none;
+}
+.reveal-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+.reveal-word > span {
+  display: inline-block;
+}
+.js [data-reveal="words"] .reveal-word > span {
+  transform: translateY(105%);
+  transition: transform var(--dur-slow) var(--ease);
+  transition-delay: calc(var(--i, 0) * 60ms);
+}
+.js [data-reveal="words"][data-in] .reveal-word > span {
+  transform: none;
+}
+
+/* Loops pause together when their section is off screen or the tab is hidden */
+[data-paused] *,
+[data-paused] *::before,
+[data-paused] *::after {
+  animation-play-state: paused !important;
+}
+
+/* A soft expanding ring (live / scanning indicators) */
+.ping {
+  animation: ping 2.4s var(--ease) infinite;
+}
+@keyframes ping {
+  from { transform: scale(1); opacity: 0.6; }
+  to { transform: scale(2.6); opacity: 0; }
+}
+
+/* Footer: one faint scan line drifting down the grid (its bottom edge is the line) */
+.footer-scan {
+  transform: translateY(-100%);
+  animation: footer-scan 11s var(--ease) infinite;
+}
+.footer-scan::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(var(--accent) / 0.4) 25%, rgb(var(--accent) / 0.4) 75%, transparent);
+  box-shadow: 0 0 12px rgb(var(--accent) / 0.25);
+}
+[data-theme="light"] .footer-scan::after {
+  background: linear-gradient(90deg, transparent, rgb(var(--accent-text) / 0.3) 25%, rgb(var(--accent-text) / 0.3) 75%, transparent);
+  box-shadow: none;
+}
+@keyframes footer-scan {
+  0% { transform: translateY(-100%); opacity: 0; }
+  8% { opacity: 1; }
+  60% { transform: translateY(0); opacity: 1; }
+  70%, 100% { transform: translateY(0); opacity: 0; }
+}
+
+/* Anchored sections clear the fixed header */
+section[id] {
+  scroll-margin-top: 72px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.lenis) {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Lenis (loaded lazily on fine pointers only) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
 /* ───────────────── Reduced motion: simple fades only ───────────────── */
 @media (prefers-reduced-motion: reduce) {
   .mask-word > span { transform: none; animation: none; }
   .fade-up { transform: none; animation: fade-only var(--dur-fast) linear forwards; }
   .toast-in { animation: fade-only var(--dur-fast) linear both; opacity: 0; }
+  .marquee-dup { display: none; }
+  .ping, .footer-scan { animation: none; opacity: 0; }
+  .marquee-track,
+  .marquee-track > div { flex-wrap: wrap; width: auto; justify-content: center; transform: none !important; }
+  .js [data-reveal],
+  .js [data-reveal="words"] .reveal-word > span {
+    transform: none !important;
+    transition: opacity var(--dur-fast) linear !important;
+    transition-delay: 0ms !important;
+  }
   @keyframes fade-only { to { opacity: 1; } }
   *, *::before, *::after {
     scroll-behavior: auto !important;

@@ -4,6 +4,8 @@ const withBundleAnalyzer = bundleAnalyzer({ enabled: process.env.ANALYZE === "tr
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // NEXT_DIST_DIR lets a prod build (Lighthouse) live next to a running dev server.
+  distDir: process.env.NEXT_DIST_DIR || ".next",
   reactStrictMode: true,
   poweredByHeader: false,
   devIndicators: false,

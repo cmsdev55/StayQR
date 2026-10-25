@@ -3,8 +3,9 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
-import { RoundedBoxGeometry } from "three-stdlib";
 import { ease } from "@/lib/motion";
+import { createCubeGeometry, createCubeMaterial, createGlowAttribute, FREEZE, MAX_DT } from "./cube-material";
+import { SCAN_EVERY, SWEEP, ScanBeam, scanAt } from "./scan-beam";
 
 export type CubeQRProps = {
   matrix: boolean[][];
@@ -14,23 +15,19 @@ export type CubeQRProps = {
   onScan?: () => void;
   /** Seconds between scan sweeps. */
   scanEvery?: number;
+  /** Stop advancing the timeline (the canvas may still render). */
+  paused?: boolean;
 };
 
-const SWEEP = 1.1; // seconds for the beam to cross the code
 const ASSEMBLE = 1.1; // per-cube flight time
 const ROW_STAGGER = 0.035;
-// Screenshot/QA mode (?capture): let the clock follow real time even at very low FPS.
-const QS = typeof window !== "undefined" ? new URLSearchParams(location.search) : null;
-const MAX_DT = QS?.has("capture") ? 0.6 : 1 / 20;
-// ?freeze=3.3 pins the timeline to one moment (fallback-image renders, QA).
-const FREEZE = QS?.get("freeze") ? Number(QS.get("freeze")) : null;
 
 /**
  * A QR code made of extruded rounded cubes (one InstancedMesh).
  * Beats: assemble from a particle cloud → hold + tilt → scan sweeps light the cubes,
  * which then stay softly lit ("codes that never die").
  */
-export function CubeQR({ matrix, theme, quality, onScan, scanEvery = 4.5 }: CubeQRProps) {
+export function CubeQR({ matrix, theme, quality, onScan, scanEvery = SCAN_EVERY, paused = false }: CubeQRProps) {
   const n = matrix.length;
   const group = useRef<THREE.Group>(null);
   const tilt = useRef<THREE.Group>(null);
@@ -74,50 +71,9 @@ export function CubeQR({ matrix, theme, quality, onScan, scanEvery = 4.5 }: Cube
   const lastHit = useMemo(() => new Float32Array(data.count).fill(-100), [data.count]);
 
   // ── Geometry + material (emissive driven per instance via aGlow) ─────
-  const geometry = useMemo(() => {
-    const g = new RoundedBoxGeometry(0.84, 0.84, 0.62, quality === "high" ? 3 : 2, 0.12);
-    return g;
-  }, [quality]);
-
-  const material = useMemo(() => {
-    const dark = theme === "dark";
-    const m = new THREE.MeshStandardMaterial({
-      color: dark ? "#2B303B" : "#C9CED6",
-      roughness: dark ? 0.42 : 0.5,
-      metalness: dark ? 0.25 : 0.05,
-    });
-    const uniforms = {
-      uGlowColor: { value: new THREE.Color("#B6FF3B") },
-      uGlowStrength: { value: dark ? 2.2 : 0.35 },
-    };
-    m.onBeforeCompile = (shader) => {
-      Object.assign(shader.uniforms, uniforms);
-      shader.vertexShader = shader.vertexShader
-        .replace("#include <common>", "#include <common>\nattribute float aGlow;\nvarying float vGlow;")
-        .replace("#include <begin_vertex>", "#include <begin_vertex>\nvGlow = aGlow;");
-      shader.fragmentShader = shader.fragmentShader
-        .replace(
-          "#include <common>",
-          "#include <common>\nuniform vec3 uGlowColor;\nuniform float uGlowStrength;\nvarying float vGlow;",
-        )
-        .replace(
-          "#include <color_fragment>",
-          "#include <color_fragment>\ndiffuseColor.rgb = mix(diffuseColor.rgb, uGlowColor, clamp((vGlow - 0.06) * 0.95, 0.0, 1.0));",
-        )
-        .replace(
-          "#include <emissivemap_fragment>",
-          "#include <emissivemap_fragment>\ntotalEmissiveRadiance += uGlowColor * max(vGlow, 0.0) * uGlowStrength;",
-        );
-    };
-    m.customProgramCacheKey = () => `cubeqr-${theme}`;
-    return m;
-  }, [theme]);
-
-  const glowAttr = useMemo(() => {
-    const a = new THREE.InstancedBufferAttribute(glow, 1);
-    a.setUsage(THREE.DynamicDrawUsage);
-    return a;
-  }, [glow]);
+  const geometry = useMemo(() => createCubeGeometry(quality), [quality]);
+  const material = useMemo(() => createCubeMaterial(theme), [theme]);
+  const glowAttr = useMemo(() => createGlowAttribute(glow), [glow]);
 
   useLayoutEffect(() => {
     geometry.setAttribute("aGlow", glowAttr);
@@ -154,26 +110,19 @@ export function CubeQR({ matrix, theme, quality, onScan, scanEvery = 4.5 }: Cube
 
   useFrame((_, delta) => {
     const m = mesh.current;
-    if (!m || !tilt.current || !group.current) return;
+    if (!m || !tilt.current || !group.current || paused) return;
     const t = FREEZE ?? (clock.current += Math.min(delta, MAX_DT));
     const { count, target, scatter, spin, delay, assembledAt } = data;
 
     // Scan schedule
     const scanStart0 = assembledAt + 0.35;
-    let beamY = Infinity;
-    if (t >= scanStart0) {
-      const k = Math.floor((t - scanStart0) / scanEvery);
-      const local = t - scanStart0 - k * scanEvery;
-      if (k !== scanIndex.current) {
-        scanIndex.current = k;
-        onScanRef.current?.();
-      }
-      if (local < SWEEP) {
-        const p = local / SWEEP;
-        beamY = THREE.MathUtils.lerp(half + 2.5, -half - 2.5, p);
-        scannedOnce.current = true;
-      }
+    const scan = scanAt(t, scanStart0, half + 2.5, -half - 2.5, scanEvery);
+    if (scan.index >= 0 && scan.index !== scanIndex.current) {
+      scanIndex.current = scan.index;
+      onScanRef.current?.();
     }
+    const beamY = scan.y ?? Infinity;
+    if (scan.y !== null) scannedOnce.current = true;
 
     const settled = scannedOnce.current || t > scanStart0 + SWEEP ? 0.014 : 0;
     const assembling = t < assembledAt + 0.05;
@@ -237,23 +186,7 @@ export function CubeQR({ matrix, theme, quality, onScan, scanEvery = 4.5 }: Cube
       <group ref={tilt}>
         <group ref={group} rotation={[isPortrait ? -0.62 : -0.72, 0, isPortrait ? -0.1 : -0.14]}>
           <instancedMesh ref={mesh} args={[geometry, material, data.count]} frustumCulled={false} />
-          <group ref={beam} visible={false}>
-            <mesh position={[0, 0, 0.75]}>
-              <planeGeometry args={[n + 5, 0.14]} />
-              <meshBasicMaterial color={new THREE.Color("#E6FFB8").multiplyScalar(theme === "dark" ? 4 : 1.2)} toneMapped={false} />
-            </mesh>
-            <mesh position={[0, 1.4, 0.72]}>
-              <planeGeometry args={[n + 5, 2.8]} />
-              <meshBasicMaterial
-                color="#B6FF3B"
-                transparent
-                opacity={theme === "dark" ? 0.07 : 0.12}
-                depthWrite={false}
-                blending={theme === "dark" ? THREE.AdditiveBlending : THREE.NormalBlending}
-                toneMapped={false}
-              />
-            </mesh>
-          </group>
+          <ScanBeam ref={beam} width={n + 5} theme={theme} />
         </group>
       </group>
     </group>

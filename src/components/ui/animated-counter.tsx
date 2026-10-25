@@ -103,6 +103,17 @@ export function AnimatedCounter({
     value.toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals, useGrouping: group }) +
     suffix;
 
+  // At rest, plain text with the font's natural spacing (fixed-width digit cells are only
+  // needed while digits roll; at rest they leave gaps around narrow glyphs like "1").
+  const settled = started.current && Math.abs(shown - value) < 1e-9;
+  if (settled)
+    return (
+      <span ref={ref} className={cn("relative inline-flex", className)}>
+        <span className="sr-only">{label ?? formatted}</span>
+        <span aria-hidden className="leading-[1.1em]">{formatted}</span>
+      </span>
+    );
+
   return (
     <span ref={ref} className={cn("relative inline-flex tabular-nums", className)}>
       <span className="sr-only">{label ?? formatted}</span>

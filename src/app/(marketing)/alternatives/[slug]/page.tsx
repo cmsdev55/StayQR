@@ -5,10 +5,14 @@ import { Logo } from "@/components/logo";
 import { CtaBand } from "@/components/sections/cta-band";
 import { Faq } from "@/components/sections/faq";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
+import { QrSvg } from "@/components/qr/qr-svg";
+import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
+import { Placeholder, PlaceholderSlot } from "@/components/ui/placeholder";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CHECKED, COMPETITORS, STAYQR_ROW, competitorBySlug } from "@/content/competitors";
 import { FAQ } from "@/content/faq";
+import { qrMatrix } from "@/lib/qr";
 import { cn } from "@/lib/utils";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -35,12 +39,13 @@ export default async function AlternativePage({ params }: Props) {
   const title = `The ${c.name} alternative that never breaks your codes`;
   const words = title.split(" ");
 
-  const rows: [string, string, string, boolean][] = [
-    ["Price per year", `$${c.pricePerYear} (${c.plan})`, `$${STAYQR_ROW.pricePerYear} (${STAYQR_ROW.plan})`, true],
-    ["Codes included", c.codesIncluded, STAYQR_ROW.codesIncluded, true],
-    ["If you cancel", c.afterCancelShort, STAYQR_ROW.afterCancelShort, true],
-    ["Scan limits", c.scanLimit, STAYQR_ROW.scanLimit, !c.scanLimitOk],
-    ["Edit after printing", c.editAfterPrint, STAYQR_ROW.editAfterPrint, true],
+  // [label, theirs, ours, StayQR is clearly better, confirmed on their pricing page]
+  const rows: [string, string, string, boolean, boolean][] = [
+    ["Price per year", `$${c.pricePerYear} (${c.plan})`, `$${STAYQR_ROW.pricePerYear} (${STAYQR_ROW.plan})`, true, c.confirmed.price],
+    ["Codes included", c.codesIncluded, STAYQR_ROW.codesIncluded, true, c.confirmed.codes],
+    ["Scan limits", c.scanLimit, STAYQR_ROW.scanLimit, !c.scanLimitOk, c.confirmed.scans],
+    ["Edit after printing", c.editAfterPrint, STAYQR_ROW.editAfterPrint, true, c.confirmed.edit],
+    ["After you cancel", c.afterCancelShort, STAYQR_ROW.afterCancelShort, true, c.confirmed.cancel],
   ];
 
   const faq = [
@@ -76,16 +81,45 @@ export default async function AlternativePage({ params }: Props) {
         </div>
       </section>
 
-      <section aria-labelledby="side-title" className="border-t border-line py-24 lg:py-32">
+      {/* After cancelling: their code (a real screenshot, to be supplied) next to ours */}
+      <section aria-labelledby="after-title" className="border-t border-line py-24 lg:py-32">
         <div className="mx-auto max-w-container px-4 sm:px-6">
-          <SectionHeading id="side-title" eyebrow="Side by side" title={`StayQR vs *${c.name}*`} />
+          <SectionHeading
+            id="after-title"
+            eyebrow="After cancelling"
+            title="What a printed code does once you *stop paying.*"
+            intro={`The same day, the same printed code, two services. ${c.name}'s side is a screenshot we capture ourselves; ours is the dashboard you'd see.`}
+          />
+          <div className="mt-12 grid gap-4 lg:grid-cols-2 lg:gap-5">
+            <figure className="flex flex-col" data-reveal="">
+              <PlaceholderSlot label={`Screenshot: a ${c.name} code scanned after cancelling`} className="aspect-[4/3] rounded-xl">
+                <span className="font-mono text-[11px] text-fg-subtle">Captured <Placeholder>date</Placeholder> · <Placeholder>device / browser</Placeholder></span>
+              </PlaceholderSlot>
+              <figcaption className="mt-4 text-body-sm text-fg-muted">
+                <span className="font-medium text-fg">{c.name}</span> · their help centre says: {c.afterCancelLong} <Verify />
+              </figcaption>
+            </figure>
+            <figure className="flex flex-col" data-reveal="" style={{ ["--stagger" as string]: 1 }}>
+              <CancelledDashboard />
+              <figcaption className="mt-4 text-body-sm text-fg-muted">
+                <span className="font-medium text-fg">StayQR</span> · plan cancelled, every code still Active and redirecting to its last destination.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      {/* Facts: anything not on their current pricing page is marked [verify] */}
+      <section aria-labelledby="facts-title" className="border-t border-line py-24 lg:py-32">
+        <div className="mx-auto max-w-container px-4 sm:px-6">
+          <SectionHeading id="facts-title" eyebrow="The facts" title={`StayQR vs *${c.name}*`} />
           <div className="mt-12 grid gap-4 lg:grid-cols-[minmax(0,8fr)_minmax(0,4fr)] lg:gap-5">
             <div className="glass overflow-hidden rounded-xl" data-reveal="">
               <table className="w-full table-fixed text-left">
                 <caption className="sr-only">StayQR compared with {c.name}</caption>
                 <thead>
                   <tr className="border-b border-line">
-                    <th scope="col" className="w-[30%] px-5 py-4 font-mono text-label font-normal uppercase text-fg-subtle sm:px-6"><span className="sr-only">Feature</span></th>
+                    <th scope="col" className="w-[30%] px-5 py-4 sm:px-6"><span className="sr-only">Fact</span></th>
                     <th scope="col" className="px-3 py-4 text-body-sm font-semibold text-fg-muted sm:px-6">{c.name}</th>
                     <th scope="col" className="bg-glass-strong px-3 py-4 sm:px-6">
                       <span className="flex items-center gap-2 text-body-sm font-semibold text-fg"><Logo size={16} /> StayQR</span>
@@ -93,10 +127,12 @@ export default async function AlternativePage({ params }: Props) {
                   </tr>
                 </thead>
                 <tbody>
-                  {rows.map(([label, theirs, ours, win]) => (
+                  {rows.map(([label, theirs, ours, win, confirmed]) => (
                     <tr key={label} className="border-b border-line last:border-0">
                       <th scope="row" className="px-5 py-4 align-top text-body-sm font-normal text-fg-muted sm:px-6">{label}</th>
-                      <td className="px-3 py-4 align-top text-body-sm text-fg-muted sm:px-6">{theirs}</td>
+                      <td className="px-3 py-4 align-top text-body-sm text-fg-muted sm:px-6">
+                        {theirs} {!confirmed && <Verify />}
+                      </td>
                       <td className={cn("bg-glass-strong px-3 py-4 align-top text-body-sm sm:px-6", win ? "font-medium text-fg" : "text-fg-muted")}>{ours}</td>
                     </tr>
                   ))}
@@ -112,15 +148,15 @@ export default async function AlternativePage({ params }: Props) {
                 </p>
               </div>
               <p className="mt-8 border-t border-line pt-6 text-body-sm text-fg-subtle">
-                After you cancel {c.name}: {c.afterCancelLong}
+                <Verify /> means the fact isn&apos;t shown on {c.name}&apos;s current pricing page. Confirm it before publishing.
               </p>
             </div>
           </div>
           <p className="mt-6 text-body-sm text-fg-subtle">
             Checked {CHECKED}:{" "}
-            {c.sources.map((s, i) => (
-              <span key={s.url}>
-                <a href={s.url} target="_blank" rel="nofollow noopener noreferrer" className="underline decoration-line-strong underline-offset-2 hover:text-fg">{c.name} {s.label.toLowerCase()}</a>
+            {c.sources.map((src, i) => (
+              <span key={src.url}>
+                <a href={src.url} target="_blank" rel="nofollow noopener noreferrer" className="underline decoration-line-strong underline-offset-2 hover:text-fg">{c.name} {src.label.toLowerCase()}</a>
                 {i < c.sources.length - 1 ? ", " : "."}
               </span>
             ))}{" "}
@@ -160,5 +196,49 @@ export default async function AlternativePage({ params }: Props) {
       <Faq items={faq} title="Switching *questions.*" />
       <CtaBand title="Stop renting your QR codes." href={`/signup?from=${c.slug}`} cta="Switch to StayQR" />
     </main>
+  );
+}
+
+function Verify() {
+  return (
+    <span className="ml-1 inline-flex h-5 items-center rounded-[4px] bg-warning/[0.12] px-1.5 align-middle font-mono text-[10px] uppercase tracking-[0.06em] text-warning">
+      [verify]
+    </span>
+  );
+}
+
+/** StayQR billing + codes the day a plan is cancelled (a calm, solid dashboard mock). */
+function CancelledDashboard() {
+  const codes = [
+    { name: "Table tent · dinner menu", url: "stayqr.com/r/k3xb9", today: 412 },
+    { name: "Window · order online", url: "stayqr.com/r/t4qa8", today: 76 },
+    { name: "Receipt · leave a review", url: "stayqr.com/r/p7mw2", today: 104 },
+  ];
+  return (
+    <div className="flex aspect-[4/3] flex-col overflow-hidden rounded-xl border border-line bg-bg-raised text-body-sm" aria-label="StayQR dashboard after cancelling">
+      <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-3 sm:px-5">
+        <span className="flex items-center gap-2 font-medium text-fg"><Logo size={16} /> QR codes</span>
+        <Badge variant="warning">Plan cancelled<span className="hidden sm:inline"> · ends 14 Mar</span></Badge>
+      </div>
+      <ul className="flex-1 divide-y divide-line">
+        {codes.map((code) => (
+          <li key={code.url} className="flex items-center gap-3 px-4 py-3 sm:px-5">
+            <span className="grid size-9 shrink-0 place-items-center rounded-[6px] bg-white p-1 text-[#0B0D12]">
+              <QrSvg m={qrMatrix(`https://${code.url}`, 0)} shape="rounded" className="size-full" />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block truncate font-medium text-fg">{code.name}</span>
+              <span className="block truncate font-mono text-[11px] text-fg-subtle">{code.url}</span>
+            </span>
+            <span className="hidden text-right sm:block">
+              <span className="block tabular-nums text-fg">{code.today}</span>
+              <span className="block font-mono text-[10px] text-fg-subtle">scans today</span>
+            </span>
+            <Badge variant="accent"><span className="size-1.5 rounded-full bg-current" /> Active</Badge>
+          </li>
+        ))}
+      </ul>
+      <p className="border-t border-line px-4 py-3 font-mono text-[11px] text-fg-subtle sm:px-5">All 14 codes redirecting · no service page, no ads</p>
+    </div>
   );
 }

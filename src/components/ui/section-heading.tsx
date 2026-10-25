@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 /**
  * Mono eyebrow + display heading + optional intro (DESIGN.md §7). Server component:
  * the words are real text; each slides out of its own mask when RevealObserver marks it in.
- * Wrap a word in *asterisks* to set it in the accent text colour.
+ * Wrap words in *asterisks* (one or several) to set them in the accent text colour.
  * `immediate` plays the mask on load instead (for headings at the top of a page).
  */
 export function SectionHeading({
@@ -29,6 +29,7 @@ export function SectionHeading({
   className?: string;
 }) {
   const words = title.split(" ");
+  let accentOn = false;
   return (
     <div className={cn("flex flex-col", align === "center" ? "items-center text-center" : "items-start", className)}>
       {eyebrow && (
@@ -46,8 +47,11 @@ export function SectionHeading({
         )}
       >
         {words.map((w, i) => {
-          const accent = w.startsWith("*") && w.replace(/[.,!?]$/, "").endsWith("*");
-          const clean = accent ? w.replace(/\*/g, "") : w;
+          // *accent* may span several words: a word opening with * starts it, one closing with * (before punctuation) ends it
+          if (w.startsWith("*")) accentOn = true;
+          const accent = accentOn;
+          if (/\*[.,!?]?$/.test(w)) accentOn = false;
+          const clean = w.replace(/\*/g, "");
           return (
             <span key={i}>
               <span className={immediate ? "mask-word" : "reveal-word"}>

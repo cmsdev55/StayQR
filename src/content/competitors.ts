@@ -8,7 +8,11 @@ export const CHECKED = "October 2026";
 
 export type AfterCancel = "stops" | "partial" | "keeps-locked";
 
+/** Which facts were confirmed on the vendor's own current pricing page (anything else shows [verify]). */
+export type Confirmed = { price: boolean; codes: boolean; scans: boolean; edit: boolean; cancel: boolean };
+
 export type Competitor = {
+  confirmed: Confirmed;
   slug: string;
   name: string;
   plan: string;
@@ -25,6 +29,7 @@ export type Competitor = {
 
 export const COMPETITORS: Competitor[] = [
   {
+    confirmed: { price: true, codes: true, scans: true, edit: false, cancel: false },
     slug: "qr-code-generator-pro",
     name: "QR Code Generator Pro",
     plan: "Starter",
@@ -46,6 +51,7 @@ export const COMPETITORS: Competitor[] = [
     ],
   },
   {
+    confirmed: { price: true, codes: true, scans: true, edit: false, cancel: false },
     slug: "bitly",
     name: "Bitly",
     plan: "Core",
@@ -67,6 +73,7 @@ export const COMPETITORS: Competitor[] = [
     ],
   },
   {
+    confirmed: { price: true, codes: true, scans: true, edit: false, cancel: false },
     slug: "flowcode",
     name: "Flowcode",
     plan: "Pro Plus",

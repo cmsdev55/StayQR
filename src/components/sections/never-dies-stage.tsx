@@ -105,8 +105,11 @@ export function NeverDiesStage({ theirs, ours }: { theirs: string[]; ours: strin
 
   // ── Scroll: pin + scrub (motion only) ────────────────────────────────
   useEffect(() => {
-    if (reduced) {
+    // read the media query directly: the hook starts false, and a first pass with motion
+    // would reset the story to its start before the real preference arrives
+    if (reduced || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       progress.current = 1;
+      applyVars(1);
       setPhase(4);
       return;
     }

@@ -1,9 +1,10 @@
 // Renders the static hero fallback images from the live 3D scene (resting state, no beam).
-// Usage: node scripts/render-fallbacks.mjs   (dev server running; BASE_URL defaults to :3000; ONLY=desktop|mobile|globe)
+// Usage: node scripts/render-fallbacks.mjs   (dev server running; BASE_URL defaults to :3000; ONLY=desktop|mobile|globe|cta)
 //   public/hero-qr-{dark,light}.webp     desktop, full frame (33×33, high tier)
 //   public/hero-qr-m-{dark,light}.webp   phones, tightly cropped (25×25, low tier, 390px wide)
 //   src/components/sections/hero-fallback.json  where the phone crop sits inside the hero box
 //   public/globe-{dark,light}.webp       features ScanGlobe (ONLY=globe)
+//   public/cta-mark-{dark,light}.webp    final CTA mark (ONLY=cta)
 import { createRequire } from "node:module";
 import { writeFileSync } from "node:fs";
 const require = createRequire(import.meta.url);
@@ -53,6 +54,17 @@ async function capture(page, theme, tier, { selector = "canvas", anchor = "", fr
 
 const layout = {};
 for (const theme of ["dark", "light"]) {
+  if (only === "cta") {
+    // final CTA: the finished StayQR mark (t=10: reformed and lit, between beam passes)
+    const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1 });
+    const { png } = await capture(page, theme, "high", { selector: '[data-scene="cta"] canvas', anchor: "#cta-title", freeze: 10 });
+    const bg = theme === "dark" ? "#07080B" : "#F5F6F2";
+    await sharp(png).flatten({ background: bg }).webp({ quality: 74, effort: 6 }).toFile(`public/cta-mark-${theme}.webp`);
+    const meta = await sharp(png).metadata();
+    console.log("cta", theme, meta.width, "x", meta.height);
+    await page.close();
+    continue;
+  }
   if (only === "globe") {
     // features bento: ScanGlobe at t=12.5 (Europe → Asia in view, cities lit, one ring mid-ping)
     const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1.5 });

@@ -10,7 +10,9 @@ const COLUMNS = [
   {
     title: "Product",
     links: [
-      { href: "/#features", label: "Features" },
+      { href: "/dynamic-qr-code-generator", label: "Dynamic QR codes" },
+      { href: "/app-download-qr-code", label: "App download QR" },
+      { href: "/bulk-qr-code-generator", label: "Bulk QR generator" },
       { href: "/pricing", label: "Pricing" },
       { href: "/#compare", label: "Compare" },
       { href: "/guides", label: "Guides" },
@@ -21,6 +23,7 @@ const COLUMNS = [
     title: "Free tools",
     links: [
       { href: "/qr-code-generator", label: "QR code generator" },
+      { href: "/qr-code-with-logo", label: "QR code with logo" },
       ...QR_TYPES.filter((t) => ["url", "wifi", "vcard", "whatsapp", "instagram"].includes(t.slug)).map((t) => ({ href: `/qr-code-generator/${t.slug}`, label: `${t.name} QR code` })),
     ],
   },

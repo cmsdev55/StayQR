@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { detectTier, useActive, useReducedMotion, useTheme, type DeviceTier } from "@/hooks/use-environment";
+import { detectTier, onFirstInteraction, useActive, useReducedMotion, useTheme, type DeviceTier } from "@/hooks/use-environment";
 import { cn } from "@/lib/utils";
 import FALLBACK from "./hero-fallback.json";
 
@@ -43,9 +43,11 @@ export function HeroVisual() {
     const t = detectTier();
     setTier(t);
     if (t === "none") return;
-    // Wait for idle after first paint so text, LCP and hydration go first.
-    const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number };
     const go = () => setMount(true);
+    // Phones: keep the static hero until the visitor touches or scrolls, so the 3D bundle never competes with first load.
+    if (t === "low") return onFirstInteraction(go);
+    // Desktop: wait for idle after first paint so text, LCP and hydration go first.
+    const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number };
     if (w.requestIdleCallback) w.requestIdleCallback(go, { timeout: 1200 });
     else setTimeout(go, 300);
   }, []);

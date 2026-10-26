@@ -5,7 +5,7 @@ import { AD_SLOTS, AdSlot } from "@/components/ads/ad-slot";
 import { Breadcrumbs } from "@/components/content/breadcrumbs";
 import { GuideCards } from "@/components/content/guide-cards";
 import { JsonLd, SITE, breadcrumbLd } from "@/components/content/json-ld";
-import { RichText } from "@/components/content/rich-text";
+import { Block } from "@/components/content/blocks";
 import { RelatedTypes } from "@/components/content/type-grid";
 import { CtaBand } from "@/components/sections/cta-band";
 import { Faq } from "@/components/sections/faq";
@@ -39,50 +39,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const fmt = (iso: string) => new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 
-function Block({ b }: { b: GuideBlock }) {
-  switch (b.type) {
-    case "p":
-      return <p className="text-body-lg text-fg-muted"><RichText text={b.text} /></p>;
-    case "h2":
-      return <h2 id={b.id} className="scroll-mt-28 pt-8 font-display text-h3 font-semibold sm:text-[2rem] sm:leading-[1.15] text-fg [text-wrap:balance]">{b.text}</h2>;
-    case "h3":
-      return <h3 className="pt-2 font-display text-h4 font-semibold text-fg">{b.text}</h3>;
-    case "ul":
-    case "ol": {
-      const List = b.type;
-      return (
-        <List className={`${b.type === "ul" ? "list-disc" : "list-decimal"} flex flex-col gap-2 pl-6 text-body-lg text-fg-muted marker:text-fg-subtle`}>
-          {b.items.map((it, i) => <li key={i} className="pl-1"><RichText text={it} /></li>)}
-        </List>
-      );
-    }
-    case "table":
-      return (
-        <div className="overflow-x-auto rounded-lg border border-line">
-          <table className="w-full min-w-[480px] text-left text-body-sm">
-            <thead className="bg-glass-strong">
-              <tr>{b.head.map((h) => <th key={h} scope="col" className="px-4 py-3 font-semibold text-fg">{h}</th>)}</tr>
-            </thead>
-            <tbody>
-              {b.rows.map((r, i) => (
-                <tr key={i} className="border-t border-line">
-                  {r.map((c, j) => (j === 0 ? <th key={j} scope="row" className="px-4 py-3 font-medium text-fg"><RichText text={c} /></th> : <td key={j} className="px-4 py-3 text-fg-muted"><RichText text={c} /></td>))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      );
-    case "tip":
-      return (
-        <aside className="rounded-lg border border-line border-l-accent bg-bg-raised px-5 py-4 text-body text-fg-muted [border-left-width:3px]">
-          <span className="mr-2 font-mono text-[11px] uppercase tracking-[0.08em] text-accent-text">Tip</span>
-          <RichText text={b.text} />
-        </aside>
-      );
-  }
-}
-
 export default async function GuidePage({ params }: Props) {
   const g = guideBySlug((await params).slug);
   if (!g) notFound();
@@ -94,7 +50,13 @@ export default async function GuidePage({ params }: Props) {
   const toc = g.body.filter((b): b is Extract<GuideBlock, { type: "h2" }> => b.type === "h2");
   // an in-content ad after the second section, never above the fold
   const adAfter = toc[2] ? g.body.indexOf(toc[2]) : -1;
-  const more = GUIDES.filter((o) => o.slug !== g.slug).slice(0, 3);
+  // same category first, then the guides that follow this one, so links spread across the whole set
+  const at = GUIDES.findIndex((o) => o.slug === g.slug);
+  const more = GUIDES.map((o, i) => ({ o, d: (i - at + GUIDES.length) % GUIDES.length }))
+    .filter(({ o }) => o.slug !== g.slug)
+    .sort((a, b) => Number(b.o.category === g.category) - Number(a.o.category === g.category) || a.d - b.d)
+    .slice(0, 3)
+    .map(({ o }) => o);
 
   return (
     <main>

@@ -8,6 +8,7 @@ import { Faq } from "@/components/sections/faq";
 import { ButtonLink } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { FAQ } from "@/content/faq";
+import { GUIDES } from "@/content/guides";
 import { INDUSTRIES, industryBySlug } from "@/content/industries";
 import { QrSvg } from "@/components/qr/qr-svg";
 import { qrMatrix } from "@/lib/qr";
@@ -26,6 +27,18 @@ function fitDescription(intro: string, suffix: string, max = 158) {
   return intro.slice(0, intro.lastIndexOf(" ", max - 1)).replace(/[,;:]$/, "") + "…";
 }
 
+/** Guides most relevant to each industry (internal links for the weakest-linked guides). */
+const INDUSTRY_GUIDES: Record<string, string[]> = {
+  restaurants: ["qr-code-for-restaurant-menu", "qr-code-for-google-reviews", "wifi-qr-code"],
+  "real-estate": ["track-qr-code-scans", "qr-code-size-for-printing", "qr-code-business-card"],
+  events: ["qr-code-for-events", "qr-code-not-scanning", "qr-code-size-for-printing"],
+  retail: ["qr-code-for-google-reviews", "qr-code-design-best-practices", "track-qr-code-scans"],
+  healthcare: ["are-qr-codes-safe", "qr-code-not-scanning", "how-to-scan-a-qr-code"],
+  hotels: ["wifi-qr-code", "qr-code-for-google-reviews", "static-vs-dynamic-qr-codes"],
+  education: ["how-to-scan-a-qr-code", "qr-code-error-correction", "what-is-a-qr-code"],
+  agencies: ["track-qr-code-scans", "qr-code-design-best-practices", "qr-code-error-correction"],
+};
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ind = industryBySlug((await params).slug);
   if (!ind) return {};
@@ -42,6 +55,7 @@ export default async function IndustryPage({ params }: Props) {
   const words = ind.headline.split(" ");
   const m = qrMatrix(`https://${ind.destinations[0].split("/")[0]}`, 0);
   const others = INDUSTRIES.filter((i) => i.slug !== ind.slug);
+  const guides = (INDUSTRY_GUIDES[ind.slug] ?? []).map((g) => GUIDES.find((x) => x.slug === g)).filter((g): g is (typeof GUIDES)[number] => !!g);
 
   return (
     <main>
@@ -130,6 +144,39 @@ export default async function IndustryPage({ params }: Props) {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      {/* Worked example + related guides */}
+      <section aria-labelledby="example-title" className="border-t border-line py-24 lg:py-32">
+        <div className="mx-auto grid max-w-container gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
+          <div>
+            <p className="eyebrow">Worked example</p>
+            <h2 id="example-title" className="mt-4 font-display text-display-md font-semibold text-fg [text-wrap:balance]">{ind.example.title.replace(/^Example:\s*/i, "")}</h2>
+            <ol className="mt-10 flex flex-col gap-6">
+              {ind.example.steps.map((step, i) => (
+                <li key={i} className="flex gap-4" data-reveal="" style={{ ["--stagger" as string]: i }}>
+                  <span className="grid size-8 shrink-0 place-items-center rounded-full border border-line-strong font-mono text-[12px] text-fg">{i + 1}</span>
+                  <p className="pt-1 text-body text-fg-muted">{step}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+          {guides.length > 0 && (
+            <aside aria-labelledby="ind-guides-title" className="lg:pt-12">
+              <h2 id="ind-guides-title" className="eyebrow">Guides for {ind.name.toLowerCase()}</h2>
+              <ul className="mt-5 flex flex-col gap-3">
+                {guides.map((g) => (
+                  <li key={g.slug}>
+                    <Link href={`/guides/${g.slug}`} className="glass block rounded-md p-4 transition-colors hover:border-line-strong">
+                      <span className="block font-medium text-fg">{g.h1}</span>
+                      <span className="mt-1 block text-body-sm text-fg-muted">{g.readMinutes} min read</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          )}
         </div>
       </section>
 

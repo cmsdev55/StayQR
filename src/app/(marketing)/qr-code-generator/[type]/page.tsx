@@ -39,7 +39,10 @@ export default async function QrTypePageRoute({ params }: Props) {
     { name: "QR code generator", path: "/qr-code-generator" },
     { name: `${def.name} QR code`, path: `/qr-code-generator/${page.slug}` },
   ];
-  const guides = GUIDES.filter((g) => g.relatedTools.includes(page.slug)).slice(0, 3);
+  // guides written for this tool first (it's their first related tool), then any that mention it
+  const guides = GUIDES.filter((g) => g.relatedTools.includes(page.slug))
+    .sort((a, b) => a.relatedTools.indexOf(page.slug) - b.relatedTools.indexOf(page.slug))
+    .slice(0, 4);
 
   return (
     <main>
@@ -118,6 +121,10 @@ export default async function QrTypePageRoute({ params }: Props) {
           <div className="mt-10"><RelatedTypes slugs={page.related} /></div>
           <p className="mt-6 text-body-sm text-fg-muted">
             <Link href="/qr-code-generator" className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">See every QR code type</Link>
+            {" · "}
+            <Link href="/qr-code-with-logo" className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">Add your logo</Link>
+            {" · "}
+            <Link href="/dynamic-qr-code-generator" className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">Make it editable after printing</Link>
             {guides.length > 0 && (
               <>
                 {" · Guides: "}

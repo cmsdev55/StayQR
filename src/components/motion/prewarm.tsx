@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { detectTier } from "@/hooks/use-environment";
+import { detectTier, onFirstInteraction } from "@/hooks/use-environment";
 import { loadGsap } from "@/lib/gsap";
 
 /**
@@ -36,11 +36,16 @@ export function Prewarm() {
       id = w.requestIdleCallback ? w.requestIdleCallback(next, { timeout: 4000 }) : window.setTimeout(next, 800);
     };
     const start = () => window.setTimeout(schedule, 1500); // let the hero scene go first
-    if (document.readyState === "complete") start();
-    else window.addEventListener("load", start, { once: true });
+    // phones: nothing until the visitor interacts (same rule as the hero scene)
+    const offInteraction = tier === "low" ? onFirstInteraction(start) : undefined;
+    if (tier !== "low") {
+      if (document.readyState === "complete") start();
+      else window.addEventListener("load", start, { once: true });
+    }
     return () => {
       cancelled = true;
       w.cancelIdleCallback?.(id);
+      offInteraction?.();
       window.removeEventListener("load", start);
     };
   }, []);

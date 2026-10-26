@@ -77,3 +77,21 @@ export function useTheme(): "dark" | "light" {
   }, []);
   return theme;
 }
+
+/**
+ * Run `cb` once, on the visitor's first touch, click, key, wheel or scroll. Phones use this to hold back
+ * 3D and prefetch work until someone is actually using the page, so first load stays fast.
+ */
+export function onFirstInteraction(cb: () => void) {
+  const events = ["pointerdown", "touchstart", "keydown", "wheel", "scroll"] as const;
+  let done = false;
+  const fire = () => {
+    if (done) return;
+    done = true;
+    off();
+    cb();
+  };
+  const off = () => events.forEach((e) => window.removeEventListener(e, fire));
+  events.forEach((e) => window.addEventListener(e, fire, { passive: true, once: true }));
+  return off;
+}

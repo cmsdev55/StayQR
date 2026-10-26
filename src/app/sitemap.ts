@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: BASE, priority: 1 },
     { url: `${BASE}/pricing`, priority: 0.9 },
     { url: `${BASE}/qr-code-generator`, priority: 0.9 },
+    ...["qr-code-with-logo", "dynamic-qr-code-generator", "app-download-qr-code", "bulk-qr-code-generator"].map((s) => ({ url: `${BASE}/${s}`, priority: 0.85 })),
     ...QR_TYPES.map((t) => ({ url: `${BASE}/qr-code-generator/${t.slug}`, priority: 0.8 })),
     { url: `${BASE}/guides`, priority: 0.7 },
     ...GUIDES.map((g) => ({ url: `${BASE}/guides/${g.slug}`, lastModified: g.updated, priority: 0.7 })),

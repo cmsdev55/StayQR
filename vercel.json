@@ -10,14 +10,25 @@
   ],
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/",
       "has": [
         {
           "type": "host",
           "value": "stayqr-six.vercel.app"
         }
       ],
-      "destination": "https://endureqr.vercel.app/:path*",
+      "destination": "https://endureqr.vercel.app/",
+      "permanent": true
+    },
+    {
+      "source": "/:path+",
+      "has": [
+        {
+          "type": "host",
+          "value": "stayqr-six.vercel.app"
+        }
+      ],
+      "destination": "https://endureqr.vercel.app/:path+",
       "permanent": true
     }
   ]

@@ -3,9 +3,11 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { cancelPlanAction, portalAction, resumePlanAction, switchPlanAction, type Result } from "@/app/dashboard/actions";
+import { CheckoutButton } from "@/components/billing/checkout-button";
+import { PaymentMethods } from "@/components/billing/payment-methods";
 import { Toast } from "@/components/dashboard/toast";
 import { Badge } from "@/components/ui/badge";
-import { Button, ButtonLink } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { LIFETIME, PRO, YEARLY_SAVING } from "@/content/plans";
 import type { Plan } from "@/lib/dashboard-types";
 import { cn } from "@/lib/utils";
@@ -111,7 +113,8 @@ export function BillingView({ plan, card, hasPortal, invoices, codes, scans30, c
                 {creditCents > 0 && <span className="text-fg-subtle line-through">${LIFETIME}</span>}
               </p>
               {creditCents > 0 && <p className="font-mono text-[12px] text-fg-subtle">${(creditCents / 100).toFixed(2)} credit applied</p>}
-              <ButtonLink href="/api/checkout?plan=lifetime" size="sm" className="mt-5 w-full">Upgrade to lifetime</ButtonLink>
+              <CheckoutButton plan="lifetime" className="mt-5 w-full">Upgrade to lifetime</CheckoutButton>
+              <PaymentMethods className="mt-4" />
             </section>
           )}
         </div>
@@ -217,7 +220,7 @@ export function BillingView({ plan, card, hasPortal, invoices, codes, scans30, c
 }
 
 function PlanPicker({ lapsed, endsAt }: { lapsed: boolean; endsAt: string | null }) {
-  const plans = [
+  const plans: { key: "pro-monthly" | "pro-yearly" | "lifetime"; name: string; price: string; per: string; note: string; best?: boolean }[] = [
     { key: "pro-monthly", name: "Pro monthly", price: `$${PRO.monthly}`, per: "/ month", note: "Cancel any time" },
     { key: "pro-yearly", name: "Pro yearly", price: `$${PRO.yearly}`, per: "/ year", note: `Save ${YEARLY_SAVING}%`, best: true },
     { key: "lifetime", name: "Lifetime", price: `$${LIFETIME}`, per: "once", note: "Never renews" },
@@ -237,12 +240,13 @@ function PlanPicker({ lapsed, endsAt }: { lapsed: boolean; endsAt: string | null
             <p className="font-medium text-fg">{p.name}</p>
             <p className="mt-3 flex items-baseline gap-1.5"><span className="text-[28px] font-semibold text-fg">{p.price}</span><span className="text-fg-subtle">{p.per}</span></p>
             <p className="mt-1 font-mono text-[12px] text-fg-subtle">{p.note}</p>
-            <ButtonLink href={`/api/checkout?plan=${p.key}`} size="sm" variant={p.best ? "primary" : "secondary"} className="mt-5 w-full">
+            <CheckoutButton plan={p.key} variant={p.best ? "primary" : "secondary"} className="mt-5 w-full">
               {lapsed ? "Resume with " : "Choose "}{p.name.toLowerCase()}
-            </ButtonLink>
+            </CheckoutButton>
           </li>
         ))}
       </ul>
+      <PaymentMethods className="mt-5" />
     </section>
   );
 }

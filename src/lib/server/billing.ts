@@ -37,8 +37,8 @@ export async function lifetimeCreditCents(userId: string) {
   return Math.max(0, Math.floor((PLAN_CENTS[s.plan] * left) / periodDays));
 }
 
-/** Hosted checkout URL for a plan. The user id rides along as custom data and comes back on every webhook. */
-export async function createCheckout(user: { id: string; email: string; name: string | null }, plan: PlanKey): Promise<string> {
+/** Checkout URL for a plan (hosted page, or overlay-ready with `embed`). The user id rides along as custom data and comes back on every webhook. */
+export async function createCheckout(user: { id: string; email: string; name: string | null }, plan: PlanKey, opts: { embed?: boolean } = {}): Promise<string> {
   const variant = env.lemon.variants[plan];
   if (!variant) throw new Error(`LEMONSQUEEZY_VARIANT for ${plan} is not set`);
   const credit = plan === "lifetime" ? await lifetimeCreditCents(user.id) : 0;
@@ -49,7 +49,7 @@ export async function createCheckout(user: { id: string; email: string; name: st
         ...(credit > 0 ? { custom_price: PLAN_CENTS.lifetime - credit } : {}),
         checkout_data: { email: user.email, name: user.name ?? undefined, custom: { user_id: user.id } },
         product_options: { enabled_variants: [Number(variant)], redirect_url: `${env.siteUrl}/dashboard/billing?checkout=done` },
-        checkout_options: { embed: false, media: false },
+        checkout_options: { embed: !!opts.embed, media: false, logo: true },
       },
       relationships: { store: { data: { type: "stores", id: String(env.lemon.storeId) } }, variant: { data: { type: "variants", id: String(variant) } } },
     },

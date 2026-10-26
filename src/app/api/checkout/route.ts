@@ -6,30 +6,35 @@ import { getPlan } from "@/lib/server/plan";
 
 export const dynamic = "force-dynamic";
 
-/** GET /api/checkout?plan=pro-yearly → Lemon Squeezy hosted checkout (signs in first if needed). */
+/**
+ * GET /api/checkout?plan=pro-yearly → Lemon Squeezy hosted checkout (signs in first if needed).
+ * With &format=json it answers { url, overlay } instead, for the in-page card overlay (CheckoutButton).
+ */
 export async function GET(req: Request) {
   const url = new URL(req.url);
   const plan = url.searchParams.get("plan");
-  if (!isPlanKey(plan)) return NextResponse.redirect(new URL("/pricing", url));
+  const json = url.searchParams.get("format") === "json";
+  const go = (to: string, overlay = false) => (json ? NextResponse.json({ url: new URL(to, url).toString(), overlay }) : NextResponse.redirect(new URL(to, url)));
+  if (!isPlanKey(plan)) return go("/pricing");
   const user = await getUser();
-  if (!user) return NextResponse.redirect(new URL(`/signup?plan=${plan}`, url));
+  if (!user) return go(`/signup?plan=${plan}`);
 
   const current = await getPlan(user.id);
   if (current.tier === "lifetime" || (current.tier === "pro" && plan !== "lifetime" && current.status !== "cancelled")) {
-    return NextResponse.redirect(new URL("/dashboard/billing", url));
+    return go("/dashboard/billing");
   }
   if (billingMode === "lemonsqueezy") {
     try {
-      return NextResponse.redirect(await createCheckout(user, plan));
+      return go(await createCheckout(user, plan, { embed: json }), json);
     } catch (e) {
       // e.g. a variant id not configured yet, or Lemon Squeezy unreachable: never show a raw error page
       console.error("checkout failed", plan, e);
-      return NextResponse.redirect(new URL("/dashboard/billing?checkout=unavailable", url));
+      return go("/dashboard/billing?checkout=unavailable");
     }
   }
   if (billingMode === "dev" && (await isLocalRequest())) {
     await devCheckout(user.id, plan);
-    return NextResponse.redirect(new URL("/dashboard/billing?checkout=done", url));
+    return go("/dashboard/billing?checkout=done");
   }
-  return NextResponse.redirect(new URL("/dashboard/billing?checkout=unavailable", url));
+  return go("/dashboard/billing?checkout=unavailable");
 }

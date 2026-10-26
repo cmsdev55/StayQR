@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Pausable } from "@/components/motion/pausable";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { Badge } from "@/components/ui/badge";
+import { PaymentMethods } from "@/components/billing/payment-methods";
 import { ButtonLink } from "@/components/ui/button";
 import { SegmentedToggle } from "@/components/ui/toggle";
 import { LIFETIME, PLAN_FEATURES, PRO, YEARLY_SAVING, type Billing } from "@/content/plans";
@@ -89,6 +90,7 @@ export function PricingCards({ headingLevel = 3 }: { headingLevel?: 2 | 3 }) {
       <p className="mt-8 text-center font-mono text-[12px] text-fg-subtle">
         Every plan: unlimited scans · codes never expire · no ads on your codes
       </p>
+      <PaymentMethods align="center" className="mt-4" />
     </div>
   );
 }

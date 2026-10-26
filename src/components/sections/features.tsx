@@ -7,6 +7,7 @@ import { QrSvg } from "@/components/qr/qr-svg";
 import { qrMatrix } from "@/lib/qr";
 import { cn } from "@/lib/utils";
 import { GlobeVisual } from "./features/globe-card";
+import { siteUrl } from "@/lib/site";
 
 /**
  * Section 4: features bento (6 columns × 280px rows on desktop, DESIGN.md §3).
@@ -15,7 +16,7 @@ import { GlobeVisual } from "./features/globe-card";
  */
 export function Features() {
   const menu = qrMatrix("https://osteria.co/m", 0);
-  const small = qrMatrix("https://stayqr.com/s", 0);
+  const small = qrMatrix(siteUrl("/pricing"), 0);
   return (
     <section id="features" aria-labelledby="features-title" className="relative border-t border-line py-24 lg:py-40">
       <div className="mx-auto max-w-container px-4 sm:px-6">

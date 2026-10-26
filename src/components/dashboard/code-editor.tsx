@@ -1,5 +1,6 @@
 "use client";
 
+import { COMPANY } from "@/content/company";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useRef, useState, useTransition } from "react";
@@ -128,7 +129,7 @@ export function CodeEditor({ code, folders, plan, shortHost }: { code: DashCode 
         <p className="mt-1 text-fg-subtle">{isNew ? "New dynamic code" : `Created ${code.created} · edited ${code.updated}`}</p>
         {code?.disabled && (
           <p role="alert" className="mt-4 rounded-sm bg-danger/[0.08] px-4 py-3 text-fg">
-            StayQR disabled this code after its link was reported as harmful. Scanners see a warning page. Contact abuse@stayqr.com if you think this is a mistake.
+            StayQR disabled this code after its link was reported as harmful. Scanners see a warning page. Contact {COMPANY.email.abuse} if you think this is a mistake.
           </p>
         )}
         {readOnly && <div className="mt-6"><PlanNotice plan={plan} /></div>}

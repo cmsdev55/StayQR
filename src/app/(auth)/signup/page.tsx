@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Create your account",
   description: "Create a StayQR account for dynamic QR codes you can edit after printing. They keep working if you cancel.",
   alternates: { canonical: "/signup" },
+  robots: { index: false, follow: true },
 };
 
 export default async function SignupPage({ searchParams }: { searchParams: Promise<{ plan?: string; next?: string; error?: string }> }) {

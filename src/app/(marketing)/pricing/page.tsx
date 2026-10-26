@@ -5,6 +5,7 @@ import { Pricing } from "@/components/sections/pricing";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { FAQ } from "@/content/faq";
 import { LIFETIME, MATRIX, PRO } from "@/content/plans";
+import { JsonLd, SITE } from "@/components/content/json-ld";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -17,14 +18,30 @@ const BILLING_FAQ = [
   FAQ[0],
   FAQ[4],
   { q: "Can I switch between monthly, yearly and lifetime?", a: "Yes, any time from Billing. Moving up is prorated to the day; moving to lifetime credits what's left of your current period." },
-  { q: "Do you offer refunds?", a: "Yes. If StayQR isn't right for you, email us within 14 days of any payment for a full refund. Your codes keep working either way." },
-  { q: "Which payment methods do you accept?", a: "All major cards, Apple Pay and Google Pay. Teams on yearly or lifetime plans can also pay by invoice." },
+  { q: "Do you offer refunds?", a: "Yes. If StayQR isn't right for you, email us within 14 days of your first Pro payment or your Lifetime purchase for a full refund. You can cancel renewals any time, and your codes keep working either way." },
+  { q: "Which payment methods do you accept?", a: "Visa, Mastercard and American Express, through Lemon Squeezy's secure checkout. Depending on your country, checkout may offer other local methods too. We never see your card number." },
   FAQ[2],
 ];
 
 export default function PricingPage() {
   return (
     <main>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: "StayQR",
+          url: SITE,
+          applicationCategory: "BusinessApplication",
+          operatingSystem: "Web",
+          offers: [
+            { "@type": "Offer", name: "Free", price: "0", priceCurrency: "USD", url: `${SITE}/qr-code-generator` },
+            { "@type": "Offer", name: "Pro monthly", price: String(PRO.monthly), priceCurrency: "USD", url: `${SITE}/pricing` },
+            { "@type": "Offer", name: "Pro yearly", price: String(PRO.yearly), priceCurrency: "USD", url: `${SITE}/pricing` },
+            { "@type": "Offer", name: "Lifetime", price: String(LIFETIME), priceCurrency: "USD", url: `${SITE}/pricing` },
+          ],
+        }}
+      />
       <Pricing page />
 
       <section aria-labelledby="matrix-title" className="border-t border-line py-24 lg:py-32">

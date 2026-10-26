@@ -4,7 +4,12 @@ import { AuthForm } from "@/components/auth/auth-form";
 import { getUser, safeNext } from "@/lib/server/auth";
 import { googleEnabled } from "@/lib/server/env";
 
-export const metadata: Metadata = { title: "Log in", alternates: { canonical: "/login" } };
+export const metadata: Metadata = {
+  title: "Log in",
+  description: "Log in to StayQR to edit your dynamic QR codes, see scans and manage billing.",
+  alternates: { canonical: "/login" },
+  robots: { index: false, follow: true },
+};
 
 export default async function LoginPage({ searchParams }: { searchParams: Promise<{ plan?: string; next?: string; error?: string }> }) {
   const { plan, next, error } = await searchParams;

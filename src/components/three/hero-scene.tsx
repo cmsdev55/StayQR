@@ -6,6 +6,7 @@ import { useMemo } from "react";
 import * as THREE from "three";
 import { qrMatrix } from "@/lib/qr";
 import { CubeQR } from "./cube-qr";
+import { SITE_URL } from "@/lib/site";
 
 const Effects = dynamic(() => import("./effects"), { ssr: false });
 
@@ -21,7 +22,7 @@ export type HeroSceneProps = {
 export default function HeroScene({ tier, theme, active, onScan, onReady }: HeroSceneProps) {
   const high = tier === "high";
   // Real, scannable code. v4 = 33×33 modules on desktop, v2 = 25×25 on phones.
-  const matrix = useMemo(() => qrMatrix("https://stayqr.com", high ? 4 : 2), [high]);
+  const matrix = useMemo(() => qrMatrix(SITE_URL, high ? 4 : 2), [high]);
   const dark = theme === "dark";
   // Post-processing needs an opaque buffer (alpha + bloom tints the clear colour).
   const opaque = high && dark;

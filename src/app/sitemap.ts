@@ -4,7 +4,9 @@ import { GUIDES } from "@/content/guides";
 import { INDUSTRIES } from "@/content/industries";
 import { QR_TYPES } from "@/lib/qr-types";
 
-const BASE = "https://stayqr.com";
+import { SITE_URL } from "@/lib/site";
+
+const BASE = SITE_URL;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -14,8 +16,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...QR_TYPES.map((t) => ({ url: `${BASE}/qr-code-generator/${t.slug}`, priority: 0.8 })),
     { url: `${BASE}/guides`, priority: 0.7 },
     ...GUIDES.map((g) => ({ url: `${BASE}/guides/${g.slug}`, lastModified: g.updated, priority: 0.7 })),
-    { url: `${BASE}/signup`, priority: 0.5 },
-    { url: `${BASE}/login`, priority: 0.3 },
     { url: `${BASE}/about`, priority: 0.4 },
     { url: `${BASE}/contact`, priority: 0.4 },
     { url: `${BASE}/terms`, priority: 0.2 },

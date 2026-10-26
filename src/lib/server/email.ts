@@ -1,3 +1,4 @@
+import { COMPANY } from "@/content/company";
 import "server-only";
 import { env } from "./env";
 
@@ -13,7 +14,7 @@ export async function sendEmail(to: string, subject: string, text: string, html:
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${env.resendKey}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ from: env.emailFrom, to: [to], subject, text, html, reply_to: "hello@stayqr.com" }),
+    body: JSON.stringify({ from: env.emailFrom, to: [to], subject, text, html, reply_to: COMPANY.email.hello }),
     signal: AbortSignal.timeout(10000),
   });
   if (!res.ok) throw new Error(`Resend failed: ${res.status} ${(await res.text()).slice(0, 200)}`);

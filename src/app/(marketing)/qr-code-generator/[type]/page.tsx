@@ -13,6 +13,7 @@ import { GUIDES } from "@/content/guides";
 import { QR_TYPE_PAGES, qrTypePage } from "@/content/qr-type-pages";
 import { qrMatrix } from "@/lib/qr";
 import { qrType } from "@/lib/qr-types";
+import { SITE_URL } from "@/lib/site";
 
 type Props = { params: Promise<{ type: string }> };
 
@@ -32,7 +33,7 @@ export default async function QrTypePageRoute({ params }: Props) {
   const def = page && qrType(page.slug);
   if (!page || !def) notFound();
 
-  const placeholder = qrMatrix(def.encode(def.defaults) || "https://stayqr.com", 0).map((r) => r.map((on) => (on ? "1" : "0")).join(""));
+  const placeholder = qrMatrix(def.encode(def.defaults) || SITE_URL, 0).map((r) => r.map((on) => (on ? "1" : "0")).join(""));
   const crumbs = [
     { name: "Home", path: "/" },
     { name: "QR code generator", path: "/qr-code-generator" },

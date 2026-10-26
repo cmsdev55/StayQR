@@ -1,5 +1,6 @@
 "use client";
 
+import { COMPANY } from "@/content/company";
 import { useActionState, useState, useTransition } from "react";
 import { changePasswordAction, type AuthState } from "@/app/(auth)/actions";
 import { deleteAccountAction, updateNameAction } from "@/app/dashboard/actions";
@@ -24,7 +25,7 @@ export function SettingsView({ name: initialName, email, timezone, hasPassword }
         <h2 id="profile-title" className="font-semibold text-fg">Profile</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
           <Input size="sm" label="Name" value={name} maxLength={80} onChange={(e) => setName(e.target.value)} hint="Shown on your paused-code page." />
-          <Input size="sm" label="Email" value={email} readOnly hint="Email hello@stayqr.com to change it." />
+          <Input size="sm" label="Email" value={email} readOnly hint={`Email ${COMPANY.email.hello} to change it.`} />
         </div>
         <p className="mt-4 text-fg-muted">Time zone: <span className="text-fg">{timezone}</span> <span className="text-fg-subtle">(set from your browser; used for analytics)</span></p>
         <div className="mt-5 flex flex-wrap gap-2">

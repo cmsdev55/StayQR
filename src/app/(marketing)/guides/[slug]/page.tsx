@@ -26,7 +26,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: g.title.length + 9 > 60 ? { absolute: g.title } : g.title,
     description: g.description,
     alternates: { canonical: `/guides/${g.slug}` },
-    openGraph: { type: "article", title: g.h1, description: g.description, publishedTime: g.published, modifiedTime: g.updated },
+    openGraph: {
+      type: "article",
+      title: g.h1,
+      description: g.description,
+      publishedTime: g.published,
+      modifiedTime: g.updated,
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "StayQR: QR codes that never stop working" }],
+    },
   };
 }
 

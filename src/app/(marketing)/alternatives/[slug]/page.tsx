@@ -13,6 +13,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { CHECKED, COMPETITORS, STAYQR_ROW, competitorBySlug } from "@/content/competitors";
 import { FAQ } from "@/content/faq";
 import { qrMatrix } from "@/lib/qr";
+import { SITE_HOST } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -213,9 +214,9 @@ export default async function AlternativePage({ params }: Props) {
 /** StayQR billing + codes the day a plan is cancelled (a calm, solid dashboard mock). */
 function CancelledDashboard() {
   const codes = [
-    { name: "Table tent · dinner menu", url: "stayqr.com/r/k3xb9", today: 412 },
-    { name: "Window · order online", url: "stayqr.com/r/t4qa8", today: 76 },
-    { name: "Receipt · leave a review", url: "stayqr.com/r/p7mw2", today: 104 },
+    { name: "Table tent · dinner menu", url: `${SITE_HOST}/r/k3xb9`, today: 412 },
+    { name: "Window · order online", url: `${SITE_HOST}/r/t4qa8`, today: 76 },
+    { name: "Receipt · leave a review", url: `${SITE_HOST}/r/p7mw2`, today: 104 },
   ];
   return (
     <div className="flex aspect-[4/3] flex-col overflow-hidden rounded-xl border border-line bg-bg-raised text-body-sm" aria-label="StayQR dashboard after cancelling">

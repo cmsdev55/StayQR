@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { JsonLd, SITE } from "@/components/content/json-ld";
 import { Prewarm } from "@/components/motion/prewarm";
 import { Compare } from "@/components/sections/compare";
 import { Faq } from "@/components/sections/faq";
@@ -11,6 +12,7 @@ import { IndustriesMarquee } from "@/components/sections/industries";
 import { NeverDies } from "@/components/sections/never-dies";
 import { Pricing } from "@/components/sections/pricing";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { COMPANY } from "@/content/company";
 import { FAQ } from "@/content/faq";
 import { INDUSTRIES } from "@/content/industries";
 
@@ -19,6 +21,23 @@ export const metadata: Metadata = { alternates: { canonical: "/" } };
 export default function Home() {
   return (
     <main>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [
+            { "@type": "WebSite", "@id": `${SITE}/#website`, url: SITE, name: "StayQR", publisher: { "@id": `${SITE}/#organization` }, inLanguage: "en" },
+            {
+              "@type": "Organization",
+              "@id": `${SITE}/#organization`,
+              name: COMPANY.name,
+              url: SITE,
+              logo: { "@type": "ImageObject", url: `${SITE}/icon.svg` },
+              email: COMPANY.email.hello,
+              contactPoint: [{ "@type": "ContactPoint", contactType: "customer support", email: COMPANY.email.hello }],
+            },
+          ],
+        }}
+      />
       <Hero />
       <NeverDies />
       <Generator />

@@ -1,5 +1,6 @@
 import { qrMatrix } from "@/lib/qr";
 import { NeverDiesStage } from "./never-dies-stage";
+import { SITE_URL, siteUrl } from "@/lib/site";
 
 const rows = (m: boolean[][]) => m.map((r) => r.map((on) => (on ? "1" : "0")).join(""));
 
@@ -7,7 +8,7 @@ const rows = (m: boolean[][]) => m.map((r) => r.map((on) => (on ? "1" : "0")).jo
 export function NeverDies() {
   return (
     <section aria-labelledby="story-title" className="relative border-t border-line">
-      <NeverDiesStage theirs={rows(qrMatrix("https://stayqr.com/#compare", 3))} ours={rows(qrMatrix("https://stayqr.com", 3))} />
+      <NeverDiesStage theirs={rows(qrMatrix(siteUrl("/#compare"), 3))} ours={rows(qrMatrix(SITE_URL, 3))} />
     </section>
   );
 }

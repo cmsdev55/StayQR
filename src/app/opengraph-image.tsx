@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import qrcode from "qrcode-generator";
+import { SITE_HOST } from "@/lib/site";
 
 export const alt = "StayQR: QR codes that never stop working";
 export const size = { width: 1200, height: 630 };
@@ -85,7 +86,7 @@ export default async function OpengraphImage() {
           <span style={{ ...chip, color: "#0A0D02", background: LIME }}>$79 lifetime</span>
         </div>
 
-        <span style={{ position: "absolute", right: 64, bottom: 72, fontFamily: "JetBrains Mono", fontSize: 22, color: SUBTLE }}>stayqr.com</span>
+        <span style={{ position: "absolute", right: 64, bottom: 72, fontFamily: "JetBrains Mono", fontSize: 22, color: SUBTLE }}>{SITE_HOST}</span>
       </div>
     ),
     {

@@ -1,5 +1,6 @@
 "use client";
 
+import { COMPANY } from "@/content/company";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { cancelPlanAction, portalAction, resumePlanAction, switchPlanAction, type Result } from "@/app/dashboard/actions";
@@ -69,7 +70,7 @@ export function BillingView({ plan, card, hasPortal, invoices, codes, scans30, c
           <span className="font-medium text-warning">Local development.</span> Lemon Squeezy isn&apos;t configured, so checkout is simulated and no money moves.
         </p>
       )}
-      {checkout === "unavailable" && <p role="alert" className="mt-4 rounded-sm bg-danger/[0.08] px-4 py-3 text-fg">Checkout isn&apos;t available right now. Please try again later or email hello@stayqr.com.</p>}
+      {checkout === "unavailable" && <p role="alert" className="mt-4 rounded-sm bg-danger/[0.08] px-4 py-3 text-fg">Checkout isn&apos;t available right now. Please try again later or email {COMPANY.email.hello}.</p>}
 
       {plan.tier === "free" ? (
         <PlanPicker lapsed={plan.lapsed} endsAt={plan.endsAt} />
@@ -211,7 +212,7 @@ export function BillingView({ plan, card, hasPortal, invoices, codes, scans30, c
       )}
 
       <p className="mt-6 text-[13px] text-fg-subtle">
-        Refunds: email hello@stayqr.com within 14 days of your first payment or a Lifetime purchase. Prices are before tax; Lemon Squeezy adds any VAT or sales tax at checkout.
+        Refunds: email {COMPANY.email.hello} within 14 days of your first payment or a Lifetime purchase. Prices are before tax; Lemon Squeezy adds any VAT or sales tax at checkout.
       </p>
 
       <Toast message={toast} />

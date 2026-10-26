@@ -6,6 +6,7 @@ import { useMemo } from "react";
 import * as THREE from "three";
 import { qrMatrix } from "@/lib/qr";
 import { ParticleField } from "./particle-field";
+import { SITE_URL } from "@/lib/site";
 
 const Effects = dynamic(() => import("./effects"), { ssr: false });
 
@@ -19,7 +20,7 @@ export type CtaSceneProps = {
 /** Final CTA: same lights, cubes and post-processing as the hero, so it reuses the hero's chunks. */
 export default function CtaScene({ tier, theme, active, onReady }: CtaSceneProps) {
   const high = tier === "high";
-  const matrix = useMemo(() => qrMatrix("https://stayqr.com", high ? 4 : 2), [high]);
+  const matrix = useMemo(() => qrMatrix(SITE_URL, high ? 4 : 2), [high]);
   const dark = theme === "dark";
   const opaque = high && dark;
   return (

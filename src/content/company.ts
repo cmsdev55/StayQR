@@ -2,15 +2,23 @@
  * Who runs StayQR and which providers it relies on. Terms, Privacy, About and Contact all read from here,
  * so a change (a registered company, a new provider) is made once.
  */
+import { SITE_HOST } from "@/lib/site";
+
+const CONTACT = process.env.NEXT_PUBLIC_CONTACT_EMAIL || undefined;
+
 export const COMPANY = {
   name: "StayQR",
-  site: "stayqr.com",
+  site: SITE_HOST,
   /** Courts and law named in the Terms. */
   jurisdiction: "Pakistan",
+  /**
+   * Public addresses. Set NEXT_PUBLIC_CONTACT_EMAIL to a mailbox you control and it is used for all three
+   * (support, privacy, abuse) until separate mailboxes exist on your own domain.
+   */
   email: {
-    hello: "hello@stayqr.com",
-    privacy: "privacy@stayqr.com",
-    abuse: "abuse@stayqr.com",
+    hello: CONTACT ?? "hello@stayqr.com",
+    privacy: CONTACT ?? "privacy@stayqr.com",
+    abuse: CONTACT ?? "abuse@stayqr.com",
   },
   /** Reply-time promise used on Contact and in Privacy. */
   replyWithin: "one business day",

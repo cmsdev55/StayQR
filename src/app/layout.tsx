@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const display = localFont({
@@ -31,7 +32,7 @@ const mono = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://stayqr.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "StayQR: Dynamic QR codes that never stop working",
     template: "%s · StayQR",

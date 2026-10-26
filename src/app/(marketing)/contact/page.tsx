@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { COMPANY } from "@/content/company";
 
 export const metadata: Metadata = {
-  title: "Contact StayQR",
+  title: { absolute: "Contact StayQR: help, billing, privacy and abuse" },
   description: `Get help with StayQR, ask about plans and billing, report a harmful QR code or make a privacy request. A person replies within ${COMPANY.replyWithin}.`,
   alternates: { canonical: "/contact" },
 };

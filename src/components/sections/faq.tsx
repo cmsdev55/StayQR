@@ -1,3 +1,4 @@
+import { COMPANY } from "@/content/company";
 import { Accordion } from "@/components/ui/accordion";
 import { SectionHeading } from "@/components/ui/section-heading";
 import type { Faq as FaqItem } from "@/content/faq";
@@ -17,8 +18,8 @@ export function Faq({ items, id = "faq", title = "Questions, *answered.*" }: { i
           <SectionHeading id={`${id}-title`} eyebrow="FAQ" title={title} />
           <p className="mt-6 max-w-[36ch] text-body text-fg-muted" data-reveal="" style={{ ["--stagger" as string]: 2 }}>
             Something else? Email{" "}
-            <a href="mailto:hello@stayqr.com" className="text-fg underline decoration-line-strong underline-offset-4 transition-colors hover:decoration-fg">
-              hello@stayqr.com
+            <a href={`mailto:${COMPANY.email.hello}`} className="text-fg underline decoration-line-strong underline-offset-4 transition-colors hover:decoration-fg">
+              {COMPANY.email.hello}
             </a>{" "}
             and a person will reply within a day.
           </p>

@@ -8,7 +8,7 @@ import { COMPANY } from "@/content/company";
 import { QR_TYPES } from "@/lib/qr-types";
 
 export const metadata: Metadata = {
-  title: "About StayQR",
+  title: { absolute: "About StayQR: QR codes that keep working" },
   description: "StayQR makes QR codes that keep working: free static codes that never expire, and dynamic codes that keep redirecting even after you cancel.",
   alternates: { canonical: "/about" },
 };

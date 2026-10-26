@@ -19,12 +19,19 @@ export function generateStaticParams() {
 }
 export const dynamicParams = false;
 
+/** Google shows about 155–160 characters: add the suffix only if it fits, and cut long intros at a word. */
+function fitDescription(intro: string, suffix: string, max = 158) {
+  if ((intro + suffix).length <= max) return intro + suffix;
+  if (intro.length <= max) return intro;
+  return intro.slice(0, intro.lastIndexOf(" ", max - 1)).replace(/[,;:]$/, "") + "…";
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ind = industryBySlug((await params).slug);
   if (!ind) return {};
   return {
     title: `Dynamic QR codes for ${ind.name.toLowerCase()}`,
-    description: `${ind.intro} Unlimited scans, and your codes keep working if you cancel.`,
+    description: fitDescription(ind.intro, " Unlimited scans, and codes keep working if you cancel."),
     alternates: { canonical: `/industries/${ind.slug}` },
   };
 }

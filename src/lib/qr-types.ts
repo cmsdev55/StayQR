@@ -1,3 +1,5 @@
+import { SITE_URL } from "@/lib/site";
+
 /**
  * The free generator's QR content types. Each type declares its form fields, defaults,
  * validation and encoding. Everything here is static (encoded into the pattern itself), so it
@@ -101,7 +103,7 @@ export const QR_TYPES: QrTypeDef[] = [
     group: "Popular",
     icon: ICON.link,
     fields: [{ name: "url", label: "Website address", kind: "url", placeholder: "yourwebsite.com/menu", required: true }],
-    defaults: { url: "https://stayqr.com" },
+    defaults: { url: SITE_URL },
     encode: (v) => withScheme(v.url ?? ""),
     describe: (v) => withScheme(v.url ?? "").replace(/^https?:\/\//, "") || "Add a link",
     validate: (v) => req(v, "url", "Add a link") ?? (looksLikeUrl(v.url) || /^[a-z]+:/i.test(v.url.trim()) ? null : "That doesn't look like a link yet."),
@@ -185,7 +187,7 @@ export const QR_TYPES: QrTypeDef[] = [
       { name: "subject", label: "Subject", kind: "text" },
       { name: "body", label: "Message", kind: "textarea", maxLength: 400 },
     ],
-    defaults: { to: "hello@stayqr.com", subject: "Hello from your QR code", body: "" },
+    defaults: { to: "you@example.com", subject: "Hello from your QR code", body: "" },
     encode: (v) => {
       if (!v.to) return "";
       const q = new URLSearchParams();

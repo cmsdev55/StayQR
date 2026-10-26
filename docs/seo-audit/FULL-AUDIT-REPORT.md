@@ -118,3 +118,28 @@ pages StayQR could support today and doesn't have:
 | "QR code for PDF / file" | Needs file hosting: a product gap, not just content |
 
 Verify demand in Google Search Console or a keyword tool before writing them.
+
+## Re-audit after fixes (26 October 2026, commit 96498e1)
+
+Production re-crawled: 53 pages, 0 errors.
+
+| Check | Before | After |
+|---|---|---|
+| Canonical host | stayqr.com (53/53) | stayqr-six.vercel.app (53/53) |
+| Sitemap and robots.txt sitemap line | stayqr.com | stayqr-six.vercel.app |
+| og:image | missing on 16 guides | present on 53/53 |
+| Descriptions over 160 chars | 8 | 0 |
+| Duplicate descriptions | 1 | 0 |
+| "StayQR · StayQR" titles | 2 | 0 |
+| /login, /signup | indexable, in sitemap | `noindex, follow`, removed from sitemap |
+| Homepage schema | FAQPage | + WebSite + Organization |
+| Pricing schema | FAQPage | + SoftwareApplication with 4 offers |
+| Security headers | HSTS only | + nosniff, Referrer-Policy, X-Frame-Options, Permissions-Policy |
+| /favicon.ico, /llms.txt | 404 | 200 |
+
+**Estimated score after fixes: 85 / 100** (Technical 88, Content 76, On-page 90, Schema 86, Performance 88,
+AI readiness 76, Images 95).
+
+Still open: a Content-Security-Policy (needs care with AdSense and the Lemon Squeezy overlay), named authors and an
+editorial policy, the homepage's 3D hero cost on mobile, contact emails on a domain you control, the content-gap
+landing pages, and Search Console submission.

@@ -1,0 +1,242 @@
+{
+ "summary": {
+  "health_score": 76,
+  "business_type": "SaaS: free QR tools plus paid dynamic codes (pre-launch)",
+  "top_findings": [
+   "endureqr.com unregistered while all contact emails use it",
+   "Short links on a temporary vercel.app host; no shutdown commitment",
+   "/dynamic-qr-code-generator is a sales page for a tool-first query",
+   "No named people or legal entity (E-E-A-T)",
+   "Organization entity split across pages; 32 px logo; no sameAs"
+  ],
+  "quick_wins": [
+   "Register endureqr.com",
+   "Set NEXT_PUBLIC_CONTACT_EMAIL now",
+   "14-day money-back under every Start Pro",
+   "One Organization @id + 512 px PNG logo",
+   "BreadcrumbList on pricing, industries, alternatives"
+  ]
+ },
+ "categories": [
+  {
+   "name": "Technical SEO",
+   "score": 82,
+   "what_works": [
+    "57/57 pages 200 with self-canonical",
+    "Full security headers incl. CSP",
+    "Server-rendered",
+    "Sitemap matches crawl"
+   ],
+   "findings": [
+    {
+     "title": "Short links on temporary host",
+     "severity": "High",
+     "description": "Dynamic codes encode endureqr.vercel.app/r/\u2026",
+     "recommendation": "Move short links to an owned domain before the first paid code"
+    },
+    {
+     "title": "New Search Console property not verified",
+     "severity": "Medium",
+     "description": "Only the old host is verified",
+     "recommendation": "Verify, submit sitemap, import to Bing"
+    },
+    {
+     "title": "No IndexNow",
+     "severity": "Low",
+     "description": "/indexnow key absent",
+     "recommendation": "Add IndexNow"
+    },
+    {
+     "title": "lastmod on 16/55 URLs",
+     "severity": "Low",
+     "description": "Only guides carry lastmod",
+     "recommendation": "Emit real content dates"
+    }
+   ]
+  },
+  {
+   "name": "Content Quality",
+   "score": 63,
+   "what_works": [
+    "Accurate technical claims",
+    "Readable (grade 5\u201310)",
+    "Tool pages not near-duplicates"
+   ],
+   "findings": [
+    {
+     "title": "Contact domain unregistered",
+     "severity": "Critical",
+     "description": "hello@/privacy@/abuse@endureqr.com on 53 pages; NXDOMAIN",
+     "recommendation": "Register domain or set NEXT_PUBLIC_CONTACT_EMAIL"
+    },
+    {
+     "title": "No named people or legal entity",
+     "severity": "High",
+     "description": "No author, founder or controller name",
+     "recommendation": "Founder section, Person authors, editorial policy"
+    },
+    {
+     "title": "Industry pages boilerplate",
+     "severity": "High",
+     "description": "7 identical sentences on all 8",
+     "recommendation": "Unique example and FAQs per page"
+    },
+    {
+     "title": "No sources or images in guides",
+     "severity": "Medium",
+     "description": "0 outbound links, 0 images",
+     "recommendation": "Link primary sources, add diagrams"
+    }
+   ]
+  },
+  {
+   "name": "On-Page SEO",
+   "score": 86,
+   "what_works": [
+    "Unique titles \u226460 and descriptions \u2264160",
+    "One H1 per page"
+   ],
+   "findings": [
+    {
+     "title": "Comparison pages target the wrong intent",
+     "severity": "Medium",
+     "description": "'bitly alternative' results are link shorteners",
+     "recommendation": "Retarget to 'Bitly alternative for QR codes'"
+    }
+   ]
+  },
+  {
+   "name": "Schema / Structured Data",
+   "score": 76,
+   "what_works": [
+    "All JSON-LD valid",
+    "Correct breadcrumbs, Article, Offers"
+   ],
+   "findings": [
+    {
+     "title": "Split Organization entity",
+     "severity": "Medium",
+     "description": "Only home has @id; no sameAs",
+     "recommendation": "Reuse /#organization everywhere"
+    },
+    {
+     "title": "Logo is a 32 px SVG",
+     "severity": "Medium",
+     "description": "icon.svg",
+     "recommendation": "512 px PNG logo"
+    },
+    {
+     "title": "FAQPage on 54 pages",
+     "severity": "Info",
+     "description": "FAQ rich results retired 7 May 2026",
+     "recommendation": "Keep; no SERP feature expected"
+    }
+   ]
+  },
+  {
+   "name": "Performance (CWV)",
+   "score": 93,
+   "what_works": [
+    "Mobile 95\u2013100",
+    "CLS 0",
+    "No 3D code on phones before interaction"
+   ],
+   "findings": [
+    {
+     "title": "Homepage LCP on the 2.5 s line",
+     "severity": "Medium",
+     "description": "2.81 s median; fonts compete with hero",
+     "recommendation": "Trim font preloads, srcset the hero"
+    }
+   ]
+  },
+  {
+   "name": "AI Search Readiness",
+   "score": 67,
+   "what_works": [
+    "All AI crawlers get 200 SSR pages",
+    "Answer-first guides",
+    "Valid llms.txt"
+   ],
+   "findings": [
+    {
+     "title": "No Bing verification or IndexNow",
+     "severity": "High",
+     "description": "No msvalidate tag",
+     "recommendation": "Verify Bing, add IndexNow"
+    },
+    {
+     "title": "No off-site presence",
+     "severity": "Medium",
+     "description": "No profiles or listings",
+     "recommendation": "Create profiles, add sameAs"
+    }
+   ]
+  },
+  {
+   "name": "Images",
+   "score": 60,
+   "what_works": [
+    "All images have alt text",
+    "OG image on every page"
+   ],
+   "findings": [
+    {
+     "title": "No diagrams or examples",
+     "severity": "Medium",
+     "description": "0 images on guides, tool and feature pages",
+     "recommendation": "Add diagrams and example codes"
+    }
+   ]
+  }
+ ],
+ "action_plan": {
+  "phases": [
+   {
+    "name": "Phase 1: Critical Fixes",
+    "timeframe": "Week 1",
+    "items": [
+     "Register endureqr.com",
+     "Working contact email now",
+     "Short links on owned domain + shutdown FAQ",
+     "Search Console, Bing, IndexNow"
+    ]
+   },
+   {
+    "name": "Phase 2: High-Impact Improvements",
+    "timeframe": "Weeks 2-3",
+    "items": [
+     "Named people and editorial policy",
+     "One brand entity in schema",
+     "Tool-first dynamic page",
+     "Mobile inputs before preview",
+     "Retarget Bitly comparison"
+    ]
+   },
+   {
+    "name": "Phase 3: Content & Authority",
+    "timeframe": "Month 2",
+    "items": [
+     "Sources, diagrams, question H2s in guides",
+     "Off-site profiles and listings",
+     "Deeper industry pages",
+     "Performance polish",
+     "Complete llms.txt and lastmod"
+    ]
+   },
+   {
+    "name": "Phase 4: Monitoring & Iteration",
+    "timeframe": "Ongoing",
+    "items": [
+     "Weekly Search Console and Bing",
+     "/seo google after 4 weeks",
+     "Re-audit after Phase 2"
+    ]
+   }
+  ]
+ },
+ "artifacts": {
+  "findings_dir": "findings/",
+  "screenshots_dir": "screenshots/"
+ }
+}

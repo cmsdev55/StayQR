@@ -1,0 +1,233 @@
+{
+ "summary": {
+  "health_score": 75,
+  "business_type": "SaaS: QR code generator with paid dynamic codes (tool-led content site)",
+  "top_findings": [
+   "Canonicals, sitemap and robots.txt point to stayqr.com, which does not serve this site (53/53 pages)",
+   "16 guides have no og:image",
+   "/login and /signup are indexable thin pages",
+   "Security headers missing beyond HSTS",
+   "Guides have no named author (E-E-A-T)"
+  ],
+  "quick_wins": [
+   "Build absolute URLs from NEXT_PUBLIC_SITE_URL",
+   "noindex auth pages",
+   "Restore og:image on guides",
+   "Trim 8 industry descriptions to ~155 chars",
+   "Add llms.txt, favicon.ico, WebSite + Organization schema"
+  ]
+ },
+ "categories": [
+  {
+   "name": "Technical SEO",
+   "score": 62,
+   "what_works": [
+    "53/53 pages return 200",
+    "Server-rendered HTML",
+    "HSTS with preload",
+    "Complete sitemap, no orphans"
+   ],
+   "findings": [
+    {
+     "title": "Canonical and sitemap host mismatch",
+     "severity": "Critical",
+     "description": "All 53 canonicals, sitemap <loc> URLs and the robots.txt Sitemap line use https://stayqr.com, which resolves to a GoDaddy server and does not answer over HTTPS.",
+     "recommendation": "Generate absolute URLs from NEXT_PUBLIC_SITE_URL and launch on a domain you control."
+    },
+    {
+     "title": "Missing security headers",
+     "severity": "Medium",
+     "description": "Only HSTS is sent. No CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy or Permissions-Policy.",
+     "recommendation": "Add headers in next.config."
+    },
+    {
+     "title": "favicon.ico returns 404",
+     "severity": "Low",
+     "description": "Only /icon.svg exists.",
+     "recommendation": "Serve /favicon.ico."
+    }
+   ]
+  },
+  {
+   "name": "Content Quality",
+   "score": 74,
+   "what_works": [
+    "Median 783 words of main content",
+    "Guides of 1,100\u20131,600 words with tables and FAQs",
+    "Competitor facts cite sources"
+   ],
+   "findings": [
+    {
+     "title": "Thin auth pages indexable",
+     "severity": "High",
+     "description": "/login 25 words, /signup 42 words, both indexable.",
+     "recommendation": "noindex auth pages."
+    },
+    {
+     "title": "No named authors",
+     "severity": "Medium",
+     "description": "Guides are credited to the organisation only; the About page names no people.",
+     "recommendation": "Add a named author/reviewer and an editorial policy page."
+    },
+    {
+     "title": "Industry pages are short",
+     "severity": "Low",
+     "description": "329\u2013376 words each.",
+     "recommendation": "Add a worked example and 2\u20133 FAQs per page."
+    }
+   ]
+  },
+  {
+   "name": "On-Page SEO",
+   "score": 80,
+   "what_works": [
+    "Unique titles, none over 60 chars",
+    "One H1 per page",
+    "Descriptions on all pages"
+   ],
+   "findings": [
+    {
+     "title": "Long industry descriptions",
+     "severity": "Medium",
+     "description": "8 descriptions run 165\u2013204 characters.",
+     "recommendation": "Trim to about 155."
+    },
+    {
+     "title": "Double brand in titles",
+     "severity": "Low",
+     "description": "'About StayQR \u00b7 StayQR' and 'Contact StayQR \u00b7 StayQR'.",
+     "recommendation": "Use absolute titles."
+    },
+    {
+     "title": "Duplicate description",
+     "severity": "Low",
+     "description": "/login repeats the homepage description.",
+     "recommendation": "Write a login-specific description."
+    }
+   ]
+  },
+  {
+   "name": "Schema / Structured Data",
+   "score": 78,
+   "what_works": [
+    "FAQPage on 46 pages",
+    "BreadcrumbList on 37",
+    "Article on 16 guides",
+    "All JSON-LD parses"
+   ],
+   "findings": [
+    {
+     "title": "No WebSite/Organization on homepage",
+     "severity": "Medium",
+     "description": "Organization appears only on /about.",
+     "recommendation": "Add WebSite + Organization to the homepage."
+    },
+    {
+     "title": "No offers markup on pricing",
+     "severity": "Low",
+     "description": "Pricing has no SoftwareApplication/Offer schema.",
+     "recommendation": "Add SoftwareApplication with one Offer per plan."
+    }
+   ]
+  },
+  {
+   "name": "Performance (CWV)",
+   "score": 88,
+   "what_works": [
+    "Tool and guide pages: Lighthouse 100",
+    "CLS 0 everywhere"
+   ],
+   "findings": [
+    {
+     "title": "Homepage main-thread cost",
+     "severity": "Medium",
+     "description": "Lighthouse mobile 83, TBT 412 ms from the 3D hero; LCP 3.13 s.",
+     "recommendation": "Defer the 3D scene further on mobile."
+    }
+   ]
+  },
+  {
+   "name": "AI Search Readiness",
+   "score": 70,
+   "what_works": [
+    "AI crawlers allowed",
+    "Answer-first paragraphs, FAQ blocks, tables"
+   ],
+   "findings": [
+    {
+     "title": "No llms.txt",
+     "severity": "Low",
+     "description": "/llms.txt returns 404.",
+     "recommendation": "Publish llms.txt listing tools and guides."
+    },
+    {
+     "title": "Weak entity signals",
+     "severity": "Medium",
+     "description": "No sameAs profiles, no named authors.",
+     "recommendation": "Add Organization sameAs and author markup."
+    }
+   ]
+  },
+  {
+   "name": "Images",
+   "score": 85,
+   "what_works": [
+    "All 10 images have alt text"
+   ],
+   "findings": [
+    {
+     "title": "Guides lack og:image",
+     "severity": "High",
+     "description": "16 guide pages have no og:image because their openGraph override drops the site image.",
+     "recommendation": "Pass the image explicitly in the guide metadata."
+    }
+   ]
+  }
+ ],
+ "action_plan": {
+  "phases": [
+   {
+    "name": "Phase 1: Critical Fixes",
+    "timeframe": "Week 1",
+    "items": [
+     "Absolute URLs from NEXT_PUBLIC_SITE_URL; launch on an owned domain",
+     "noindex auth pages",
+     "og:image on guides",
+     "Submit sitemap to Search Console"
+    ]
+   },
+   {
+    "name": "Phase 2: High-Impact Improvements",
+    "timeframe": "Weeks 2-3",
+    "items": [
+     "Security headers",
+     "WebSite/Organization + pricing schema",
+     "Trim descriptions, fix titles",
+     "llms.txt and favicon.ico"
+    ]
+   },
+   {
+    "name": "Phase 3: Content & Authority",
+    "timeframe": "Month 2",
+    "items": [
+     "Landing pages: QR with logo, dynamic QR, app-download QR, bulk QR",
+     "Named author + editorial policy",
+     "Expand industry pages",
+     "First directory listings and links"
+    ]
+   },
+   {
+    "name": "Phase 4: Monitoring & Iteration",
+    "timeframe": "Ongoing",
+    "items": [
+     "Weekly Search Console review",
+     "Re-run audit after each content batch"
+    ]
+   }
+  ]
+ },
+ "artifacts": {
+  "findings_dir": "findings/",
+  "screenshots_dir": "screenshots/"
+ }
+}

@@ -143,3 +143,18 @@ AI readiness 76, Images 95).
 Still open: a Content-Security-Policy (needs care with AdSense and the Lemon Squeezy overlay), named authors and an
 editorial policy, the homepage's 3D hero cost on mobile, contact emails on a domain you control, the content-gap
 landing pages, and Search Console submission.
+
+## Round 2 (26 October 2026, commit 8c9176e)
+
+Production re-crawled: 57 pages, 0 errors, 0 descriptions over 160 characters, 0 duplicate titles.
+
+| Change | Result |
+|---|---|
+| New landing pages | `/qr-code-with-logo` (1,840 words, live generator), `/dynamic-qr-code-generator` (1,347), `/app-download-qr-code` (1,481), `/bulk-qr-code-generator` (1,388). Each has breadcrumbs, app schema and FAQPage, and is linked from all 55 other pages via the footer |
+| Industry pages | 330–375 → 616–677 words: a 5-step worked example, 4–5 FAQs, related guides. Unbacked figures removed |
+| Internal links | Least-linked guide went from 1 inbound page to 7 |
+| Homepage, mobile Lighthouse (live, median of 3) | Performance 83 → 96, TBT 412 → 20 ms, LCP 3.13 → 2.74 s |
+| Content-Security-Policy | Live; allows only Google AdSense/Funding Choices and Lemon Squeezy. No violations on the home, generator (incl. downloads), guide, pricing or dashboard pages |
+
+Still open (needs the owner): Search Console and Bing verification and sitemap submission, a named author with an
+editorial policy, brand profile links (`sameAs`), and contact emails on a domain you control.

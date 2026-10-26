@@ -1,4 +1,4 @@
-/** EndureQR plans. Prices are the brief's; limits are placeholders until the product team confirms them. */
+/** EndureQR plans and limits (enforced in src/lib/server: 500-row bulk create, 12-month scan retention on Pro). */
 export type Billing = "monthly" | "yearly";
 
 export const PRO = {

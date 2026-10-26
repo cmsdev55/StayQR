@@ -53,7 +53,7 @@ export const TERMS: LegalDoc = {
       title: "Static and dynamic codes",
       body: [
         "A **static** code stores its content inside the pattern. Once downloaded it works without EndureQR, and we have no way to change, track or disable it. You may use static codes for any lawful purpose, including commercial use, without credit to us.",
-        "A **dynamic** code points to a EndureQR short link that redirects to a destination you choose. You can change the destination while your plan includes editing.",
+        "A **dynamic** code points to an EndureQR short link that redirects to a destination you choose. You can change the destination while your plan includes editing.",
         "You keep all rights in the content, logos and designs you add. You give us the limited permission we need to host, display and redirect them for you.",
       ],
     },

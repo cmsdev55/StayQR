@@ -21,7 +21,7 @@ export function Faq({ items, id = "faq", title = "Questions, *answered.*" }: { i
             <a href={`mailto:${COMPANY.email.hello}`} className="text-fg underline decoration-line-strong underline-offset-4 transition-colors hover:decoration-fg">
               {COMPANY.email.hello}
             </a>{" "}
-            and a person will reply within a day.
+            and a person will reply within {COMPANY.replyWithin}.
           </p>
         </div>
         <div data-reveal="" style={{ ["--stagger" as string]: 1 }}>

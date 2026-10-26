@@ -384,7 +384,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
     eyebrow: "App download codes",
     h1: "One QR code for the *App Store and Google Play*",
     intro:
-      "An app download QR code sends each person to the right store: iPhone and iPad users to the App Store, Android users to Google Play, and everyone else to a web page you choose. You make it as a EndureQR dynamic code with smart redirects, so one printed code works for every phone. You can change any of the links after printing.",
+      "An app download QR code sends each person to the right store: iPhone and iPad users to the App Store, Android users to Google Play, and everyone else to a web page you choose. You make it as an EndureQR dynamic code with smart redirects, so one printed code works for every phone. You can change any of the links after printing.",
     tool: false,
     cta: { label: "Create an app download code", href: "/signup?plan=pro-yearly" },
     benefits: [
@@ -443,7 +443,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
       { type: "h2", id: "how-smart-redirects-work", text: "How smart redirects work" },
       {
         type: "p",
-        text: "A EndureQR [dynamic QR code](/dynamic-qr-code-generator) holds a short link. When someone scans it, EndureQR checks what kind of device opened the link and forwards it to the matching address.",
+        text: "An EndureQR [dynamic QR code](/dynamic-qr-code-generator) holds a short link. When someone scans it, EndureQR checks what kind of device opened the link and forwards it to the matching address.",
       },
       {
         type: "table",

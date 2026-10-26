@@ -6,7 +6,7 @@ import { googleEnabled } from "@/lib/server/env";
 
 export const metadata: Metadata = {
   title: "Create your account",
-  description: "Create a EndureQR account for dynamic QR codes you can edit after printing. They keep working if you cancel.",
+  description: "Create an EndureQR account for dynamic QR codes you can edit after printing. They keep working if you cancel.",
   alternates: { canonical: "/signup" },
   robots: { index: false, follow: true },
 };

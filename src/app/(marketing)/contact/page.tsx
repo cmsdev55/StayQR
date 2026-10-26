@@ -18,7 +18,7 @@ const CRUMBS = [
 
 const CHANNELS = [
   { title: "Help and billing", body: "Questions about the generator, your codes, plans, refunds or invoices.", email: COMPANY.email.hello },
-  { title: "Report a harmful code", body: "A EndureQR code that leads to phishing, malware, fraud or other abuse. Include the code's short link or a photo of it.", email: COMPANY.email.abuse },
+  { title: "Report a harmful code", body: "An EndureQR code that leads to phishing, malware, fraud or other abuse. Include the code's short link or a photo of it.", email: COMPANY.email.abuse },
   { title: "Privacy requests", body: "Access, export, correction or deletion of your personal data.", email: COMPANY.email.privacy },
 ];
 

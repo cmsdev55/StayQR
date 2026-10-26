@@ -37,7 +37,7 @@ function layout(heading: string, body: string, cta: { label: string; url: string
 }
 
 export function verifyEmail(to: string, url: string) {
-  const footer = "If you didn't create a EndureQR account, ignore this email and nothing will happen.";
+  const footer = "If you didn't create an EndureQR account, ignore this email and nothing will happen.";
   return sendEmail(
     to,
     "Confirm your email for EndureQR",

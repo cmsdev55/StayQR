@@ -10,7 +10,8 @@ export function PaymentMethods({ className, align = "left" }: { className?: stri
         </svg>
         Pay by card
       </span>
-      <span className="flex items-center gap-1.5" aria-label="Visa, Mastercard and American Express accepted">
+      <span className="flex items-center gap-1.5">
+        <span className="sr-only">Visa, Mastercard and American Express accepted.</span>
         {["VISA", "Mastercard", "AMEX"].map((c) => (
           <span key={c} aria-hidden className="inline-flex h-6 items-center rounded-[5px] border border-line bg-bg-raised px-2 font-mono text-[10px] font-semibold tracking-[0.06em] text-fg">
             {c}

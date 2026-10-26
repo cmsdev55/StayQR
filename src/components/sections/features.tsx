@@ -94,7 +94,7 @@ export function Features() {
             <GlobeVisual />
             <div className="relative">
               <h3 className="font-display text-h3 font-semibold text-fg">See every scan</h3>
-              <p className="mt-2 max-w-[34ch] text-body-sm text-fg-muted">Live map of scans by city, device and time of day. Analytics on every plan, for every code.</p>
+              <p className="mt-2 max-w-[34ch] text-body-sm text-fg-muted">Scans by day, city, device and time of day, for every dynamic code on a paid plan.</p>
             </div>
           </Card>
 

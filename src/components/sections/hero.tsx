@@ -46,6 +46,7 @@ export function Hero() {
                   </span>
                 );
               })}
+              {li < HEADLINE.length - 1 ? " " : null}
             </span>
           ))}
         </h1>

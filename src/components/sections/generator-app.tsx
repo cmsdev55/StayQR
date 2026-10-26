@@ -78,7 +78,8 @@ export function GeneratorApp({ placeholder, initialType = "url" }: { placeholder
       setBusy(false);
     }
   };
-  const upsell = downloaded !== null && !dismissed;
+  // only web links can become dynamic codes (WiFi, contact cards, text, email, phone… are read by the phone directly)
+  const upsell = downloaded !== null && !dismissed && /^https?:\/\//i.test(data);
   const framed = (design.frame ?? "none") !== "none";
 
   return (

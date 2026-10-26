@@ -58,8 +58,8 @@ export function PricingCards({ headingLevel = 3 }: { headingLevel?: 2 | 3 }) {
           blurb="Dynamic codes you can edit, track and keep."
           price={
             <span className="flex items-baseline gap-1">
-              <AnimatedCounter value={perMonth} decimals={2} prefix="$" duration={700} label={`$${perMonth.toFixed(2)} per month`} className="font-display text-display-md font-semibold text-fg" />
-              <span className="text-body-sm text-fg-muted">/mo</span>
+              <AnimatedCounter value={perMonth} decimals={2} prefix="$" duration={700} label={`$${perMonth.toFixed(2)}`} className="font-display text-display-md font-semibold text-fg" />
+              <span className="text-body-sm text-fg-muted"><span aria-hidden>/mo</span><span className="sr-only"> per month</span></span>
             </span>
           }
           note={yearly ? `Billed $${PRO.yearly} once a year` : "Billed monthly, cancel any time"}

@@ -259,7 +259,7 @@ export const INDUSTRIES: Industry[] = [
       { q: "Can clients edit their own codes?", a: "Not yet. Client access to their own folder, with edit or view-only rights, is on our roadmap." },
       { q: "Can we create a whole campaign's codes at once?", a: "Yes. Upload a CSV of up to 500 rows to create the codes in one go, and download a ZIP of print-ready SVGs." },
       { q: "Can several people at the agency log in?", a: "Not yet. Team seats with their own logins are on our roadmap. Today one account manages every client's codes." },
-      { q: "Can we use our own domain for the short links?", a: "Not at the moment. Every dynamic code uses a EndureQR short link, which keeps working whichever destination you choose." },
+      { q: "Can we use our own domain for the short links?", a: "Not at the moment. Every dynamic code uses an EndureQR short link, which keeps working whichever destination you choose." },
     ],
   },
 ];

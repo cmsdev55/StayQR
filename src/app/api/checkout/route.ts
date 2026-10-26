@@ -18,7 +18,15 @@ export async function GET(req: Request) {
   if (current.tier === "lifetime" || (current.tier === "pro" && plan !== "lifetime" && current.status !== "cancelled")) {
     return NextResponse.redirect(new URL("/dashboard/billing", url));
   }
-  if (billingMode === "lemonsqueezy") return NextResponse.redirect(await createCheckout(user, plan));
+  if (billingMode === "lemonsqueezy") {
+    try {
+      return NextResponse.redirect(await createCheckout(user, plan));
+    } catch (e) {
+      // e.g. a variant id not configured yet, or Lemon Squeezy unreachable: never show a raw error page
+      console.error("checkout failed", plan, e);
+      return NextResponse.redirect(new URL("/dashboard/billing?checkout=unavailable", url));
+    }
+  }
   if (billingMode === "dev" && (await isLocalRequest())) {
     await devCheckout(user.id, plan);
     return NextResponse.redirect(new URL("/dashboard/billing?checkout=done", url));

@@ -1,4 +1,11 @@
 {
-  "regions": ["iad1"],
-  "crons": [{ "path": "/api/cron/retention", "schedule": "17 3 * * *" }]
+  "regions": [
+    "sfo1"
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/retention",
+      "schedule": "17 3 * * *"
+    }
+  ]
 }

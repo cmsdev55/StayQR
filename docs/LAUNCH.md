@@ -1,15 +1,15 @@
 # Going live: Railway (Postgres) + Vercel (app) + Lemon Squeezy + Resend
 
 The whole Next.js app (pages, API, redirects, webhooks) runs on Vercel. Railway runs only Postgres.
-Keep both in the same part of the world: `vercel.json` pins functions to **iad1** (Washington DC), so create the
-Railway database in **US East (Virginia)**. If most scanners are in Europe, use Railway **EU West (Amsterdam)** and
-change `regions` in `vercel.json` to `["fra1"]`.
+Keep both in the same part of the world. The Railway database runs in **US West (California)**, so `vercel.json` pins
+functions to **sfo1** (San Francisco). If you ever move the database, change `regions` to match (e.g. `iad1` for
+US East, `fra1` for EU West).
 
 ## 1. Railway (database)
 
-1. New project → **Deploy PostgreSQL**. Region as above.
-2. Postgres service → Variables: copy **DATABASE_PUBLIC_URL** (host like `*.proxy.rlwy.net`). Vercel is outside
-   Railway's private network, so it must use the public URL.
+1. Done: project **stayqr** (workspace "My Projects") with a **Postgres** service, a public TCP proxy and the schema applied.
+2. Postgres service → Variables: copy **DATABASE_PUBLIC_URL** (host `*.proxy.rlwy.net`, `?sslmode=require`). Vercel is
+   outside Railway's private network, so it must use the public URL.
 3. Create the tables (from your machine):
    ```bash
    DATABASE_URL="<DATABASE_PUBLIC_URL>" node scripts/db-migrate.mjs

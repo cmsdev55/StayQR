@@ -129,7 +129,7 @@ export function CodeEditor({ code, folders, plan, shortHost }: { code: DashCode 
         <p className="mt-1 text-fg-subtle">{isNew ? "New dynamic code" : `Created ${code.created} · edited ${code.updated}`}</p>
         {code?.disabled && (
           <p role="alert" className="mt-4 rounded-sm bg-danger/[0.08] px-4 py-3 text-fg">
-            StayQR disabled this code after its link was reported as harmful. Scanners see a warning page. Contact {COMPANY.email.abuse} if you think this is a mistake.
+            EndureQR disabled this code after its link was reported as harmful. Scanners see a warning page. Contact {COMPANY.email.abuse} if you think this is a mistake.
           </p>
         )}
         {readOnly && <div className="mt-6"><PlanNotice plan={plan} /></div>}
@@ -275,7 +275,7 @@ export function CodeEditor({ code, folders, plan, shortHost }: { code: DashCode 
               {code ? (
                 <div className="mt-4 grid grid-cols-4 gap-2">
                   {(["png", "svg", "jpeg", "pdf"] as const).map((f) => (
-                    <Button key={f} variant="secondary" size="sm" className="px-0" onClick={() => preview.current?.download(f, `stayqr-${code.slug}`)}>{f === "jpeg" ? "JPG" : f.toUpperCase()}</Button>
+                    <Button key={f} variant="secondary" size="sm" className="px-0" onClick={() => preview.current?.download(f, `endureqr-${code.slug}`)}>{f === "jpeg" ? "JPG" : f.toUpperCase()}</Button>
                   ))}
                 </div>
               ) : (

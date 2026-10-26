@@ -34,21 +34,21 @@ const mono = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "StayQR: Dynamic QR codes that never stop working",
-    template: "%s · StayQR",
+    default: "EndureQR: Dynamic QR codes that never stop working",
+    template: "%s · EndureQR",
   },
   description:
     "Create dynamic QR codes you can edit after printing, with unlimited scans and real analytics. Cancel any time: your codes keep working forever.",
   openGraph: {
     type: "website",
-    siteName: "StayQR",
+    siteName: "EndureQR",
     title: "QR codes that never stop working",
     description: "Edit after printing. Unlimited scans. Your codes keep working even if you cancel.",
   },
   twitter: { card: "summary_large_image" },
   // Search engine ownership checks (Google Search Console "HTML tag" and Bing Webmaster Tools "Meta tag")
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.split(",").map((s) => s.trim()).filter(Boolean),
     other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION } : undefined,
   },
   // AdSense site verification (the ad script itself only loads next to an ad slot)
@@ -65,7 +65,7 @@ export const viewport: Viewport = {
 };
 
 /** Set the theme before first paint (no flash). Dark is the default. Also flags `.js` so reveal styles only hide content when JS can show it again. */
-const themeScript = `(function(){try{var t=localStorage.getItem('stayqr-theme');var q=new URLSearchParams(location.search).get('theme');if(q==='light'||q==='dark')t=q;var d=document.documentElement;d.classList.add('js');d.dataset.theme=t==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}})()`;
+const themeScript = `(function(){try{var t=localStorage.getItem('endureqr-theme');var q=new URLSearchParams(location.search).get('theme');if(q==='light'||q==='dark')t=q;var d=document.documentElement;d.classList.add('js');d.dataset.theme=t==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}})()`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

@@ -71,7 +71,7 @@ export const GUIDES_USES: Guide[] = [
       { type: "h2", id: "vcard-3-compatibility", text: "Why vCard 3.0 is the safe format" },
       {
         type: "p",
-        text: "A vCard is plain text with one field per line. Three versions are in common use: 2.1, 3.0 and 4.0. Version 3.0, defined in RFC 2426, is the one phone scanners handle most consistently. The iPhone camera, Android camera apps and most scanner apps read it. Version 4.0 is newer, but support in phone scanners is less even, and it adds nothing a business card needs. The [vCard QR code generator](/qr-code-generator/vcard) on StayQR writes vCard 3.0 for this reason.",
+        text: "A vCard is plain text with one field per line. Three versions are in common use: 2.1, 3.0 and 4.0. Version 3.0, defined in RFC 2426, is the one phone scanners handle most consistently. The iPhone camera, Android camera apps and most scanner apps read it. Version 4.0 is newer, but support in phone scanners is less even, and it adds nothing a business card needs. The [vCard QR code generator](/qr-code-generator/vcard) on EndureQR writes vCard 3.0 for this reason.",
       },
       {
         type: "p",
@@ -117,7 +117,7 @@ export const GUIDES_USES: Guide[] = [
       },
       {
         type: "p",
-        text: "A small logo in the centre is fine. Uploading one switches StayQR codes to error correction level H, so the code still reads with the centre covered. On a dense vCard, though, every module counts, so keep the logo small or leave it out. Our guide to [error correction levels](/guides/qr-code-error-correction) explains the trade-off.",
+        text: "A small logo in the centre is fine. Uploading one switches EndureQR codes to error correction level H, so the code still reads with the centre covered. On a dense vCard, though, every module counts, so keep the logo small or leave it out. Our guide to [error correction levels](/guides/qr-code-error-correction) explains the trade-off.",
       },
       { type: "h2", id: "test-on-iphone-and-android", text: "Test on iPhone and Android contacts" },
       {
@@ -303,19 +303,19 @@ export const GUIDES_USES: Guide[] = [
       },
       {
         type: "p",
-        text: "On the [StayQR generator](/qr-code-generator), uploading a logo switches error correction to H automatically, so a logo can never be paired with a low level by mistake. For more on logos, colour and contrast, read our [design best practices guide](/guides/qr-code-design-best-practices).",
+        text: "On the [EndureQR generator](/qr-code-generator), uploading a logo switches error correction to H automatically, so a logo can never be paired with a low level by mistake. For more on logos, colour and contrast, read our [design best practices guide](/guides/qr-code-design-best-practices).",
       },
       { type: "h2", id: "setting-the-level", text: "Setting the level in practice" },
       {
         type: "p",
-        text: "Many generators pick a level for you and never show it. The StayQR generator has an Advanced panel where you can choose L, M, Q or H yourself when there is no logo. The same panel sets the quiet zone, the blank margin around the code, from 2 to 8 modules. The standard recommends 4, which is the safe choice for print.",
+        text: "Many generators pick a level for you and never show it. The EndureQR generator has an Advanced panel where you can choose L, M, Q or H yourself when there is no logo. The same panel sets the quiet zone, the blank margin around the code, from 2 to 8 modules. The standard recommends 4, which is the safe choice for print.",
       },
       {
         type: "ol",
         items: [
           "Start with M for a plain printed code.",
           "Move to Q if the code will live outdoors or be handled often.",
-          "Use H whenever you add a logo. StayQR does this for you.",
+          "Use H whenever you add a logo. EndureQR does this for you.",
           "Drop to L only for screens, or when the content is long and the space is fixed.",
           "If the code becomes too dense at the level you need, shorten the content. A dynamic code holds only a short redirect link, which keeps the grid simple even at H. See [static vs dynamic QR codes](/guides/static-vs-dynamic-qr-codes).",
         ],
@@ -607,7 +607,7 @@ export const GUIDES_USES: Guide[] = [
       },
       {
         type: "p",
-        text: "StayQR's paid plans include dynamic codes with scan analytics by device, city and time of day. If you cancel, the codes keep redirecting to the last destination you set, so printed material never goes dead. Pro is $3.99 a month or $29 a year, and Lifetime is $79 once. See [pricing](/pricing) for details.",
+        text: "EndureQR's paid plans include dynamic codes with scan analytics by device, city and time of day. If you cancel, the codes keep redirecting to the last destination you set, so printed material never goes dead. Pro is $3.99 a month or $29 a year, and Lifetime is $79 once. See [pricing](/pricing) for details.",
       },
       {
         type: "p",
@@ -803,7 +803,7 @@ export const GUIDES_USES: Guide[] = [
       },
       {
         type: "p",
-        text: "StayQR's paid plans include dynamic codes you can edit after printing, with scan analytics by device, city and time of day that show which signs people actually used. Codes keep redirecting even if you cancel. See [pricing](/pricing), or read more about [QR codes for events](/industries/events).",
+        text: "EndureQR's paid plans include dynamic codes you can edit after printing, with scan analytics by device, city and time of day that show which signs people actually used. Codes keep redirecting even if you cancel. See [pricing](/pricing), or read more about [QR codes for events](/industries/events).",
       },
       { type: "h2", id: "event-code-plan", text: "A simple code plan for your event" },
       {

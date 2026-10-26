@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: g.description,
       publishedTime: g.published,
       modifiedTime: g.updated,
-      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "StayQR: QR codes that never stop working" }],
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "EndureQR: QR codes that never stop working" }],
     },
   };
 }
@@ -71,8 +71,8 @@ export default async function GuidePage({ params }: Props) {
           dateModified: g.updated,
           mainEntityOfPage: `${SITE}/guides/${g.slug}`,
           image: `${SITE}/opengraph-image`,
-          author: { "@type": "Organization", name: "StayQR", url: SITE },
-          publisher: { "@type": "Organization", name: "StayQR", url: SITE, logo: { "@type": "ImageObject", url: `${SITE}/icon.svg` } },
+          author: { "@type": "Organization", name: "EndureQR", url: SITE },
+          publisher: { "@type": "Organization", name: "EndureQR", url: SITE, logo: { "@type": "ImageObject", url: `${SITE}/icon.svg` } },
         }}
       />
 

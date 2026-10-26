@@ -30,6 +30,6 @@ export const PASSWORD_MIN = 8;
 export function passwordProblem(pw: string) {
   if (pw.length < PASSWORD_MIN) return `Use at least ${PASSWORD_MIN} characters.`;
   if (pw.length > 200) return "That password is too long.";
-  if (/^(.)\1+$/.test(pw) || ["password", "12345678", "qwertyui", "stayqr123"].includes(pw.toLowerCase())) return "Pick a less common password.";
+  if (/^(.)\1+$/.test(pw) || ["password", "12345678", "qwertyui", "endureqr123"].includes(pw.toLowerCase())) return "Pick a less common password.";
   return null;
 }

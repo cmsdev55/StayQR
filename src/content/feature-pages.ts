@@ -2,7 +2,7 @@ import type { GuideBlock } from "@/content/guides";
 import type { QrTypeSlug } from "@/lib/qr-types";
 
 /**
- * Landing pages for features StayQR already has (from the SEO audit's content gaps).
+ * Landing pages for features EndureQR already has (from the SEO audit's content gaps).
  * Facts must match the product: see docs/ROADMAP.md. No statistics, customer names or competitor names.
  */
 export type FeatureSlug = "qr-code-with-logo" | "dynamic-qr-code-generator" | "app-download-qr-code" | "bulk-qr-code-generator";
@@ -101,7 +101,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
       },
       {
         type: "p",
-        text: "When you add a logo, the StayQR generator switches to **level H** automatically and clears the dots behind the image, so the logo sits on a clean patch instead of on top of half-hidden modules. Without a logo, you can pick any level yourself in the advanced panel. The [error correction guide](/guides/qr-code-error-correction) explains the levels in more detail.",
+        text: "When you add a logo, the EndureQR generator switches to **level H** automatically and clears the dots behind the image, so the logo sits on a clean patch instead of on top of half-hidden modules. Without a logo, you can pick any level yourself in the advanced panel. The [error correction guide](/guides/qr-code-error-correction) explains the levels in more detail.",
       },
       { type: "h2", id: "logo-size", text: "How big should the logo be?" },
       {
@@ -221,7 +221,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
     eyebrow: "Dynamic QR codes",
     h1: "Dynamic QR codes you can *edit after printing*",
     intro:
-      "A dynamic QR code points to a short link, so you can change where it goes after the code is printed. StayQR Pro gives you unlimited dynamic codes, unlimited scans and scan analytics for $29 a year. If you ever cancel, your codes keep redirecting to their last destination.",
+      "A dynamic QR code points to a short link, so you can change where it goes after the code is printed. EndureQR Pro gives you unlimited dynamic codes, unlimited scans and scan analytics for $29 a year. If you ever cancel, your codes keep redirecting to their last destination.",
     tool: false,
     cta: { label: "Start Pro", href: "/signup?plan=pro-yearly" },
     benefits: [
@@ -259,12 +259,12 @@ export const FEATURE_PAGES: FeaturePage[] = [
     body: [
       {
         type: "p",
-        text: "A dynamic QR code stores a short redirect link instead of your final address. When someone scans it, their phone opens the short link and StayQR forwards them to the destination you have set. Because that destination lives in your account and not in the printed pattern, you can change it whenever you like. A static code cannot do this. Once it is printed, its content is fixed.",
+        text: "A dynamic QR code stores a short redirect link instead of your final address. When someone scans it, their phone opens the short link and EndureQR forwards them to the destination you have set. Because that destination lives in your account and not in the printed pattern, you can change it whenever you like. A static code cannot do this. Once it is printed, its content is fixed.",
       },
       { type: "h2", id: "how-dynamic-codes-work", text: "How a dynamic QR code works" },
       {
         type: "p",
-        text: "Every StayQR dynamic code holds a short link made of /r/ and a unique code. The printed pattern never changes. What changes is the destination saved against that short link.",
+        text: "Every EndureQR dynamic code holds a short link made of /r/ and a unique code. The printed pattern never changes. What changes is the destination saved against that short link.",
       },
       {
         type: "ol",
@@ -277,7 +277,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
       },
       {
         type: "p",
-        text: "Because each scan passes through StayQR first, scans can be counted and different phones can be sent to different links. The [static vs dynamic guide](/guides/static-vs-dynamic-qr-codes) covers the trade-offs in depth.",
+        text: "Because each scan passes through EndureQR first, scans can be counted and different phones can be sent to different links. The [static vs dynamic guide](/guides/static-vs-dynamic-qr-codes) covers the trade-offs in depth.",
       },
       { type: "h2", id: "static-vs-dynamic", text: "Static and dynamic codes compared" },
       {
@@ -297,7 +297,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
         type: "p",
         text: "Static codes are the right choice for content that never changes, like a WiFi password or a contact card. You can make those for free in the [QR code generator](/qr-code-generator), with no sign-up and no watermark.",
       },
-      { type: "h2", id: "whats-included", text: "What you get with StayQR dynamic codes" },
+      { type: "h2", id: "whats-included", text: "What you get with EndureQR dynamic codes" },
       {
         type: "ul",
         items: [
@@ -328,7 +328,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
       { type: "h2", id: "if-you-cancel", text: "What happens if you cancel" },
       {
         type: "p",
-        text: "Some dynamic QR services switch codes off when a plan ends, which is a common reason printed codes stop working. StayQR does not. **Your codes keep redirecting to their last destination after you cancel**, with no service page and no ads in between. Editing and new analytics pause until you resume your plan. Read more in [do QR codes expire?](/guides/do-qr-codes-expire)",
+        text: "Some dynamic QR services switch codes off when a plan ends, which is a common reason printed codes stop working. EndureQR does not. **Your codes keep redirecting to their last destination after you cancel**, with no service page and no ads in between. Editing and new analytics pause until you resume your plan. Read more in [do QR codes expire?](/guides/do-qr-codes-expire)",
       },
       { type: "h2", id: "pricing", text: "Pricing" },
       {
@@ -351,7 +351,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
         a: "A static code stores its content in the pattern, so it cannot change after printing. A dynamic code stores a short link, so you can change the destination at any time and count scans.",
       },
       {
-        q: "Do StayQR dynamic QR codes expire?",
+        q: "Do EndureQR dynamic QR codes expire?",
         a: "No. Your codes keep redirecting to their last destination even if you cancel, with no service page and no ads.",
       },
       {
@@ -384,7 +384,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
     eyebrow: "App download codes",
     h1: "One QR code for the *App Store and Google Play*",
     intro:
-      "An app download QR code sends each person to the right store: iPhone and iPad users to the App Store, Android users to Google Play, and everyone else to a web page you choose. You make it as a StayQR dynamic code with smart redirects, so one printed code works for every phone. You can change any of the links after printing.",
+      "An app download QR code sends each person to the right store: iPhone and iPad users to the App Store, Android users to Google Play, and everyone else to a web page you choose. You make it as a EndureQR dynamic code with smart redirects, so one printed code works for every phone. You can change any of the links after printing.",
     tool: false,
     cta: { label: "Create an app download code", href: "/signup?plan=pro-yearly" },
     benefits: [
@@ -443,7 +443,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
       { type: "h2", id: "how-smart-redirects-work", text: "How smart redirects work" },
       {
         type: "p",
-        text: "A StayQR [dynamic QR code](/dynamic-qr-code-generator) holds a short link. When someone scans it, StayQR checks what kind of device opened the link and forwards it to the matching address.",
+        text: "A EndureQR [dynamic QR code](/dynamic-qr-code-generator) holds a short link. When someone scans it, EndureQR checks what kind of device opened the link and forwards it to the matching address.",
       },
       {
         type: "table",
@@ -494,7 +494,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
       { type: "h2", id: "measuring-scans-and-installs", text: "Measuring scans and installs" },
       {
         type: "p",
-        text: "StayQR analytics show how many people scanned the code, split by iPhone and iPad, Android and computers, along with daily totals, approximate location and the busiest times of the week. That tells you which placements create interest. Scans are not installs, though. The stores report downloads in App Store Connect and the Google Play Console, so compare the two to see how many scanners go on to install. Our guide on [how to track QR code scans](/guides/track-qr-code-scans) has more on reading the numbers.",
+        text: "EndureQR analytics show how many people scanned the code, split by iPhone and iPad, Android and computers, along with daily totals, approximate location and the busiest times of the week. That tells you which placements create interest. Scans are not installs, though. The stores report downloads in App Store Connect and the Google Play Console, so compare the two to see how many scanners go on to install. Our guide on [how to track QR code scans](/guides/track-qr-code-scans) has more on reading the numbers.",
       },
       {
         type: "p",
@@ -504,7 +504,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
     faq: [
       {
         q: "Can one QR code link to both the App Store and Google Play?",
-        a: "Yes, with a dynamic code that checks the device when it is scanned. StayQR sends iPhone and iPad users to your App Store link, Android users to your Google Play link, and everyone else to your main link.",
+        a: "Yes, with a dynamic code that checks the device when it is scanned. EndureQR sends iPhone and iPad users to your App Store link, Android users to your Google Play link, and everyone else to your main link.",
       },
       {
         q: "Can I do this with a free static QR code?",
@@ -523,8 +523,8 @@ export const FEATURE_PAGES: FeaturePage[] = [
         a: "Yes. Edit any of the three links in your dashboard and the change applies on the next scan.",
       },
       {
-        q: "Can StayQR tell me how many people installed the app?",
-        a: "StayQR counts scans, split by iPhone/iPad, Android and computers. Installs are reported by the stores in App Store Connect and the Google Play Console.",
+        q: "Can EndureQR tell me how many people installed the app?",
+        a: "EndureQR counts scans, split by iPhone/iPad, Android and computers. Installs are reported by the stores in App Store Connect and the Google Play Console.",
       },
     ],
     relatedTools: ["url", "youtube", "instagram"],
@@ -540,7 +540,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
     eyebrow: "Bulk creation",
     h1: "Create hundreds of QR codes *from one CSV*",
     intro:
-      "Upload a CSV with a name and a destination on each row, and StayQR creates one dynamic QR code per row, up to 500 per upload. You then download a ZIP of print-ready SVG files and a CSV of the short links. Every code can be edited after printing and has its own scan analytics.",
+      "Upload a CSV with a name and a destination on each row, and EndureQR creates one dynamic QR code per row, up to 500 per upload. You then download a ZIP of print-ready SVG files and a CSV of the short links. Every code can be edited after printing and has its own scan analytics.",
     tool: false,
     cta: { label: "Start bulk creating", href: "/signup?plan=pro-yearly" },
     benefits: [
@@ -568,7 +568,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
       },
       {
         title: "Create the codes",
-        body: "StayQR creates one dynamic code per row and files each one in its folder.",
+        body: "EndureQR creates one dynamic code per row and files each one in its folder.",
       },
       {
         title: "Download the ZIP",
@@ -578,7 +578,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
     body: [
       {
         type: "p",
-        text: "A bulk QR code generator creates many QR codes at once from a list, instead of one at a time. With StayQR, you upload a CSV file with a name and a destination link on each row, and you get one dynamic QR code per row, up to 500 rows per upload. You then download a ZIP of print-ready SVG files and a CSV of the short links, ready for a printer or a designer.",
+        text: "A bulk QR code generator creates many QR codes at once from a list, instead of one at a time. With EndureQR, you upload a CSV file with a name and a destination link on each row, and you get one dynamic QR code per row, up to 500 rows per upload. You then download a ZIP of print-ready SVG files and a CSV of the short links, ready for a printer or a designer.",
       },
       { type: "h2", id: "preparing-your-csv", text: "Preparing your CSV file" },
       {

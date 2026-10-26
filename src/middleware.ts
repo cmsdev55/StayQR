@@ -5,7 +5,7 @@ import { NextResponse, type NextRequest } from "next/server";
  * layout still validates the session itself. Short links (/r/…) and marketing pages never run this.
  */
 export function middleware(req: NextRequest) {
-  if (!req.cookies.get("stayqr_session")?.value) {
+  if (!req.cookies.get("endureqr_session")?.value) {
     const to = req.nextUrl.clone();
     to.pathname = "/login";
     to.search = `?next=${encodeURIComponent(req.nextUrl.pathname + req.nextUrl.search)}`;

@@ -6,7 +6,7 @@ import { googleEnabled } from "@/lib/server/env";
 
 export const metadata: Metadata = {
   title: "Log in",
-  description: "Log in to StayQR to edit your dynamic QR codes, see scans and manage billing.",
+  description: "Log in to EndureQR to edit your dynamic QR codes, see scans and manage billing.",
   alternates: { canonical: "/login" },
   robots: { index: false, follow: true },
 };

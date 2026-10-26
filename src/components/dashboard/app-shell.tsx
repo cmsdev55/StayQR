@@ -74,9 +74,9 @@ export function AppShell({ children, user, plan }: { children: React.ReactNode; 
 
       {/* Sidebar */}
       <aside className="sticky top-0 hidden h-[100svh] flex-col border-r border-line bg-bg-raised px-3 py-5 lg:flex" aria-label="Dashboard">
-        <Link href="/" className="flex items-center gap-2.5 px-3 text-fg" aria-label="StayQR home">
+        <Link href="/" className="flex items-center gap-2.5 px-3 text-fg" aria-label="EndureQR home">
           <Logo />
-          <span className="font-display text-[19px] font-semibold tracking-[-0.02em]">StayQR</span>
+          <span className="font-display text-[19px] font-semibold tracking-[-0.02em]">EndureQR</span>
         </Link>
         <nav className="mt-8 flex flex-col gap-0.5" aria-label="Sections">
           {NAV.map((n) => {
@@ -120,7 +120,7 @@ export function AppShell({ children, user, plan }: { children: React.ReactNode; 
       <div className="flex min-w-0 flex-col">
         <header className="sticky top-0 z-30 border-b border-line bg-bg/90 backdrop-blur-md">
           <div className="flex h-16 items-center gap-3 px-4 lg:px-8">
-            <Link href="/" className="text-fg lg:hidden" aria-label="StayQR home"><Logo /></Link>
+            <Link href="/" className="text-fg lg:hidden" aria-label="EndureQR home"><Logo /></Link>
             <form
               role="search"
               className="relative ml-1 min-w-0 flex-1 lg:ml-0 lg:max-w-[420px]"

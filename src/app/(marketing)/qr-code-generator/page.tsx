@@ -26,7 +26,7 @@ const CRUMBS = [
 const FAQ_ITEMS = [
   { q: "Is this QR code generator really free?", a: "Yes. Every type on this page is free, with no sign-up, no watermark and no scan limit. You can add a logo and a frame and download PNG, SVG, JPEG or PDF up to 4096 px." },
   { q: "Do the QR codes expire?", a: "No. These are static codes: the content is stored in the pattern itself, so they keep working as long as the print survives. Nothing on our side can switch them off." },
-  { q: "Can I change a code after printing it?", a: "Not a static one, because the content is baked into the pattern. If you might need to change the destination later, use a dynamic code from a StayQR plan: you can edit it any time, and it keeps redirecting even if you cancel." },
+  { q: "Can I change a code after printing it?", a: "Not a static one, because the content is baked into the pattern. If you might need to change the destination later, use a dynamic code from a EndureQR plan: you can edit it any time, and it keeps redirecting even if you cancel." },
   { q: "Is my data stored anywhere?", a: "No. The code is generated in your browser and the file is built on your device. What you type into the generator is never sent to our servers." },
   { q: "Which format should I download?", a: "SVG or PDF for print, since they stay sharp at any size. PNG for websites, documents and slides. JPEG when you need the smallest file." },
   { q: "Can I add my logo?", a: "Yes. Upload a PNG, JPEG, SVG or WebP up to 1 MB. The generator switches to the highest error correction level automatically, so the code still scans with the logo covering part of it." },
@@ -41,7 +41,7 @@ export default function GeneratorHubPage() {
         data={{
           "@context": "https://schema.org",
           "@type": "WebApplication",
-          name: "StayQR free QR code generator",
+          name: "EndureQR free QR code generator",
           url: `${SITE}/qr-code-generator`,
           applicationCategory: "UtilitiesApplication",
           operatingSystem: "Any (runs in the browser)",

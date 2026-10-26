@@ -12,6 +12,6 @@ export async function GET(req: Request) {
   const url = new URL(req.url);
   const csv = await scansCsv(user.id, url.searchParams.get("code") ?? "all", plan.tier === "lifetime" ? 36500 : 366);
   return new Response(csv, {
-    headers: { "content-type": "text/csv; charset=utf-8", "content-disposition": `attachment; filename="stayqr-scans-${new Date().toISOString().slice(0, 10)}.csv"`, "cache-control": "no-store" },
+    headers: { "content-type": "text/csv; charset=utf-8", "content-disposition": `attachment; filename="endureqr-scans-${new Date().toISOString().slice(0, 10)}.csv"`, "cache-control": "no-store" },
   });
 }

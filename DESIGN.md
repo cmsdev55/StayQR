@@ -1,6 +1,6 @@
-# StayQR — Design System (v1, direction)
+# EndureQR — Design System (v1, direction)
 
-> Concept: **codes that never die.** A QR code is a grid of modules. On StayQR every module is a small glowing cube. Codes *assemble*, *light up when scanned*, and *stay lit*. Every visual on the marketing site comes from that one idea. Every later build (dashboard, backend-rendered pages, emails) must follow this file.
+> Concept: **codes that never die.** A QR code is a grid of modules. On EndureQR every module is a small glowing cube. Codes *assemble*, *light up when scanned*, and *stay lit*. Every visual on the marketing site comes from that one idea. Every later build (dashboard, backend-rendered pages, emails) must follow this file.
 
 ---
 

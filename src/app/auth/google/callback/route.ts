@@ -16,8 +16,8 @@ export async function GET(req: Request) {
   const url = new URL(req.url);
   const fail = () => NextResponse.redirect(new URL("/login?error=google", url));
   const store = await cookies();
-  const saved = store.get("stayqr_oauth")?.value;
-  store.delete({ name: "stayqr_oauth", path: "/auth/google" });
+  const saved = store.get("endureqr_oauth")?.value;
+  store.delete({ name: "endureqr_oauth", path: "/auth/google" });
   let flow: { state: string; verifier: string; next: string };
   try {
     flow = JSON.parse(saved ?? "");

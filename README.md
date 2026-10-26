@@ -1,4 +1,4 @@
-# StayQR web (design phase)
+# EndureQR web (design phase)
 
 Next.js 15 · TypeScript · Tailwind · React Three Fiber. Design system: [DESIGN.md](./DESIGN.md).
 
@@ -13,7 +13,7 @@ ANALYZE=true npm run build   # bundle analyzer
 Postgres on Railway (`db/migrations`), the app (pages + API) on Vercel. Own auth: email + password (scrypt), hashed
 session tokens, verify/reset emails via Resend, optional Google sign-in. Lemon Squeezy checkout and webhooks. Short links at `/r/[slug]`.
 - Local: `scripts/db-local.sh start` (Postgres on :54329, no Docker), `node scripts/db-seed.mjs`, then log in as
-  `demo@stayqr.local` / `demo-password`. Without a Resend key, emails print to the server log; without Lemon Squeezy keys,
+  `demo@endureqr.local` / `demo-password`. Without a Resend key, emails print to the server log; without Lemon Squeezy keys,
   checkout is simulated (localhost only).
 - Server code lives in `src/lib/server/` (auth, password, email, plan, codes, analytics, billing); dashboard mutations in `src/app/dashboard/actions.ts`.
 - Going live: `docs/LAUNCH.md`. Variables: `.env.example`.

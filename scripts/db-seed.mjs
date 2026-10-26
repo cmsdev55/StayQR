@@ -1,13 +1,13 @@
-// Local demo data: one account (demo@stayqr.local / demo-password) with folders, codes and 90 days of scans.
-// Usage: DATABASE_URL=postgres://localhost:54329/stayqr node scripts/db-seed.mjs   (refuses non-local databases)
+// Local demo data: one account (demo@endureqr.local / demo-password) with folders, codes and 90 days of scans.
+// Usage: DATABASE_URL=postgres://localhost:54329/endureqr node scripts/db-seed.mjs   (refuses non-local databases)
 import { randomBytes, randomUUID, scryptSync } from "node:crypto";
 import { createRequire } from "node:module";
 const postgres = createRequire(import.meta.url)("postgres");
-const url = process.env.DATABASE_URL ?? "postgres://localhost:54329/stayqr";
+const url = process.env.DATABASE_URL ?? "postgres://localhost:54329/endureqr";
 if (!/@?(localhost|127\.0\.0\.1)[:/]/.test(url)) throw new Error("Refusing to seed a non-local database");
 const sql = postgres(url, { onnotice: () => {} });
 
-const email = "demo@stayqr.local";
+const email = "demo@endureqr.local";
 await sql`delete from public.codes where user_id in (select id from public.profiles where lower(email) = ${email})`;
 await sql`delete from public.profiles where lower(email) = ${email}`;
 const id = randomUUID();
@@ -19,7 +19,7 @@ const renews = new Date(Date.now() + 140 * 864e5);
 await sql`insert into public.subscriptions (id, user_id, customer_id, variant_id, plan, status, renews_at, card_brand, card_last_four)
           values (${`seed-${id.slice(0, 8)}`}, ${id}, 'seed', 'seed', 'pro-yearly', 'active', ${renews}, 'visa', '4242')`;
 await sql`insert into public.invoices (id, user_id, description, total_cents, currency, status, created_at)
-          values (${`seed-inv-${id.slice(0, 8)}`}, ${id}, 'StayQR Pro · yearly', 2900, 'USD', 'paid', ${new Date(Date.now() - 225 * 864e5)})`;
+          values (${`seed-inv-${id.slice(0, 8)}`}, ${id}, 'EndureQR Pro · yearly', 2900, 'USD', 'paid', ${new Date(Date.now() - 225 * 864e5)})`;
 
 const folders = {};
 for (const name of ["Restaurant", "Hotel", "Spring campaign"]) {

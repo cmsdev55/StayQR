@@ -9,8 +9,8 @@ import { cn } from "@/lib/utils";
 
 /**
  * Scroll story: the same "Subscription cancelled" hits two printed codes. The rival code cracks
- * and falls apart; the StayQR code keeps taking scans. One scrubbed progress value (0–1) drives
- * every beat; scans run on their own clock so the StayQR side visibly stays alive.
+ * and falls apart; the EndureQR code keeps taking scans. One scrubbed progress value (0–1) drives
+ * every beat; scans run on their own clock so the EndureQR side visibly stays alive.
  */
 
 const clamp01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
@@ -244,7 +244,7 @@ export function NeverDiesStage({ theirs, ours }: { theirs: string[]; ours: strin
         drawPings(ctx, pings.theirs, now, ox, oy, m, colors);
       }
 
-      // StayQR code: lit modules stay softly lime
+      // EndureQR code: lit modules stay softly lime
       {
         const ctx = b.getContext("2d")!;
         const { w, h } = fit(b);
@@ -302,7 +302,7 @@ export function NeverDiesStage({ theirs, ours }: { theirs: string[]; ours: strin
     };
 
     if (reduced) {
-      // a still frame of the end state, with a few StayQR modules lit
+      // a still frame of the end state, with a few EndureQR modules lit
       const now = performance.now() / 1000;
       ourCells.forEach((_, i) => i % 3 === 0 && (ourGlow.hit[i] = now - 10));
       draw(now);
@@ -369,7 +369,7 @@ export function NeverDiesStage({ theirs, ours }: { theirs: string[]; ours: strin
 
           <p className="sr-only">
             With some dynamic QR services, cancelling pauses printed codes or freezes them so they can no longer be
-            edited. When you cancel StayQR, your codes keep redirecting to their last destination, for life.
+            edited. When you cancel EndureQR, your codes keep redirecting to their last destination, for life.
           </p>
 
           {/* The two printed codes */}
@@ -408,7 +408,7 @@ export function NeverDiesStage({ theirs, ours }: { theirs: string[]; ours: strin
             </StoryCard>
 
             <StoryCard
-              label="StayQR"
+              label="EndureQR"
               accent
               status={cancelled ? { text: "Still live", tone: "accent" } : { text: "Live", tone: "accent" }}
               footer={

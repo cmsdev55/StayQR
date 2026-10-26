@@ -138,7 +138,7 @@ export function normaliseUrl(raw: string, label = "Link"): string {
   }
   if (u.protocol !== "https:" && u.protocol !== "http:") throw new InputError(`${label} must start with https:// or http://.`);
   if (!u.hostname.includes(".") && u.hostname !== "localhost") throw new InputError(`${label} needs a full domain, like example.com.`);
-  if (u.host === shortHost() && u.pathname.startsWith("/r/")) throw new InputError("A code can't point at another StayQR short link.");
+  if (u.host === shortHost() && u.pathname.startsWith("/r/")) throw new InputError("A code can't point at another EndureQR short link.");
   if (withScheme.length > 2048) throw new InputError(`${label} is longer than 2,048 characters.`);
   return u.toString();
 }
@@ -151,7 +151,7 @@ async function assertSafe(urls: string[]) {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
-        client: { clientId: "stayqr", clientVersion: "1.0" },
+        client: { clientId: "endureqr", clientVersion: "1.0" },
         threatInfo: {
           threatTypes: ["MALWARE", "SOCIAL_ENGINEERING", "UNWANTED_SOFTWARE", "POTENTIALLY_HARMFUL_APPLICATION"],
           platformTypes: ["ANY_PLATFORM"],

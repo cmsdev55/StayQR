@@ -8,9 +8,9 @@ type Row = { id: string; destination: string; ios_url: string | null; android_ur
 
 const page = (status: number, title: string, body: string) =>
   new Response(
-    `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>${title} · StayQR</title>
+    `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>${title} · EndureQR</title>
 <style>body{margin:0;min-height:100svh;display:grid;place-items:center;background:#07080B;color:#F2F4F7;font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif;padding:24px}main{max-width:420px;text-align:center}h1{font-size:24px;line-height:1.2;margin:0 0 12px}p{color:#A3A9B6;margin:0 0 24px}a{color:#F2F4F7}</style></head>
-<body><main><h1>${title}</h1><p>${body}</p><a href="/">StayQR</a></main></body></html>`,
+<body><main><h1>${title}</h1><p>${body}</p><a href="/">EndureQR</a></main></body></html>`,
     { status, headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "x-robots-tag": "noindex" } },
   );
 
@@ -24,7 +24,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug: st
 
   const [code] = await db()<Row[]>`select id, destination, ios_url, android_url, paused, disabled_at from public.codes where slug = ${slug}`;
   if (!code) return page(404, "This code doesn't exist", "Check that the whole code is in view and scan it again.");
-  if (code.disabled_at) return page(410, "This code has been disabled", "StayQR switched off this code because its link was reported as harmful. For your safety, it no longer opens.");
+  if (code.disabled_at) return page(410, "This code has been disabled", "EndureQR switched off this code because its link was reported as harmful. For your safety, it no longer opens.");
 
   const ua = parseUa(req.headers.get("user-agent"));
   const h = req.headers;

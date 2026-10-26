@@ -51,7 +51,7 @@ export default async function QrTypePageRoute({ params }: Props) {
         data={{
           "@context": "https://schema.org",
           "@type": "WebApplication",
-          name: `StayQR ${def.name} QR code generator`,
+          name: `EndureQR ${def.name} QR code generator`,
           url: `${SITE}/qr-code-generator/${page.slug}`,
           description: page.description,
           applicationCategory: "UtilitiesApplication",

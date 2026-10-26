@@ -1,7 +1,7 @@
 import { ButtonLink, Magnetic } from "@/components/ui/button";
 import { FinalCtaVisual } from "./final-cta-visual";
 
-/** Section 9: the cube QR returns, scatters into a field and reforms into the StayQR mark. */
+/** Section 9: the cube QR returns, scatters into a field and reforms into the EndureQR mark. */
 export function FinalCta() {
   const words = "Print it once. Keep it forever.".split(" ");
   return (

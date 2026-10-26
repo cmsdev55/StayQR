@@ -60,7 +60,7 @@ export const COMPETITORS: Competitor[] = [
     },
     headline: "The Bitly alternative with *unlimited edits* after printing",
     pitch:
-      "Bitly Core is $120 a year, makes 5 QR codes a month, and lets you change where they point only 5 times a month. StayQR Pro is $29 a year with unlimited codes and unlimited edits, and your codes keep working if you cancel.",
+      "Bitly Core is $120 a year, makes 5 QR codes a month, and lets you change where they point only 5 times a month. EndureQR Pro is $29 a year with unlimited codes and unlimited edits, and your codes keep working if you cancel.",
     ctaTitle: "Change your codes as often as you like.",
     sources: [
       { label: "Pricing", url: "https://bitly.com/pages/pricing" },
@@ -91,7 +91,7 @@ export const COMPETITORS: Competitor[] = [
     },
     headline: "The QRFY alternative that stays *yours* after you cancel",
     pitch:
-      "QRFY is $228 a year on its 12-month plan, or $39 a month if you pay quarterly. Cancel, and you lose access to your codes and their data until you pay again. StayQR Pro is $29 a year, or $79 once, and your codes keep working after you cancel.",
+      "QRFY is $228 a year on its 12-month plan, or $39 a month if you pay quarterly. Cancel, and you lose access to your codes and their data until you pay again. EndureQR Pro is $29 a year, or $79 once, and your codes keep working after you cancel.",
     ctaTitle: "Keep your codes, and $199 a year.",
     sources: [
       { label: "Pricing", url: "https://qrfy.com/pricing" },
@@ -100,8 +100,8 @@ export const COMPETITORS: Competitor[] = [
   },
 ];
 
-export const STAYQR_ROW = {
-  name: "StayQR",
+export const ENDUREQR_ROW = {
+  name: "EndureQR",
   plan: "Pro",
   pricePerYear: 29,
   price: "$29, or $79 once",

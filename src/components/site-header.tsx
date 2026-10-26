@@ -20,7 +20,7 @@ export function ThemeToggle() {
   const flip = () => {
     const next = theme === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = next;
-    try { localStorage.setItem("stayqr-theme", next); } catch {}
+    try { localStorage.setItem("endureqr-theme", next); } catch {}
     setTheme(next);
   };
   return (
@@ -57,9 +57,9 @@ export function SiteHeader() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-wide items-center justify-between px-4 sm:h-[72px] sm:px-6 lg:px-12">
-        <Link href="/" aria-label="StayQR home" className="flex items-center gap-2.5 text-fg">
+        <Link href="/" aria-label="EndureQR home" className="flex items-center gap-2.5 text-fg">
           <Logo />
-          <span className="font-display text-[20px] font-semibold tracking-[-0.02em]">StayQR</span>
+          <span className="font-display text-[20px] font-semibold tracking-[-0.02em]">EndureQR</span>
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-8 lg:flex">

@@ -123,7 +123,7 @@ export function AuthForm({
       )}
 
       <p className="mt-8 text-body-sm text-fg-muted">
-        {signup ? "Already have an account? " : "New to StayQR? "}
+        {signup ? "Already have an account? " : "New to EndureQR? "}
         <Link
           href={`${signup ? "/login" : "/signup"}${planKey ? `?plan=${planKey}` : next ? `?next=${encodeURIComponent(next)}` : ""}`}
           className="font-medium text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg"

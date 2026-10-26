@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { RoundedBoxGeometry } from "three-stdlib";
 
 /**
- * The StayQR module cube, shared by CubeQR and ParticleField so both scenes look identical
+ * The EndureQR module cube, shared by CubeQR and ParticleField so both scenes look identical
  * and webpack keeps the code in one shared chunk.
  */
 export function createCubeGeometry(quality: "high" | "low") {

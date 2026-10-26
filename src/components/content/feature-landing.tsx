@@ -27,7 +27,7 @@ export function featureMetadata(slug: FeatureSlug): Metadata {
   };
 }
 
-/** Landing page for a feature StayQR already has: hero, optional live generator, benefits, steps, long-form body, FAQ. */
+/** Landing page for a feature EndureQR already has: hero, optional live generator, benefits, steps, long-form body, FAQ. */
 export function FeatureLanding({ slug }: { slug: FeatureSlug }) {
   const p = featurePage(slug);
   const crumbs = [
@@ -48,7 +48,7 @@ export function FeatureLanding({ slug }: { slug: FeatureSlug }) {
             : {
                 "@context": "https://schema.org",
                 "@type": "SoftwareApplication",
-                name: `StayQR: ${p.eyebrow}`,
+                name: `EndureQR: ${p.eyebrow}`,
                 url: `${SITE}/${p.slug}`,
                 description: p.description,
                 applicationCategory: "BusinessApplication",

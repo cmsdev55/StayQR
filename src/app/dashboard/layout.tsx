@@ -5,8 +5,8 @@ import { requireUser } from "@/lib/server/auth";
 import { getPlan } from "@/lib/server/plan";
 
 export const metadata: Metadata = {
-  title: { default: "Dashboard", template: "%s · StayQR" },
-  description: "Manage your StayQR codes, scans and billing.",
+  title: { default: "Dashboard", template: "%s · EndureQR" },
+  description: "Manage your EndureQR codes, scans and billing.",
   robots: { index: false, follow: false },
 };
 

@@ -1,4 +1,4 @@
--- StayQR core schema: accounts and sessions, billing, dynamic codes and scans. Plain Postgres 14+ (Railway, local).
+-- EndureQR core schema: accounts and sessions, billing, dynamic codes and scans. Plain Postgres 14+ (Railway, local).
 -- The app is the only client: it connects over DATABASE_URL and scopes every query by user id.
 
 -- ── Accounts ─────────────────────────────────────────────────────────────
@@ -119,7 +119,7 @@ create table public.codes (
   paused          boolean not null default false,
   pause_message   text check (length(pause_message) <= 160),
   pause_until     date,
-  -- set by StayQR staff for phishing/abuse (Terms §4); the redirect shows a warning page instead
+  -- set by EndureQR staff for phishing/abuse (Terms §4); the redirect shows a warning page instead
   disabled_at     timestamptz,
   disabled_reason text,
   created_at      timestamptz not null default now(),

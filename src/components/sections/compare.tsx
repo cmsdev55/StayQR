@@ -2,20 +2,20 @@ import { Logo } from "@/components/logo";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { VerifyTag } from "@/components/ui/placeholder";
-import { CHECKED, COMPETITORS, STAYQR_ROW, type Competitor, type Verdict } from "@/content/competitors";
+import { CHECKED, COMPETITORS, ENDUREQR_ROW, type Competitor, type Verdict } from "@/content/competitors";
 import { cn } from "@/lib/utils";
 
 type Cell = { text: string; verdict?: Verdict; confirmed?: boolean };
 
 // The cancel row is plain text on purpose: what happens varies too much for a tick or a cross.
 const ROWS: { label: string; ours: Cell; theirs: (c: Competitor) => Cell }[] = [
-  { label: "Codes included", ours: { text: STAYQR_ROW.codes, verdict: "yes" }, theirs: (c) => c.codes },
-  { label: "What happens when you cancel", ours: { text: STAYQR_ROW.cancel }, theirs: (c) => c.cancel },
-  { label: "Scan limits", ours: { text: STAYQR_ROW.scans, verdict: "yes" }, theirs: (c) => c.scans },
-  { label: "Edit after printing", ours: { text: STAYQR_ROW.edit, verdict: "yes" }, theirs: (c) => c.edit },
+  { label: "Codes included", ours: { text: ENDUREQR_ROW.codes, verdict: "yes" }, theirs: (c) => c.codes },
+  { label: "What happens when you cancel", ours: { text: ENDUREQR_ROW.cancel }, theirs: (c) => c.cancel },
+  { label: "Scan limits", ours: { text: ENDUREQR_ROW.scans, verdict: "yes" }, theirs: (c) => c.scans },
+  { label: "Edit after printing", ours: { text: ENDUREQR_ROW.edit, verdict: "yes" }, theirs: (c) => c.edit },
 ];
 
-/** Section 5: StayQR vs the three best-known dynamic QR services (facts in src/content/competitors.ts). */
+/** Section 5: EndureQR vs the three best-known dynamic QR services (facts in src/content/competitors.ts). */
 export function Compare() {
   return (
     <section id="compare" aria-labelledby="compare-title" className="relative border-t border-line py-24 lg:py-40">
@@ -30,7 +30,7 @@ export function Compare() {
         {/* md+: a real table */}
         <div className="mt-12 hidden overflow-hidden md:block lg:mt-16">
           <table className="w-full table-fixed border-separate border-spacing-0 text-left">
-            <caption className="sr-only">StayQR compared with {COMPETITORS.map((c) => c.name).join(" and ")}</caption>
+            <caption className="sr-only">EndureQR compared with {COMPETITORS.map((c) => c.name).join(" and ")}</caption>
             <colgroup>
               <col className="w-[22%]" />
               <col className="w-[26%]" />
@@ -42,9 +42,9 @@ export function Compare() {
               <tr>
                 <th scope="col" className="pb-6 align-bottom"><span className="eyebrow">Price per year</span></th>
                 <th scope="col" className="rounded-t-xl border-x border-t border-line-strong bg-glass-strong px-5 pb-6 pt-6 align-bottom">
-                  <span className="flex items-center gap-2 text-body font-semibold text-fg"><Logo size={18} /> StayQR</span>
-                  <span className="mt-0.5 block font-mono text-[12px] font-normal text-fg-subtle">{STAYQR_ROW.plan} · or $79 once</span>
-                  <AnimatedCounter value={STAYQR_ROW.pricePerYear} from={300} prefix="$" duration={1800} label={`$${STAYQR_ROW.pricePerYear} per year`} className="mt-4 font-display text-display-md font-semibold text-accent-text" />
+                  <span className="flex items-center gap-2 text-body font-semibold text-fg"><Logo size={18} /> EndureQR</span>
+                  <span className="mt-0.5 block font-mono text-[12px] font-normal text-fg-subtle">{ENDUREQR_ROW.plan} · or $79 once</span>
+                  <AnimatedCounter value={ENDUREQR_ROW.pricePerYear} from={300} prefix="$" duration={1800} label={`$${ENDUREQR_ROW.pricePerYear} per year`} className="mt-4 font-display text-display-md font-semibold text-accent-text" />
                 </th>
                 {COMPETITORS.map((c) => (
                   <th key={c.slug} scope="col" className="px-5 pb-6 align-bottom">
@@ -79,8 +79,8 @@ export function Compare() {
             <p className="eyebrow">Price per year</p>
             <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-4">
               <div>
-                <dt className="flex items-center gap-1.5 text-body-sm font-semibold text-fg"><Logo size={14} /> StayQR</dt>
-                <dd><AnimatedCounter value={STAYQR_ROW.pricePerYear} from={300} prefix="$" duration={1800} label={`$${STAYQR_ROW.pricePerYear} per year`} className="font-display text-[34px] font-semibold text-accent-text" /></dd>
+                <dt className="flex items-center gap-1.5 text-body-sm font-semibold text-fg"><Logo size={14} /> EndureQR</dt>
+                <dd><AnimatedCounter value={ENDUREQR_ROW.pricePerYear} from={300} prefix="$" duration={1800} label={`$${ENDUREQR_ROW.pricePerYear} per year`} className="font-display text-[34px] font-semibold text-accent-text" /></dd>
               </div>
               {COMPETITORS.map((c) => (
                 <div key={c.slug}>
@@ -95,7 +95,7 @@ export function Compare() {
               <p className="eyebrow">{row.label}</p>
               <dl className="mt-4 flex flex-col gap-3">
                 <div className="flex items-start justify-between gap-4 rounded-sm bg-glass-strong px-3 py-2.5">
-                  <dt className="text-body-sm font-semibold text-fg">StayQR</dt>
+                  <dt className="text-body-sm font-semibold text-fg">EndureQR</dt>
                   <dd><Value cell={row.ours} delay={0} strong /></dd>
                 </div>
                 {COMPETITORS.map((c) => (

@@ -138,7 +138,7 @@ export async function exportQr(data: string, design: QrDesign, format: ExportFor
 }
 
 /** Export and save. */
-export async function downloadQr(data: string, design: QrDesign, format: ExportFormat, size: number, name = "stayqr-code") {
+export async function downloadQr(data: string, design: QrDesign, format: ExportFormat, size: number, name = "endureqr-code") {
   const blob = await exportQr(data, design, format, size);
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);

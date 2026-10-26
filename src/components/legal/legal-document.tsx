@@ -63,7 +63,7 @@ export function LegalDocument({ doc }: { doc: LegalDoc }) {
       </div>
 
       <p className="mt-6 border-t border-line pt-8 text-body-sm text-fg-muted">
-        {doc.slug === "terms" ? "How we handle your data: " : "The agreement for using StayQR: "}
+        {doc.slug === "terms" ? "How we handle your data: " : "The agreement for using EndureQR: "}
         <Link href={doc.slug === "terms" ? "/privacy" : "/terms"} className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">
           {doc.slug === "terms" ? "Privacy Policy" : "Terms of Service"}
         </Link>

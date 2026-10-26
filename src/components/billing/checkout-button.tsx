@@ -29,7 +29,7 @@ function loadLemon() {
 }
 
 /**
- * Opens the card checkout as an overlay on top of StayQR. If the overlay can't load (blocked script, old browser),
+ * Opens the card checkout as an overlay on top of EndureQR. If the overlay can't load (blocked script, old browser),
  * it falls back to Lemon Squeezy's full checkout page, which accepts the same cards.
  */
 export function CheckoutButton({ plan, children, variant, size = "sm", className }: { plan: "pro-monthly" | "pro-yearly" | "lifetime"; children: React.ReactNode; variant?: "primary" | "secondary"; size?: "sm" | "md" | "lg"; className?: string }) {

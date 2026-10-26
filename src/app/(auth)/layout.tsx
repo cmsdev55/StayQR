@@ -6,15 +6,15 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
   return (
     <div className="grid min-h-[100svh] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
       <div className="flex flex-col px-4 py-6 sm:px-10 lg:px-16">
-        <Link href="/" className="flex w-fit items-center gap-2.5 text-fg" aria-label="StayQR home">
+        <Link href="/" className="flex w-fit items-center gap-2.5 text-fg" aria-label="EndureQR home">
           <Logo />
-          <span className="font-display text-[20px] font-semibold tracking-[-0.02em]">StayQR</span>
+          <span className="font-display text-[20px] font-semibold tracking-[-0.02em]">EndureQR</span>
         </Link>
         <main className="mx-auto flex w-full max-w-[400px] flex-1 flex-col justify-center py-12">{children}</main>
-        <p className="font-mono text-[12px] text-fg-subtle">© 2026 StayQR · Codes that never die</p>
+        <p className="font-mono text-[12px] text-fg-subtle">© 2026 EndureQR · Codes that never die</p>
       </div>
 
-      <aside className="noise bg-grid relative isolate hidden overflow-hidden border-l border-line bg-bg-raised lg:flex lg:flex-col lg:justify-end lg:p-16" aria-label="Why StayQR">
+      <aside className="noise bg-grid relative isolate hidden overflow-hidden border-l border-line bg-bg-raised lg:flex lg:flex-col lg:justify-end lg:p-16" aria-label="Why EndureQR">
         <div aria-hidden className="pointer-events-none absolute left-1/2 top-[38%] -z-10 h-[70%] w-[130%] -translate-x-1/2 -translate-y-1/2 rounded-full [background:radial-gradient(closest-side,rgb(var(--depth)/0.26),transparent)]" />
         {(["dark", "light"] as const).map((t) => (
           // eslint-disable-next-line @next/next/no-img-element

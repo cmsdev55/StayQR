@@ -20,7 +20,7 @@ const { email } = COMPANY;
 export const TERMS: LegalDoc = {
   slug: "terms",
   title: "Terms of Service",
-  description: "The agreement between you and StayQR for using the website, the free QR code generator and paid plans.",
+  description: "The agreement between you and EndureQR for using the website, the free QR code generator and paid plans.",
   effective: LEGAL_EFFECTIVE,
   updated: LEGAL_EFFECTIVE,
   summary: [
@@ -35,7 +35,7 @@ export const TERMS: LegalDoc = {
       id: "who",
       title: "Who we are",
       body: [
-        `StayQR ("StayQR", "we", "us") runs the website at ${COMPANY.site}, the free QR code generator, the StayQR dashboard and related services (together, the "Service").`,
+        `EndureQR ("EndureQR", "we", "us") runs the website at ${COMPANY.site}, the free QR code generator, the EndureQR dashboard and related services (together, the "Service").`,
         "By using the Service you agree to these terms. If you use it for an organisation, you confirm you are allowed to accept them on its behalf.",
       ],
     },
@@ -52,8 +52,8 @@ export const TERMS: LegalDoc = {
       id: "codes",
       title: "Static and dynamic codes",
       body: [
-        "A **static** code stores its content inside the pattern. Once downloaded it works without StayQR, and we have no way to change, track or disable it. You may use static codes for any lawful purpose, including commercial use, without credit to us.",
-        "A **dynamic** code points to a StayQR short link that redirects to a destination you choose. You can change the destination while your plan includes editing.",
+        "A **static** code stores its content inside the pattern. Once downloaded it works without EndureQR, and we have no way to change, track or disable it. You may use static codes for any lawful purpose, including commercial use, without credit to us.",
+        "A **dynamic** code points to a EndureQR short link that redirects to a destination you choose. You can change the destination while your plan includes editing.",
         "You keep all rights in the content, logos and designs you add. You give us the limited permission we need to host, display and redirect them for you.",
       ],
     },
@@ -70,9 +70,9 @@ export const TERMS: LegalDoc = {
       id: "plans",
       title: "Plans, billing and refunds",
       body: [
-        "Pro is billed monthly or yearly in advance and renews automatically until you cancel. Lifetime is a single payment for access to Pro features for as long as StayQR operates the Service.",
+        "Pro is billed monthly or yearly in advance and renews automatically until you cancel. Lifetime is a single payment for access to Pro features for as long as EndureQR operates the Service.",
         "Our order process is run by our online reseller **Lemon Squeezy**, which is the merchant of record for all orders. Lemon Squeezy handles payment, sales tax and VAT, invoices and billing questions. Prices are shown before tax; the tax due is shown at checkout.",
-        `**Refunds:** if StayQR isn't right for you, email ${email.hello} within 14 days of your first Pro payment or your Lifetime purchase for a full refund. Renewals can be cancelled at any time and are not refunded for the period already started, unless the law where you live says otherwise.`,
+        `**Refunds:** if EndureQR isn't right for you, email ${email.hello} within 14 days of your first Pro payment or your Lifetime purchase for a full refund. Renewals can be cancelled at any time and are not refunded for the period already started, unless the law where you live says otherwise.`,
         "We may change prices for future billing periods with at least 30 days' notice by email. A price change never applies to a Lifetime purchase already made.",
       ],
     },
@@ -82,7 +82,7 @@ export const TERMS: LegalDoc = {
       body: [
         "You can cancel any time from Billing in your dashboard. Your plan stays active until the end of the period you've paid for.",
         "After that, your dynamic codes keep redirecting to the last destination you set. We don't replace them with a service page, an upgrade prompt or ads. Editing destinations and new analytics pause until you resume a plan.",
-        "This commitment lasts for as long as StayQR operates the Service. If StayQR is ever sold or merged, the commitment transfers with it. If we ever have to close the Service, we will give at least 90 days' notice by email and let you export every code's destination, so you can move to another provider.",
+        "This commitment lasts for as long as EndureQR operates the Service. If EndureQR is ever sold or merged, the commitment transfers with it. If we ever have to close the Service, we will give at least 90 days' notice by email and let you export every code's destination, so you can move to another provider.",
         "We may still pause a code under section 4 (acceptable use) or where the law requires it.",
       ],
     },
@@ -119,7 +119,7 @@ export const TERMS: LegalDoc = {
 export const PRIVACY: LegalDoc = {
   slug: "privacy",
   title: "Privacy Policy",
-  description: "What StayQR collects, why, how long we keep it, who we share it with, and the choices you have.",
+  description: "What EndureQR collects, why, how long we keep it, who we share it with, and the choices you have.",
   effective: LEGAL_EFFECTIVE,
   updated: LEGAL_EFFECTIVE,
   summary: [
@@ -134,7 +134,7 @@ export const PRIVACY: LegalDoc = {
       id: "controller",
       title: "Who is responsible for your data",
       body: [
-        `StayQR is the controller of the personal data described here. Contact us about privacy at ${email.privacy}.`,
+        `EndureQR is the controller of the personal data described here. Contact us about privacy at ${email.privacy}.`,
         "For scan data about the dynamic codes you create, you decide why the codes are used and we process scan data on your behalf to give you analytics.",
       ],
     },
@@ -176,9 +176,9 @@ export const PRIVACY: LegalDoc = {
       id: "share",
       title: "Who we share it with",
       body: [
-        `Service providers that run parts of StayQR for us, only for that purpose: ${PROVIDERS.map((p) => `**${p.name}** (${p.role})`).join(", ")}.`,
+        `Service providers that run parts of EndureQR for us, only for that purpose: ${PROVIDERS.map((p) => `**${p.name}** (${p.role})`).join(", ")}.`,
         "Authorities, if the law requires it, or to protect people from harm such as phishing.",
-        "A buyer or successor, if StayQR is ever sold or merged, under the same commitments as this policy.",
+        "A buyer or successor, if EndureQR is ever sold or merged, under the same commitments as this policy.",
         "We never sell personal data, and we never share account or scan data with advertisers.",
       ],
     },
@@ -212,7 +212,7 @@ export const PRIVACY: LegalDoc = {
     {
       id: "children",
       title: "Children",
-      body: ["StayQR is not meant for children under 16, and we don't knowingly collect their data. If you think a child has given us personal data, contact us and we'll delete it."],
+      body: ["EndureQR is not meant for children under 16, and we don't knowingly collect their data. If you think a child has given us personal data, contact us and we'll delete it."],
     },
     {
       id: "changes",

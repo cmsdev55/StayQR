@@ -7,7 +7,7 @@ import { billingMode, env } from "./env";
 export type PlanKey = "pro-monthly" | "pro-yearly" | "lifetime";
 export const PLAN_KEYS: PlanKey[] = ["pro-monthly", "pro-yearly", "lifetime"];
 export const isPlanKey = (v: unknown): v is PlanKey => PLAN_KEYS.includes(v as PlanKey);
-export const PLAN_NAME: Record<PlanKey, string> = { "pro-monthly": "StayQR Pro · monthly", "pro-yearly": "StayQR Pro · yearly", lifetime: "StayQR Lifetime" };
+export const PLAN_NAME: Record<PlanKey, string> = { "pro-monthly": "EndureQR Pro · monthly", "pro-yearly": "EndureQR Pro · yearly", lifetime: "EndureQR Lifetime" };
 const PLAN_CENTS: Record<PlanKey, number> = { "pro-monthly": Math.round(PRO.monthly * 100), "pro-yearly": PRO.yearly * 100, lifetime: LIFETIME * 100 };
 
 const planForVariant = (id: string | number): PlanKey | null =>
@@ -123,7 +123,7 @@ async function upsertSubscription(userId: string, id: string, a: Attrs) {
       update_payment_url = coalesce(excluded.update_payment_url, subscriptions.update_payment_url), updated_at = now()`;
 }
 
-/** Find the StayQR user for an event: custom data first, then any row we already linked. */
+/** Find the EndureQR user for an event: custom data first, then any row we already linked. */
 async function userFor(e: Event): Promise<string> {
   const fromCustom = e.meta.custom_data?.user_id;
   if (fromCustom) return fromCustom;
@@ -141,7 +141,7 @@ async function userFor(e: Event): Promise<string> {
     const [p] = await db()<{ id: string }[]>`select id from public.profiles where lower(email) = lower(${String(a.user_email)})`;
     if (p) return p.id;
   }
-  throw new Error(`No StayQR user for ${e.meta.event_name} ${e.data.id}`);
+  throw new Error(`No EndureQR user for ${e.meta.event_name} ${e.data.id}`);
 }
 
 async function handle(e: Event) {

@@ -1,4 +1,4 @@
-# StayQR roadmap and claim ledger
+# EndureQR roadmap and claim ledger
 
 Every feature the site promises is listed here with the phase that makes it real. **Rule:** copy may
 only describe a feature in the present tense once its row is ✅. Anything ⏳ must either be built
@@ -58,21 +58,21 @@ remaining work is account setup on Railway, Vercel, Resend and Lemon Squeezy.
 
 ## Launch checklist for ads (Phase 1 is wired, needs your accounts)
 
-1. Get AdSense approval for `stayqr.com` (needs the site live with the guides and tool pages indexed).
+1. Get AdSense approval for `endureqr.com` (needs the site live with the guides and tool pages indexed).
 2. Set `NEXT_PUBLIC_ADSENSE_CLIENT=ca-pub-…` and the slot IDs `NEXT_PUBLIC_ADSENSE_SLOT_TOOL`,
    `NEXT_PUBLIC_ADSENSE_SLOT_GUIDE`. `/ads.txt` starts returning the publisher line automatically.
    The same variable adds the `google-adsense-account` meta tag that AdSense uses to verify the site.
 3. In AdSense → Privacy & messaging, publish the European regulations (GDPR) message and the US state
    regulations message. The footer's "Privacy settings" link reopens it. Privacy Policy already covers this.
 4. Ads never go on the dashboard, pricing, auth, checkout or `/paused` pages.
-5. Create the mailboxes the site publishes: hello@, privacy@ and abuse@stayqr.com.
+5. Create the mailboxes the site publishes: hello@, privacy@ and abuse@endureqr.com.
 6. AdX: Google only admits publishers to Ad Manager / AdX directly at large scale. The practical route is an
    MCM partner (Google Certified Publishing Partner) once traffic is substantial; AdSense comes first.
 
 ## Decisions written into the legal pages (confirm, or change in `src/content/company.ts` / `legal.ts`)
 
 - Governing law and courts: **Pakistan**.
-- Operator named as "StayQR" (no registered company yet). Add the legal entity and address once registered.
+- Operator named as "EndureQR" (no registered company yet). Add the legal entity and address once registered.
 - App on **Vercel**, database on **Railway**, emails via **Resend**, payments via **Lemon Squeezy** as merchant of record.
 - Refunds: full refund within **14 days** of the first Pro payment or a Lifetime purchase.
 - Minimum age 16. Abuse notice period 7 days. Price-change notice 30 days. Closure notice 90 days with export.

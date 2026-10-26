@@ -7,7 +7,7 @@ export const FAQ: Faq[] = [
   },
   {
     q: "What's the difference between static and dynamic codes?",
-    a: "A static code stores the link inside the pattern, so it can never change. A dynamic code points to a short StayQR link, so you can change where it goes after it's printed and see who scans it.",
+    a: "A static code stores the link inside the pattern, so it can never change. A dynamic code points to a short EndureQR link, so you can change where it goes after it's printed and see who scans it.",
   },
   {
     q: "Are there any scan limits?",
@@ -23,7 +23,7 @@ export const FAQ: Faq[] = [
   },
   {
     q: "Can I move my codes from another QR provider?",
-    a: "You can't move a code that points at someone else's short link, but you can reprint with StayQR once and never have to reprint again. Import a CSV of destinations to create them all at once.",
+    a: "You can't move a code that points at someone else's short link, but you can reprint with EndureQR once and never have to reprint again. Import a CSV of destinations to create them all at once.",
   },
   {
     q: "Will my codes work on every phone?",

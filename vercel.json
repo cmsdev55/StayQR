@@ -7,5 +7,18 @@
       "path": "/api/cron/retention",
       "schedule": "17 3 * * *"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "stayqr-six.vercel.app"
+        }
+      ],
+      "destination": "https://endureqr.vercel.app/:path*",
+      "permanent": true
+    }
   ]
 }

@@ -1,5 +1,5 @@
 /**
- * Who runs StayQR and which providers it relies on. Terms, Privacy, About and Contact all read from here,
+ * Who runs EndureQR and which providers it relies on. Terms, Privacy, About and Contact all read from here,
  * so a change (a registered company, a new provider) is made once.
  */
 import { SITE_HOST } from "@/lib/site";
@@ -7,7 +7,7 @@ import { SITE_HOST } from "@/lib/site";
 const CONTACT = process.env.NEXT_PUBLIC_CONTACT_EMAIL || undefined;
 
 export const COMPANY = {
-  name: "StayQR",
+  name: "EndureQR",
   site: SITE_HOST,
   /** Courts and law named in the Terms. */
   jurisdiction: "Pakistan",
@@ -16,9 +16,9 @@ export const COMPANY = {
    * (support, privacy, abuse) until separate mailboxes exist on your own domain.
    */
   email: {
-    hello: CONTACT ?? "hello@stayqr.com",
-    privacy: CONTACT ?? "privacy@stayqr.com",
-    abuse: CONTACT ?? "abuse@stayqr.com",
+    hello: CONTACT ?? "hello@endureqr.com",
+    privacy: CONTACT ?? "privacy@endureqr.com",
+    abuse: CONTACT ?? "abuse@endureqr.com",
   },
   /** Reply-time promise used on Contact and in Privacy. */
   replyWithin: "one business day",

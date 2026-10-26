@@ -62,7 +62,7 @@ export function BulkCreate({ limit }: { limit: number }) {
       const blob = new Blob([zipSync(files, { level: 6 }) as BlobPart], { type: "application/zip" });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
-      a.download = `stayqr-codes-${new Date().toISOString().slice(0, 10)}.zip`;
+      a.download = `endureqr-codes-${new Date().toISOString().slice(0, 10)}.zip`;
       a.click();
       setTimeout(() => URL.revokeObjectURL(a.href), 2000);
     } finally {
@@ -95,7 +95,7 @@ export function BulkCreate({ limit }: { limit: number }) {
           <input ref={input} type="file" accept=".csv,text/csv" className="sr-only" id="csv" onChange={(e) => load(e.target.files?.[0])} />
           <div className="flex flex-wrap items-center gap-3">
             <Button size="sm" variant="secondary" onClick={() => input.current?.click()}>{fileName ? "Choose another file" : "Choose CSV file"}</Button>
-            <a href={`data:text/csv;charset=utf-8,${encodeURIComponent(SAMPLE)}`} download="stayqr-template.csv" className="font-medium text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">
+            <a href={`data:text/csv;charset=utf-8,${encodeURIComponent(SAMPLE)}`} download="endureqr-template.csv" className="font-medium text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">
               Download template
             </a>
             {fileName && <span className="font-mono text-[12px] text-fg-subtle">{fileName} · {rows.length} rows</span>}

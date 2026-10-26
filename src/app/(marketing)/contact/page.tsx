@@ -6,8 +6,8 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { COMPANY } from "@/content/company";
 
 export const metadata: Metadata = {
-  title: { absolute: "Contact StayQR: help, billing, privacy and abuse" },
-  description: `Get help with StayQR, ask about plans and billing, report a harmful QR code or make a privacy request. A person replies within ${COMPANY.replyWithin}.`,
+  title: { absolute: "Contact EndureQR: help, billing, privacy and abuse" },
+  description: `Get help with EndureQR, ask about plans and billing, report a harmful QR code or make a privacy request. A person replies within ${COMPANY.replyWithin}.`,
   alternates: { canonical: "/contact" },
 };
 
@@ -18,7 +18,7 @@ const CRUMBS = [
 
 const CHANNELS = [
   { title: "Help and billing", body: "Questions about the generator, your codes, plans, refunds or invoices.", email: COMPANY.email.hello },
-  { title: "Report a harmful code", body: "A StayQR code that leads to phishing, malware, fraud or other abuse. Include the code's short link or a photo of it.", email: COMPANY.email.abuse },
+  { title: "Report a harmful code", body: "A EndureQR code that leads to phishing, malware, fraud or other abuse. Include the code's short link or a photo of it.", email: COMPANY.email.abuse },
   { title: "Privacy requests", body: "Access, export, correction or deletion of your personal data.", email: COMPANY.email.privacy },
 ];
 

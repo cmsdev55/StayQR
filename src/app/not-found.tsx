@@ -5,9 +5,9 @@ import { ButtonLink } from "@/components/ui/button";
 export default function NotFound() {
   return (
     <main className="noise bg-grid relative isolate flex min-h-[100svh] flex-col items-center justify-center px-4 text-center">
-      <Link href="/" className="absolute left-4 top-5 flex items-center gap-2.5 text-fg sm:left-6" aria-label="StayQR home">
+      <Link href="/" className="absolute left-4 top-5 flex items-center gap-2.5 text-fg sm:left-6" aria-label="EndureQR home">
         <Logo />
-        <span className="font-display text-[20px] font-semibold tracking-[-0.02em]">StayQR</span>
+        <span className="font-display text-[20px] font-semibold tracking-[-0.02em]">EndureQR</span>
       </Link>
       <p className="eyebrow">404</p>
       <h1 className="mt-4 max-w-[16ch] font-display text-display-lg font-semibold text-fg [text-wrap:balance]">This page doesn&apos;t exist. Your codes still do.</h1>

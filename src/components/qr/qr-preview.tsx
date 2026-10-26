@@ -78,7 +78,7 @@ export const QrPreview = forwardRef<QrPreviewHandle, {
   }, [ready, data, design.dots, design.corners, design.fg, design.bg, design.logo, design.logoSize, design.ecl, size]);
 
   useImperativeHandle(ref, () => ({
-    async download(ext, name = "stayqr-code") {
+    async download(ext, name = "endureqr-code") {
       // same pipeline as the free generator: frame, quiet zone and formats included
       await downloadQr(latest.current.data, latest.current.design, ext, 1024, name);
     },

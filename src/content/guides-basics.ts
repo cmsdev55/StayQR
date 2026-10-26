@@ -113,7 +113,7 @@ export const GUIDES_BASICS: Guide[] = [
       },
       {
         type: "p",
-        text: "Higher levels are more robust, but the extra codewords take up space, so the same content produces a denser pattern. A centre logo works only because error correction fills in the modules it covers. The StayQR [free QR code generator](/qr-code-generator) switches to level H automatically as soon as you upload a logo.",
+        text: "Higher levels are more robust, but the extra codewords take up space, so the same content produces a denser pattern. A centre logo works only because error correction fills in the modules it covers. The EndureQR [free QR code generator](/qr-code-generator) switches to level H automatically as soon as you upload a logo.",
       },
       {
         type: "tip",
@@ -385,12 +385,12 @@ export const GUIDES_BASICS: Guide[] = [
       },
       {
         type: "p",
-        text: "If you answered no to the first two questions, a free static code is all you need. If not, a dynamic code lets you change the destination after printing and see scan analytics. StayQR offers dynamic codes on [paid plans](/pricing), and they keep redirecting even if you cancel. Our comparison of [static vs dynamic QR codes](/guides/static-vs-dynamic-qr-codes) goes into more detail.",
+        text: "If you answered no to the first two questions, a free static code is all you need. If not, a dynamic code lets you change the destination after printing and see scan analytics. EndureQR offers dynamic codes on [paid plans](/pricing), and they keep redirecting even if you cancel. Our comparison of [static vs dynamic QR codes](/guides/static-vs-dynamic-qr-codes) goes into more detail.",
       },
       { type: "h2", id: "choose-a-type-and-enter-content", text: "Steps 2 and 3: choose a type and enter your content" },
       {
         type: "p",
-        text: "The StayQR generator has 17 code types. The type decides how your content is formatted inside the code, and so what the phone offers to do with it.",
+        text: "The EndureQR generator has 17 code types. The type decides how your content is formatted inside the code, and so what the phone offers to do with it.",
       },
       {
         type: "table",
@@ -422,7 +422,7 @@ export const GUIDES_BASICS: Guide[] = [
       },
       {
         type: "p",
-        text: "Everything in the StayQR generator is processed in your browser, and nothing you type is sent to a server. That matters when the content is a WiFi password or personal contact details.",
+        text: "Everything in the EndureQR generator is processed in your browser, and nothing you type is sent to a server. That matters when the content is a WiFi password or personal contact details.",
       },
       { type: "h2", id: "style-logo-and-frame", text: "Steps 4 to 6: style it, add a logo and a frame" },
       {
@@ -513,7 +513,7 @@ export const GUIDES_BASICS: Guide[] = [
     faq: [
       {
         q: "Is it free to make a QR code?",
-        a: "Yes. Static codes are free to make and never expire. The StayQR generator needs no sign-up and adds no watermark.",
+        a: "Yes. Static codes are free to make and never expire. The EndureQR generator needs no sign-up and adds no watermark.",
       },
       {
         q: "Can I change a QR code after printing it?",
@@ -581,7 +581,7 @@ export const GUIDES_BASICS: Guide[] = [
           "**Inverted colours.** Light modules on a dark background fail on some phones and scanner apps. Fix: use dark modules on a light background.",
           "**A busy background.** A code printed over a photo or pattern confuses the scanner. Fix: place the code on a plain white or very light box.",
           "**A missing quiet zone.** The standard calls for a plain margin 4 modules wide on every side. Text, borders or a crop too close to the code remove it. Fix: restore the margin and keep everything else outside it.",
-          "**A logo that is too big.** A logo covers modules and uses up error correction. Fix: shrink it to no more than about 20 to 25% of the code's area, keep it off the corner squares and use level H error correction. The StayQR generator sets level H automatically when you add a logo.",
+          "**A logo that is too big.** A logo covers modules and uses up error correction. Fix: shrink it to no more than about 20 to 25% of the code's area, keep it off the corner squares and use level H error correction. The EndureQR generator sets level H automatically when you add a logo.",
           "**Unusual shapes.** Tiny dots, gaps between modules or corner squares redrawn as other shapes can defeat older scanners. Fix: return to square or rounded modules and standard corners.",
         ],
       },
@@ -618,7 +618,7 @@ export const GUIDES_BASICS: Guide[] = [
         type: "ul",
         items: [
           "**A broken link.** The page was moved or deleted, the address had a typing error, or a PDF was replaced with a file of a different name. Fix: restore the page at its old address or set up a redirect from it. A static code cannot be edited.",
-          "**An expired dynamic code.** Some services switch codes off when a trial or subscription ends, so scans land on an error or upgrade page. Fix: renew the plan, or cover the code with a new one. Our guide [do QR codes expire?](/guides/do-qr-codes-expire) explains how to check. StayQR dynamic codes keep redirecting even if you cancel.",
+          "**An expired dynamic code.** Some services switch codes off when a trial or subscription ends, so scans land on an error or upgrade page. Fix: renew the plan, or cover the code with a new one. Our guide [do QR codes expire?](/guides/do-qr-codes-expire) explains how to check. EndureQR dynamic codes keep redirecting even if you cancel.",
           "**WiFi that will not connect.** The code scans but the phone cannot join. The security type may be wrong, the password may have changed, or a special character may not have been escaped. Fix: make a new code with the current details.",
           "**A page that will not load.** The page needs a login, is blocked on some networks, or is too heavy for mobile data. Fix: test it on a phone over mobile data and simplify it.",
         ],
@@ -800,7 +800,7 @@ export const GUIDES_BASICS: Guide[] = [
           "**Check printed codes regularly.** Ask staff to scan each code on a schedule and look for stickers that should not be there. With dynamic codes on a [paid plan](/pricing), a sudden drop in scans at one location can be a sign that a code has been covered.",
           "**Tell customers what to expect.** A line such as \"Our codes only lead to our own website\" helps people spot fakes. Never ask for passwords through a code.",
           "**Protect the account behind dynamic codes.** Whoever controls that login controls where every printed code points. Use a strong, unique password.",
-          "**Choose a generator you can trust.** A static code shows exactly what it contains and depends on no outside service. The [StayQR free generator](/qr-code-generator) creates codes in your browser, and nothing you type is sent to a server.",
+          "**Choose a generator you can trust.** A static code shows exactly what it contains and depends on no outside service. The [EndureQR free generator](/qr-code-generator) creates codes in your browser, and nothing you type is sent to a server.",
         ],
       },
       {

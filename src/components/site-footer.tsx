@@ -57,9 +57,9 @@ export function SiteFooter() {
       <div className="mx-auto max-w-wide px-4 pb-10 pt-20 sm:px-6 lg:px-12 lg:pt-28">
         <div className="grid gap-12 lg:grid-cols-[1.3fr_repeat(5,1fr)] lg:gap-8">
           <div className="max-w-[300px]">
-            <Link href="/" className="flex items-center gap-2.5 text-fg" aria-label="StayQR home">
+            <Link href="/" className="flex items-center gap-2.5 text-fg" aria-label="EndureQR home">
               <Logo />
-              <span className="font-display text-[20px] font-semibold tracking-[-0.02em]">StayQR</span>
+              <span className="font-display text-[20px] font-semibold tracking-[-0.02em]">EndureQR</span>
             </Link>
             <p className="mt-4 text-body-sm text-fg-muted">
               Dynamic QR codes that keep working, even if you cancel. Edit after printing, scan without limits.
@@ -85,7 +85,7 @@ export function SiteFooter() {
 
         <div className="mt-20 flex flex-col gap-4 border-t border-line pt-8 font-mono text-[12px] text-fg-subtle sm:flex-row sm:items-center sm:justify-between">
           <p className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <span>© 2026 StayQR. Codes that never die.</span>
+            <span>© 2026 EndureQR. Codes that never die.</span>
             <Link href="/about" className="transition-colors hover:text-fg">About</Link>
             <Link href="/contact" className="transition-colors hover:text-fg">Contact</Link>
             <Link href="/terms" className="transition-colors hover:text-fg">Terms</Link>

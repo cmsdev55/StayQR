@@ -2,7 +2,7 @@ import { processWebhook, verifySignature } from "@/lib/server/billing";
 
 export const dynamic = "force-dynamic";
 
-/** Lemon Squeezy → StayQR. Signed with LEMONSQUEEZY_WEBHOOK_SECRET; 500 makes Lemon Squeezy retry. */
+/** Lemon Squeezy → EndureQR. Signed with LEMONSQUEEZY_WEBHOOK_SECRET; 500 makes Lemon Squeezy retry. */
 export async function POST(req: Request) {
   const raw = await req.text();
   if (!verifySignature(raw, req.headers.get("x-signature"))) return new Response("Invalid signature", { status: 401 });

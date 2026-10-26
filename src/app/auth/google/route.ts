@@ -14,7 +14,7 @@ export async function GET(req: Request) {
   const verifier = randomBytes(32).toString("base64url");
   const challenge = createHash("sha256").update(verifier).digest("base64url");
   const next = safeNext(url.searchParams.get("next"));
-  (await cookies()).set("stayqr_oauth", JSON.stringify({ state, verifier, next }), {
+  (await cookies()).set("endureqr_oauth", JSON.stringify({ state, verifier, next }), {
     httpOnly: true,
     secure: env.siteUrl.startsWith("https://"),
     sameSite: "lax",

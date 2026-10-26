@@ -5,7 +5,7 @@ export const env = {
   siteUrl: (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3100").replace(/\/$/, ""),
   databaseUrl: process.env.DATABASE_URL,
   resendKey: process.env.RESEND_API_KEY,
-  emailFrom: process.env.EMAIL_FROM ?? "StayQR <hello@stayqr.com>",
+  emailFrom: process.env.EMAIL_FROM ?? "EndureQR <hello@endureqr.com>",
   google: { clientId: process.env.GOOGLE_CLIENT_ID, clientSecret: process.env.GOOGLE_CLIENT_SECRET },
   lemon: {
     apiKey: process.env.LEMONSQUEEZY_API_KEY,
@@ -32,5 +32,5 @@ export const billingMode: "lemonsqueezy" | "dev" | "off" =
       ? "dev"
       : "off";
 
-/** "stayqr.com/r/k3xb9" style host for short links. */
+/** "endureqr.com/r/k3xb9" style host for short links. */
 export const shortHost = () => env.siteUrl.replace(/^https?:\/\//, "");

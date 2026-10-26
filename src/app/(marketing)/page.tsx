@@ -25,7 +25,7 @@ export default function Home() {
         data={{
           "@context": "https://schema.org",
           "@graph": [
-            { "@type": "WebSite", "@id": `${SITE}/#website`, url: SITE, name: "StayQR", publisher: { "@id": `${SITE}/#organization` }, inLanguage: "en" },
+            { "@type": "WebSite", "@id": `${SITE}/#website`, url: SITE, name: "EndureQR", publisher: { "@id": `${SITE}/#organization` }, inLanguage: "en" },
             {
               "@type": "Organization",
               "@id": `${SITE}/#organization`,

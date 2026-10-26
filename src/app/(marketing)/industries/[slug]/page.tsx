@@ -64,7 +64,7 @@ export default async function IndustryPage({ params }: Props) {
         <div className="mx-auto grid max-w-container items-center gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
           <div>
             <p className="fade-up inline-flex items-center gap-2.5 font-mono text-label uppercase text-fg-subtle" style={{ ["--d" as string]: "0ms" }}>
-              <IndustryIcon slug={ind.slug} size={16} /> StayQR for {ind.name.toLowerCase()}
+              <IndustryIcon slug={ind.slug} size={16} /> EndureQR for {ind.name.toLowerCase()}
             </p>
             <h1 id="ind-title" className="mt-5 max-w-[16ch] font-display text-display-lg font-semibold text-fg [text-wrap:balance]">
               {words.map((w, i) => (
@@ -113,7 +113,7 @@ export default async function IndustryPage({ params }: Props) {
       {/* Use cases */}
       <section aria-labelledby="uses-title" className="border-t border-line py-24 lg:py-32">
         <div className="mx-auto max-w-container px-4 sm:px-6">
-          <SectionHeading id="uses-title" eyebrow="Use cases" title={`How ${ind.name.toLowerCase()} use *StayQR.*`} />
+          <SectionHeading id="uses-title" eyebrow="Use cases" title={`How ${ind.name.toLowerCase()} use *EndureQR.*`} />
           <div className="mt-12 grid gap-4 md:grid-cols-3 lg:gap-5">
             {ind.useCases.map((u, i) => (
               <article key={u.title} className="glass rounded-lg p-6 sm:p-8" data-reveal="" style={{ ["--stagger" as string]: i }}>

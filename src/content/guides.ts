@@ -125,10 +125,10 @@ const GUIDES_CORE: Guide[] = [
           "**Keep a record of every code you print.** Note where it is, what it points to and which account owns it, so a staff change does not leave it stranded.",
         ],
       },
-      { type: "h2", id: "what-happens-to-stayqr-codes", text: "What happens to StayQR codes if you cancel" },
+      { type: "h2", id: "what-happens-to-endureqr-codes", text: "What happens to EndureQR codes if you cancel" },
       {
         type: "p",
-        text: "StayQR was built around this problem. Free codes from the generator are static and never expire. Paid dynamic codes add the things people choose dynamic codes for: editing the destination after printing, scan analytics by city, device and time of day, smart redirects for iPhone and Android, and the option to pause a code with a friendly page.",
+        text: "EndureQR was built around this problem. Free codes from the generator are static and never expire. Paid dynamic codes add the things people choose dynamic codes for: editing the destination after printing, scan analytics by city, device and time of day, smart redirects for iPhone and Android, and the option to pause a code with a friendly page.",
       },
       {
         type: "p",
@@ -138,7 +138,7 @@ const GUIDES_CORE: Guide[] = [
     faq: [
       {
         q: "Do free QR codes expire?",
-        a: "It depends on the generator. A true static code never expires. Some free tools make dynamic codes that stop working when a trial ends. Codes from the StayQR free generator are static, so they keep working.",
+        a: "It depends on the generator. A true static code never expires. Some free tools make dynamic codes that stop working when a trial ends. Codes from the EndureQR free generator are static, so they keep working.",
       },
       {
         q: "Can I fix a QR code that has stopped working?",
@@ -149,7 +149,7 @@ const GUIDES_CORE: Guide[] = [
         a: "A static code has no scan limit, because nothing counts the scans. Dynamic codes can have limits depending on the provider and plan, so check before you print.",
       },
       {
-        q: "Will my StayQR dynamic codes stop working if I cancel?",
+        q: "Will my EndureQR dynamic codes stop working if I cancel?",
         a: "No. They keep redirecting to the last destination you set. You can no longer edit the destination or see new analytics until you resume a plan.",
       },
     ],
@@ -274,7 +274,7 @@ const GUIDES_CORE: Guide[] = [
       },
       {
         type: "p",
-        text: "StayQR's free generator makes static codes with no sign-up and no watermark. Paid dynamic codes add editing after printing, scan analytics by city, device and time of day, iPhone and Android smart redirects, and pausing with a friendly page. Pro is $29 a year or $3.99 a month, Lifetime is $79 once, and your codes keep working even if you cancel. Compare plans on the [pricing page](/pricing).",
+        text: "EndureQR's free generator makes static codes with no sign-up and no watermark. Paid dynamic codes add editing after printing, scan analytics by city, device and time of day, iPhone and Android smart redirects, and pausing with a friendly page. Pro is $29 a year or $3.99 a month, Lifetime is $79 once, and your codes keep working even if you cancel. Compare plans on the [pricing page](/pricing).",
       },
     ],
     faq: [
@@ -388,7 +388,7 @@ const GUIDES_CORE: Guide[] = [
       },
       {
         type: "p",
-        text: "The [StayQR free generator](/qr-code-generator) downloads PNG, SVG, JPEG and PDF with no watermark, so you can hand your printer a vector file straight away. For a web link, start with the [URL QR code generator](/qr-code-generator/url).",
+        text: "The [EndureQR free generator](/qr-code-generator) downloads PNG, SVG, JPEG and PDF with no watermark, so you can hand your printer a vector file straight away. For a web link, start with the [URL QR code generator](/qr-code-generator/url).",
       },
       { type: "h2", id: "printing-checklist", text: "A quick checklist before you print" },
       {
@@ -475,7 +475,7 @@ const GUIDES_CORE: Guide[] = [
       },
       {
         type: "p",
-        text: "StayQR dynamic codes cost $29 a year or $3.99 a month on Pro, or $79 once on Lifetime, and they keep working even if you cancel. See [pricing](/pricing), or read more about [QR codes for restaurants](/industries/restaurants).",
+        text: "EndureQR dynamic codes cost $29 a year or $3.99 a month on Pro, or $79 once on Lifetime, and they keep working even if you cancel. See [pricing](/pricing), or read more about [QR codes for restaurants](/industries/restaurants).",
       },
       { type: "h2", id: "table-tent-tips", text: "Table tent and placement tips" },
       {
@@ -611,7 +611,7 @@ const GUIDES_CORE: Guide[] = [
       { type: "h2", id: "hidden-networks", text: "Hidden networks" },
       {
         type: "p",
-        text: "A hidden network does not broadcast its name, so phones will not see it in the list. The format supports this with H:true, which tells the phone to look for the network even though it is not advertised. The [StayQR WiFi generator](/qr-code-generator/wifi) has a hidden-network switch that adds it for you. Phones still handle hidden networks with varying success, so test on the devices your guests use.",
+        text: "A hidden network does not broadcast its name, so phones will not see it in the list. The format supports this with H:true, which tells the phone to look for the network even though it is not advertised. The [EndureQR WiFi generator](/qr-code-generator/wifi) has a hidden-network switch that adds it for you. Phones still handle hidden networks with varying success, so test on the devices your guests use.",
       },
       {
         type: "p",
@@ -718,7 +718,7 @@ const GUIDES_CORE: Guide[] = [
       },
       {
         type: "p",
-        text: "That recovery budget also has to cover scratches, dirt, glare and print defects. So do not spend all of it on the logo. Keep the logo to around 20 to 25% of the code's area at most, and smaller is safer. Use a high error correction level when you add one. The [StayQR generator](/qr-code-generator/url) switches to level H automatically as soon as you upload a logo.",
+        text: "That recovery budget also has to cover scratches, dirt, glare and print defects. So do not spend all of it on the logo. Keep the logo to around 20 to 25% of the code's area at most, and smaller is safer. Use a high error correction level when you add one. The [EndureQR generator](/qr-code-generator/url) switches to level H automatically as soon as you upload a logo.",
       },
       {
         type: "ul",
@@ -731,7 +731,7 @@ const GUIDES_CORE: Guide[] = [
       },
       {
         type: "p",
-        text: "The [free StayQR generator](/qr-code-generator) lets you upload a logo, pick colours and add a frame, then download PNG, SVG, JPEG or PDF with no watermark.",
+        text: "The [free EndureQR generator](/qr-code-generator) lets you upload a logo, pick colours and add a frame, then download PNG, SVG, JPEG or PDF with no watermark.",
       },
       { type: "h2", id: "dot-and-corner-styles", text: "Dot styles and corner shapes" },
       {

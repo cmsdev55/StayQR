@@ -4,7 +4,7 @@ import { ImageResponse } from "next/og";
 import qrcode from "qrcode-generator";
 import { SITE_HOST } from "@/lib/site";
 
-export const alt = "StayQR: QR codes that never stop working";
+export const alt = "EndureQR: QR codes that never stop working";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -14,7 +14,7 @@ const BG = "#07080B", INK = "#F2F4F7", MUTED = "#9AA3B2", SUBTLE = "#7A8294", LI
 function scene() {
   // Upper-case URL in alphanumeric mode fits version 1 (21×21) at level M, so the drawn code really scans.
   const qr = qrcode(1, "M");
-  qr.addData("HTTPS://STAYQR.COM", "Alphanumeric");
+  qr.addData("HTTPS://ENDUREQR.COM", "Alphanumeric");
   qr.make();
   const n = qr.getModuleCount();
   const cell = 15, scanRow = 12.4; // beam sits between rows 12 and 13
@@ -71,7 +71,7 @@ export default async function OpengraphImage() {
 
         <div style={{ position: "absolute", left: 72, top: 64, display: "flex", alignItems: "center", gap: 14 }}>
           <Mark size={40} />
-          <span style={{ fontFamily: "Clash Display", fontSize: 34, color: INK, letterSpacing: -0.7 }}>StayQR</span>
+          <span style={{ fontFamily: "Clash Display", fontSize: 34, color: INK, letterSpacing: -0.7 }}>EndureQR</span>
         </div>
 
         <div style={{ position: "absolute", left: 72, top: 178, display: "flex", flexDirection: "column", fontFamily: "Clash Display", fontSize: 84, lineHeight: 0.96, letterSpacing: -3.4, color: INK }}>

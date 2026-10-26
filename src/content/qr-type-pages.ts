@@ -98,7 +98,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       "Emoji and accented letters may display differently on older phones. If you use them, scan on more than one device.",
     ],
     faq: [
-      { q: "How much text can a QR code hold?", a: "StayQR's text codes take up to 300 characters. QR codes can technically hold more, but long messages produce dense patterns that are hard to scan from print." },
+      { q: "How much text can a QR code hold?", a: "EndureQR's text codes take up to 300 characters. QR codes can technically hold more, but long messages produce dense patterns that are hard to scan from print." },
       { q: "Does a text QR code need internet to work?", a: "No. The message is stored in the pattern, so the phone can show it with no signal or WiFi." },
       { q: "What happens when someone scans a text QR code?", a: "The phone shows the message on screen. It doesn't open a website or an app." },
       { q: "Can I edit the text after printing?", a: "No. The text is part of the pattern, so changing it means making a new code. For content you'll want to update, point a URL code at a page you control instead." },
@@ -132,14 +132,14 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       "Use a guest network. Anyone with the code can join, and a QR reader app can display the password, so treat the printed code like the password itself.",
       "Change the password, change the code. The password is stored inside the code, so reprint whenever you update your router.",
       "Match the security type to your router. If the code says WEP and the router uses WPA2, phones won't connect.",
-      "StayQR escapes symbols such as ; : , and \" in passwords, but phones vary, so test the printed code on both an iPhone and an Android phone.",
+      "EndureQR escapes symbols such as ; : , and \" in passwords, but phones vary, so test the printed code on both an iPhone and an Android phone.",
       "Print it at least 3 cm (1.2 in) wide on a table card, and larger on a wall sign that people scan from across the room.",
       "Write the network name in plain text under the code so people know which network they're joining.",
     ],
     faq: [
       { q: "How do I scan a WiFi QR code on iPhone?", a: "Open the Camera app, point it at the code and tap the banner that appears. The iPhone asks to join the network and connects without anyone typing the password." },
       { q: "Does it work on Android?", a: "Yes. Most Android phones read WiFi codes from the camera. On some models you scan from the WiFi settings screen or with Google Lens instead." },
-      { q: "Does it work with WPA3 or hidden networks?", a: "Yes. StayQR supports WPA, WPA2 and WPA3 personal networks, WEP, open networks and hidden networks. It doesn't support WPA-Enterprise networks that need a username." },
+      { q: "Does it work with WPA3 or hidden networks?", a: "Yes. EndureQR supports WPA, WPA2 and WPA3 personal networks, WEP, open networks and hidden networks. It doesn't support WPA-Enterprise networks that need a username." },
       { q: "Is a WiFi QR code secure?", a: "It's as secure as sharing the password, because the password is inside the code. Use a guest network and display the code only where guests can see it." },
       { q: "What happens if I change my WiFi password?", a: "The old code stops working, because it holds the old password. Make a new code with the new password and reprint it." },
       { q: "Do I need internet to scan it?", a: "No. The details are stored in the code, so a phone can read it and join the network without mobile data." },
@@ -178,7 +178,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
     faq: [
       { q: "What is a vCard QR code?", a: "It's a QR code that contains a contact card in the vCard format. When scanned, the phone shows the details and offers to add them to contacts." },
       { q: "Which fields can I include?", a: "First and last name, phone, email, company, job title, website, and a street address with city, postcode and country. Fill in only what you want to share." },
-      { q: "Does it work on iPhone and Android?", a: "Yes. The built-in camera on both reads vCard codes and offers to save the contact. StayQR uses vCard 3.0, which contacts apps widely support." },
+      { q: "Does it work on iPhone and Android?", a: "Yes. The built-in camera on both reads vCard codes and offers to save the contact. EndureQR uses vCard 3.0, which contacts apps widely support." },
       { q: "Can I update my details after printing?", a: "Not in a vCard code, because the details are stored in the pattern. Make a new code when your details change, or use a URL code that points to an online profile you can edit." },
       { q: "Does the person scanning need internet?", a: "No. The details are inside the code, so they can be saved with no connection." },
       { q: "Why does my vCard code look so dense?", a: "Each field adds characters, and more characters mean more dots. Remove fields you don't need or print the code larger." },
@@ -311,7 +311,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
     intro:
       "Make a QR code that opens a WhatsApp chat with you, with a message already typed. Customers scan, tap send and the conversation starts. Free, with no sign-up and no watermark.",
     steps: [
-      { title: "Enter your WhatsApp number", body: "Type the number registered to WhatsApp, including the country code, for example +44 7700 900123. StayQR removes spaces and the + for you." },
+      { title: "Enter your WhatsApp number", body: "Type the number registered to WhatsApp, including the country code, for example +44 7700 900123. EndureQR removes spaces and the + for you." },
       { title: "Write an opening message", body: "Add up to 300 characters, such as \"Hi, I'd like to book a table\". It's optional, and people can edit it before sending." },
       { title: "Style and test", body: "Add your colours, logo or a \"Scan me\" frame, then scan the preview and check WhatsApp opens a chat with the right number." },
       { title: "Download", body: "Save as PNG, JPEG, SVG or PDF, from 512 to 4096 px." },
@@ -448,8 +448,8 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       { q: "Can people without an Instagram account see my profile?", a: "They can usually see a public profile in the browser, though Instagram may ask them to log in to see more." },
       { q: "Can I link to a specific post or reel?", a: "Yes. Paste the post or reel link instead of your username." },
       { q: "What happens if I change my username?", a: "A static code keeps pointing at the old username. Make a new code, or use a dynamic code so you can change the destination without reprinting." },
-      { q: "How is this different from the code inside the Instagram app?", a: "StayQR lets you use your own colours, logo, dot styles and frame, and download print files in PNG, SVG, JPEG or PDF up to 4096 px." },
-      { q: "Do Instagram QR codes expire?", a: "No. Static codes from StayQR never expire and have unlimited scans." },
+      { q: "How is this different from the code inside the Instagram app?", a: "EndureQR lets you use your own colours, logo, dot styles and frame, and download print files in PNG, SVG, JPEG or PDF up to 4096 px." },
+      { q: "Do Instagram QR codes expire?", a: "No. Static codes from EndureQR never expire and have unlimited scans." },
     ],
     related: ["tiktok", "facebook", "youtube", "url"],
   },
@@ -597,7 +597,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       "Keep the code dark on a light background, even if your slides use a dark theme.",
     ],
     faq: [
-      { q: "Do old twitter.com links still work?", a: "twitter.com links currently redirect to x.com. StayQR builds x.com links when you type a username." },
+      { q: "Do old twitter.com links still work?", a: "twitter.com links currently redirect to x.com. EndureQR builds x.com links when you type a username." },
       { q: "Does it open the X app?", a: "If the app is installed, the phone usually opens the profile in it. Otherwise it opens in the browser." },
       { q: "Can I link to a single post?", a: "Yes. Copy the post's link from the share menu and paste it in place of your username." },
       { q: "Can people see my profile without an account?", a: "X may ask visitors to log in before showing much. Open the link in a private browser window to see what they'll get." },
@@ -617,7 +617,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
     intro:
       "Make a QR code that opens your TikTok profile or a specific video. Put it on products, packaging and shop counters to bring people from the real world to your videos. Free, with no sign-up and no watermark.",
     steps: [
-      { title: "Enter your username or a video link", body: "Type your username, with or without the @, and StayQR builds the tiktok.com/@username link. To open one video, paste its link instead." },
+      { title: "Enter your username or a video link", body: "Type your username, with or without the @, and EndureQR builds the tiktok.com/@username link. To open one video, paste its link instead." },
       { title: "Check the account is public", body: "Private accounts only show videos to approved followers, so people who scan may see very little." },
       { title: "Style it", body: "Bold colours are fine, but keep the dots dark on a light background so the code scans reliably." },
       { title: "Test and download", body: "Scan the preview, then download PNG, JPEG, SVG or PDF for your print job." },
@@ -638,9 +638,9 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
     faq: [
       { q: "Does a TikTok QR code open the app?", a: "If TikTok is installed, the link usually opens in the app. Otherwise it opens in the browser, where TikTok may prompt the viewer to log in or get the app." },
       { q: "Can I link to one video?", a: "Yes. Paste the video link instead of your username." },
-      { q: "How is this different from the code in the TikTok app?", a: "StayQR gives you a code in your own colours with your logo and frame, downloaded in PNG, SVG, JPEG or PDF up to 4096 px for print." },
+      { q: "How is this different from the code in the TikTok app?", a: "EndureQR gives you a code in your own colours with your logo and frame, downloaded in PNG, SVG, JPEG or PDF up to 4096 px for print." },
       { q: "Can I swap the video later?", a: "Not on a static code. If you want to switch to a newer video, a dynamic code lets you change the destination after printing." },
-      { q: "Do free TikTok QR codes have a watermark?", a: "No. StayQR's free codes have no watermark, never expire and have unlimited scans." },
+      { q: "Do free TikTok QR codes have a watermark?", a: "No. EndureQR's free codes have no watermark, never expire and have unlimited scans." },
     ],
     related: ["instagram", "youtube", "x", "facebook"],
   },
@@ -676,7 +676,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
     faq: [
       { q: "What is a PayPal QR code?", a: "It's a QR code that holds your PayPal.Me link, optionally with an amount and currency. Scanning it opens your PayPal payment page on the person's phone." },
       { q: "Can I set a fixed amount?", a: "Yes. Add an amount and currency and they're included in the link. Leave the amount blank and the payer enters their own." },
-      { q: "Does StayQR process the payment?", a: "No. The code only opens your PayPal.Me link. The payment happens in PayPal, and StayQR never sees it or takes a cut." },
+      { q: "Does EndureQR process the payment?", a: "No. The code only opens your PayPal.Me link. The payment happens in PayPal, and EndureQR never sees it or takes a cut." },
       { q: "Does the payer need the PayPal app?", a: "No. The link opens in the PayPal app if it's installed, or in the browser if not." },
       { q: "Are PayPal QR codes free to make?", a: "Yes. The code is free, never expires and has unlimited scans. Any PayPal fees are set by PayPal." },
     ],

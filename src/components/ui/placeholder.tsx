@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * Visible stand-in for content StayQR must supply (customer names, quotes, logos, numbers,
+ * Visible stand-in for content EndureQR must supply (customer names, quotes, logos, numbers,
  * screenshots, legal details). Always shows its [brackets]; never replace it with invented copy.
  */
 export function Placeholder({ children, className }: { children: ReactNode; className?: string }) {

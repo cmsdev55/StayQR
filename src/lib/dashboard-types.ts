@@ -10,7 +10,7 @@ export type DashCode = {
   folderId: string | null;
   folderName: string | null;
   destination: string;
-  shortUrl: string; // "stayqr.com/r/k3xb9"
+  shortUrl: string; // "endureqr.com/r/k3xb9"
   iosUrl: string | null;
   androidUrl: string | null;
   paused: boolean;

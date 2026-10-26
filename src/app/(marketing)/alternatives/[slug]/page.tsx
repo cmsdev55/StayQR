@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { VerifyTag } from "@/components/ui/placeholder";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { CHECKED, COMPETITORS, STAYQR_ROW, competitorBySlug } from "@/content/competitors";
+import { CHECKED, COMPETITORS, ENDUREQR_ROW, competitorBySlug } from "@/content/competitors";
 import { FAQ } from "@/content/faq";
 import { qrMatrix } from "@/lib/qr";
 import { SITE_HOST } from "@/lib/site";
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!c) return {};
   return {
     title: `${c.name} alternative`,
-    description: `Looking for a ${c.name} alternative? StayQR is $${STAYQR_ROW.pricePerYear}/year with unlimited codes and scans, and your codes keep working if you cancel.`,
+    description: `Looking for a ${c.name} alternative? EndureQR is $${ENDUREQR_ROW.pricePerYear}/year with unlimited codes and scans, and your codes keep working if you cancel.`,
     alternates: { canonical: `/alternatives/${c.slug}` },
   };
 }
@@ -36,23 +36,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function AlternativePage({ params }: Props) {
   const c = competitorBySlug((await params).slug);
   if (!c) notFound();
-  const saving = c.pricePerYear - STAYQR_ROW.pricePerYear;
+  const saving = c.pricePerYear - ENDUREQR_ROW.pricePerYear;
   const words = c.headline.split(" ");
   let accentOn = false;
 
-  // [label, their fact, ours, StayQR is clearly better here]
+  // [label, their fact, ours, EndureQR is clearly better here]
   const rows: [string, (typeof c)["price"], string, boolean][] = [
-    ["Price per year", c.price, `${STAYQR_ROW.price} (${STAYQR_ROW.plan})`, true],
-    ["Codes included", c.codes, STAYQR_ROW.codes, true],
-    ["Scan limits", c.scans, STAYQR_ROW.scans, c.scans.verdict !== "yes"],
-    ["Edit after printing", c.edit, STAYQR_ROW.edit, c.edit.verdict !== "yes"],
-    ["What happens when you cancel", c.cancel, STAYQR_ROW.cancel, true],
+    ["Price per year", c.price, `${ENDUREQR_ROW.price} (${ENDUREQR_ROW.plan})`, true],
+    ["Codes included", c.codes, ENDUREQR_ROW.codes, true],
+    ["Scan limits", c.scans, ENDUREQR_ROW.scans, c.scans.verdict !== "yes"],
+    ["Edit after printing", c.edit, ENDUREQR_ROW.edit, c.edit.verdict !== "yes"],
+    ["What happens when you cancel", c.cancel, ENDUREQR_ROW.cancel, true],
   ];
 
   const faq = [
-    { q: `Is StayQR affiliated with ${c.name}?`, a: `No. StayQR is an independent product. ${c.name} is a trademark of its owner; we compare plans using their public pricing and help pages, checked ${CHECKED}.` },
+    { q: `Is EndureQR affiliated with ${c.name}?`, a: `No. EndureQR is an independent product. ${c.name} is a trademark of its owner; we compare plans using their public pricing and help pages, checked ${CHECKED}.` },
     { q: `What happens to my ${c.name} codes if I cancel?`, a: `${c.cancelLong} (Checked ${CHECKED}; confirm with ${c.name} before relying on it.)` },
-    { q: `Can I import my ${c.name} codes?`, a: `You can't move a code that points at ${c.name}'s short links, but you can export your destinations, import them into StayQR as a CSV and reprint once. After that, you never need to reprint again.` },
+    { q: `Can I import my ${c.name} codes?`, a: `You can't move a code that points at ${c.name}'s short links, but you can export your destinations, import them into EndureQR as a CSV and reprint once. After that, you never need to reprint again.` },
     FAQ[0],
   ];
 
@@ -80,7 +80,7 @@ export default async function AlternativePage({ params }: Props) {
             {c.pitch}
           </p>
           <div className="fade-up mt-8 flex flex-col gap-3 sm:flex-row" style={{ ["--d" as string]: "380ms" }}>
-            <ButtonLink href={`/signup?from=${c.slug}`} size="lg">Switch to StayQR</ButtonLink>
+            <ButtonLink href={`/signup?from=${c.slug}`} size="lg">Switch to EndureQR</ButtonLink>
             <ButtonLink href="/#compare" size="lg" variant="secondary">Compare all services</ButtonLink>
           </div>
         </div>
@@ -93,7 +93,7 @@ export default async function AlternativePage({ params }: Props) {
             id="after-title"
             eyebrow="After cancelling"
             title="What a printed code does once you *stop paying.*"
-            intro={`What ${c.name}'s own help pages say happens to your codes, next to what you'd see in StayQR after cancelling.`}
+            intro={`What ${c.name}'s own help pages say happens to your codes, next to what you'd see in EndureQR after cancelling.`}
           />
           <div className="mt-12 grid gap-4 lg:grid-cols-2 lg:gap-5">
             <figure className="flex flex-col" data-reveal="">
@@ -113,7 +113,7 @@ export default async function AlternativePage({ params }: Props) {
             <figure className="flex flex-col" data-reveal="" style={{ ["--stagger" as string]: 1 }}>
               <CancelledDashboard />
               <figcaption className="mt-4 text-body-sm text-fg-muted">
-                <span className="font-medium text-fg">StayQR</span> · plan cancelled, every code still Active and redirecting to its last destination.
+                <span className="font-medium text-fg">EndureQR</span> · plan cancelled, every code still Active and redirecting to its last destination.
               </figcaption>
             </figure>
           </div>
@@ -123,17 +123,17 @@ export default async function AlternativePage({ params }: Props) {
       {/* Facts: anything not on their current pricing page is marked [verify] */}
       <section aria-labelledby="facts-title" className="border-t border-line py-24 lg:py-32">
         <div className="mx-auto max-w-container px-4 sm:px-6">
-          <SectionHeading id="facts-title" eyebrow="The facts" title={`StayQR vs *${c.name}*`} />
+          <SectionHeading id="facts-title" eyebrow="The facts" title={`EndureQR vs *${c.name}*`} />
           <div className="mt-12 grid gap-4 lg:grid-cols-[minmax(0,8fr)_minmax(0,4fr)] lg:gap-5">
             <div className="glass overflow-hidden rounded-xl" data-reveal="">
               <table className="w-full table-fixed text-left">
-                <caption className="sr-only">StayQR compared with {c.name}</caption>
+                <caption className="sr-only">EndureQR compared with {c.name}</caption>
                 <thead>
                   <tr className="border-b border-line">
                     <th scope="col" className="w-[30%] px-5 py-4 sm:px-6"><span className="sr-only">Fact</span></th>
                     <th scope="col" className="px-3 py-4 text-body-sm font-semibold text-fg-muted sm:px-6">{c.name}</th>
                     <th scope="col" className="bg-glass-strong px-3 py-4 sm:px-6">
-                      <span className="flex items-center gap-2 text-body-sm font-semibold text-fg"><Logo size={16} /> StayQR</span>
+                      <span className="flex items-center gap-2 text-body-sm font-semibold text-fg"><Logo size={16} /> EndureQR</span>
                     </th>
                   </tr>
                 </thead>
@@ -155,7 +155,7 @@ export default async function AlternativePage({ params }: Props) {
                 <p className="eyebrow">You save every year</p>
                 <AnimatedCounter value={saving} from={0} prefix="$" duration={1600} label={`$${saving} per year`} className="mt-4 font-display text-display-lg font-semibold text-accent-text" />
                 <p className="mt-3 text-body-sm text-fg-muted">
-                  Comparing {c.name} {c.plan} with StayQR Pro, both billed yearly. Or pay $79 once and never renew.
+                  Comparing {c.name} {c.plan} with EndureQR Pro, both billed yearly. Or pay $79 once and never renew.
                   {c.priceNote && <span className="mt-2 block text-fg-subtle">{c.priceNote}</span>}
                 </p>
               </div>
@@ -183,7 +183,7 @@ export default async function AlternativePage({ params }: Props) {
           <ol className="mt-12 grid gap-4 md:grid-cols-3 lg:gap-5">
             {[
               ["Export your destinations", `Download the list of links your ${c.name} codes point to.`],
-              ["Import a CSV", "Upload it to StayQR and get a print-ready code for every row."],
+              ["Import a CSV", "Upload it to EndureQR and get a print-ready code for every row."],
               ["Reprint once", "Swap the codes on your next print run. It's the last reprint you'll need."],
             ].map(([t, b], i) => (
               <li key={t} className="glass rounded-lg p-6 sm:p-8" data-reveal="" style={{ ["--stagger" as string]: i }}>
@@ -206,12 +206,12 @@ export default async function AlternativePage({ params }: Props) {
       </section>
 
       <Faq items={faq} title="Switching *questions.*" />
-      <CtaBand title={c.ctaTitle} href={`/signup?from=${c.slug}`} cta="Switch to StayQR" />
+      <CtaBand title={c.ctaTitle} href={`/signup?from=${c.slug}`} cta="Switch to EndureQR" />
     </main>
   );
 }
 
-/** StayQR billing + codes the day a plan is cancelled (a calm, solid dashboard mock). */
+/** EndureQR billing + codes the day a plan is cancelled (a calm, solid dashboard mock). */
 function CancelledDashboard() {
   const codes = [
     { name: "Table tent · dinner menu", url: `${SITE_HOST}/r/k3xb9`, today: 412 },
@@ -219,7 +219,7 @@ function CancelledDashboard() {
     { name: "Receipt · leave a review", url: `${SITE_HOST}/r/p7mw2`, today: 104 },
   ];
   return (
-    <div className="flex aspect-[4/3] flex-col overflow-hidden rounded-xl border border-line bg-bg-raised text-body-sm" aria-label="StayQR dashboard after cancelling">
+    <div className="flex aspect-[4/3] flex-col overflow-hidden rounded-xl border border-line bg-bg-raised text-body-sm" aria-label="EndureQR dashboard after cancelling">
       <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-3 sm:px-5">
         <span className="flex items-center gap-2 font-medium text-fg"><Logo size={16} /> QR codes</span>
         <Badge variant="warning">Plan cancelled<span className="hidden sm:inline"> · ends 14 Mar</span></Badge>

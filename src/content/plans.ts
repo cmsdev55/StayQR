@@ -1,4 +1,4 @@
-/** StayQR plans. Prices are the brief's; limits are placeholders until the product team confirms them. */
+/** EndureQR plans. Prices are the brief's; limits are placeholders until the product team confirms them. */
 export type Billing = "monthly" | "yearly";
 
 export const PRO = {

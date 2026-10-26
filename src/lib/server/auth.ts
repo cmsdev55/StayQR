@@ -8,7 +8,7 @@ import { env } from "./env";
 
 export type SessionUser = { id: string; email: string; name: string | null; timezone: string; verified: boolean; hasPassword: boolean };
 
-export const SESSION_COOKIE = "stayqr_session";
+export const SESSION_COOKIE = "endureqr_session";
 const SESSION_DAYS = 30;
 const sha256 = (v: string) => createHash("sha256").update(v).digest("hex");
 const newToken = () => randomBytes(32).toString("base64url");

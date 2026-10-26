@@ -70,7 +70,7 @@ export function GeneratorApp({ placeholder, initialType = "url" }: { placeholder
     setBusy(true);
     setExportError(null);
     try {
-      await downloadQr(data, design, format, size, `stayqr-${type}`);
+      await downloadQr(data, design, format, size, `endureqr-${type}`);
       setDownloaded(format.toUpperCase());
     } catch {
       setExportError("Couldn't create that file. Try another format, or remove the logo and try again.");
@@ -122,7 +122,7 @@ export function GeneratorApp({ placeholder, initialType = "url" }: { placeholder
             ))}
           </div>
           <p aria-live="polite" className={cn("mt-4 text-body-sm", problem ? "text-warning" : "text-fg-subtle")}>
-            {problem ?? "Static code: it stores this content itself, works without StayQR and never expires."}
+            {problem ?? "Static code: it stores this content itself, works without EndureQR and never expires."}
           </p>
         </Step>
 

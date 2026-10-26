@@ -46,6 +46,11 @@ export const metadata: Metadata = {
     description: "Edit after printing. Unlimited scans. Your codes keep working even if you cancel.",
   },
   twitter: { card: "summary_large_image" },
+  // Search engine ownership checks (Google Search Console "HTML tag" and Bing Webmaster Tools "Meta tag")
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION } : undefined,
+  },
   // AdSense site verification (the ad script itself only loads next to an ad slot)
   ...(process.env.NEXT_PUBLIC_ADSENSE_CLIENT ? { other: { "google-adsense-account": process.env.NEXT_PUBLIC_ADSENSE_CLIENT } } : {}),
 };

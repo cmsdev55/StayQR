@@ -1,18 +1,19 @@
 "use client";
 
-import Link from "next/link";
-import { useState, useTransition } from "react";
+import { useActionState, useState, useTransition } from "react";
+import { changePasswordAction, type AuthState } from "@/app/(auth)/actions";
 import { deleteAccountAction, updateNameAction } from "@/app/dashboard/actions";
 import { Toast } from "@/components/dashboard/toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-export function SettingsView({ name: initialName, email, timezone, canChangePassword }: { name: string; email: string; timezone: string; canChangePassword: boolean }) {
+export function SettingsView({ name: initialName, email, timezone, hasPassword }: { name: string; email: string; timezone: string; hasPassword: boolean }) {
   const [name, setName] = useState(initialName);
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const [busy, start] = useTransition();
+  const [pw, pwAction, pwBusy] = useActionState<AuthState, FormData>(changePasswordAction, undefined);
 
   return (
     <div className="max-w-[720px]">
@@ -32,8 +33,20 @@ export function SettingsView({ name: initialName, email, timezone, canChangePass
             setToast(r.ok ? "Saved" : r.error);
             setTimeout(() => setToast(null), 2400);
           })}>Save</Button>
-          {canChangePassword && <Link href="/auth/reset" className="inline-flex h-10 items-center rounded-sm px-4 font-medium text-fg-muted hover:bg-glass-strong hover:text-fg">Change password</Link>}
         </div>
+      </section>
+
+      <section className="mt-4 rounded-md border border-line bg-bg-raised p-5 sm:p-6" aria-labelledby="pw-title">
+        <h2 id="pw-title" className="font-semibold text-fg">{hasPassword ? "Change password" : "Set a password"}</h2>
+        <p className="mt-1 text-fg-muted">{hasPassword ? "Other devices are signed out when you change it." : "You sign in with Google. Add a password to log in with email as well."}</p>
+        <form action={pwAction} className="mt-5 grid gap-4 sm:grid-cols-2">
+          {hasPassword && <Input size="sm" label="Current password" name="current" type="password" autoComplete="current-password" required />}
+          <Input size="sm" label="New password" name="password" type="password" autoComplete="new-password" required minLength={8} hint="At least 8 characters." error={pw?.error} />
+          <div className="sm:col-span-2">
+            <Button type="submit" size="sm" variant="secondary" disabled={pwBusy}>{pwBusy ? "Saving" : hasPassword ? "Change password" : "Set password"}</Button>
+            {pw?.notice && <span role="status" className="ml-3 text-fg-muted">{pw.notice}</span>}
+          </div>
+        </form>
       </section>
 
       <section className="mt-4 rounded-md border border-line bg-bg-raised p-5 sm:p-6" aria-labelledby="data-title">

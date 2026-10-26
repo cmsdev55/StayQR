@@ -1,45 +1,34 @@
 import "server-only";
-import { createHmac, randomUUID, timingSafeEqual } from "node:crypto";
+import { createHash, randomBytes } from "node:crypto";
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { cache } from "react";
-import { supabaseServer } from "@/lib/supabase/server";
 import { db } from "./db";
-import { authMode } from "./env";
+import { env } from "./env";
 
-export type SessionUser = { id: string; email: string; name: string | null; timezone: string };
+export type SessionUser = { id: string; email: string; name: string | null; timezone: string; verified: boolean; hasPassword: boolean };
 
-const DEV_COOKIE = "stayqr-dev-session";
-const devSecret = () => process.env.DEV_AUTH_SECRET ?? "stayqr-local-dev-only";
-const sign = (v: string) => createHmac("sha256", devSecret()).update(v).digest("hex");
+export const SESSION_COOKIE = "stayqr_session";
+const SESSION_DAYS = 30;
+const sha256 = (v: string) => createHash("sha256").update(v).digest("hex");
+const newToken = () => randomBytes(32).toString("base64url");
 
-/** Keep public.profiles in step with the auth user (first login creates it). */
-async function ensureProfile(id: string, email: string, name: string | null): Promise<SessionUser> {
-  const [p] = await db()<SessionUser[]>`
-    insert into public.profiles (id, email, name) values (${id}, ${email}, ${name})
-    on conflict (id) do update set email = excluded.email, name = coalesce(public.profiles.name, excluded.name)
-    returning id, email, name, timezone`;
-  return p;
-}
+// ── Sessions ─────────────────────────────────────────────────────────────
 
-/** The signed-in user for this request, or null. Cached per request. */
+/** The signed-in user for this request, or null. One indexed lookup; cached per request. */
 export const getUser = cache(async (): Promise<SessionUser | null> => {
-  if (authMode === "supabase") {
-    const sb = await supabaseServer();
-    const { data } = await sb.auth.getUser();
-    if (!data.user?.email) return null;
-    const name = (data.user.user_metadata?.name as string | undefined) ?? (data.user.user_metadata?.full_name as string | undefined) ?? null;
-    return ensureProfile(data.user.id, data.user.email, name);
+  const token = (await cookies()).get(SESSION_COOKIE)?.value;
+  if (!token || token.length > 100) return null;
+  const [row] = await db()<(Omit<SessionUser, "verified" | "hasPassword"> & { verified_at: Date | null; has_password: boolean; last_seen_at: Date; sid: string })[]>`
+    select p.id, p.email, p.name, p.timezone, p.email_verified_at as verified_at, p.password_hash is not null as has_password, s.last_seen_at, s.id as sid
+      from public.sessions s join public.profiles p on p.id = s.user_id
+     where s.id = ${sha256(token)} and s.expires_at > now()`;
+  if (!row) return null;
+  // sliding expiry, written at most once an hour
+  if (Date.now() - row.last_seen_at.getTime() > 3600_000) {
+    await db()`update public.sessions set last_seen_at = now(), expires_at = now() + make_interval(days => ${SESSION_DAYS}) where id = ${row.sid}`;
   }
-  if (authMode === "dev") {
-    if (!(await isLocalRequest())) return null;
-    const raw = (await cookies()).get(DEV_COOKIE)?.value;
-    const [id, mac] = raw?.split(".") ?? [];
-    if (!id || !mac || mac.length !== 64 || !timingSafeEqual(Buffer.from(mac), Buffer.from(sign(id)))) return null;
-    const [p] = await db()<SessionUser[]>`select id, email, name, timezone from public.profiles where id = ${id}`;
-    return p ?? null;
-  }
-  return null;
+  return { id: row.id, email: row.email, name: row.name, timezone: row.timezone, verified: !!row.verified_at, hasPassword: row.has_password };
 });
 
 export async function requireUser(next = "/dashboard") {
@@ -48,27 +37,86 @@ export async function requireUser(next = "/dashboard") {
   return u;
 }
 
-/** Dev login is only honoured on localhost, whatever the environment says. */
+/** Start a session: random token in an httpOnly cookie, its hash in the database. */
+export async function startSession(userId: string) {
+  const token = newToken();
+  const ua = (await headers()).get("user-agent")?.slice(0, 300) ?? null;
+  await db()`insert into public.sessions (id, user_id, expires_at, user_agent)
+             values (${sha256(token)}, ${userId}, now() + make_interval(days => ${SESSION_DAYS}), ${ua})`;
+  (await cookies()).set(SESSION_COOKIE, token, {
+    httpOnly: true,
+    secure: env.siteUrl.startsWith("https://"),
+    sameSite: "lax",
+    path: "/",
+    maxAge: SESSION_DAYS * 86400,
+  });
+}
+
+export async function endSession() {
+  const store = await cookies();
+  const token = store.get(SESSION_COOKIE)?.value;
+  if (token) await db()`delete from public.sessions where id = ${sha256(token)}`;
+  store.delete(SESSION_COOKIE);
+}
+
+/** Sign out everywhere else (after a password change or reset). */
+export async function endOtherSessions(userId: string) {
+  const token = (await cookies()).get(SESSION_COOKIE)?.value;
+  await db()`delete from public.sessions where user_id = ${userId} and id <> ${token ? sha256(token) : ""}`;
+}
+
+// ── One-time links (verify email, reset password) ────────────────────────
+
+export async function issueToken(userId: string, kind: "verify" | "reset") {
+  const token = newToken();
+  const hours = kind === "verify" ? 24 : 1;
+  await db()`delete from public.auth_tokens where user_id = ${userId} and kind = ${kind} and used_at is null`;
+  await db()`insert into public.auth_tokens (id, user_id, kind, expires_at) values (${sha256(token)}, ${userId}, ${kind}, now() + make_interval(hours => ${hours}))`;
+  return token;
+}
+
+/** Marks the token used and returns its user, or null if it's unknown, used or expired. */
+export async function consumeToken(token: string, kind: "verify" | "reset") {
+  if (!token || token.length > 100) return null;
+  const [row] = await db()<{ user_id: string }[]>`
+    update public.auth_tokens set used_at = now()
+     where id = ${sha256(token)} and kind = ${kind} and used_at is null and expires_at > now()
+     returning user_id`;
+  return row?.user_id ?? null;
+}
+
+// ── Throttling ───────────────────────────────────────────────────────────
+
+export async function clientIp() {
+  const h = await headers();
+  return (h.get("x-forwarded-for")?.split(",")[0] ?? h.get("x-real-ip") ?? "unknown").trim();
+}
+
+/** Records an attempt for each key and reports whether any key went over its limit in the window. */
+export async function tooMany(keys: { key: string; max: number }[], minutes: number) {
+  const sql = db();
+  const counts = await sql<{ key: string; n: number }[]>`
+    select key, count(*)::int as n from public.auth_attempts
+     where key = any(${keys.map((k) => k.key)}) and at > now() - make_interval(mins => ${minutes}) group by key`;
+  const over = keys.some((k) => (counts.find((c) => c.key === k.key)?.n ?? 0) >= k.max);
+  if (!over) await sql`insert into public.auth_attempts ${sql(keys.map((k) => ({ key: k.key })))}`;
+  return over;
+}
+
+export async function clearAttempts(key: string) {
+  await db()`delete from public.auth_attempts where key = ${key}`;
+}
+
+// ── Helpers ──────────────────────────────────────────────────────────────
+
 export async function isLocalRequest() {
   const host = (await headers()).get("host") ?? "";
   return /^(localhost|127\.0\.0\.1)(:\d+)?$/.test(host);
 }
 
-/** Local development: sign in as any email without a password (creates the stub auth user). */
-export async function devSignIn(email: string, name: string | null) {
-  if (authMode !== "dev" || !(await isLocalRequest())) throw new Error("Dev login is not available here.");
-  const sql = db();
-  const [u] = await sql<{ id: string }[]>`
-    insert into auth.users (id, email) values (${randomUUID()}, ${email})
-    on conflict (email) do update set email = excluded.email returning id`;
-  await ensureProfile(u.id, email, name);
-  (await cookies()).set(DEV_COOKIE, `${u.id}.${sign(u.id)}`, { httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 24 * 30 });
-}
-
-export async function devSignOut() {
-  (await cookies()).delete(DEV_COOKIE);
-}
-
 /** Only same-site relative paths survive as a post-login destination. */
 export const safeNext = (next: unknown, fallback = "/dashboard") =>
   typeof next === "string" && next.startsWith("/") && !next.startsWith("//") && !next.startsWith("/\\") ? next : fallback;
+
+export const normaliseEmail = (e: string) => e.trim().toLowerCase();
+export const validEmail = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e) && e.length <= 254;

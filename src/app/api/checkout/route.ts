@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getUser } from "@/lib/server/auth";
+import { getUser, isLocalRequest } from "@/lib/server/auth";
 import { createCheckout, devCheckout, isPlanKey } from "@/lib/server/billing";
 import { billingMode } from "@/lib/server/env";
 import { getPlan } from "@/lib/server/plan";
@@ -19,7 +19,7 @@ export async function GET(req: Request) {
     return NextResponse.redirect(new URL("/dashboard/billing", url));
   }
   if (billingMode === "lemonsqueezy") return NextResponse.redirect(await createCheckout(user, plan));
-  if (billingMode === "dev") {
+  if (billingMode === "dev" && (await isLocalRequest())) {
     await devCheckout(user.id, plan);
     return NextResponse.redirect(new URL("/dashboard/billing?checkout=done", url));
   }

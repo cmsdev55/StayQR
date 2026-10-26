@@ -1,6 +1,6 @@
-// Local demo data: one account (demo@stayqr.local, sign in with the dev login) with folders, codes and 90 days of scans.
+// Local demo data: one account (demo@stayqr.local / demo-password) with folders, codes and 90 days of scans.
 // Usage: DATABASE_URL=postgres://localhost:54329/stayqr node scripts/db-seed.mjs   (refuses non-local databases)
-import { randomUUID } from "node:crypto";
+import { randomBytes, randomUUID, scryptSync } from "node:crypto";
 import { createRequire } from "node:module";
 const postgres = createRequire(import.meta.url)("postgres");
 const url = process.env.DATABASE_URL ?? "postgres://localhost:54329/stayqr";
@@ -8,10 +8,13 @@ if (!/@?(localhost|127\.0\.0\.1)[:/]/.test(url)) throw new Error("Refusing to se
 const sql = postgres(url, { onnotice: () => {} });
 
 const email = "demo@stayqr.local";
-await sql`delete from auth.users where email = ${email}`;
+await sql`delete from public.codes where user_id in (select id from public.profiles where lower(email) = ${email})`;
+await sql`delete from public.profiles where lower(email) = ${email}`;
 const id = randomUUID();
-await sql`insert into auth.users (id, email) values (${id}, ${email})`;
-await sql`insert into public.profiles (id, email, name) values (${id}, ${email}, 'Demo Owner')`;
+const salt = randomBytes(16);
+const key = scryptSync("demo-password", salt, 64, { N: 32768, r: 8, p: 1, maxmem: 64 * 1024 * 1024 });
+const hash = `scrypt$32768$8$1$${salt.toString("base64url")}$${key.toString("base64url")}`; // same format as src/lib/server/password.ts
+await sql`insert into public.profiles (id, email, name, password_hash, email_verified_at) values (${id}, ${email}, 'Demo Owner', ${hash}, now())`;
 const renews = new Date(Date.now() + 140 * 864e5);
 await sql`insert into public.subscriptions (id, user_id, customer_id, variant_id, plan, status, renews_at, card_brand, card_last_four)
           values (${`seed-${id.slice(0, 8)}`}, ${id}, 'seed', 'seed', 'pro-yearly', 'active', ${renews}, 'visa', '4242')`;
@@ -57,5 +60,5 @@ for (const [i, [name, dest, folder, design, perDay]] of codes.entries()) {
   for (let j = 0; j < rows.length; j += 2000) await sql`insert into public.scans ${sql(rows.slice(j, j + 2000))}`;
   total += rows.length;
 }
-console.log(`seeded ${email}: ${codes.length} codes, ${total} scans`);
+console.log(`seeded ${email} (password: demo-password): ${codes.length} codes, ${total} scans`);
 await sql.end();

@@ -25,14 +25,14 @@ Last reviewed: 26 October 2026.
 | Per-type SEO pages, 16 guides, About, Contact, sitemap, JSON-LD | `/qr-code-generator/*`, `/guides/*` | ✅ |
 | AdSense on tool and guide pages only, `ads.txt` | `AdSlot`, `/ads.txt` | ✅ (off until env is set, see below) |
 
-## Phase 2: accounts, billing, dynamic codes (Supabase + Lemon Squeezy)
+## Phase 2: accounts, billing, dynamic codes (Railway Postgres + own auth + Lemon Squeezy, app on Vercel)
 
 Built and tested end to end against local Postgres (see `docs/LAUNCH.md` to go live). ✅ = done in code; the
-remaining work is account setup on Supabase, Lemon Squeezy and Vercel.
+remaining work is account setup on Railway, Vercel, Resend and Lemon Squeezy.
 
 | Claim | Where it appears | Status |
 |---|---|---|
-| Sign up / log in, password reset, Google | Header, `/signup`, `/login` | ✅ Supabase Auth (Google needs provider config) |
+| Sign up / log in, email confirmation, password reset, Google | Header, `/signup`, `/login` | ✅ own auth in Postgres; emails via Resend (Google needs OAuth keys) |
 | Dynamic codes: edit destination after printing | Landing features, pricing, industries | ✅ `/r/[slug]` |
 | Codes keep redirecting after you cancel | Everywhere (core promise) | ✅ the redirect never reads billing; tested |
 | Unlimited dynamic codes and scans, no throttling | Pricing, features | ✅ no caps in code |
@@ -73,7 +73,7 @@ remaining work is account setup on Supabase, Lemon Squeezy and Vercel.
 
 - Governing law and courts: **Pakistan**.
 - Operator named as "StayQR" (no registered company yet). Add the legal entity and address once registered.
-- Hosting on **Vercel**, accounts/DB on **Supabase**, payments via **Lemon Squeezy** as merchant of record.
+- App on **Vercel**, database on **Railway**, emails via **Resend**, payments via **Lemon Squeezy** as merchant of record.
 - Refunds: full refund within **14 days** of the first Pro payment or a Lifetime purchase.
 - Minimum age 16. Abuse notice period 7 days. Price-change notice 30 days. Closure notice 90 days with export.
 - Retention: account data deleted within 30 days of account deletion (backups 90); scan analytics 12 months

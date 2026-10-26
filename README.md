@@ -10,10 +10,12 @@ ANALYZE=true npm run build   # bundle analyzer
 ```
 
 ## Accounts, billing and dynamic codes
-Supabase Auth + Postgres (`db/migrations`), Lemon Squeezy checkout and webhooks, short links at `/r/[slug]`.
-- Local: `scripts/db-local.sh start` (Postgres on :54329, no Docker), `node scripts/db-seed.mjs`, then sign in as
-  `demo@stayqr.local`. Without Supabase/Lemon Squeezy keys you get a localhost-only dev login and simulated checkout.
-- Server code lives in `src/lib/server/` (auth, plan, codes, analytics, billing); dashboard mutations in `src/app/dashboard/actions.ts`.
+Postgres on Railway (`db/migrations`), the app (pages + API) on Vercel. Own auth: email + password (scrypt), hashed
+session tokens, verify/reset emails via Resend, optional Google sign-in. Lemon Squeezy checkout and webhooks. Short links at `/r/[slug]`.
+- Local: `scripts/db-local.sh start` (Postgres on :54329, no Docker), `node scripts/db-seed.mjs`, then log in as
+  `demo@stayqr.local` / `demo-password`. Without a Resend key, emails print to the server log; without Lemon Squeezy keys,
+  checkout is simulated (localhost only).
+- Server code lives in `src/lib/server/` (auth, password, email, plan, codes, analytics, billing); dashboard mutations in `src/app/dashboard/actions.ts`.
 - Going live: `docs/LAUNCH.md`. Variables: `.env.example`.
 
 ## Routes
@@ -28,7 +30,7 @@ Supabase Auth + Postgres (`db/migrations`), Lemon Squeezy checkout and webhooks,
 | `/industries/[slug]` | Industry template (8 static pages from `src/content/industries.ts`) |
 | `/alternatives/[slug]` | "Alternative to" template: `bitly`, `qrfy` (facts in `src/content/competitors.ts`, price evidence in `docs/evidence/`) |
 | `/paused` | What a scanner sees when a code is paused (noindex) |
-| `/login`, `/signup`, `/auth/*` | Supabase auth (`/signup?plan=lifetime` goes straight to checkout after sign-up) |
+| `/login`, `/signup`, `/auth/*` | Auth: verify link, reset, Google OAuth, sign-out (`/signup?plan=lifetime` goes straight to checkout) |
 | `/terms`, `/privacy` | Legal documents (short version, section index); operator and provider facts come from `src/content/company.ts` |
 | `/opengraph-image`, `/twitter-image` | 1200×630 social image (`next/og`, fonts in `src/assets/og`) |
 | `/dashboard` | Codes, folders, search (`?q=`) · `/dashboard/codes/[id]` editor (`/new`, `/bulk`) · `/dashboard/analytics` (`?range=&code=`) · `/dashboard/billing` · `/dashboard/settings` |

@@ -2,13 +2,11 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { getUser, requireUser } from "@/lib/server/auth";
+import { endSession, getUser, requireUser } from "@/lib/server/auth";
 import { cancelSubscription, portalUrl, resumeSubscription, switchPlan } from "@/lib/server/billing";
 import * as codes from "@/lib/server/codes";
 import { db } from "@/lib/server/db";
-import { authMode, env } from "@/lib/server/env";
 import { getPlan } from "@/lib/server/plan";
-import { supabaseServer } from "@/lib/supabase/server";
 
 export type Result<T = undefined> = { ok: true; data?: T } | { ok: false; error: string };
 
@@ -152,7 +150,7 @@ export async function updateNameAction(name: string): Promise<Result> {
 
 /**
  * Delete the account (Privacy: "How long we keep it"). Subscriptions are cancelled first. Codes are detached, not
- * deleted, so printed codes keep redirecting; folders, billing mirrors and the profile go with the account.
+ * deleted, so printed codes keep redirecting; sessions, folders, billing mirrors and the profile go with the account.
  */
 export async function deleteAccountAction(confirm: string): Promise<Result> {
   return attempt(async () => {
@@ -160,19 +158,8 @@ export async function deleteAccountAction(confirm: string): Promise<Result> {
     const user = await requireUser();
     const subs = await db()<{ id: string }[]>`select id from public.subscriptions where user_id = ${user.id} and status in ('active', 'on_trial', 'past_due')`;
     for (const s of subs) await cancelSubscription(user.id, s.id);
-    await db()`delete from public.profiles where id = ${user.id}`;
-    if (authMode === "supabase") {
-      const sb = await supabaseServer();
-      await sb.auth.signOut();
-      if (env.supabaseServiceKey) {
-        await fetch(`${env.supabaseUrl}/auth/v1/admin/users/${user.id}`, {
-          method: "DELETE",
-          headers: { apikey: env.supabaseServiceKey, Authorization: `Bearer ${env.supabaseServiceKey}` },
-        }).catch((e) => console.error("auth user delete failed", e));
-      }
-    } else {
-      await db()`delete from auth.users where id = ${user.id}`;
-    }
+    await endSession();
+    await db()`delete from public.profiles where id = ${user.id}`; // sessions, tokens, folders and billing rows cascade
     redirect("/?account=deleted");
   });
 }

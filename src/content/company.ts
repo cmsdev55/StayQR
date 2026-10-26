@@ -19,9 +19,10 @@ export const COMPANY = {
 /** Sub-processors named in the Privacy Policy. */
 export const PROVIDERS = [
   { name: "Vercel", role: "website hosting and delivery" },
-  { name: "Supabase", role: "accounts, database and account emails" },
+  { name: "Railway", role: "database hosting" },
+  { name: "Resend", role: "account emails (confirmation and password reset)" },
   { name: "Lemon Squeezy", role: "checkout, payments, tax and invoices (merchant of record)" },
-  { name: "Google AdSense", role: "advertising on the free generator and guide pages" },
+  { name: "Google", role: "optional sign-in with a Google account, and AdSense advertising on the free generator and guide pages" },
 ];
 
 export const LEGAL_EFFECTIVE = "26 October 2026";

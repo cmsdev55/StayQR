@@ -1,5 +1,5 @@
 // Applies db/migrations/*.sql in order, once each, inside a transaction per file.
-// Usage: DATABASE_URL=postgres://… node scripts/db-migrate.mjs   (Supabase: use the direct or session-pooler URL)
+// Usage: DATABASE_URL=postgres://… node scripts/db-migrate.mjs   (Railway: the public DATABASE_PUBLIC_URL)
 import { readdirSync, readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 const postgres = createRequire(import.meta.url)("postgres");

@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { NewPasswordForm } from "@/components/auth/new-password-form";
-import { requireUser } from "@/lib/server/auth";
 
 export const metadata: Metadata = { title: "Choose a new password", robots: { index: false } };
 
-/** Reached from the reset email (via /auth/callback, which signs the user in first). */
-export default async function ResetPage() {
-  await requireUser("/auth/reset");
-  return <NewPasswordForm />;
+/** From the password-reset email: the token travels with the form and is checked when it's submitted. */
+export default async function ResetPage({ searchParams }: { searchParams: Promise<{ token?: string }> }) {
+  const { token } = await searchParams;
+  return <NewPasswordForm token={token ?? ""} />;
 }

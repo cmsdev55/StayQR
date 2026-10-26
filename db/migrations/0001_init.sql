@@ -1,18 +1,47 @@
--- StayQR core schema: accounts, billing, dynamic codes and scans.
--- Runs on Supabase (auth.users exists) and on local Postgres (db/local/auth-stub.sql creates it).
--- The app connects as the database owner over DATABASE_URL and scopes every query by user id.
--- RLS is enabled with no policies, so the public API roles (anon, authenticated) can't read these tables.
-
-create extension if not exists pgcrypto;
+-- StayQR core schema: accounts and sessions, billing, dynamic codes and scans. Plain Postgres 14+ (Railway, local).
+-- The app is the only client: it connects over DATABASE_URL and scopes every query by user id.
 
 -- ── Accounts ─────────────────────────────────────────────────────────────
 create table public.profiles (
-  id          uuid primary key references auth.users (id) on delete cascade,
-  email       text not null,
-  name        text,
-  timezone    text not null default 'UTC',
+  id                 uuid primary key default gen_random_uuid(),
+  email              text not null,
+  name               text,
+  timezone           text not null default 'UTC',
+  password_hash      text,                                     -- scrypt; null for Google-only accounts
+  email_verified_at  timestamptz,
+  google_sub         text unique,
+  created_at         timestamptz not null default now()
+);
+create unique index profiles_email_idx on public.profiles (lower(email));
+
+-- Session cookies hold a random token; only its SHA-256 is stored, so a database leak can't be replayed as logins.
+create table public.sessions (
+  id            text primary key,                              -- sha256(token), hex
+  user_id       uuid not null references public.profiles (id) on delete cascade,
+  created_at    timestamptz not null default now(),
+  expires_at    timestamptz not null,
+  last_seen_at  timestamptz not null default now(),
+  user_agent    text
+);
+create index sessions_user_idx on public.sessions (user_id);
+
+-- One-time links: email verification and password reset (also stored hashed).
+create table public.auth_tokens (
+  id          text primary key,                                -- sha256(token), hex
+  user_id     uuid not null references public.profiles (id) on delete cascade,
+  kind        text not null check (kind in ('verify', 'reset')),
+  expires_at  timestamptz not null,
+  used_at     timestamptz,
   created_at  timestamptz not null default now()
 );
+
+-- Throttling for login, sign-up and reset requests (rows older than a day are deleted by the retention cron).
+create table public.auth_attempts (
+  id     bigint generated always as identity primary key,
+  key    text not null,                                        -- e.g. "login:email:a@b.com", "signup:ip:1.2.3.4"
+  at     timestamptz not null default now()
+);
+create index auth_attempts_key_idx on public.auth_attempts (key, at desc);
 
 -- ── Billing (mirrors Lemon Squeezy, written only by the webhook) ─────────
 create table public.subscriptions (
@@ -130,13 +159,3 @@ language sql stable as $$
   order by case when p.tier = 'lifetime' then 0 else 1 end
   limit 1
 $$;
-
--- ── Lock the tables away from Supabase's public API roles ───────────────
-alter table public.profiles       enable row level security;
-alter table public.subscriptions  enable row level security;
-alter table public.orders         enable row level security;
-alter table public.invoices       enable row level security;
-alter table public.webhook_events enable row level security;
-alter table public.folders        enable row level security;
-alter table public.codes          enable row level security;
-alter table public.scans          enable row level security;

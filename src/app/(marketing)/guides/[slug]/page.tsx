@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!g) return {};
   return {
     // keep the brand suffix only while the whole title fits in ~60 characters
-    title: g.title.length + 9 > 60 ? { absolute: g.title } : g.title,
+    title: g.title.length + " · EndureQR".length > 60 ? { absolute: g.title } : g.title,
     description: g.description,
     alternates: { canonical: `/guides/${g.slug}` },
     openGraph: {

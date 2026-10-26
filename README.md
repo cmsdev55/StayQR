@@ -9,6 +9,13 @@ npm run build && npm start
 ANALYZE=true npm run build   # bundle analyzer
 ```
 
+## Accounts, billing and dynamic codes
+Supabase Auth + Postgres (`db/migrations`), Lemon Squeezy checkout and webhooks, short links at `/r/[slug]`.
+- Local: `scripts/db-local.sh start` (Postgres on :54329, no Docker), `node scripts/db-seed.mjs`, then sign in as
+  `demo@stayqr.local`. Without Supabase/Lemon Squeezy keys you get a localhost-only dev login and simulated checkout.
+- Server code lives in `src/lib/server/` (auth, plan, codes, analytics, billing); dashboard mutations in `src/app/dashboard/actions.ts`.
+- Going live: `docs/LAUNCH.md`. Variables: `.env.example`.
+
 ## Routes
 | Route | What |
 |---|---|
@@ -21,10 +28,12 @@ ANALYZE=true npm run build   # bundle analyzer
 | `/industries/[slug]` | Industry template (8 static pages from `src/content/industries.ts`) |
 | `/alternatives/[slug]` | "Alternative to" template: `bitly`, `qrfy` (facts in `src/content/competitors.ts`, price evidence in `docs/evidence/`) |
 | `/paused` | What a scanner sees when a code is paused (noindex) |
-| `/login`, `/signup` | Mock auth (`/signup?plan=lifetime` carries the plan) |
+| `/login`, `/signup`, `/auth/*` | Supabase auth (`/signup?plan=lifetime` goes straight to checkout after sign-up) |
 | `/terms`, `/privacy` | Legal documents (short version, section index); operator and provider facts come from `src/content/company.ts` |
 | `/opengraph-image`, `/twitter-image` | 1200×630 social image (`next/og`, fonts in `src/assets/og`) |
-| `/dashboard` | Codes with folders + search (`?q=`) · `/dashboard/codes/[id]` editor (`/new`) · `/dashboard/analytics` (`?code=`) · `/dashboard/billing` |
+| `/dashboard` | Codes, folders, search (`?q=`) · `/dashboard/codes/[id]` editor (`/new`, `/bulk`) · `/dashboard/analytics` (`?range=&code=`) · `/dashboard/billing` · `/dashboard/settings` |
+| `/r/[slug]` | Dynamic-code redirect (records the scan after responding) · `/p/[slug]` paused page |
+| `/api/checkout`, `/api/webhooks/lemonsqueezy`, `/api/export/*`, `/api/cron/retention` | Billing, exports, daily retention |
 
 Content lives in `src/content/` (plans, FAQ, industries, legal, competitor facts with sources and `confirmed` flags, dashboard fake data).
 Never invent customers, quotes, logos or numbers. A competitor fact without a source on the vendor's own site stays `confirmed: false` and shows a [verify] tag.

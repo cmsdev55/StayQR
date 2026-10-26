@@ -343,7 +343,7 @@ export function GeneratorApp({ placeholder, initialType = "url" }: { placeholder
 }
 
 /** HTML mirror of the exported frame (same ratios as frameLayout in qr-export). */
-function FramedPreview({ design, sweep, children }: { design: QrDesign; sweep: number; children: React.ReactNode }) {
+export function FramedPreview({ design, sweep, children }: { design: QrDesign; sweep: number; children: React.ReactNode }) {
   const frame = design.frame ?? "none";
   const { label, width } = frameLayout(frame);
   const scale = 248 / width;

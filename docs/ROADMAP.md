@@ -27,23 +27,24 @@ Last reviewed: 26 October 2026.
 
 ## Phase 2: accounts, billing, dynamic codes (Supabase + Lemon Squeezy)
 
-These are sold on `/pricing` and the landing page **today**, so they must ship before taking money.
+Built and tested end to end against local Postgres (see `docs/LAUNCH.md` to go live). ✅ = done in code; the
+remaining work is account setup on Supabase, Lemon Squeezy and Vercel.
 
 | Claim | Where it appears | Status |
 |---|---|---|
-| Sign up / log in | Header, `/signup`, `/login` | ⏳ UI only |
-| Dynamic codes: edit destination after printing | Landing features, pricing, industries | ⏳ needs DB + edge redirect |
-| Codes keep redirecting after you cancel | Everywhere (core promise) | ⏳ redirect service must not check billing state |
-| Unlimited dynamic codes and scans, no throttling | Pricing, features | ⏳ needs rate-limit policy for abuse only |
-| Analytics: devices, cities, time of day; 12 months on Pro, forever on Lifetime | Pricing matrix, features | ⏳ scan logging + retention job |
-| iOS / Android smart redirect | Features, pricing | ⏳ user-agent routing in redirect |
-| Bulk create from CSV (500 rows) | Features, pricing, industries | ⏳ |
-| Export scans as CSV | Agencies FAQ | ⏳ |
-| Folders and search | Pricing matrix, Agencies use case | ⏳ |
-| Pause a code with a friendly page | Pricing matrix, `/paused` | ⏳ page exists, toggle does not |
-| Pro $3.99/mo or $29/yr; Lifetime $79 once | Pricing | ⏳ Lemon Squeezy products + webhooks |
-| Abuse reporting and takedown for malicious destinations | Terms | ⏳ required before public dynamic codes |
-| Priority support (Lifetime) | Pricing | ⏳ define what it means |
+| Sign up / log in, password reset, Google | Header, `/signup`, `/login` | ✅ Supabase Auth (Google needs provider config) |
+| Dynamic codes: edit destination after printing | Landing features, pricing, industries | ✅ `/r/[slug]` |
+| Codes keep redirecting after you cancel | Everywhere (core promise) | ✅ the redirect never reads billing; tested |
+| Unlimited dynamic codes and scans, no throttling | Pricing, features | ✅ no caps in code |
+| Analytics: devices, cities, time of day; 12 months on Pro, forever on Lifetime | Pricing matrix, features | ✅ scans table + daily retention cron |
+| iOS / Android smart redirect | Features, pricing | ✅ |
+| Bulk create from CSV (500 rows) | Features, pricing, industries | ✅ plus ZIP of SVGs |
+| Export scans as CSV | Agencies FAQ | ✅ (and codes CSV) |
+| Folders and search | Pricing matrix, Agencies use case | ✅ |
+| Pause a code with a friendly page | Pricing matrix, `/paused` | ✅ `/p/[slug]` |
+| Pro $3.99/mo or $29/yr; Lifetime $79 once | Pricing | ✅ checkout, webhooks, cancel/resume/switch, Lifetime credit (needs LS products) |
+| Abuse reporting and takedown for malicious destinations | Terms | ✅ abuse@ + `disabled_at` warning page; optional Google Safe Browsing check on save |
+| Priority support (Lifetime) | Pricing | ⏳ define what it means (e.g. same-day email reply) |
 
 ## Phase 3: growth features (worded as roadmap on the site)
 

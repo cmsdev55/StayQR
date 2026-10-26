@@ -6,3 +6,8 @@ out
 tsconfig.tsbuildinfo
 .lighthouse
 .next-prod
+
+# local postgres
+.pgdata
+
+!.env.example

@@ -158,3 +158,23 @@ Production re-crawled: 57 pages, 0 errors, 0 descriptions over 160 characters, 0
 
 Still open (needs the owner): Search Console and Bing verification and sitemap submission, a named author with an
 editorial policy, brand profile links (`sameAs`), and contact emails on a domain you control.
+
+## Rebrand to EndureQR (27 October 2026, commits 81278ca and after)
+
+The product was renamed because another live QR product already uses "StayQR" (stayqr.com, stayqr.app). Sections
+above describe the StayQR-era site and are kept as a record.
+
+Crawl of https://endureqr.vercel.app: 57 pages, 0 errors.
+
+| Check | Result |
+|---|---|
+| Canonical and og:image host | endureqr.vercel.app on 57/57 |
+| Old address | every stayqr-six.vercel.app URL redirects permanently (308) to the same path on endureqr.vercel.app |
+| Leftover "StayQR" in page HTML | none on any page |
+| Titles over 60 characters | 0 (two guides fixed for the longer brand suffix) |
+| Descriptions over 160 / duplicate titles | 0 / 0 |
+| robots.txt / sitemap | point to endureqr.vercel.app |
+
+To do: verify `https://endureqr.vercel.app` in Search Console (new property), submit its sitemap, re-import into Bing,
+and move to endureqr.com once it is registered (change `NEXT_PUBLIC_SITE_URL`, add the domain in Vercel, and redirect
+endureqr.vercel.app to it).

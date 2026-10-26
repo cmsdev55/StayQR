@@ -1,0 +1,6 @@
+.pgdata
+.next-prod
+.lighthouse
+design-screenshots
+docs/evidence
+.env.local

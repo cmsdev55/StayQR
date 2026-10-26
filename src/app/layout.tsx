@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const display = localFont({
@@ -14,13 +13,21 @@ const display = localFont({
   adjustFontFallback: "Arial",
 });
 
-const sans = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
+// Inter and JetBrains Mono (SIL OFL), Latin subset, self-hosted so builds never depend on Google Fonts
+const sans = localFont({
+  src: "../fonts/Inter-Variable.woff2",
+  weight: "100 900",
+  variable: "--font-sans",
+  display: "swap",
+  adjustFontFallback: "Arial",
+});
+const mono = localFont({
+  src: "../fonts/JetBrainsMono-Variable.woff2",
+  weight: "100 800",
   variable: "--font-mono",
   display: "swap",
   preload: false,
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {

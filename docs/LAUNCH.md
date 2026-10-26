@@ -40,6 +40,12 @@ ID (Web). Authorised redirect URI: `https://stayqr.com/auth/google/callback`. Co
 
 ## 5. Vercel (app)
 
+Done: project **stayqr** (team "Hamza Akram's projects"), live at **https://stayqr-six.vercel.app**, connected to
+`github.com/cmsdev55/StayQR` (pushes to `main` deploy automatically). Set: `DATABASE_URL`, `NEXT_PUBLIC_SITE_URL`,
+`CRON_SECRET`, `EMAIL_FROM`. Still to add: Resend, Lemon Squeezy and (optionally) Google keys, then the domain.
+When `stayqr.com` is connected, change `NEXT_PUBLIC_SITE_URL` to it and redeploy.
+
+
 1. Import `github.com/cmsdev55/StayQR`, framework Next.js.
 2. Environment variables (Production): everything in `.env.example`. `NEXT_PUBLIC_SITE_URL=https://stayqr.com`,
    `DATABASE_URL` = Railway's public URL, `CRON_SECRET` = a long random string.

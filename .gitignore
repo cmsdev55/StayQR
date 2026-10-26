@@ -11,3 +11,6 @@ tsconfig.tsbuildinfo
 .pgdata
 
 !.env.example
+
+.vercel
+.env*.local

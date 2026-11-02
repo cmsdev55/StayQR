@@ -64,10 +64,8 @@ function layout(m: Mail) {
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px">
     <tr><td style="padding:0 4px 24px">
       <a href="${esc(site)}" style="text-decoration:none;color:${C.ink}">
-        <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
-          <td style="vertical-align:middle"><img src="${esc(site)}/logo-512.png" width="36" height="36" alt="EndureQR" style="display:block;border:0;border-radius:9px"></td>
-          <td style="vertical-align:middle;padding-left:10px;font:600 19px/1 ${FONT};letter-spacing:-0.02em;color:${C.ink}">EndureQR</td>
-        </tr></table>
+        <!-- public/email-logo.png: mark + wordmark in the display font, 3x for sharp screens -->
+        <img src="${esc(site)}/email-logo.png" width="180" height="34" alt="EndureQR" style="display:block;border:0;font:600 22px/34px ${FONT};color:${C.ink}">
       </a>
     </td></tr>
     <tr><td style="background:${C.card};border:1px solid ${C.line};border-radius:16px;padding:40px 36px">

@@ -8,7 +8,6 @@ import { CtaBand } from "@/components/sections/cta-band";
 import { Faq } from "@/components/sections/faq";
 import { ButtonLink } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { FAQ } from "@/content/faq";
 import { GUIDES } from "@/content/guides";
 import { INDUSTRIES, industryBySlug } from "@/content/industries";
 import { QrSvg } from "@/components/qr/qr-svg";
@@ -131,21 +130,6 @@ export default async function IndustryPage({ params }: Props) {
             <p className="max-w-[40ch] text-body-lg text-fg-muted">{ind.stat.label}. Change destinations from your phone, and the code you printed keeps working, even if you cancel.</p>
           </div>
 
-          <ol className="mt-16 grid gap-8 md:grid-cols-3">
-            {[
-              ["Create", "Make a dynamic code and point it at today's page."],
-              ["Print", "Download print-ready SVG, PDF or PNG for menus, signs or packaging."],
-              ["Change any time", "Update where it goes, pause it, or see who scanned. No reprints."],
-            ].map(([t, b], i) => (
-              <li key={t} className="flex gap-4" data-reveal="" style={{ ["--stagger" as string]: i }}>
-                <span className="grid size-8 shrink-0 place-items-center rounded-full border border-line-strong font-mono text-[12px] text-fg">{i + 1}</span>
-                <div>
-                  <h3 className="text-body font-semibold text-fg">{t}</h3>
-                  <p className="mt-1 text-body-sm text-fg-muted">{b}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
         </div>
       </section>
 
@@ -182,7 +166,7 @@ export default async function IndustryPage({ params }: Props) {
         </div>
       </section>
 
-      <Faq items={[...ind.faq, FAQ[0], FAQ[2]]} title={`${ind.name}: common *questions.*`} />
+      <Faq items={ind.faq} title={`${ind.name}: common *questions.*`} />
 
       {/* Other industries */}
       <section aria-labelledby="more-title" className="border-t border-line py-24">

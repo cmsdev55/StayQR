@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Breadcrumbs } from "@/components/content/breadcrumbs";
 import { JsonLd, ORG_REF, SITE, breadcrumbLd } from "@/components/content/json-ld";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { COMPANY } from "@/content/company";
+import { COMPANY, FOUNDER } from "@/content/company";
 
 export const metadata: Metadata = {
   title: { absolute: "Contact EndureQR: help, billing, privacy and abuse" },
@@ -55,6 +55,17 @@ export default function ContactPage() {
               </li>
             ))}
           </ul>
+          <div className="mt-14 grid max-w-[64ch] gap-4 text-body text-fg-muted">
+            <h2 className="font-display text-h4 font-semibold text-fg">Who answers</h2>
+            <p>
+              EndureQR is run by {FOUNDER.name} from {FOUNDER.city}, {FOUNDER.country}, and {FOUNDER.name.split(" ")[0]} reads every email
+              sent to these addresses. Replies come within {COMPANY.replyWithin}, on Pakistan time (UTC+5).
+            </p>
+            <p>
+              To help us answer in one go, tell us the email you signed up with and, for a dynamic code, its short link (the part after{" "}
+              <span className="font-mono text-body-sm text-fg">{COMPANY.site}/r/</span>). We never ask for your password.
+            </p>
+          </div>
           <p className="mt-10 max-w-[64ch] text-body text-fg-muted">
             Many answers are already in our <Link href="/guides" className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">guides</Link> and the{" "}
             <Link href="/#faq" className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">FAQ</Link>. For how we handle data, see the{" "}

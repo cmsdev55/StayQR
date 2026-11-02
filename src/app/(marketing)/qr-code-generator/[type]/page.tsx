@@ -75,7 +75,7 @@ export default async function QrTypePageRoute({ params }: Props) {
 
       <section aria-labelledby="steps-title" className="border-t border-line py-24 lg:py-32">
         <div className="mx-auto max-w-container px-4 sm:px-6">
-          <SectionHeading id="steps-title" eyebrow="How it works" title={`How to make a ${def.name} QR code`} />
+          <SectionHeading id="steps-title" eyebrow="How it works" title={`How to make ${/^(Email|SMS)$/.test(def.name) ? "an" : "a"} ${def.name} QR code`} />
           <ol className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-5">
             {page.steps.map((s, i) => (
               <li key={s.title} className="glass rounded-lg p-6 sm:p-7" data-reveal="" style={{ ["--stagger" as string]: i }}>

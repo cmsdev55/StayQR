@@ -3,7 +3,7 @@ export type Faq = { q: string; a: string };
 export const FAQ: Faq[] = [
   {
     q: "What happens to my QR codes if I cancel?",
-    a: "They keep working. Every dynamic code keeps redirecting to its last destination, forever, with no service page and no ads. You only lose the ability to edit destinations and see new analytics until you come back.",
+    a: "They keep working. Every dynamic code keeps redirecting to its last destination for as long as EndureQR runs, with no service page and no ads. You only lose the ability to edit destinations and see new analytics until you come back. If EndureQR ever had to close, you'd get at least 90 days' notice and an export of every destination, so you could move your codes elsewhere.",
   },
   {
     q: "What's the difference between static and dynamic codes?",

@@ -5,7 +5,7 @@ import type { GuideBlock } from "@/content/guides";
 export function Block({ b }: { b: GuideBlock }) {
   switch (b.type) {
     case "p":
-      return <p className="text-body-lg text-fg-muted"><RichText text={b.text} /></p>;
+      return <p className="break-words text-body-lg text-fg-muted"><RichText text={b.text} /></p>;
     case "h2":
       return <h2 id={b.id} className="scroll-mt-28 pt-8 font-display text-h3 font-semibold sm:text-[2rem] sm:leading-[1.15] text-fg [text-wrap:balance]">{b.text}</h2>;
     case "h3":
@@ -14,7 +14,7 @@ export function Block({ b }: { b: GuideBlock }) {
     case "ol": {
       const List = b.type;
       return (
-        <List className={`${b.type === "ul" ? "list-disc" : "list-decimal"} flex flex-col gap-2 pl-6 text-body-lg text-fg-muted marker:text-fg-subtle`}>
+        <List className={`${b.type === "ul" ? "list-disc" : "list-decimal"} flex flex-col gap-2 break-words pl-6 text-body-lg text-fg-muted marker:text-fg-subtle`}>
           {b.items.map((it, i) => <li key={i} className="pl-1"><RichText text={it} /></li>)}
         </List>
       );
@@ -38,7 +38,7 @@ export function Block({ b }: { b: GuideBlock }) {
       );
     case "tip":
       return (
-        <aside className="rounded-lg border border-line border-l-accent bg-bg-raised px-5 py-4 text-body text-fg-muted [border-left-width:3px]">
+        <aside className="break-words rounded-lg border border-line border-l-accent bg-bg-raised px-5 py-4 text-body text-fg-muted [border-left-width:3px]">
           <span className="mr-2 font-mono text-[11px] uppercase tracking-[0.08em] text-accent-text">Tip</span>
           <RichText text={b.text} />
         </aside>

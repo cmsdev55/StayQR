@@ -16,7 +16,7 @@ export default async function CodePage({ params, searchParams }: Props) {
   const user = await requireUser();
   const [plan, folders] = await Promise.all([getPlan(user.id), listFolders(user.id)]);
   if (id === "new") {
-    if (!plan.canEdit) redirect("/dashboard/billing");
+    if (!plan.canCreate) redirect("/dashboard/billing");
     return <CodeEditor code={null} folders={folders} plan={plan} shortHost={shortHost()} />;
   }
   const code = await getCode(user.id, id, user.timezone);

@@ -97,7 +97,7 @@ export function CodesList({ codes, folders, plan, initialQuery = "" }: { codes: 
               </li>
             );
           })}
-          {plan.canEdit && (
+          {plan.pro && (
             <li className="shrink-0">
               <button type="button" onClick={() => folderAction("new")} disabled={pending} className="flex h-9 w-full items-center gap-2.5 whitespace-nowrap rounded-sm px-3 text-fg-subtle transition-colors hover:bg-glass-strong hover:text-fg">
                 <svg width="15" height="15" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden><path d="M7 2v10M2 7h10" /></svg>
@@ -109,7 +109,8 @@ export function CodesList({ codes, folders, plan, initialQuery = "" }: { codes: 
       </nav>
 
       <section aria-labelledby="codes-title" className="min-w-0">
-        {(plan.lapsed || (plan.tier === "pro" && plan.status === "cancelled")) && <PlanNotice plan={plan} />}
+        {((plan.lapsed && !plan.canEdit) || (plan.tier === "pro" && plan.status === "cancelled")) && <PlanNotice plan={plan} />}
+        {!plan.pro && plan.canEdit && !plan.canCreate && <FreeNotice />}
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <h1 id="codes-title" className="font-display text-h4 font-semibold text-fg sm:text-[26px]">
@@ -120,13 +121,13 @@ export function CodesList({ codes, folders, plan, initialQuery = "" }: { codes: 
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            {current && plan.canEdit && (
+            {current && plan.pro && (
               <>
                 <button type="button" onClick={() => folderAction("rename")} className="h-9 rounded-sm px-3 font-medium text-fg-muted hover:bg-glass-strong hover:text-fg">Rename</button>
                 <button type="button" onClick={() => folderAction("delete")} className="h-9 rounded-sm px-3 font-medium text-fg-muted hover:bg-danger/10 hover:text-danger">Delete folder</button>
               </>
             )}
-            {plan.canEdit && <ButtonLink href="/dashboard/codes/bulk" variant="secondary" size="sm">Bulk create</ButtonLink>}
+            {plan.pro && <ButtonLink href="/dashboard/codes/bulk" variant="secondary" size="sm">Bulk create</ButtonLink>}
             <a href="/api/export/codes" className="inline-flex h-10 items-center rounded-sm px-3 font-medium text-fg-muted transition-colors hover:bg-glass-strong hover:text-fg">Export CSV</a>
           </div>
         </div>
@@ -266,6 +267,18 @@ export function CodesList({ codes, folders, plan, initialQuery = "" }: { codes: 
 
 const fmt = (iso: string | null) => (iso ? new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) : "");
 
+/** Free account that has used its one dynamic code. */
+function FreeNotice() {
+  return (
+    <div role="status" className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-md border border-line bg-bg-raised px-4 py-3">
+      <p className="text-fg">
+        Your free dynamic code is in use. <span className="text-fg-muted">Upgrade to Pro for unlimited codes, folders and bulk create.</span>
+      </p>
+      <ButtonLink href="/dashboard/billing" size="sm" variant="secondary">See plans</ButtonLink>
+    </div>
+  );
+}
+
 /** Cancelled or lapsed: say plainly that the codes still work. */
 export function PlanNotice({ plan }: { plan: Plan }) {
   const ended = plan.lapsed;
@@ -283,17 +296,19 @@ export function PlanNotice({ plan }: { plan: Plan }) {
 function EmptyState({ plan }: { plan: Plan }) {
   return (
     <div className="mx-auto max-w-[640px] py-10 text-center">
-      <h1 className="font-display text-h3 font-semibold text-fg">{plan.canEdit ? "Make your first dynamic code" : "Choose a plan to make dynamic codes"}</h1>
+      <h1 className="font-display text-h3 font-semibold text-fg">
+        {plan.canCreate ? (plan.pro ? "Make your first dynamic code" : "Make your free dynamic code") : "Choose a plan to make dynamic codes"}
+      </h1>
       <p className="mx-auto mt-3 max-w-[52ch] text-body text-fg-muted">
-        {plan.canEdit
-          ? "Print it once, then change where it points whenever you like. Every scan shows up here."
+        {plan.canCreate
+          ? `Print it once, then change where it points whenever you like. Every scan shows up here.${plan.pro ? "" : " Your free plan includes one dynamic code."}`
           : "Dynamic codes can be edited after printing and show you every scan. They keep working even if you cancel."}
       </p>
       <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-        {plan.canEdit ? (
+        {plan.canCreate ? (
           <>
             <ButtonLink href="/dashboard/codes/new">Create a code</ButtonLink>
-            <ButtonLink href="/dashboard/codes/bulk" variant="secondary">Bulk create from CSV</ButtonLink>
+            {plan.pro && <ButtonLink href="/dashboard/codes/bulk" variant="secondary">Bulk create from CSV</ButtonLink>}
           </>
         ) : (
           <>

@@ -217,13 +217,13 @@ export const FEATURE_PAGES: FeaturePage[] = [
     slug: "dynamic-qr-code-generator",
     title: "Dynamic QR Code Generator: Edit Links After Printing",
     description:
-      "Create dynamic QR codes you can edit after printing. Unlimited codes and scans, scan analytics and iPhone/Android links. Codes keep working if you cancel.",
+      "Create a dynamic QR code free and edit it after printing. Pro adds unlimited codes, with unlimited scans, analytics and iPhone/Android links.",
     eyebrow: "Dynamic QR codes",
     h1: "Dynamic QR codes you can *edit after printing*",
     intro:
-      "A dynamic QR code points to a short link, so you can change where it goes after the code is printed. EndureQR Pro gives you unlimited dynamic codes, unlimited scans and scan analytics for $29 a year. If you ever cancel, your codes keep redirecting to their last destination.",
+      "A dynamic QR code points to a short link, so you can change where it goes after the code is printed. Your first dynamic code is free, with editing and scan analytics. EndureQR Pro gives you unlimited dynamic codes for $29 a year. If you ever cancel, your codes keep redirecting to their last destination.",
     tool: false,
-    cta: { label: "Start Pro", href: "/signup?plan=pro-yearly" },
+    cta: { label: "Create a free dynamic code", href: "/signup?next=%2Fdashboard%2Fcodes%2Fnew&from=dynamic" },
     benefits: [
       {
         title: "Change the link any time",
@@ -240,8 +240,8 @@ export const FEATURE_PAGES: FeaturePage[] = [
     ],
     steps: [
       {
-        title: "Choose a plan",
-        body: "Pro is $3.99 a month or $29 a year. Lifetime is $79, paid once.",
+        title: "Create a free account",
+        body: "Your first dynamic code is free. Pro, at $3.99 a month or $29 a year, adds unlimited codes, folders and bulk create. Lifetime is $79, paid once.",
       },
       {
         title: "Create a code",
@@ -290,7 +290,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
           ["Pause with a message", "No", "Yes"],
           ["Account needed", "No", "Yes"],
           ["Relies on a redirect service", "No", "Yes, and keeps redirecting if you cancel"],
-          ["Cost", "Free", "From $3.99 a month"],
+          ["Cost", "Free", "One free, then from $3.99 a month"],
         ],
       },
       {

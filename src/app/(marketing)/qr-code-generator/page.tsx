@@ -13,7 +13,7 @@ import { qrMatrix } from "@/lib/qr";
 import { QR_TYPES, qrType } from "@/lib/qr-types";
 
 export const metadata: Metadata = {
-  title: "Free QR Code Generator: No Sign-Up, No Watermark",
+  title: "Free QR Code Generator That Never Expires: No Sign-Up",
   description: `Make a free QR code for a link, WiFi, vCard, WhatsApp and ${QR_TYPES.length - 4} more types. Add a logo and frame, download PNG, SVG, JPEG or PDF. Static codes never expire.`,
   alternates: { canonical: "/qr-code-generator" },
 };

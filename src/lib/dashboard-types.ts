@@ -31,8 +31,12 @@ export type Plan = {
   status: string | null; // Lemon Squeezy status for subscriptions
   renewsAt: string | null;
   endsAt: string | null;
-  /** May create and edit dynamic codes. */
+  /** Pro or Lifetime: unlimited codes, folders and bulk create. */
+  pro: boolean;
+  /** May edit existing dynamic codes (a paid plan, or a free account within its free allowance). */
   canEdit: boolean;
+  /** May create another dynamic code. */
+  canCreate: boolean;
   /** Had a plan that has ended: codes keep working, editing is paused. */
   lapsed: boolean;
 };

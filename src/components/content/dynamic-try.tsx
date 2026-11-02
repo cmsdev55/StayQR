@@ -9,12 +9,13 @@ import { SITE_HOST } from "@/lib/site";
 export const PENDING_DESTINATION_KEY = "endureqr-pending-destination";
 
 /**
- * Tool-first start for the dynamic-code page: type a destination, see the code you'd print, then continue to an
- * account with the destination carried over (the new-code editor picks it up from localStorage).
+ * Tool-first start for the dynamic-code page: type a destination, see the code you'd print, then continue to a free
+ * account (one dynamic code is free) with the destination carried over (the new-code editor picks it up from localStorage).
  */
 export function DynamicTry() {
   const [dest, setDest] = useState("");
-  const shortLink = `https://${SITE_HOST}/r/yourcode`;
+  // a sample that scans to a page explaining dynamic codes (served by app/r/[slug]/route.ts)
+  const shortLink = `https://${SITE_HOST}/r/demo`;
   const matrix = useMemo(() => qrMatrix(shortLink, 0), [shortLink]);
   const clean = dest.trim();
   const valid = /^(https?:\/\/)?[\w-]+(\.[\w-]+)+(\/\S*)?$/i.test(clean);
@@ -23,7 +24,7 @@ export function DynamicTry() {
     try {
       localStorage.setItem(PENDING_DESTINATION_KEY, clean);
     } catch {}
-    window.location.href = "/signup?plan=pro-yearly&from=dynamic-try";
+    window.location.href = `/signup?next=${encodeURIComponent("/dashboard/codes/new")}&from=dynamic-try`;
   };
 
   return (
@@ -42,17 +43,17 @@ export function DynamicTry() {
           spellCheck={false}
         />
         <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-          <Button onClick={go} disabled={!valid} size="lg">Create this dynamic code</Button>
+          <Button onClick={go} disabled={!valid} size="lg">Create this code free</Button>
           <ButtonLink href="/qr-code-generator/url" variant="secondary" size="lg">Make a free static one</ButtonLink>
         </div>
-        <p className="mt-3 text-[12px] text-fg-subtle">Pro from $29 a year · 14-day money-back guarantee · codes keep working if you cancel</p>
+        <p className="mt-3 text-[12px] text-fg-subtle">Your first dynamic code is free · Pro from $29 a year for unlimited codes · codes keep working if you cancel</p>
       </div>
       <figure className="flex flex-col items-center gap-3">
         <span className="grid size-[176px] place-items-center rounded-lg bg-white p-3 text-[#0B0D12] shadow-md">
           <QrSvg m={matrix} shape="rounded" className="size-full" />
         </span>
         <figcaption className="text-center font-mono text-[11px] text-fg-subtle">
-          {SITE_HOST}/r/… → <span className="text-fg-muted">{valid ? clean.replace(/^https?:\/\//, "").slice(0, 28) : "your link"}</span>
+          Sample · {SITE_HOST}/r/… →{" "}<span className="text-fg-muted">{valid ? clean.replace(/^https?:\/\//, "").slice(0, 28) : "your link"}</span>
         </figcaption>
       </figure>
     </div>

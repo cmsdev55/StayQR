@@ -26,7 +26,7 @@ type Phase = 0 | 1 | 2 | 3 | 4; // live · cancelled · cracking · dead · end
 const phaseAt = (p: number): Phase => (p < 0.14 ? 0 : p < 0.27 ? 1 : p < 0.42 ? 2 : p < 0.72 ? 3 : 4);
 
 const CITIES = ["Austin", "Leeds", "Lahore", "Lyon", "Osaka", "Denver", "Porto", "Dubai", "Oslo", "Perth"];
-const END_WORDS = "Cancel anytime. Your codes keep working. Forever.".split(" ");
+const END_WORDS = "Cancel anytime. Your codes keep working.".split(" ");
 
 type Cell = { r: number; c: number; delay: number; vx: number; spin: number };
 type Ping = { t0: number; r: number; c: number; failed?: boolean };
@@ -369,7 +369,7 @@ export function NeverDiesStage({ theirs, ours }: { theirs: string[]; ours: strin
 
           <p className="sr-only">
             With some dynamic QR services, cancelling pauses printed codes or freezes them so they can no longer be
-            edited. When you cancel EndureQR, your codes keep redirecting to their last destination, for life.
+            edited. When you cancel EndureQR, your codes keep redirecting to their last destination.
           </p>
 
           {/* The two printed codes */}

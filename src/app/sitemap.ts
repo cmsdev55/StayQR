@@ -8,20 +8,26 @@ import { SITE_URL } from "@/lib/site";
 
 const BASE = SITE_URL;
 
+/** When the marketing pages' copy last changed. Bump it with the content, not on every deploy (guides carry their own date). */
+const PAGES_UPDATED = "2026-11-03";
+/** Terms and Privacy follow their effective date. */
+const LEGAL_UPDATED = "2026-11-03";
+
 export default function sitemap(): MetadataRoute.Sitemap {
+  const page = (path: string, lastModified = PAGES_UPDATED) => ({ url: `${BASE}${path}`, lastModified });
   return [
-    { url: BASE, priority: 1 },
-    { url: `${BASE}/pricing`, priority: 0.9 },
-    { url: `${BASE}/qr-code-generator`, priority: 0.9 },
-    ...["qr-code-with-logo", "dynamic-qr-code-generator", "app-download-qr-code", "bulk-qr-code-generator"].map((s) => ({ url: `${BASE}/${s}`, priority: 0.85 })),
-    ...QR_TYPES.map((t) => ({ url: `${BASE}/qr-code-generator/${t.slug}`, priority: 0.8 })),
-    { url: `${BASE}/guides`, priority: 0.7 },
-    ...GUIDES.map((g) => ({ url: `${BASE}/guides/${g.slug}`, lastModified: g.updated, priority: 0.7 })),
-    { url: `${BASE}/about`, priority: 0.4 },
-    { url: `${BASE}/contact`, priority: 0.4 },
-    { url: `${BASE}/terms`, priority: 0.2 },
-    { url: `${BASE}/privacy`, priority: 0.2 },
-    ...INDUSTRIES.map((i) => ({ url: `${BASE}/industries/${i.slug}`, priority: 0.7 })),
-    ...COMPETITORS.map((c) => ({ url: `${BASE}/alternatives/${c.slug}`, priority: 0.7 })),
+    page(""),
+    page("/pricing"),
+    page("/qr-code-generator"),
+    ...["qr-code-with-logo", "dynamic-qr-code-generator", "app-download-qr-code", "bulk-qr-code-generator"].map((s) => page(`/${s}`)),
+    ...QR_TYPES.map((t) => page(`/qr-code-generator/${t.slug}`)),
+    page("/guides", GUIDES.reduce((a, g) => (g.updated > a ? g.updated : a), "")),
+    ...GUIDES.map((g) => page(`/guides/${g.slug}`, g.updated)),
+    page("/about"),
+    page("/contact"),
+    page("/terms", LEGAL_UPDATED),
+    page("/privacy", LEGAL_UPDATED),
+    ...INDUSTRIES.map((i) => page(`/industries/${i.slug}`)),
+    ...COMPETITORS.map((c) => page(`/alternatives/${c.slug}`)),
   ];
 }

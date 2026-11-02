@@ -45,9 +45,9 @@ export function PricingCards({ headingLevel = 3 }: { headingLevel?: 2 | 3 }) {
           h={headingLevel}
           i={0}
           name="Free"
-          blurb="Static codes for anything you print once."
+          blurb="Static codes, plus one dynamic code to try."
           price={<span className="font-display text-display-md font-semibold text-fg">$0</span>}
-          note="Free forever, no account"
+          note="Free forever. Account only for the dynamic code"
           features={PLAN_FEATURES.free}
           cta={<ButtonLink href="/qr-code-generator" variant="secondary" className="w-full">Create free QR</ButtonLink>}
         />
@@ -67,7 +67,7 @@ export function PricingCards({ headingLevel = 3 }: { headingLevel?: 2 | 3 }) {
           cta={<ButtonLink href={`/signup?plan=pro-${billing}`} variant="secondary" className="w-full">Start Pro</ButtonLink>}
         />
         <div className="lifetime-ring relative rounded-xl p-px" data-reveal="" style={{ ["--stagger" as string]: 2 }}>
-          <div aria-hidden className="pointer-events-none absolute -inset-8 -z-10 rounded-[40px] opacity-60 [background:radial-gradient(closest-side,rgb(var(--depth)/0.22),transparent)]" />
+          <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 sm:-inset-8 rounded-[40px] opacity-60 [background:radial-gradient(closest-side,rgb(var(--depth)/0.22),transparent)]" />
           <Plan
             h={headingLevel}
             name="Lifetime"

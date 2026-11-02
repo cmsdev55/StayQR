@@ -108,7 +108,7 @@ export const ENDUREQR_ROW = {
   codes: "Unlimited codes",
   scans: "Unlimited",
   edit: "Unlimited",
-  cancel: "Keep working, for life",
+  cancel: "Keep working after you cancel",
 };
 
 export const competitorBySlug = (slug: string) => COMPETITORS.find((c) => c.slug === slug);

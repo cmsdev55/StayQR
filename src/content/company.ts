@@ -24,6 +24,19 @@ export const COMPANY = {
   replyWithin: "one business day",
 };
 
+/** The person who runs EndureQR: named on About, as the author of the guides, and in the Terms and Privacy Policy. */
+export const FOUNDER = {
+  name: "Armaghan Abdul Qayyum",
+  role: "Founder",
+  city: "Lahore",
+  country: "Pakistan",
+  countryCode: "PK",
+  bio: [
+    "Armaghan Abdul Qayyum founded EndureQR in Lahore, Pakistan, to make QR codes that people can print once and trust for years.",
+    "Armaghan builds the product and writes the guides on this site, checking each fact against its primary source, such as the QR code standard, phone makers' documentation or the pricing pages of the services compared.",
+  ],
+};
+
 /** Sub-processors named in the Privacy Policy. */
 export const PROVIDERS = [
   { name: "Vercel", role: "website hosting and delivery" },
@@ -33,4 +46,4 @@ export const PROVIDERS = [
   { name: "Google", role: "optional sign-in with a Google account, and AdSense advertising on the free generator and guide pages" },
 ];
 
-export const LEGAL_EFFECTIVE = "26 October 2026";
+export const LEGAL_EFFECTIVE = "3 November 2026";

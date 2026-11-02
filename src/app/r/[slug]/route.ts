@@ -20,6 +20,13 @@ const page = (status: number, title: string, body: string) =>
  */
 export async function GET(req: Request, { params }: { params: Promise<{ slug: string }> }) {
   const slug = (await params).slug.toLowerCase();
+  // the sample code on /dynamic-qr-code-generator; real slugs are 6 characters without "o", so this never collides
+  if (slug === "demo")
+    return page(
+      200,
+      "You scanned a sample EndureQR code",
+      'A real code sends people straight to your link, and you can change that link any time after printing. <br><br><a href="/dynamic-qr-code-generator">Make your own dynamic code</a>',
+    );
   if (!/^[a-z0-9]{4,12}$/.test(slug)) return page(404, "This code doesn't exist", "Check that the whole code is in view and scan it again.");
 
   const [code] = await db()<Row[]>`select id, destination, ios_url, android_url, paused, disabled_at from public.codes where slug = ${slug}`;

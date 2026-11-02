@@ -48,9 +48,9 @@ export function BillingView({ plan, card, hasPortal, invoices, codes, scans30, c
   // after checkout the webhook can land a moment later: refresh a few times until the plan shows
   useEffect(() => {
     if (checkout !== "done") return;
-    flash(plan.canEdit ? "You're all set. Thank you!" : "Payment received. Activating your plan…");
+    flash(plan.pro ? "You're all set. Thank you!" : "Payment received. Activating your plan…");
     window.history.replaceState(null, "", "/dashboard/billing");
-    if (plan.canEdit) return;
+    if (plan.pro) return;
     let n = 0;
     const t = setInterval(() => (++n > 6 ? clearInterval(t) : router.refresh()), 2500);
     return () => clearInterval(t);
@@ -178,7 +178,7 @@ export function BillingView({ plan, card, hasPortal, invoices, codes, scans30, c
         <section className="mt-4 rounded-md border border-line bg-bg-raised p-5 sm:p-6" aria-labelledby="cancel-title">
           <h2 id="cancel-title" className="font-semibold text-fg">Cancel plan</h2>
           <p className="mt-1 max-w-[60ch] text-fg-muted">
-            {codes === 1 ? "Your code keeps" : `All ${codes} of your codes keep`} working after you cancel, forever. You&apos;ll keep editing and analytics until {fmt(plan.renewsAt)}.
+            {codes === 1 ? "Your code keeps" : `All ${codes} of your codes keep`} working after you cancel, for as long as EndureQR runs. You&apos;ll keep editing and analytics until {fmt(plan.renewsAt)}.
           </p>
           <div className={cn("grid transition-[grid-template-rows,opacity] duration-base ease-stay", confirm ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0")} inert={!confirm}>
             <div className="overflow-hidden">

@@ -3,7 +3,7 @@ import { FinalCtaVisual } from "./final-cta-visual";
 
 /** Section 9: the cube QR returns, scatters into a field and reforms into the EndureQR mark. */
 export function FinalCta() {
-  const words = "Print it once. Keep it forever.".split(" ");
+  const words = "Print it once. Change it any time.".split(" ");
   return (
     <section aria-labelledby="cta-title" className="noise bg-grid relative isolate overflow-hidden border-t border-line pt-24 lg:pt-40">
       <div className="relative z-10 mx-auto flex max-w-container flex-col items-center px-4 text-center sm:px-6">

@@ -126,7 +126,7 @@ export const QR_TYPES: QrTypeDef[] = [
     icon: ICON.wifi,
     fields: [
       { name: "ssid", label: "Network name (SSID)", kind: "text", required: true, half: true },
-      { name: "password", label: "Password", kind: "text", half: true },
+      { name: "password", label: "Password", kind: "text", half: true, hint: "Never leaves your browser: the code is made on your device." },
       { name: "security", label: "Security", kind: "select", options: [{ value: "WPA", label: "WPA / WPA2 / WPA3" }, { value: "WEP", label: "WEP" }, { value: "nopass", label: "None (open network)" }] },
       { name: "hidden", label: "Hidden network", kind: "toggle" },
     ],

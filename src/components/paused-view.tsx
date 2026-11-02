@@ -58,7 +58,7 @@ export function PausedView({ owner, site, reason, back }: { owner: string | null
 
       <footer className="fade-up mt-auto pt-12 text-center" style={{ ["--d" as string]: "240ms" }}>
         <Link href="/" className="inline-flex items-center gap-2 font-mono text-[12px] text-fg-subtle transition-colors hover:text-fg">
-          <Logo size={14} /> Codes made with EndureQR never expire. Make your own →
+          <Logo size={14} /> Free static codes from EndureQR never expire. Make your own →
         </Link>
       </footer>
     </main>

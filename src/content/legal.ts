@@ -2,7 +2,7 @@
  * Terms of Service and Privacy Policy. Operator facts and providers come from ./company.ts.
  * Inline text supports **bold** and [text](url). Have a lawyer review before taking payments.
  */
-import { COMPANY, LEGAL_EFFECTIVE, PROVIDERS } from "./company";
+import { COMPANY, FOUNDER, LEGAL_EFFECTIVE, PROVIDERS } from "./company";
 
 export type LegalSection = { id: string; title: string; body: string[] };
 export type LegalDoc = {
@@ -35,7 +35,7 @@ export const TERMS: LegalDoc = {
       id: "who",
       title: "Who we are",
       body: [
-        `EndureQR ("EndureQR", "we", "us") runs the website at ${COMPANY.site}, the free QR code generator, the EndureQR dashboard and related services (together, the "Service").`,
+        `EndureQR ("EndureQR", "we", "us") runs the website at ${COMPANY.site}, the free QR code generator, the EndureQR dashboard and related services (together, the "Service"). EndureQR is run by ${FOUNDER.name}, based in ${FOUNDER.city}, ${FOUNDER.country}.`,
         "By using the Service you agree to these terms. If you use it for an organisation, you confirm you are allowed to accept them on its behalf.",
       ],
     },
@@ -70,6 +70,7 @@ export const TERMS: LegalDoc = {
       id: "plans",
       title: "Plans, billing and refunds",
       body: [
+        "A free account includes one dynamic code, with the same features as Pro except folders and bulk create. It follows section 6 like any other dynamic code.",
         "Pro is billed monthly or yearly in advance and renews automatically until you cancel. Lifetime is a single payment for access to Pro features for as long as EndureQR operates the Service.",
         "Our order process is run by our online reseller **Lemon Squeezy**, which is the merchant of record for all orders. Lemon Squeezy handles payment, sales tax and VAT, invoices and billing questions. Prices are shown before tax; the tax due is shown at checkout.",
         `**Refunds:** if EndureQR isn't right for you, email ${email.hello} within 14 days of your first Pro payment or your Lifetime purchase for a full refund. Renewals can be cancelled at any time and are not refunded for the period already started, unless the law where you live says otherwise.`,
@@ -134,7 +135,7 @@ export const PRIVACY: LegalDoc = {
       id: "controller",
       title: "Who is responsible for your data",
       body: [
-        `EndureQR is the controller of the personal data described here. Contact us about privacy at ${email.privacy}.`,
+        `EndureQR, run by ${FOUNDER.name} in ${FOUNDER.city}, ${FOUNDER.country}, is the controller of the personal data described here. Contact us about privacy at ${email.privacy}.`,
         "For scan data about the dynamic codes you create, you decide why the codes are used and we process scan data on your behalf to give you analytics.",
       ],
     },

@@ -10,7 +10,7 @@ export const GUIDES_BASICS: Guide[] = [
       "A QR code is a square barcode that stores links, text or data in a grid of modules. Learn how it works, its parts, its versions and error correction levels.",
     category: "Basics",
     published: "2026-10-26",
-    updated: "2026-10-26",
+    updated: "2026-11-02",
     readMinutes: 7,
     summary:
       "QR codes look like random noise, but every square has a job. Here is how the pattern stores data, how a phone reads it and why a damaged code can still scan.",
@@ -184,7 +184,7 @@ export const GUIDES_BASICS: Guide[] = [
       "To scan a QR code, open your phone's camera, point it at the code and tap the link that appears. Steps for iPhone, Android, screenshots and laptops.",
     category: "Basics",
     published: "2026-10-26",
-    updated: "2026-10-26",
+    updated: "2026-11-02",
     readMinutes: 6,
     summary:
       "Most phones can scan a QR code with the built-in camera. Here is how to do it on iPhone and Android, how to read a code that is already on your screen, and what to do on a laptop.",
@@ -348,7 +348,7 @@ export const GUIDES_BASICS: Guide[] = [
       "Make a QR code in minutes: pick a type, enter your link or details, style it, add a logo, test it and download PNG, SVG or PDF. Free, with no sign-up needed.",
     category: "Basics",
     published: "2026-10-26",
-    updated: "2026-10-26",
+    updated: "2026-11-02",
     readMinutes: 7,
     summary:
       "Making a QR code takes a few minutes. Making one that scans first time, looks right and prints sharply takes a few extra checks. Here is the whole process.",
@@ -557,7 +557,7 @@ export const GUIDES_BASICS: Guide[] = [
       "QR code not scanning? Work through this checklist: contrast, size, quiet zone, data density, logo size, glare, curves, blur, broken links and expired codes.",
     category: "Printing",
     published: "2026-10-26",
-    updated: "2026-10-26",
+    updated: "2026-11-02",
     readMinutes: 6,
     summary:
       "Most scanning problems come down to a handful of causes. Work through this checklist in order to find yours, from the phone to the print to the link behind the code.",
@@ -699,7 +699,7 @@ export const GUIDES_BASICS: Guide[] = [
       "QR codes are safe to scan, but the link can be risky. Learn how quishing and fake parking codes work, what to check before you tap and how to protect codes.",
     category: "Basics",
     published: "2026-10-26",
-    updated: "2026-10-26",
+    updated: "2026-11-02",
     readMinutes: 6,
     summary:
       "A QR code is just a way of storing text. The risk is where that text sends you. Here is how QR code scams work, what to check before you tap, and how businesses can protect their codes.",

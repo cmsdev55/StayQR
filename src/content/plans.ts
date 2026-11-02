@@ -8,10 +8,12 @@ export const PRO = {
   yearlyPerMonth: 29 / 12,
 };
 export const LIFETIME = 79;
+/** Dynamic codes a free account may create and edit, with every Pro feature except folders and bulk. */
+export const FREE_DYNAMIC_CODES = 1;
 export const YEARLY_SAVING = Math.round((1 - PRO.yearly / (PRO.monthly * 12)) * 100); // 39%
 
 export const PLAN_FEATURES = {
-  free: ["Unlimited static QR codes, 17 types", "Your logo and a call-to-action frame", "PNG, SVG, JPEG and PDF up to 4096 px", "No sign-up, no watermark"],
+  free: ["Unlimited static QR codes, 17 types", "1 dynamic code: edit it after printing, see its scans", "Your logo and a call-to-action frame", "PNG, SVG, JPEG and PDF up to 4096 px", "No watermark, no sign-up for static codes"],
   pro: [
     "Unlimited dynamic QR codes",
     "Unlimited scans, no caps",
@@ -22,7 +24,7 @@ export const PLAN_FEATURES = {
     "Codes keep working if you cancel",
   ],
   lifetime: [
-    "Everything in Pro, forever",
+    "Everything in Pro, with no renewals",
     "One payment, no renewals",
     "All future features included",
     "Priority support",
@@ -35,10 +37,10 @@ export const MATRIX: { group: string; rows: { label: string; free: string | bool
     group: "Codes",
     rows: [
       { label: "Static QR codes", free: "Unlimited", pro: "Unlimited", lifetime: "Unlimited" },
-      { label: "Dynamic QR codes", free: false, pro: "Unlimited", lifetime: "Unlimited" },
+      { label: "Dynamic QR codes", free: "1", pro: "Unlimited", lifetime: "Unlimited" },
       { label: "Scans per month", free: "Unlimited", pro: "Unlimited", lifetime: "Unlimited" },
-      { label: "Edit destination after printing", free: false, pro: true, lifetime: true },
-      { label: "Codes keep working after you cancel", free: "n/a", pro: true, lifetime: true },
+      { label: "Edit destination after printing", free: true, pro: true, lifetime: true },
+      { label: "Codes keep working after you cancel", free: true, pro: true, lifetime: true },
     ],
   },
   {
@@ -53,11 +55,11 @@ export const MATRIX: { group: string; rows: { label: string; free: string | bool
   {
     group: "Insight and control",
     rows: [
-      { label: "Scan analytics", free: false, pro: "12 months", lifetime: "Forever" },
-      { label: "iOS / Android split", free: false, pro: true, lifetime: true },
+      { label: "Scan analytics", free: "12 months", pro: "12 months", lifetime: "No time limit" },
+      { label: "iOS / Android split", free: true, pro: true, lifetime: true },
       { label: "Bulk create from CSV", free: false, pro: "500 rows", lifetime: "500 rows" },
       { label: "Folders and search", free: false, pro: true, lifetime: true },
-      { label: "Pause a code with a friendly page", free: false, pro: true, lifetime: true },
+      { label: "Pause a code with a friendly page", free: true, pro: true, lifetime: true },
     ],
   },
 ];

@@ -21,8 +21,8 @@ export type Guide = {
   description: string;
   category: "Basics" | "Printing" | "Design" | "Use cases";
   /** ISO date */
-  published: "2026-10-26";
-  updated: "2026-10-26";
+  published: string;
+  updated: string;
   readMinutes: number;
   /** 1–2 sentence standfirst under the H1 */
   summary: string;
@@ -42,7 +42,7 @@ const GUIDES_CORE: Guide[] = [
       "Static QR codes never expire. Dynamic codes can stop working when a trial, subscription or account ends. Learn how to check your codes and avoid dead ones.",
     category: "Basics",
     published: "2026-10-26",
-    updated: "2026-10-26",
+    updated: "2026-11-02",
     readMinutes: 5,
     summary:
       "A QR code has no built-in expiry date. When a code stops working, the cause is almost always the service behind it, not the code itself.",
@@ -165,7 +165,7 @@ const GUIDES_CORE: Guide[] = [
       "Static QR codes are free and never expire but cannot change. Dynamic codes can be edited and tracked. Compare both side by side and pick the right one.",
     category: "Basics",
     published: "2026-10-26",
-    updated: "2026-10-26",
+    updated: "2026-11-02",
     readMinutes: 6,
     summary:
       "Static codes are fixed and free. Dynamic codes can be edited and measured. Here is how they differ and when each one makes sense.",
@@ -307,7 +307,7 @@ const GUIDES_CORE: Guide[] = [
       "The minimum printed QR code size is about 2 cm (0.8 in). Use the 10:1 distance rule, the right DPI and vector files so your code scans every time.",
     category: "Printing",
     published: "2026-10-26",
-    updated: "2026-10-26",
+    updated: "2026-11-02",
     readMinutes: 6,
     summary:
       "How big a QR code needs to be depends on how far away people stand and how much data it holds. Here are the numbers, plus the file and print settings that matter.",
@@ -439,7 +439,7 @@ const GUIDES_CORE: Guide[] = [
       "Put your menu online, link it to a QR code, and print it on table tents at 5 cm or larger. Steps, placement tips and why dynamic codes suit changing menus.",
     category: "Use cases",
     published: "2026-10-26",
-    updated: "2026-10-26",
+    updated: "2026-11-02",
     readMinutes: 6,
     summary:
       "A menu QR code takes a few minutes to set up. Getting the page, the placement and the printed fallback right is what makes guests actually use it.",
@@ -566,7 +566,7 @@ const GUIDES_CORE: Guide[] = [
       "Make a WiFi QR code by entering your network name, password and security type. Learn the WIFI: format, hidden networks and safe guest network setup.",
     category: "Use cases",
     published: "2026-10-26",
-    updated: "2026-10-26",
+    updated: "2026-11-02",
     readMinutes: 6,
     summary:
       "A WiFi QR code lets guests join your network without typing a password. Here is how it works, which settings to choose and how to share it safely.",
@@ -694,7 +694,7 @@ const GUIDES_CORE: Guide[] = [
       "Design a custom QR code with a logo that still scans: strong contrast, a light background, a logo under 25% of the area, clear frames and real phone tests.",
     category: "Design",
     published: "2026-10-26",
-    updated: "2026-10-26",
+    updated: "2026-11-02",
     readMinutes: 6,
     summary:
       "A branded QR code can look good and scan first time. The trick is knowing which design choices are safe and which ones quietly break the code.",

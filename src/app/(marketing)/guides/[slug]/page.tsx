@@ -4,11 +4,12 @@ import { notFound } from "next/navigation";
 import { AD_SLOTS, AdSlot } from "@/components/ads/ad-slot";
 import { Breadcrumbs } from "@/components/content/breadcrumbs";
 import { GuideCards } from "@/components/content/guide-cards";
-import { JsonLd, ORG_REF, SITE, breadcrumbLd } from "@/components/content/json-ld";
+import { JsonLd, ORG_REF, SITE, breadcrumbLd, founderLd } from "@/components/content/json-ld";
 import { Block } from "@/components/content/blocks";
 import { RelatedTypes } from "@/components/content/type-grid";
 import { CtaBand } from "@/components/sections/cta-band";
 import { Faq } from "@/components/sections/faq";
+import { FOUNDER } from "@/content/company";
 import { GUIDES, guideBySlug, type GuideBlock } from "@/content/guides";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -71,7 +72,7 @@ export default async function GuidePage({ params }: Props) {
           dateModified: g.updated,
           mainEntityOfPage: `${SITE}/guides/${g.slug}`,
           image: `${SITE}/opengraph-image`,
-          author: ORG_REF,
+          author: founderLd(),
           publisher: ORG_REF,
         }}
       />
@@ -83,11 +84,12 @@ export default async function GuidePage({ params }: Props) {
           <h1 id="guide-title" className="fade-up mt-4 max-w-[24ch] font-display text-display-lg font-semibold text-fg [text-wrap:balance]">{g.h1}</h1>
           <p className="fade-up mt-5 max-w-[60ch] text-body-lg text-fg-muted" style={{ ["--d" as string]: "120ms" }}>{g.summary}</p>
           <p className="mt-6 font-mono text-[12px] text-fg-subtle">
-            Updated <time dateTime={g.updated}>{fmt(g.updated)}</time> · {g.readMinutes} min read
+            By <Link href="/about#founder" className="text-fg-muted underline decoration-line-strong underline-offset-2 hover:text-fg">{FOUNDER.name}</Link> · Updated{" "}
+            <time dateTime={g.updated}>{fmt(g.updated)}</time> · {g.readMinutes} min read
           </p>
         </header>
 
-        <div className="mx-auto mt-14 grid max-w-container gap-12 border-t border-line px-4 pt-14 sm:px-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,8fr)] lg:gap-16">
+        <div className="mx-auto mt-14 grid max-w-container grid-cols-1 gap-12 border-t border-line px-4 pt-14 sm:px-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,8fr)] lg:gap-16">
           <nav aria-label="On this page" className="lg:sticky lg:top-28 lg:self-start">
             <p className="eyebrow">On this page</p>
             <ol className="mt-4 flex flex-col gap-2.5 border-l border-line pl-4">

@@ -94,7 +94,7 @@ export function Features() {
             <GlobeVisual />
             <div className="relative">
               <h3 className="font-display text-h3 font-semibold text-fg">See every scan</h3>
-              <p className="mt-2 max-w-[34ch] text-body-sm text-fg-muted">Scans by day, city, device and time of day, for every dynamic code on a paid plan.</p>
+              <p className="mt-2 max-w-[34ch] text-body-sm text-fg-muted">Scans by day, city, device and time of day, for every dynamic code, including your free one.</p>
             </div>
           </Card>
 
@@ -177,8 +177,8 @@ export function Features() {
           {/* 7 · Unlimited scans */}
           <Tile i={6} className="sm:col-span-2 lg:col-span-2" title="Unlimited scans" body="No caps, no throttling, no surprise bills when a code goes viral.">
             <div className="flex h-full flex-col justify-center">
-              <AnimatedCounter value={48291} from={0} group duration={1800} className="font-display text-display-md font-semibold text-fg" label="48,291 scans this month" />
-              <p className="mt-1 font-mono text-[11px] text-fg-subtle">scans this month</p>
+              <AnimatedCounter value={48291} from={0} group duration={1800} className="font-display text-display-md font-semibold text-fg" label="Example: 48,291 scans this month" />
+              <p className="mt-1 font-mono text-[11px] text-fg-subtle">scans this month · example</p>
               <div className="mt-4 flex h-12 items-end gap-1" aria-hidden>
                 {[30, 42, 38, 55, 48, 62, 58, 70, 66, 80, 74, 88, 84, 96].map((h, k) => (
                   <span key={k} className={cn("bar-grow flex-1 rounded-t-[3px]", k === 13 ? "bg-accent" : "bg-fg/15")} style={{ height: `${h}%`, transitionDelay: `${300 + k * 40}ms` }} />

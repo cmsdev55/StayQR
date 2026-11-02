@@ -32,7 +32,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
   // ── url ──────────────────────────────────────────────────────────────
   {
     slug: "url",
-    title: "URL QR Code Generator: Free, No Sign-Up, No Watermark",
+    title: "URL QR Code Generator: Free, Never Expires, No Sign-Up",
     description:
       "Turn any link into a QR code for free. No sign-up, no watermark, unlimited scans and no expiry. Add your logo and colours, then download PNG, SVG or PDF.",
     h1: "URL QR code generator",

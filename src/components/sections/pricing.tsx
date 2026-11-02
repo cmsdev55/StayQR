@@ -17,8 +17,8 @@ export function Pricing({ page = false }: { page?: boolean }) {
           immediate={page}
           align="center"
           eyebrow="Pricing"
-          title="Simple pricing. Codes for *life.*"
-          intro="Start free. Upgrade when you need to edit codes after printing. Cancel any time and your codes keep working."
+          title="Simple pricing. Codes that *last.*"
+          intro="Start free, with one dynamic code you can edit after printing. Upgrade for unlimited codes. Cancel any time and your codes keep working."
         />
         <div className="mt-12 lg:mt-16">
           <PricingCards headingLevel={page ? 2 : 3} />

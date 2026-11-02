@@ -10,7 +10,7 @@ export const GUIDES_USES: Guide[] = [
       "Put a QR code on your business card with a vCard that saves your details or a link to a profile. Which fields to add, vCard 3.0, size and how to test it.",
     category: "Use cases",
     published: "2026-10-26",
-    updated: "2026-10-26",
+    updated: "2026-11-02",
     readMinutes: 7,
     summary:
       "A QR code on a business card should save you into someone's phone in one scan. Here is how to choose between a vCard and a link, what to include and how to print it so it works.",
@@ -192,7 +192,7 @@ export const GUIDES_USES: Guide[] = [
       "QR codes have four error correction levels, L, M, Q and H, which recover about 7, 15, 25 and 30% of damage. Learn the density trade-off and when to use each.",
     category: "Basics",
     published: "2026-10-26",
-    updated: "2026-10-26",
+    updated: "2026-11-02",
     readMinutes: 6,
     summary:
       "Error correction is what lets a scratched, smudged or logo-covered QR code still scan. Choosing the right level is a balance between toughness and size.",
@@ -369,7 +369,7 @@ export const GUIDES_USES: Guide[] = [
       "Make a QR code for Google reviews from your Business Profile review link. Where to place it, how to test it, and Google's rules on incentives and gating.",
     category: "Use cases",
     published: "2026-10-26",
-    updated: "2026-10-26",
+    updated: "2026-11-02",
     readMinutes: 6,
     summary:
       "A review QR code takes customers straight to your Google review form. Here is how to get the link, where the code works best and which rules you must not break.",
@@ -548,7 +548,7 @@ export const GUIDES_USES: Guide[] = [
       "Static QR codes cannot count scans. Track them with UTM parameters and web analytics, or dynamic codes that log time, city and device. Privacy tips included.",
     category: "Basics",
     published: "2026-10-26",
-    updated: "2026-10-26",
+    updated: "2026-11-02",
     readMinutes: 6,
     summary:
       "Knowing whether a printed code gets scanned turns a guess into a decision. Here are the two ways to measure scans, what the numbers mean and what they cannot tell you.",
@@ -716,7 +716,7 @@ export const GUIDES_USES: Guide[] = [
       "Use QR codes at events for agendas, venue WiFi, directions, calendar invites, badges and feedback forms, plus why dynamic codes suit changing schedules.",
     category: "Use cases",
     published: "2026-10-26",
-    updated: "2026-10-26",
+    updated: "2026-11-02",
     readMinutes: 6,
     summary:
       "From the first invitation to the last feedback form, QR codes save attendees typing and save organisers reprinting. Here is which code to use at each stage.",

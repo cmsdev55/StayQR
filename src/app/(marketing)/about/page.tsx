@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/content/breadcrumbs";
-import { JsonLd, SITE, breadcrumbLd, organizationLd } from "@/components/content/json-ld";
+import { JsonLd, SITE, breadcrumbLd, founderLd, organizationLd } from "@/components/content/json-ld";
 import { CtaBand } from "@/components/sections/cta-band";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { COMPANY } from "@/content/company";
+import { COMPANY, FOUNDER } from "@/content/company";
 import { QR_TYPES } from "@/lib/qr-types";
 
 export const metadata: Metadata = {
@@ -30,6 +30,7 @@ export default function AboutPage() {
     <main>
       <JsonLd data={breadcrumbLd(CRUMBS)} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "AboutPage", url: `${SITE}/about`, name: `About ${COMPANY.name}`, mainEntity: organizationLd() }} />
+      <JsonLd data={{ "@context": "https://schema.org", ...founderLd() }} />
       <section aria-labelledby="about-title" className="noise bg-grid relative isolate overflow-hidden pb-20 pt-28 sm:pt-36 lg:pb-28">
         <div className="mx-auto max-w-container px-4 sm:px-6">
           <Breadcrumbs items={CRUMBS} />
@@ -57,6 +58,26 @@ export default function AboutPage() {
             <p>
               For everything that never needs to change, such as WiFi details, contact cards or a link to a page you own, we offer a free static generator. Static codes store their content in the pattern itself, so they work forever without us. Read more in our guide to{" "}
               <Link href="/guides/static-vs-dynamic-qr-codes" className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">static vs dynamic QR codes</Link>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="founder" aria-labelledby="founder-title" className="scroll-mt-24 border-t border-line py-20 lg:py-28">
+        <div className="mx-auto grid max-w-container gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+          <h2 id="founder-title" className="font-display text-display-md font-semibold text-fg">Who runs EndureQR</h2>
+          <div className="flex max-w-[64ch] flex-col gap-5 text-body-lg text-fg-muted">
+            <div>
+              <p className="font-display text-h4 font-semibold text-fg">{FOUNDER.name}</p>
+              <p className="mt-1 font-mono text-[12px] uppercase tracking-[0.08em] text-fg-subtle">
+                {FOUNDER.role} · {FOUNDER.city}, {FOUNDER.country}
+              </p>
+            </div>
+            {FOUNDER.bio.map((p) => <p key={p.slice(0, 24)}>{p}</p>)}
+            <h3 className="pt-4 font-display text-h4 font-semibold text-fg">How we write our guides</h3>
+            <p>
+              Every guide is written and checked by {FOUNDER.name}. Facts about standards, phones and other companies link to the source they come from, and each guide shows the date it was last updated. If you spot a mistake,{" "}
+              <Link href="/contact" className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">tell us</Link> and we will correct it.
             </p>
           </div>
         </div>

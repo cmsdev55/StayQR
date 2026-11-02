@@ -14,7 +14,7 @@ export default async function AnalyticsPage({ searchParams }: { searchParams: Pr
   const plan = await getPlan(user.id);
   const range = ([7, 30, 90] as const).find((r) => String(r) === sp.range) ?? (30 as Range);
   const [data, codes] = await Promise.all([
-    getAnalytics(user.id, { range, code: sp.code ?? "all", tz: user.timezone, until: plan.lapsed ? plan.endsAt : null }),
+    getAnalytics(user.id, { range, code: sp.code ?? "all", tz: user.timezone, until: plan.lapsed && !plan.canEdit ? plan.endsAt : null }),
     db()<{ id: string; name: string }[]>`select id, name from public.codes where user_id = ${user.id} order by created_at desc`,
   ]);
   return <AnalyticsView data={data} codes={codes} />;

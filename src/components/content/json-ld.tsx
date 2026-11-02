@@ -1,4 +1,4 @@
-import { COMPANY } from "@/content/company";
+import { COMPANY, FOUNDER } from "@/content/company";
 import { LIFETIME, PRO } from "@/content/plans";
 import { SITE_URL } from "@/lib/site";
 
@@ -13,6 +13,20 @@ export const SITE = SITE_URL;
 export const ORG_ID = `${SITE}/#organization`;
 export const APP_ID = `${SITE}/#app`;
 export const ORG_REF = { "@type": "Organization", "@id": ORG_ID, name: COMPANY.name, url: SITE };
+export const FOUNDER_ID = `${SITE}/about#founder`;
+
+/** The founder, who also writes the guides (Article author). */
+export function founderLd() {
+  return {
+    "@type": "Person",
+    "@id": FOUNDER_ID,
+    name: FOUNDER.name,
+    jobTitle: FOUNDER.role,
+    url: `${SITE}/about#founder`,
+    worksFor: { "@id": ORG_ID },
+    homeLocation: { "@type": "Place", address: { "@type": "PostalAddress", addressLocality: FOUNDER.city, addressCountry: FOUNDER.countryCode } },
+  };
+}
 
 export function organizationLd() {
   return {
@@ -24,6 +38,8 @@ export function organizationLd() {
     logo: { "@type": "ImageObject", "@id": `${SITE}/#logo`, url: `${SITE}/logo-512.png`, width: 512, height: 512, caption: COMPANY.name },
     image: { "@id": `${SITE}/#logo` },
     email: COMPANY.email.hello,
+    founder: { "@id": FOUNDER_ID },
+    address: { "@type": "PostalAddress", addressLocality: FOUNDER.city, addressCountry: FOUNDER.countryCode },
     contactPoint: [
       { "@type": "ContactPoint", contactType: "customer support", email: COMPANY.email.hello, availableLanguage: "en" },
       { "@type": "ContactPoint", contactType: "privacy", email: COMPANY.email.privacy, availableLanguage: "en" },
@@ -51,7 +67,7 @@ export function softwareAppLd() {
     operatingSystem: "Web",
     publisher: { "@id": ORG_ID },
     offers: [
-      { "@type": "Offer", name: "Free", price: "0", priceCurrency: "USD", availability: "https://schema.org/InStock", url: `${SITE}/qr-code-generator` },
+      { "@type": "Offer", name: "Free", description: "Unlimited static QR codes and one dynamic QR code", price: "0", priceCurrency: "USD", availability: "https://schema.org/InStock", url: `${SITE}/qr-code-generator` },
       sub("Pro monthly", PRO.monthly, "P1M"),
       sub("Pro yearly", PRO.yearly, "P1Y"),
       { "@type": "Offer", name: "Lifetime", price: String(LIFETIME), priceCurrency: "USD", availability: "https://schema.org/InStock", url: `${SITE}/pricing` },

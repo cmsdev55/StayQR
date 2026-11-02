@@ -30,7 +30,7 @@ export function LegalDocument({ doc }: { doc: LegalDoc }) {
         <p className="mt-6 text-body-sm text-fg-subtle">This summary helps you read the document; the full text below is what applies.</p>
       </section>
 
-      <div className="mt-16 grid gap-12 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
+      <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
         <nav aria-label="Sections" className="lg:sticky lg:top-28 lg:self-start">
           <p className="eyebrow">On this page</p>
           <ol className="mt-4 flex flex-col gap-1 border-l border-line">

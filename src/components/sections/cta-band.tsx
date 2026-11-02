@@ -2,7 +2,7 @@ import { ButtonLink } from "@/components/ui/button";
 
 /** Closing call to action for inner pages: no 3D, just the grid and one lime button. */
 export function CtaBand({
-  title = "Print it once. Keep it forever.",
+  title = "Print it once. Change it any time.",
   body = "Make your first dynamic code in a minute. If you ever leave, it keeps working.",
   href = "/signup",
   cta = "Start free",

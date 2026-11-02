@@ -23,7 +23,7 @@ export function Hero() {
           <span className="inline-flex h-[22px] items-center rounded-full bg-accent/[0.14] px-2 font-mono text-[11px] tracking-[0.08em] text-accent-text">
             LIFETIME
           </span>
-          One payment of $79. Codes live forever.
+          One payment of $79. No renewals.
         </Link>
 
         <h1

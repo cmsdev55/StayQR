@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     template: "%s · EndureQR",
   },
   description:
-    "Create dynamic QR codes you can edit after printing, with unlimited scans and real analytics. Cancel any time: your codes keep working forever.",
+    "Create dynamic QR codes you can edit after printing, with unlimited scans and real analytics. Cancel any time: your codes keep working.",
   openGraph: {
     type: "website",
     siteName: "EndureQR",

@@ -137,7 +137,7 @@ export function HeroVisual() {
             <span className="flex min-w-0 flex-col">
               <span className="truncate text-body-sm font-semibold text-fg">Scanned in {(s ?? SCANS[0]).city}</span>
               <span className="font-mono text-[12px] text-fg-muted">
-                {(s ?? SCANS[0]).device} · just now · #{(scan?.n ?? 12409).toLocaleString("en-US")}
+                Example · {(s ?? SCANS[0]).device} · just now · #{(scan?.n ?? 12409).toLocaleString("en-US")}
               </span>
             </span>
           </div>

@@ -186,7 +186,7 @@ export default async function AlternativePage({ params }: Props) {
             {[
               ["Export your destinations", `Download the list of links your ${c.name} codes point to.`],
               ["Import a CSV", "Upload it to EndureQR and get a print-ready code for every row."],
-              ["Reprint once", "Swap the codes on your next print run. It's the last reprint you'll need."],
+              ["Reprint once", "Swap the codes on your next print run. After that, change where they point without reprinting."],
             ].map(([t, b], i) => (
               <li key={t} className="glass rounded-lg p-6 sm:p-8" data-reveal="" style={{ ["--stagger" as string]: i }}>
                 <span className="grid size-8 place-items-center rounded-full border border-line-strong font-mono text-[12px] text-fg">{i + 1}</span>

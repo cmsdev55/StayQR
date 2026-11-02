@@ -102,7 +102,7 @@ export function FeatureLanding({ slug }: { slug: FeatureSlug }) {
       </section>
 
       <section aria-label="In depth" className="border-t border-line py-20 lg:py-28">
-        <div className="mx-auto grid max-w-container gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,8fr)] lg:gap-16">
+        <div className="mx-auto grid max-w-container grid-cols-1 gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,8fr)] lg:gap-16">
           <nav aria-label="On this page" className="lg:sticky lg:top-28 lg:self-start">
             <p className="eyebrow">On this page</p>
             <ol className="mt-4 flex flex-col gap-2.5 border-l border-line pl-4">
@@ -132,7 +132,7 @@ export function FeatureLanding({ slug }: { slug: FeatureSlug }) {
 
       <Faq items={p.faq} title="Common *questions.*" />
       <CtaBand
-        title={p.tool ? "Want to change it after printing?" : "Print it once. Keep it forever."}
+        title={p.tool ? "Want to change it after printing?" : "Print it once. Change it any time."}
         body={p.tool ? "A dynamic code keeps your logo and design, lets you change the link any time, and keeps working even if you cancel." : "Unlimited codes and scans. Your codes keep working even if you cancel."}
         href={p.tool ? "/dynamic-qr-code-generator" : p.cta.href}
         cta={p.tool ? "See dynamic codes" : p.cta.label}

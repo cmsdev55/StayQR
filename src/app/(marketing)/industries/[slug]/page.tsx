@@ -115,7 +115,7 @@ export default async function IndustryPage({ params }: Props) {
       {/* Use cases */}
       <section aria-labelledby="uses-title" className="border-t border-line py-24 lg:py-32">
         <div className="mx-auto max-w-container px-4 sm:px-6">
-          <SectionHeading id="uses-title" eyebrow="Use cases" title={`How ${ind.name.toLowerCase()} use *EndureQR.*`} />
+          <SectionHeading id="uses-title" eyebrow="Use cases" title={`${ind.name}: how teams use *EndureQR.*`} />
           <div className="mt-12 grid gap-4 md:grid-cols-3 lg:gap-5">
             {ind.useCases.map((u, i) => (
               <article key={u.title} className="glass rounded-lg p-6 sm:p-8" data-reveal="" style={{ ["--stagger" as string]: i }}>
@@ -200,7 +200,7 @@ export default async function IndustryPage({ params }: Props) {
         </div>
       </section>
 
-      <CtaBand title={`Codes your ${ind.name.toLowerCase()} business can print once.`} href={`/signup?industry=${ind.slug}`} />
+      <CtaBand title={`${ind.name}: codes you print once and keep.`} href={`/signup?industry=${ind.slug}`} />
     </main>
   );
 }

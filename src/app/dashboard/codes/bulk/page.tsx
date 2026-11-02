@@ -9,6 +9,6 @@ export const metadata: Metadata = { title: "Bulk create" };
 
 export default async function BulkPage() {
   const user = await requireUser();
-  if (!(await getPlan(user.id)).canEdit) redirect("/dashboard/billing");
+  if (!(await getPlan(user.id)).pro) redirect("/dashboard/billing");
   return <BulkCreate limit={BULK_LIMIT} />;
 }

@@ -4,18 +4,26 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { endSession, getUser, requireUser } from "@/lib/server/auth";
 import { cancelSubscription, portalUrl, resumeSubscription, switchPlan } from "@/lib/server/billing";
+import { FREE_DYNAMIC_CODES } from "@/content/plans";
 import * as codes from "@/lib/server/codes";
 import { db } from "@/lib/server/db";
 import { getPlan } from "@/lib/server/plan";
 
 export type Result<T = undefined> = { ok: true; data?: T } | { ok: false; error: string };
 
-/** Signed in and on a plan that allows editing; anything else becomes a friendly error. */
-async function editor() {
+const FREE_LIMIT = `The free plan includes ${FREE_DYNAMIC_CODES} dynamic code. Upgrade to Pro for unlimited codes.`;
+
+/**
+ * Signed in and allowed to do this; anything else becomes a friendly error. "edit" covers existing codes, "create" a
+ * new one (free accounts get FREE_DYNAMIC_CODES), "pro" folders and bulk create.
+ */
+async function editor(need: "edit" | "create" | "pro" = "edit") {
   const user = await requireUser();
   const plan = await getPlan(user.id);
-  if (!plan.canEdit) throw new codes.InputError(plan.lapsed ? "Your plan has ended. Your codes keep working; resume a plan to edit them." : "Choose a plan to create and edit dynamic codes.");
-  return user;
+  if (need === "pro" && !plan.pro) throw new codes.InputError(plan.lapsed ? "Your plan has ended. Resume a plan to use folders and bulk create." : "Folders and bulk create are part of Pro.");
+  if (need === "create" && !plan.canCreate) throw new codes.InputError(plan.lapsed ? "Your plan has ended. Your codes keep working; resume a plan to add more." : FREE_LIMIT);
+  if (!plan.canEdit) throw new codes.InputError(plan.lapsed ? "Your plan has ended. Your codes keep working; resume a plan to edit them." : FREE_LIMIT);
+  return { user, plan };
 }
 
 async function attempt<T>(fn: () => Promise<T>): Promise<Result<T>> {
@@ -33,9 +41,17 @@ async function attempt<T>(fn: () => Promise<T>): Promise<Result<T>> {
 
 export async function saveCodeAction(id: string | null, input: codes.CodeInput): Promise<Result<string>> {
   return attempt(async () => {
-    const user = await editor();
+    const { user, plan } = await editor(id ? "edit" : "create");
     if (id) await codes.updateCode(user.id, id, input);
     const savedId = id ?? (await codes.createCode(user.id, input));
+    if (!id && !plan.pro) {
+      // two free creates racing: keep the first, undo the extra
+      const [{ n }] = await db()<{ n: number }[]>`select count(*)::int as n from public.codes where user_id = ${user.id}`;
+      if (n > FREE_DYNAMIC_CODES) {
+        await codes.deleteCode(user.id, savedId);
+        throw new codes.InputError(FREE_LIMIT);
+      }
+    }
     revalidatePath("/dashboard", "layout");
     return savedId;
   });
@@ -52,7 +68,7 @@ export async function deleteCodeAction(id: string): Promise<Result> {
 
 export async function createFolderAction(name: string): Promise<Result<string>> {
   return attempt(async () => {
-    const id = await codes.createFolder((await editor()).id, name);
+    const id = await codes.createFolder((await editor("pro")).user.id, name);
     revalidatePath("/dashboard", "layout");
     return id;
   });
@@ -60,7 +76,7 @@ export async function createFolderAction(name: string): Promise<Result<string>> 
 
 export async function renameFolderAction(id: string, name: string): Promise<Result> {
   return attempt(async () => {
-    await codes.renameFolder((await editor()).id, id, name);
+    await codes.renameFolder((await editor("pro")).user.id, id, name);
     revalidatePath("/dashboard", "layout");
     return undefined;
   });
@@ -76,7 +92,7 @@ export async function deleteFolderAction(id: string): Promise<Result> {
 
 export async function bulkCreateAction(rows: { name: string; destination: string; folder?: string }[]): Promise<Result<{ slug: string; name: string; shortUrl: string }[]>> {
   return attempt(async () => {
-    const created = await codes.bulkCreate((await editor()).id, rows);
+    const created = await codes.bulkCreate((await editor("pro")).user.id, rows);
     revalidatePath("/dashboard", "layout");
     return created;
   });

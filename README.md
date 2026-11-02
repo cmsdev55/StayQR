@@ -1,89 +1,88 @@
-# EndureQR web (design phase)
+<p align="center">
+  <img src="public/logo-512.png" width="88" height="88" alt="EndureQR logo">
+</p>
 
-Next.js 15 · TypeScript · Tailwind · React Three Fiber. Design system: [DESIGN.md](./DESIGN.md).
+<h1 align="center">EndureQR</h1>
+
+<p align="center">
+  QR codes that keep working, even if you leave.<br>
+  <a href="https://endureqr.com"><strong>endureqr.com</strong></a>
+</p>
+
+---
+
+## About
+
+EndureQR is a QR code generator with two parts:
+
+- **A free generator.** Make static QR codes for 17 content types (links, WiFi, contact cards, calendar events, social
+  profiles and more). Add your logo and a frame, then download PNG, SVG, JPEG or PDF up to 4096 px. There's no sign-up
+  and no watermark. Codes are drawn in the browser, so what you type never reaches our servers.
+- **Dynamic QR codes (paid).** The printed code points to a short link, so you can change where it goes after printing.
+  Plans include unlimited codes and scans, scan analytics (device, city, time of day), separate iPhone and Android
+  destinations, and bulk creation from CSV.
+
+The name is the promise: if you cancel, your dynamic codes keep redirecting to the last destination you set. They're
+never replaced with an ad or an upgrade page.
+
+## Plans
+
+| Plan | Price | Includes |
+|---|---|---|
+| Free | $0 | Unlimited static codes, logo and frame, all download formats |
+| Pro | $3.99 / month or $29 / year | Unlimited dynamic codes and scans, analytics, smart redirects, bulk create |
+| Lifetime | $79 once | Everything in Pro, with no renewals |
+
+Every paid plan has a 14-day money-back guarantee.
+
+## Tech stack
+
+| Area | Tools |
+|---|---|
+| App | [Next.js 15](https://nextjs.org) (App Router), React 19, TypeScript |
+| Styling and motion | Tailwind CSS, Framer Motion, GSAP, Lenis |
+| 3D | three.js, React Three Fiber |
+| QR rendering | qr-code-styling, qrcode-generator |
+| Database | PostgreSQL on [Railway](https://railway.com) |
+| Sign-in | Email and password, plus Google sign-in |
+| Payments | [Lemon Squeezy](https://www.lemonsqueezy.com) (merchant of record) |
+| Email | [Resend](https://resend.com) |
+| Hosting | [Vercel](https://vercel.com) |
+
+## Getting started
+
+You need Node.js 20 or later and PostgreSQL installed locally.
 
 ```bash
 npm install
-npm run dev            # http://localhost:3000
-npm run build && npm start
-ANALYZE=true npm run build   # bundle analyzer
+cp .env.example .env.local       # fill in what you need; most services are optional locally
+scripts/db-local.sh start        # local Postgres on port 54329, with migrations applied
+node scripts/db-seed.mjs         # demo account: demo@endureqr.local / demo-password
+npm run dev                      # http://localhost:3000
 ```
 
-## Accounts, billing and dynamic codes
-Postgres on Railway (`db/migrations`), the app (pages + API) on Vercel. Own auth: email + password (scrypt), hashed
-session tokens, verify/reset emails via Resend, optional Google sign-in. Lemon Squeezy checkout and webhooks. Short links at `/r/[slug]`.
-- Local: `scripts/db-local.sh start` (Postgres on :54329, no Docker), `node scripts/db-seed.mjs`, then log in as
-  `demo@endureqr.local` / `demo-password`. Without a Resend key, emails print to the server log; without Lemon Squeezy keys,
-  checkout is simulated (localhost only).
-- Server code lives in `src/lib/server/` (auth, password, email, plan, codes, analytics, billing); dashboard mutations in `src/app/dashboard/actions.ts`.
-- Going live: `docs/LAUNCH.md`. Variables: `.env.example`.
+Locally, emails print to the server log and checkout is simulated, so you don't need Resend or Lemon Squeezy keys
+to try the app.
 
-## Routes
-| Route | What |
-|---|---|
-| `/` | Landing: hero, never-dies story (pinned), free generator, features bento, comparison, pricing, free tools + guides, industries, FAQ, final CTA |
-| `/qr-code-generator`, `/qr-code-generator/[type]` | Free generator hub and one SEO page per type (17, from `src/lib/qr-types.ts` + `src/content/qr-type-pages.ts`) |
-| `/guides`, `/guides/[slug]` | Guide articles (`src/content/guides*.ts`) with TOC, Article JSON-LD and in-content ad slots |
-| `/about`, `/contact` | Company and contact pages (facts in `src/content/company.ts`) |
-| `/ads.txt` | AdSense publisher line from `NEXT_PUBLIC_ADSENSE_CLIENT` (404 until set) |
-| `/pricing` | Plans with the odometer toggle, full feature matrix, billing FAQ |
-| `/industries/[slug]` | Industry template (8 static pages from `src/content/industries.ts`) |
-| `/alternatives/[slug]` | "Alternative to" template: `bitly`, `qrfy` (facts in `src/content/competitors.ts`, price evidence in `docs/evidence/`) |
-| `/paused` | What a scanner sees when a code is paused (noindex) |
-| `/login`, `/signup`, `/auth/*` | Auth: verify link, reset, Google OAuth, sign-out (`/signup?plan=lifetime` goes straight to checkout) |
-| `/terms`, `/privacy` | Legal documents (short version, section index); operator and provider facts come from `src/content/company.ts` |
-| `/opengraph-image`, `/twitter-image` | 1200×630 social image (`next/og`, fonts in `src/assets/og`) |
-| `/dashboard` | Codes, folders, search (`?q=`) · `/dashboard/codes/[id]` editor (`/new`, `/bulk`) · `/dashboard/analytics` (`?range=&code=`) · `/dashboard/billing` · `/dashboard/settings` |
-| `/r/[slug]` | Dynamic-code redirect (records the scan after responding) · `/p/[slug]` paused page |
-| `/api/checkout`, `/api/webhooks/lemonsqueezy`, `/api/export/*`, `/api/cron/retention` | Billing, exports, daily retention |
+## Project structure
 
-Content lives in `src/content/` (plans, FAQ, industries, legal, competitor facts with sources and `confirmed` flags, dashboard fake data).
-Never invent customers, quotes, logos or numbers. A competitor fact without a source on the vendor's own site stays `confirmed: false` and shows a [verify] tag.
-Ads: set `NEXT_PUBLIC_ADSENSE_CLIENT` plus `NEXT_PUBLIC_ADSENSE_SLOT_TOOL` / `NEXT_PUBLIC_ADSENSE_SLOT_GUIDE`; slots render only on generator and guide pages. See `docs/ROADMAP.md`.
-Logo: mark A "The Lit Core" (`src/components/logo.tsx`, geometry in `MARK`); `node scripts/gen-icons.mjs` regenerates `icon.svg` and `apple-icon.png`.
-3D components are in `src/components/three/` (CubeQR, ScanBeam, ScanGlobe, ParticleField; shared cube material); every scene is
-lazy, tiered (`useLazyScene`) and has a same-size static fallback in `public/`.
-
-## QA URL flags (dev and prod)
-| Flag | Effect |
-|---|---|
-| `?theme=dark` / `?theme=light` | Force theme |
-| `?tier=high` / `low` / `none` | Force 3D quality (`none` = static image only) |
-| `?capture` | 3D clock follows real time at very low FPS (headless screenshots) |
-| `?freeze=3.1` | Pin the hero timeline to one moment (3.1 = mid-scan) |
-
-## Scripts
-- `node scripts/screenshots.mjs [path] [name] [waitMs]`: desktop 1440 + mobile 390, dark + light → `design-screenshots/`. Env: `BASE_URL`, `FREEZE`, `TIER`.
-- `node scripts/render-fallbacks.mjs`: re-renders the static 3D fallbacks from the live scenes (hero desktop + the tight phone crop and its position in `hero-fallback.json`). Run after changing the 3D look. Env: `BASE_URL`, `ONLY=desktop|mobile`.
-- `node scripts/lighthouse.mjs [path] [runs=3]`: Lighthouse mobile, median of N runs, plus the LCP element and its phases. `THROTTLE=devtools` applies real throttling instead of the Lantern simulation.
-- `node scripts/lcp.mjs [path]`: lists LCP candidates on a Lighthouse-sized phone (412×823, 4× CPU).
-- `node scripts/gen-icons.mjs`: favicon + apple touch icon from the mark geometry.
-- `node scripts/gen-land-mask.mjs`: rebuilds the ScanGlobe land bitmap from Natural Earth data.
-
-Scrolling note: test smoothness on a production build. In `next dev`, each lazy chunk is compiled the first time its
-section scrolls into view, which shows up as hitches the production build doesn't have.
-
-### Dev and prod side by side
-`NEXT_DIST_DIR` moves the build output, so a production build can run next to `next dev`:
-```bash
-npx next dev -p 3100
-NEXT_DIST_DIR=.next-prod npx next build && NEXT_DIST_DIR=.next-prod npx next start -p 3200
-BASE_URL=http://localhost:3200 node scripts/lighthouse.mjs / 3
+```
+src/app/            pages, API routes and the dashboard
+src/components/     UI, generator, dashboard and 3D components
+src/content/        site copy: plans, guides, FAQs, legal pages
+src/lib/server/     auth, billing, email, codes and analytics
+db/migrations/      database schema
+scripts/            database, icon, screenshot and performance tools
+tests/e2e/          end-to-end tests
 ```
 
-### Measured (Oct 2026, prod build, Lighthouse mobile, median of 3)
-| Page | Perf | A11y | LCP (simulated) | LCP (devtools throttling) | TBT | CLS |
-|---|---|---|---|---|---|---|
-| `/` | 92 | 100 | 3.10s | 1.76s | 187ms | 0 |
-| `/pricing` | 96 | 100 | 2.81s | | 44ms | 0 |
-| `/industries/restaurants` | 97 | 100 | 2.64s | | 30ms | 0 |
+## Documentation
 
-First-load JS: `/` 139 KB, inner marketing pages 117–123 KB, dashboard 122–146 KB. Lazy chunks (gzip): three.js + R3F ≈ 241 KB
-shared by all scenes; each scene 3.5–3.8 KB; post-processing ≈ 21 KB; GSAP ≈ 47 KB; qr-code-styling 21 KB; Lenis 5 KB.
+- [Development notes](docs/DEVELOPMENT.md): routes, QA flags, scripts and performance measurements
+- [Design system](DESIGN.md)
+- [Launch checklist](docs/LAUNCH.md)
+- [Roadmap](docs/ROADMAP.md)
 
-### Lab LCP on localhost
-Lighthouse's default (simulated) run reports ~2.8s LCP on the home page even though the observed LCP is ~70ms.
-On localhost the framework JS arrives and runs *before* first paint, so Lantern's pessimistic graph bills all of it
-to LCP, whichever element wins: even the near text-only `/paused` page scores ~2.6s. With real throttling
-(`THROTTLE=devtools`) LCP is ~1.8s. Measure on a real host
-(CDN latency puts first paint ahead of the scripts) before optimising against the simulated number.
+## License
+
+Copyright © 2026 EndureQR. All rights reserved.

@@ -6,7 +6,10 @@
     "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start -p 3000",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:e2e": "node tests/e2e/product.mjs && DEV_LOG=${DEV_LOG:-/tmp/endureqr-dev.log} node tests/e2e/auth.mjs",
+    "db:migrate": "node scripts/db-migrate.mjs",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",

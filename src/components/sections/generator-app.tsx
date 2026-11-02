@@ -33,8 +33,10 @@ const LOGO_MAX_BYTES = 1_000_000;
  * The free generator: 17 static content types, styles, colours, logo, frames, and PNG/SVG/JPEG/PDF
  * export at up to 4096px. Everything runs in the browser; nothing is uploaded.
  */
-export function GeneratorApp({ placeholder, initialType = "url" }: { placeholder: string[]; initialType?: QrTypeSlug }) {
+export function GeneratorApp({ placeholder, initialType = "url", collapseTypes = false }: { placeholder: string[]; initialType?: QrTypeSlug; collapseTypes?: boolean }) {
   const [type, setType] = useState<QrTypeSlug>(initialType);
+  // type pages (WiFi, vCard…) open with the picker folded, so the first field sits near the top on phones
+  const [showTypes, setShowTypes] = useState(!collapseTypes);
   const [values, setValues] = useState<Record<string, Values>>(() => Object.fromEntries(QR_TYPES.map((t) => [t.slug, { ...t.defaults }])));
   const [design, setDesign] = useState<QrDesign>({ ...DEFAULT_DESIGN, frame: "none", frameLabel: "Scan me", quietZone: 4 });
   const [format, setFormat] = useState<ExportFormat>("png");
@@ -85,9 +87,17 @@ export function GeneratorApp({ placeholder, initialType = "url" }: { placeholder
   return (
     <div className="mt-12 grid items-start gap-6 lg:mt-16 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-8">
       {/* ── Controls ── */}
-      <div className="glass order-2 rounded-xl p-5 sm:p-8 lg:order-1">
+      <div className="glass rounded-xl p-5 sm:p-8">
         <Step n={1} title="What should it open?">
-          <div role="radiogroup" aria-label="Content type" className="flex flex-col gap-4">
+          {!showTypes && (
+            <div className="flex items-center justify-between gap-3 rounded-sm border border-line bg-bg-raised px-4 py-3">
+              <span className="text-body-sm text-fg-muted">Type: <span className="font-medium text-fg">{def.name}</span></span>
+              <button type="button" onClick={() => setShowTypes(true)} aria-expanded={false} className="h-9 rounded-sm px-3 text-body-sm font-medium text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">
+                Change type
+              </button>
+            </div>
+          )}
+          <div role="radiogroup" aria-label="Content type" className={cn("flex flex-col gap-4", !showTypes && "hidden")}>
             {GROUPS.map((g) => (
               <div key={g}>
                 <p className="eyebrow mb-2">{g}</p>
@@ -254,7 +264,7 @@ export function GeneratorApp({ placeholder, initialType = "url" }: { placeholder
       </div>
 
       {/* ── Preview + download ── */}
-      <div className="order-1 flex flex-col gap-4 lg:sticky lg:top-28 lg:order-2">
+      <div className="flex flex-col gap-4 lg:sticky lg:top-28">
         <Card tilt spotlight className="rounded-xl p-6 sm:p-8">
           <div className="flex items-center justify-between">
             <span className="eyebrow">Preview</span>

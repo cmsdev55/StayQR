@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/content/breadcrumbs";
-import { JsonLd, SITE, breadcrumbLd } from "@/components/content/json-ld";
+import { JsonLd, ORG_REF, SITE, breadcrumbLd } from "@/components/content/json-ld";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { COMPANY } from "@/content/company";
 
@@ -31,7 +31,8 @@ export default function ContactPage() {
           "@context": "https://schema.org",
           "@type": "ContactPage",
           url: `${SITE}/contact`,
-          mainEntity: { "@type": "Organization", name: COMPANY.name, url: SITE, contactPoint: CHANNELS.map((c) => ({ "@type": "ContactPoint", contactType: c.title, email: c.email })) },
+          name: `Contact ${COMPANY.name}`,
+          mainEntity: { ...ORG_REF, contactPoint: CHANNELS.map((c) => ({ "@type": "ContactPoint", contactType: c.title.toLowerCase(), email: c.email, availableLanguage: "en" })) },
         }}
       />
       <section aria-labelledby="contact-title" className="noise bg-grid relative isolate overflow-hidden pb-24 pt-28 sm:pt-36 lg:pb-32">

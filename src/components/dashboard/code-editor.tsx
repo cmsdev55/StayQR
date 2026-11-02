@@ -3,8 +3,9 @@
 import { COMPANY } from "@/content/company";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMemo, useRef, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { deleteCodeAction, saveCodeAction } from "@/app/dashboard/actions";
+import { PENDING_DESTINATION_KEY } from "@/components/content/dynamic-try";
 import { PlanNotice } from "@/components/dashboard/codes-list";
 import { Toast } from "@/components/dashboard/toast";
 import { StylePicker, SwatchPicker } from "@/components/qr/qr-controls";
@@ -60,6 +61,18 @@ export function CodeEditor({ code, folders, plan, shortHost }: { code: DashCode 
   const preview = useRef<QrPreviewHandle>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const readOnly = !plan.canEdit;
+
+  // a destination typed on /dynamic-qr-code-generator before signing up fills the first new code
+  useEffect(() => {
+    if (!isNew) return;
+    try {
+      const pending = localStorage.getItem(PENDING_DESTINATION_KEY);
+      if (pending) {
+        setDraft((d) => (d.destination ? d : { ...d, destination: pending }));
+        localStorage.removeItem(PENDING_DESTINATION_KEY);
+      }
+    } catch {}
+  }, [isNew]);
   const dirty = JSON.stringify(draft) !== JSON.stringify(saved);
   const set = <K extends keyof Draft>(k: K) => (v: Draft[K]) => setDraft((d) => ({ ...d, [k]: v }));
   const setDesign = <K extends keyof QrDesign>(k: K) => (v: QrDesign[K]) => setDraft((d) => ({ ...d, design: { ...d.design, [k]: v } }));

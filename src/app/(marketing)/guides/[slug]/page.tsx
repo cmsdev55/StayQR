@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { AD_SLOTS, AdSlot } from "@/components/ads/ad-slot";
 import { Breadcrumbs } from "@/components/content/breadcrumbs";
 import { GuideCards } from "@/components/content/guide-cards";
-import { JsonLd, SITE, breadcrumbLd } from "@/components/content/json-ld";
+import { JsonLd, ORG_REF, SITE, breadcrumbLd } from "@/components/content/json-ld";
 import { Block } from "@/components/content/blocks";
 import { RelatedTypes } from "@/components/content/type-grid";
 import { CtaBand } from "@/components/sections/cta-band";
@@ -71,8 +71,8 @@ export default async function GuidePage({ params }: Props) {
           dateModified: g.updated,
           mainEntityOfPage: `${SITE}/guides/${g.slug}`,
           image: `${SITE}/opengraph-image`,
-          author: { "@type": "Organization", name: "EndureQR", url: SITE },
-          publisher: { "@type": "Organization", name: "EndureQR", url: SITE, logo: { "@type": "ImageObject", url: `${SITE}/icon.svg` } },
+          author: ORG_REF,
+          publisher: ORG_REF,
         }}
       />
 

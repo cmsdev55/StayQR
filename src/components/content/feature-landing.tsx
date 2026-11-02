@@ -3,8 +3,9 @@ import { AD_SLOTS, AdSlot } from "@/components/ads/ad-slot";
 import { PaymentMethods } from "@/components/billing/payment-methods";
 import { Block } from "@/components/content/blocks";
 import { Breadcrumbs } from "@/components/content/breadcrumbs";
+import { DynamicTry } from "@/components/content/dynamic-try";
 import { GuideCards } from "@/components/content/guide-cards";
-import { JsonLd, SITE, breadcrumbLd } from "@/components/content/json-ld";
+import { JsonLd, ORG_ID, SITE, breadcrumbLd, softwareAppLd } from "@/components/content/json-ld";
 import { RelatedTypes } from "@/components/content/type-grid";
 import { CtaBand } from "@/components/sections/cta-band";
 import { Faq } from "@/components/sections/faq";
@@ -13,7 +14,6 @@ import { ButtonLink } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { featurePage, type FeatureSlug } from "@/content/feature-pages";
 import { GUIDES } from "@/content/guides";
-import { LIFETIME, PRO } from "@/content/plans";
 import { qrMatrix } from "@/lib/qr";
 import { qrType } from "@/lib/qr-types";
 
@@ -44,21 +44,8 @@ export function FeatureLanding({ slug }: { slug: FeatureSlug }) {
       <JsonLd
         data={
           p.tool
-            ? { "@context": "https://schema.org", "@type": "WebApplication", name: p.title, url: `${SITE}/${p.slug}`, description: p.description, applicationCategory: "UtilitiesApplication", operatingSystem: "Any (runs in the browser)", offers: { "@type": "Offer", price: "0", priceCurrency: "USD" } }
-            : {
-                "@context": "https://schema.org",
-                "@type": "SoftwareApplication",
-                name: `EndureQR: ${p.eyebrow}`,
-                url: `${SITE}/${p.slug}`,
-                description: p.description,
-                applicationCategory: "BusinessApplication",
-                operatingSystem: "Web",
-                offers: [
-                  { "@type": "Offer", name: "Pro monthly", price: String(PRO.monthly), priceCurrency: "USD" },
-                  { "@type": "Offer", name: "Pro yearly", price: String(PRO.yearly), priceCurrency: "USD" },
-                  { "@type": "Offer", name: "Lifetime", price: String(LIFETIME), priceCurrency: "USD" },
-                ],
-              }
+            ? { "@context": "https://schema.org", "@type": "WebApplication", name: p.title, url: `${SITE}/${p.slug}`, description: p.description, applicationCategory: "UtilitiesApplication", operatingSystem: "Any (runs in the browser)", offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }, publisher: { "@id": ORG_ID } }
+            : { "@context": "https://schema.org", ...softwareAppLd(), description: p.description }
         }
       />
 
@@ -66,7 +53,8 @@ export function FeatureLanding({ slug }: { slug: FeatureSlug }) {
         <div className="mx-auto max-w-container px-4 sm:px-6">
           <Breadcrumbs items={crumbs} />
           <SectionHeading as="h1" id="feature-title" immediate className="mt-6" eyebrow={p.eyebrow} title={p.h1} intro={p.intro} />
-          {!p.tool && (
+          {p.slug === "dynamic-qr-code-generator" && <DynamicTry />}
+          {!p.tool && p.slug !== "dynamic-qr-code-generator" && (
             <div className="fade-up mt-8 flex flex-col gap-3 sm:flex-row" style={{ ["--d" as string]: "380ms" }}>
               <ButtonLink href={p.cta.href} size="lg">{p.cta.label}</ButtonLink>
               <ButtonLink href="/pricing" size="lg" variant="secondary">See pricing</ButtonLink>
@@ -76,7 +64,7 @@ export function FeatureLanding({ slug }: { slug: FeatureSlug }) {
           {p.tool && (
             <div id="generator" className="mt-12 scroll-mt-24">
               <h2 className="sr-only">Make your QR code</h2>
-              <GeneratorApp placeholder={placeholder} />
+              <GeneratorApp placeholder={placeholder} collapseTypes />
             </div>
           )}
         </div>

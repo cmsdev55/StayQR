@@ -5,7 +5,7 @@ import { Pricing } from "@/components/sections/pricing";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { FAQ } from "@/content/faq";
 import { LIFETIME, MATRIX, PRO } from "@/content/plans";
-import { JsonLd, SITE } from "@/components/content/json-ld";
+import { JsonLd, breadcrumbLd, softwareAppLd } from "@/components/content/json-ld";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -26,22 +26,8 @@ const BILLING_FAQ = [
 export default function PricingPage() {
   return (
     <main>
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "SoftwareApplication",
-          name: "EndureQR",
-          url: SITE,
-          applicationCategory: "BusinessApplication",
-          operatingSystem: "Web",
-          offers: [
-            { "@type": "Offer", name: "Free", price: "0", priceCurrency: "USD", url: `${SITE}/qr-code-generator` },
-            { "@type": "Offer", name: "Pro monthly", price: String(PRO.monthly), priceCurrency: "USD", url: `${SITE}/pricing` },
-            { "@type": "Offer", name: "Pro yearly", price: String(PRO.yearly), priceCurrency: "USD", url: `${SITE}/pricing` },
-            { "@type": "Offer", name: "Lifetime", price: String(LIFETIME), priceCurrency: "USD", url: `${SITE}/pricing` },
-          ],
-        }}
-      />
+      <JsonLd data={{ "@context": "https://schema.org", ...softwareAppLd() }} />
+      <JsonLd data={breadcrumbLd([{ name: "Home", path: "/" }, { name: "Pricing", path: "/pricing" }])} />
       <Pricing page />
 
       <section aria-labelledby="matrix-title" className="border-t border-line py-24 lg:py-32">

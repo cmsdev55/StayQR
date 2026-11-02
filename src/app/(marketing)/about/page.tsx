@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/content/breadcrumbs";
-import { JsonLd, SITE, breadcrumbLd } from "@/components/content/json-ld";
+import { JsonLd, SITE, breadcrumbLd, organizationLd } from "@/components/content/json-ld";
 import { CtaBand } from "@/components/sections/cta-band";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { COMPANY } from "@/content/company";
@@ -29,7 +29,7 @@ export default function AboutPage() {
   return (
     <main>
       <JsonLd data={breadcrumbLd(CRUMBS)} />
-      <JsonLd data={{ "@context": "https://schema.org", "@type": "Organization", name: COMPANY.name, url: SITE, logo: `${SITE}/icon.svg`, email: COMPANY.email.hello }} />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "AboutPage", url: `${SITE}/about`, name: `About ${COMPANY.name}`, mainEntity: organizationLd() }} />
       <section aria-labelledby="about-title" className="noise bg-grid relative isolate overflow-hidden pb-20 pt-28 sm:pt-36 lg:pb-28">
         <div className="mx-auto max-w-container px-4 sm:px-6">
           <Breadcrumbs items={CRUMBS} />

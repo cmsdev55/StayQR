@@ -22,7 +22,8 @@ const CSP = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  `connect-src 'self'${isDev ? " ws:" : ""} ${[...GOOGLE_ADS, ...LEMON].join(" ")}`,
+  // data: lets qr-code-styling re-read an uploaded logo (a data URL) when it embeds it in the exported SVG
+  `connect-src 'self' data:${isDev ? " ws:" : ""} ${[...GOOGLE_ADS, ...LEMON].join(" ")}`,
   `frame-src ${[...GOOGLE_ADS, ...LEMON].join(" ")}`,
   "worker-src 'self' blob:",
   "object-src 'none'",

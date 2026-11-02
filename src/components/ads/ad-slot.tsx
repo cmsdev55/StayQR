@@ -18,6 +18,8 @@ let scriptRequested = false;
 function loadScript() {
   if (scriptRequested || !CLIENT) return;
   scriptRequested = true;
+  // public pages already carry the snippet in <head> (app/(marketing)/layout.tsx)
+  if (document.querySelector('script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]')) return;
   const s = document.createElement("script");
   s.async = true;
   s.crossOrigin = "anonymous";

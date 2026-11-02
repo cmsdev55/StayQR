@@ -11,6 +11,7 @@ tsconfig.tsbuildinfo
 .pgdata
 
 !.env.example
+!.env.production
 
 .vercel
 .env*.local

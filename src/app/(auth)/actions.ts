@@ -25,9 +25,18 @@ export type AuthState = { error?: string; notice?: string } | undefined;
 const str = (f: FormData, k: string) => String(f.get(k) ?? "");
 const SLOW_DOWN = "Too many attempts. Wait a few minutes and try again.";
 
-async function sendVerification(userId: string, email: string) {
+async function sendVerification(userId: string, email: string, name: string | null, next = "/dashboard") {
   const token = await issueToken(userId, "verify");
-  await verifyEmail(email, `${env.siteUrl}/auth/verify?token=${token}`).catch((e) => console.error("verify email failed", e));
+  const after = next === "/dashboard" ? "" : `&next=${encodeURIComponent(next)}`;
+  await verifyEmail(email, `${env.siteUrl}/auth/verify?token=${token}${after}`, name).catch((e) => console.error("verify email failed", e));
+}
+
+/** The "check your inbox" page after sign-up, or after logging in before the email is confirmed. */
+function toCheckEmail(email: string, next: string, reason?: "login"): never {
+  const q = new URLSearchParams({ email });
+  if (next !== "/dashboard") q.set("next", next);
+  if (reason) q.set("reason", reason);
+  redirect(`/auth/check-email?${q}`);
 }
 
 export async function signUpAction(_: AuthState, form: FormData): Promise<AuthState> {
@@ -45,9 +54,9 @@ export async function signUpAction(_: AuthState, form: FormData): Promise<AuthSt
     insert into public.profiles (email, name, password_hash) values (${email}, ${name}, ${hash})
     on conflict ((lower(email))) do nothing returning id`;
   if (!user) return { error: "There's already an account with this email. Log in, or reset your password." };
-  await sendVerification(user.id, email);
-  await startSession(user.id);
-  redirect(next);
+  // no session yet: the account opens once the emailed link is clicked and the user logs in
+  await sendVerification(user.id, email, name, next);
+  toCheckEmail(email, next);
 }
 
 export async function signInAction(_: AuthState, form: FormData): Promise<AuthState> {
@@ -58,13 +67,18 @@ export async function signInAction(_: AuthState, form: FormData): Promise<AuthSt
   const emailKey = `login:email:${email}`;
   if (await tooMany([{ key: emailKey, max: 10 }, { key: `login:ip:${await clientIp()}`, max: 40 }], 15)) return { error: SLOW_DOWN };
 
-  const [user] = await db()<{ id: string; password_hash: string | null; google_sub: string | null }[]>`
-    select id, password_hash, google_sub from public.profiles where lower(email) = ${email}`;
+  const [user] = await db()<{ id: string; name: string | null; password_hash: string | null; google_sub: string | null; verified: boolean }[]>`
+    select id, name, password_hash, google_sub, email_verified_at is not null as verified from public.profiles where lower(email) = ${email}`;
   const ok = await verifyPassword(password, user?.password_hash ?? DUMMY_HASH); // same work whether or not the account exists
   if (!user || !ok) {
     return { error: user && !user.password_hash && user.google_sub ? "This account uses Google sign-in. Use “Continue with Google”." : "That email and password don't match." };
   }
   await clearAttempts(emailKey);
+  if (!user.verified) {
+    // right password, unconfirmed email: send a fresh link (a few an hour at most) instead of a session
+    if (!(await tooMany([{ key: `verify:email:${email}`, max: 3 }], 60))) await sendVerification(user.id, email, user.name, next);
+    toCheckEmail(email, next, "login");
+  }
   await startSession(user.id);
   redirect(next);
 }
@@ -74,10 +88,10 @@ export async function resetRequestAction(_: AuthState, form: FormData): Promise<
   const email = normaliseEmail(str(form, "email"));
   if (!validEmail(email)) return { error: "Enter your email address first." };
   if (await tooMany([{ key: `reset:email:${email}`, max: 3 }, { key: `reset:ip:${await clientIp()}`, max: 10 }], 60)) return { error: SLOW_DOWN };
-  const [user] = await db()<{ id: string }[]>`select id from public.profiles where lower(email) = ${email}`;
+  const [user] = await db()<{ id: string; name: string | null }[]>`select id, name from public.profiles where lower(email) = ${email}`;
   if (user) {
     const token = await issueToken(user.id, "reset");
-    await resetEmail(email, `${env.siteUrl}/auth/reset?token=${token}`).catch((e) => console.error("reset email failed", e));
+    await resetEmail(email, `${env.siteUrl}/auth/reset?token=${token}`, user.name).catch((e) => console.error("reset email failed", e));
   }
   return { notice: "If that email has an account, a reset link is on its way. It works for one hour." };
 }
@@ -100,8 +114,20 @@ export async function resendVerificationAction(): Promise<AuthState> {
   const user = await requireUser();
   if (user.verified) return { notice: "Your email is already confirmed." };
   if (await tooMany([{ key: `verify:user:${user.id}`, max: 3 }], 60)) return { error: SLOW_DOWN };
-  await sendVerification(user.id, user.email);
+  await sendVerification(user.id, user.email, user.name);
   return { notice: `Sent. Check ${user.email} for the confirmation link.` };
+}
+
+/** From the check-your-inbox page or an expired link, signed out. Answers the same whether or not the account exists. */
+export async function resendVerificationByEmailAction(_: AuthState, form: FormData): Promise<AuthState> {
+  const email = normaliseEmail(str(form, "email"));
+  const next = safeNext(form.get("next"));
+  if (!validEmail(email)) return { error: "Enter a valid email address." };
+  if (await tooMany([{ key: `verify:email:${email}`, max: 3 }, { key: `verify:ip:${await clientIp()}`, max: 10 }], 60)) return { error: SLOW_DOWN };
+  const [user] = await db()<{ id: string; name: string | null }[]>`
+    select id, name from public.profiles where lower(email) = ${email} and email_verified_at is null`;
+  if (user) await sendVerification(user.id, email, user.name, next);
+  return { notice: `If ${email} still needs confirming, a new link is on its way. It works for 24 hours.` };
 }
 
 export async function changePasswordAction(_: AuthState, form: FormData): Promise<AuthState> {

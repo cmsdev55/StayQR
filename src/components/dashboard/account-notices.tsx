@@ -5,8 +5,6 @@ import { resendVerificationAction, type AuthState } from "@/app/(auth)/actions";
 import { Toast } from "@/components/dashboard/toast";
 
 const FLASH: Record<string, string> = {
-  "verified=1": "Email confirmed. Thank you!",
-  "verified=expired": "That confirmation link has expired. Send a new one below.",
   "password=reset": "Password changed. Other devices are signed out.",
 };
 

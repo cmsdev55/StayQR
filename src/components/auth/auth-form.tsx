@@ -25,12 +25,17 @@ export function AuthForm({
   next,
   error: initialError,
   google,
+  email: initialEmail,
+  verified,
 }: {
   mode: "login" | "signup";
   plan?: string;
   next?: string;
   error?: string;
   google?: boolean;
+  /** Pre-filled after following the confirmation link. */
+  email?: string;
+  verified?: boolean;
 }) {
   const signup = mode === "signup";
   const planKey = plan === "pro" ? "pro-yearly" : plan;
@@ -39,7 +44,7 @@ export function AuthForm({
   const [state, action, busy] = useActionState<AuthState, FormData>(signup ? signUpAction : signInAction, undefined);
   const [resetState, resetAct, resetting] = useActionState<AuthState, FormData>(resetRequestAction, undefined);
   const [show, setShow] = useState(false);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(initialEmail ?? "");
   const error = state?.error ?? (initialError ? ERRORS[initialError] : undefined);
 
   return (
@@ -48,6 +53,13 @@ export function AuthForm({
       <p className="mt-3 text-body text-fg-muted">
         {signup ? "Your dynamic codes keep working, even if you leave." : "Log in to edit your codes and see your scans."}
       </p>
+
+      {verified && !state && (
+        <p role="status" className="mt-6 flex items-center gap-3 rounded-sm bg-accent/[0.1] px-4 py-3 text-body-sm text-fg">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-accent-text" aria-hidden><path d="M3 8.5l3 3 7-7" /></svg>
+          Email verified. Log in to continue.
+        </p>
+      )}
 
       {planLabel && (
         <p className="mt-6 flex items-center justify-between rounded-sm border border-line bg-glass-strong px-4 py-3 text-body-sm">

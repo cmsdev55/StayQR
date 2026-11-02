@@ -29,20 +29,38 @@ await page.fill('input[name="password"]', "password");
 await submit();
 ok(await vis(page.getByText("Pick a less common password.")), "common password rejected");
 await page.fill('input[name="password"]', "first-password-1");
+await Promise.all([page.waitForURL(/\/auth\/check-email/), submit()]);
+ok(await vis(page.getByRole("heading", { name: "Check your inbox" })), "sign-up lands on check-your-inbox");
+ok(!(await ctx.cookies()).some((c) => c.name === "endureqr_session"), "no session before the email is confirmed");
+
+await page.goto(`${BASE}/login`);
+await page.fill('input[name="email"]', email);
+await page.fill('input[name="password"]', "first-password-1");
+await Promise.all([page.waitForURL(/\/auth\/check-email.*reason=login/), submit()]);
+ok(await vis(page.getByRole("heading", { name: "Confirm your email to log in" })), "logging in unconfirmed sends a new link instead of a session");
+ok(!(await ctx.cookies()).some((c) => c.name === "endureqr_session"), "still no session");
+
+const verify = await lastLink("verify");
+ok(!!verify, "confirmation email produced a link");
+await page.goto(verify);
+ok(await vis(page.getByRole("heading", { name: "Email verified" })), "link shows the email-verified page");
+await Promise.all([page.waitForURL(/\/login\?verified=1/), page.click('a:has-text("Log in to your account")')]);
+ok((await page.inputValue('input[name="email"]')) === email && (await vis(page.getByText("Email verified. Log in to continue."))), "login is pre-filled after verifying");
+await page.fill('input[name="password"]', "first-password-1");
 await Promise.all([page.waitForURL(/\/dashboard/), submit()]);
-ok(await vis(page.getByText("Confirm your email")), "sign-up lands on the dashboard with the confirm banner");
+await page.waitForTimeout(500);
+ok(!(await page.getByText("Confirm your email").isVisible()), "verified account logs in with no confirm banner");
 
 const cookie = (await ctx.cookies()).find((c) => c.name === "endureqr_session");
 const [s] = await sql`select id from public.sessions where id = ${createHash("sha256").update(cookie.value).digest("hex")}`;
 const [raw] = await sql`select count(*)::int as n from public.sessions where id = ${cookie.value}`;
 ok(cookie.httpOnly && s && raw.n === 0, "session cookie is httpOnly and stored only as a hash");
 
-const verify = await lastLink("verify");
-ok(!!verify, "confirmation email produced a link");
-await page.goto(verify);
-await page.waitForURL(/\/dashboard/);
-await page.waitForTimeout(500);
-ok(!(await page.getByText("Confirm your email").isVisible()), "banner gone after confirming");
+const scanner = await (await browser.newContext()).newPage();
+await scanner.goto(verify);
+ok(await vis(scanner.getByRole("heading", { name: "Email verified" })), "a used link still shows verified (mail scanners open links first)");
+await scanner.goto(`${BASE}/auth/verify?token=not-a-real-token`);
+ok(await vis(scanner.getByRole("heading", { name: "This link has expired" })), "unknown link offers a new one");
 
 const p2 = await (await browser.newContext()).newPage();
 await p2.goto(`${BASE}/signup`);

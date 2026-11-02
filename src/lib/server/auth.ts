@@ -85,6 +85,25 @@ export async function consumeToken(token: string, kind: "verify" | "reset") {
   return row?.user_id ?? null;
 }
 
+/**
+ * The verify link: confirms the address and returns whose it is, or null for an unknown or expired link. A link that
+ * was already used still counts once the address is confirmed, because mail scanners often open links first.
+ */
+export async function confirmEmailToken(token: string) {
+  const sql = db();
+  const userId = await consumeToken(token, "verify");
+  if (userId) {
+    const [u] = await sql<{ id: string; email: string }[]>`
+      update public.profiles set email_verified_at = coalesce(email_verified_at, now()) where id = ${userId} returning id, email`;
+    return u ?? null;
+  }
+  if (!token || token.length > 100) return null;
+  const [u] = await sql<{ id: string; email: string }[]>`
+    select p.id, p.email from public.auth_tokens t join public.profiles p on p.id = t.user_id
+     where t.id = ${sha256(token)} and t.kind = 'verify' and t.used_at is not null and p.email_verified_at is not null`;
+  return u ?? null;
+}
+
 // ── Throttling ───────────────────────────────────────────────────────────
 
 export async function clientIp() {

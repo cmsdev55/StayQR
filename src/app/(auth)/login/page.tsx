@@ -11,8 +11,8 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-export default async function LoginPage({ searchParams }: { searchParams: Promise<{ plan?: string; next?: string; error?: string }> }) {
-  const { plan, next, error } = await searchParams;
+export default async function LoginPage({ searchParams }: { searchParams: Promise<{ plan?: string; next?: string; error?: string; email?: string; verified?: string }> }) {
+  const { plan, next, error, email, verified } = await searchParams;
   if (await getUser()) redirect(safeNext(next));
-  return <AuthForm mode="login" plan={plan} next={next ? safeNext(next) : undefined} error={error} google={googleEnabled()} />;
+  return <AuthForm mode="login" plan={plan} next={next ? safeNext(next) : undefined} error={error} google={googleEnabled()} email={email?.slice(0, 254)} verified={verified === "1"} />;
 }

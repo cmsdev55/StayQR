@@ -44,10 +44,10 @@ export const GUIDES_USES: Guide[] = [
         type: "p",
         text: "A link makes more sense when your details change often, or when the page does more to sell you than a contact entry could. A designer might link to a portfolio, a consultant to a booking page. If you take this route, put a clear save-contact option near the top of the page. For a professional profile, the [LinkedIn QR code generator](/qr-code-generator/linkedin) makes a code that opens it directly.",
       },
-      { type: "h2", id: "fields-to-include", text: "Which fields to include in a vCard" },
+      { type: "h2", id: "fields-to-include", text: "Which fields should a vCard QR code include?" },
       {
         type: "p",
-        text: "Every field you add makes the code denser and the modules smaller. Include what someone needs to contact you again, and leave out the rest.",
+        text: "Include only what someone needs to contact you again, and leave out the rest. Every field you add makes the code denser and the modules smaller.",
       },
       {
         type: "ul",
@@ -68,10 +68,14 @@ export const GUIDES_USES: Guide[] = [
         type: "p",
         text: "To see why this matters, compare sizes. A short web address produces a code around 29 modules wide. A vCard with name, title, company, mobile, email and website runs to roughly 200 characters, which needs a grid of around 57 modules. Printed at 2.5 cm, each of those modules is less than half a millimetre across.",
       },
-      { type: "h2", id: "vcard-3-compatibility", text: "Why vCard 3.0 is the safe format" },
+      { type: "h2", id: "vcard-3-compatibility", text: "Which vCard version should you use?" },
       {
         type: "p",
-        text: "A vCard is plain text with one field per line. Three versions are in common use: 2.1, 3.0 and 4.0. Version 3.0, defined in RFC 2426, is the one phone scanners handle most consistently. The iPhone camera, Android camera apps and most scanner apps read it. Version 4.0 is newer, but support in phone scanners is less even, and it adds nothing a business card needs. The [vCard QR code generator](/qr-code-generator/vcard) on EndureQR writes vCard 3.0 for this reason.",
+        text: "Use vCard 3.0, the version phone scanners handle most consistently. A vCard is plain text with one field per line, and three versions are in common use: 2.1, 3.0 and 4.0. Version 3.0 is defined in [RFC 2426](https://www.rfc-editor.org/rfc/rfc2426). The iPhone camera, Android camera apps and most scanner apps read it.",
+      },
+      {
+        type: "p",
+        text: "[Version 4.0](https://www.rfc-editor.org/rfc/rfc6350) is newer, but support in phone scanners is less even, and it adds nothing a business card needs. The [vCard QR code generator](/qr-code-generator/vcard) on EndureQR writes vCard 3.0 for this reason.",
       },
       {
         type: "p",
@@ -93,17 +97,17 @@ export const GUIDES_USES: Guide[] = [
         type: "p",
         text: "A generator writes all of this for you. If you build the text by hand, two details cause most problems. The N field must hold the surname before the first name, or the phone saves you back to front. And accented letters or non-Latin scripts, while fine on recent phones, should be tested, because some older scanner apps mishandle them.",
       },
-      { type: "h2", id: "size-and-placement", text: "Size and placement on an 85 x 55 mm card" },
+      { type: "h2", id: "size-and-placement", text: "How big should a QR code be on a business card?" },
       {
         type: "p",
-        text: "The standard UK and European business card is 85 x 55 mm. The common US size is 3.5 x 2 in, about 89 x 51 mm. Either way space is tight, so the right size depends on what the code holds.",
+        text: "About 2 to 3 cm (0.8 to 1.2 in) wide, depending on what the code holds. The standard UK and European business card is 85 x 55 mm. The common US size is 3.5 x 2 in, about 89 x 51 mm. Either way space is tight.",
       },
       {
         type: "ul",
         items: [
           "**Short link:** about 2 to 2.5 cm (0.8 to 1 in) wide is enough.",
           "**vCard:** about 2.5 to 3 cm (1 to 1.2 in) wide, because the grid is much finer.",
-          "**Quiet zone:** keep a clear, light margin of 4 modules on every side, free of text and lines.",
+          "**Quiet zone:** keep a [clear, light margin of 4 modules](https://www.qrcode.com/en/howto/code.html) on every side, free of text and lines.",
           "**Safe area:** keep the code and its margin a few millimetres inside the trim line, so the cutting never clips it.",
         ],
       },
@@ -111,6 +115,7 @@ export const GUIDES_USES: Guide[] = [
         type: "p",
         text: "The back of the card is usually the best place. It leaves the front clean for your name and logo, and the code can sit at a generous size on its own. If it has to go on the front, put it in a corner opposite the logo, at the same size.",
       },
+      { type: "h3", text: "Print quality and logos" },
       {
         type: "p",
         text: "Print quality matters as much as size. Use dark modules on white or very light stock, send your printer an SVG or PDF, and keep foil, embossing, spot gloss and heavy texture away from the code. Matte finishes scan more reliably than gloss. The [QR code size guide](/guides/qr-code-size-for-printing) explains the numbers behind these sizes.",
@@ -196,15 +201,16 @@ export const GUIDES_USES: Guide[] = [
         type: "p",
         text: "QR codes have four error correction levels. **Level L** can restore about 7% of the data if the code is damaged, **M** about 15%, **Q** about 25% and **H** about 30%. Higher levels make a code more robust but add modules, so the pattern gets denser for the same content. M suits most printed codes, Q suits codes that face rough handling, and H is the right choice when a logo covers part of the code.",
       },
-      { type: "h2", id: "how-error-correction-works", text: "How QR code error correction works" },
+      { type: "h2", id: "how-error-correction-works", text: "How does QR code error correction work?" },
       {
         type: "p",
-        text: "A QR code stores data as a sequence of 8-bit blocks called codewords. Alongside your data, it stores extra codewords calculated with Reed-Solomon coding, the same family of error correction used on CDs and DVDs. If some codewords are missing or misread, a scanner can work out the original from the ones that remain.",
+        text: "QR code error correction works by storing extra recovery data alongside your content, so a scanner can rebuild parts that are missing or misread. A QR code stores data as a sequence of [8-bit blocks called codewords](https://www.qrcode.com/en/about/error_correction.html). Alongside your data, it stores extra codewords calculated with Reed-Solomon coding, the same family of error correction used on CDs and DVDs. If some codewords are missing or misread, a scanner can work out the original from the ones that remain.",
       },
       {
         type: "p",
         text: "The level decides how many of these extra codewords the code carries. More recovery data means more codewords in total, and more codewords mean more modules in the grid. The level is recorded in the code's format information, next to the corner squares, so a scanner always knows which level it is reading. You only choose a level when you make a code, never when you scan one.",
       },
+      { type: "h3", text: "What the percentages mean" },
       {
         type: "p",
         text: "Strictly, the percentages describe codewords, not area. In practice it is fair to think of them as the share of the code that can be dirty, scratched or covered and still scan. Two limits are worth knowing:",
@@ -231,10 +237,10 @@ export const GUIDES_USES: Guide[] = [
         type: "p",
         text: "M is a common default in QR software, and for good reason. It survives everyday wear without making the code much denser than L.",
       },
-      { type: "h2", id: "density-trade-off", text: "The trade-off: robustness against density" },
+      { type: "h2", id: "density-trade-off", text: "Does higher error correction make a QR code denser?" },
       {
         type: "p",
-        text: "QR codes come in 40 versions, each with a fixed grid, from 21 x 21 modules at version 1 to 177 x 177 at version 40. Raising the error correction level gives more of that grid to recovery data and less to your content, so the same content can need a larger version.",
+        text: "Yes. For the same content, a higher level means more modules, so the pattern gets denser. QR codes come in [40 versions](https://www.qrcode.com/en/about/version.html), each with a fixed grid, from 21 x 21 modules at version 1 to 177 x 177 at version 40. Raising the error correction level gives more of that grid to recovery data and less to your content, so the same content can need a larger version.",
       },
       {
         type: "p",
@@ -262,7 +268,11 @@ export const GUIDES_USES: Guide[] = [
         type: "p",
         text: "If a code needs to be small, the best fix is shorter content, not a lower level. The [print size guide](/guides/qr-code-size-for-printing) covers minimum sizes and scanning distance.",
       },
-      { type: "h2", id: "when-to-choose-each-level", text: "When to choose each level" },
+      { type: "h2", id: "when-to-choose-each-level", text: "Which error correction level should you use?" },
+      {
+        type: "p",
+        text: "Use M for most print, Q for codes that take a beating, H whenever a logo covers part of the code, and L only for screens or very long content.",
+      },
       { type: "h3", text: "Level L" },
       {
         type: "p",
@@ -308,7 +318,7 @@ export const GUIDES_USES: Guide[] = [
       { type: "h2", id: "setting-the-level", text: "Setting the level in practice" },
       {
         type: "p",
-        text: "Many generators pick a level for you and never show it. The EndureQR generator has an Advanced panel where you can choose L, M, Q or H yourself when there is no logo. The same panel sets the quiet zone, the blank margin around the code, from 2 to 8 modules. The standard recommends 4, which is the safe choice for print.",
+        text: "Many generators pick a level for you and never show it. The EndureQR generator has an Advanced panel where you can choose L, M, Q or H yourself when there is no logo. The same panel sets the quiet zone, the blank margin around the code, from 2 to 8 modules. The [standard recommends 4](https://www.qrcode.com/en/howto/code.html), which is the safe choice for print.",
       },
       {
         type: "ol",
@@ -368,10 +378,10 @@ export const GUIDES_USES: Guide[] = [
         type: "p",
         text: "To make a QR code for Google reviews, open your Google Business Profile, find the option to ask for reviews and copy the review link it gives you. Paste that link into a URL QR code generator, download the code and print it where customers finish their visit, such as receipts, the counter or table tents. Scanning it opens your review form on Google, ready for the customer to rate and write.",
       },
-      { type: "h2", id: "get-your-review-link", text: "Get your review link from Google Business Profile" },
+      { type: "h2", id: "get-your-review-link", text: "Where do you find your Google review link?" },
       {
         type: "p",
-        text: "Google gives each verified Business Profile a short link that opens the review form directly. You need to be an owner or manager of the profile to see it.",
+        text: "You find it in your Google Business Profile, which gives each verified profile a short link that opens the review form directly. You need to be an owner or manager of the profile to see it.",
       },
       {
         type: "ol",
@@ -385,7 +395,7 @@ export const GUIDES_USES: Guide[] = [
       },
       {
         type: "p",
-        text: "If you cannot find the option, check that the profile is verified and that you are signed in with the right account. Google's Business Profile help pages describe the current steps.",
+        text: "If you cannot find the option, check that the profile is verified and that you are signed in with the right account. [Google's Business Profile help pages](https://support.google.com/business/answer/3474122) describe the current steps.",
       },
       {
         type: "p",
@@ -428,10 +438,10 @@ export const GUIDES_USES: Guide[] = [
         type: "p",
         text: "If you run several branches, give each one its own code made from that branch's review link. A single shared code sends every review to one profile. Recheck your codes every few months, too. Receipt layouts change, stickers fade, and it is worth confirming the link still opens the right form.",
       },
-      { type: "h2", id: "where-to-place-it", text: "Where to place a Google review QR code" },
+      { type: "h2", id: "where-to-place-it", text: "Where should you put a Google review QR code?" },
       {
         type: "p",
-        text: "Ask while the experience is fresh and the customer has a spare minute. That is usually at the end of the visit or soon after it.",
+        text: "Put it where customers finish their visit, while the experience is fresh and they have a spare minute. That is usually at the end of the visit or soon after it.",
       },
       {
         type: "table",
@@ -453,10 +463,10 @@ export const GUIDES_USES: Guide[] = [
         type: "p",
         text: "On invoices sent by email, a clickable link works better than a code, because the customer is already on a device. Keep the code for the printed version. Cafés and restaurants can find more placement ideas on our page about [QR codes for restaurants](/industries/restaurants).",
       },
-      { type: "h2", id: "google-review-rules", text: "The rules: no incentives and no review gating" },
+      { type: "h2", id: "google-review-rules", text: "What are Google's rules for asking for reviews?" },
       {
         type: "p",
-        text: "Google's review policies are strict, and breaking them can cost you more than a few reviews. Two rules matter most for any QR code campaign.",
+        text: "Google does not allow incentives for reviews or review gating, and breaking its [review policies](https://support.google.com/contributionpolicy/answer/7400114) can cost you more than a few reviews. Those two rules matter most for any QR code campaign.",
       },
       { type: "h3", text: "Do not offer incentives" },
       {
@@ -482,7 +492,7 @@ export const GUIDES_USES: Guide[] = [
       },
       {
         type: "p",
-        text: "Google can remove reviews and take action against a profile that breaks these rules. Consumer protection law in many countries also treats fake and misleading reviews seriously. The safe approach is simple: ask every customer, in the same way, for an honest review.",
+        text: "Google can remove reviews and take action against a profile that breaks these rules. Consumer protection law in many countries also treats fake and misleading reviews seriously, as the [US Federal Trade Commission's rule on fake reviews](https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials) shows. The safe approach is simple: ask every customer, in the same way, for an honest review.",
       },
       { type: "h2", id: "getting-more-reviews", text: "Getting more reviews the honest way" },
       {
@@ -547,10 +557,10 @@ export const GUIDES_USES: Guide[] = [
         type: "p",
         text: "To track QR code scans, you need something that records each scan, because a standard static code sends phones straight to the destination and nothing in between counts them. There are two practical options: add **UTM parameters** to the link so your web analytics can identify visits from the code, or use a **dynamic QR code**, which passes every scan through a redirect that logs the time, approximate location and device.",
       },
-      { type: "h2", id: "why-static-codes-cannot-be-tracked", text: "Why a static QR code cannot track scans" },
+      { type: "h2", id: "why-static-codes-cannot-be-tracked", text: "Why can't a static QR code track scans?" },
       {
         type: "p",
-        text: "A static QR code is data in a printed pattern. When a phone scans it, the phone reads the web address and opens it directly. No server sits in between, and nobody is told the scan happened. The code has no memory and no connection.",
+        text: "Because nothing sits between the code and the destination to record the scan. A static QR code is data in a printed pattern. When a phone scans it, the phone reads the web address and opens it directly, and nobody is told the scan happened. The code has no memory and no connection.",
       },
       {
         type: "p",
@@ -567,7 +577,7 @@ export const GUIDES_USES: Guide[] = [
       },
       {
         type: "p",
-        text: "Five parameters are standard:",
+        text: "[Five parameters are standard](https://support.google.com/analytics/answer/10917952):",
       },
       {
         type: "ul",
@@ -579,6 +589,7 @@ export const GUIDES_USES: Guide[] = [
           "**utm_term**: optional, and mainly used for paid search keywords.",
         ],
       },
+      { type: "h3", text: "The limits of UTM tracking" },
       {
         type: "p",
         text: "This approach is free and works with a static code. It has real limits, though:",
@@ -613,7 +624,11 @@ export const GUIDES_USES: Guide[] = [
         type: "p",
         text: "You can also combine both methods. Point a dynamic code at a UTM-tagged address. The dynamic code counts every scan, the UTM tags show what visitors did on your site, and the printed pattern stays simple because it only holds the short link.",
       },
-      { type: "h2", id: "what-scan-analytics-show", text: "What scan analytics can and cannot tell you" },
+      { type: "h2", id: "what-scan-analytics-show", text: "What can QR code scan analytics tell you?" },
+      {
+        type: "p",
+        text: "Scan analytics show how many scans a code gets, when, roughly where and on what kind of device, but not who scanned it.",
+      },
       {
         type: "table",
         head: ["Data point", "Available?", "Where it comes from"],
@@ -641,7 +656,7 @@ export const GUIDES_USES: Guide[] = [
       { type: "h2", id: "privacy-considerations", text: "Privacy considerations" },
       {
         type: "p",
-        text: "Scan analytics does not reveal who someone is, but it can still involve personal data. IP addresses can count as personal data under laws such as the UK and EU GDPR. Treat scan data with the same care as the rest of your analytics.",
+        text: "Scan analytics does not reveal who someone is, but it can still involve personal data. IP addresses can count as personal data under laws such as the [UK and EU GDPR](https://www.legislation.gov.uk/eur/2016/679/introduction). Treat scan data with the same care as the rest of your analytics.",
       },
       {
         type: "ul",
@@ -710,10 +725,10 @@ export const GUIDES_USES: Guide[] = [
         type: "p",
         text: "QR codes help at every stage of an event. Use them on posters and invitations to open the event page or add the date to a calendar, at the venue for the agenda, WiFi and directions, and at the end for a feedback form. Tickets are different: each attendee needs a unique code issued by a ticketing system. For anything that may change after printing, such as the schedule, use a dynamic code so you can update the link without reprinting.",
       },
-      { type: "h2", id: "tickets-vs-information-codes", text: "Ticket codes and information codes" },
+      { type: "h2", id: "tickets-vs-information-codes", text: "What is the difference between ticket and information QR codes?" },
       {
         type: "p",
-        text: "Event organisers use two kinds of QR code, and they work in very different ways.",
+        text: "A ticket code is unique to each attendee and checked at the door, while an information code is the same for everyone. Event organisers use both, and they work in very different ways.",
       },
       {
         type: "ul",
@@ -735,7 +750,7 @@ export const GUIDES_USES: Guide[] = [
         type: "ul",
         items: [
           "**Posters and flyers.** Link to the event page. Size the code for the distance people walk past, at least one tenth of that distance in width.",
-          "**Invitations.** Add an add-to-calendar code. The [event QR code generator](/qr-code-generator/event) creates a calendar event in the standard VEVENT format, with a title, start and end times, location and description. Scanning it lets a phone add the event straight to its calendar.",
+          "**Invitations.** Add an add-to-calendar code. The [event QR code generator](/qr-code-generator/event) creates a calendar event in the standard [VEVENT format](https://www.rfc-editor.org/rfc/rfc5545), with a title, start and end times, location and description. Scanning it lets a phone add the event straight to its calendar.",
           "**Save-the-date cards.** A calendar code works well here too, as long as the date, time and place are settled.",
         ],
       },
@@ -747,7 +762,7 @@ export const GUIDES_USES: Guide[] = [
       { type: "h3", text: "Directions to the venue" },
       {
         type: "p",
-        text: "A [location QR code](/qr-code-generator/location) stores map coordinates and opens the phone's map app at that spot. Use it on tickets, joining instructions and car park signs. Drop the pin on the entrance people should use, not the middle of the building. Large venues, campuses and parks often have several gates, and the right pin saves a lot of walking.",
+        text: "A [location QR code](/qr-code-generator/location) stores map coordinates and [opens the phone's map app](https://developers.google.com/maps/documentation/urls/get-started) at that spot. Use it on tickets, joining instructions and car park signs. Drop the pin on the entrance people should use, not the middle of the building. Large venues, campuses and parks often have several gates, and the right pin saves a lot of walking.",
       },
       { type: "h3", text: "The agenda" },
       {
@@ -763,10 +778,10 @@ export const GUIDES_USES: Guide[] = [
         type: "p",
         text: "Codes on projected slides follow the same rules as print. Size them for the back row, not the front, and leave the slide up long enough for people to get their phones out.",
       },
-      { type: "h2", id: "badges", text: "QR codes on name badges" },
+      { type: "h2", id: "badges", text: "Should you put QR codes on name badges?" },
       {
         type: "p",
-        text: "Badges are a natural home for networking codes. A code on an attendee's badge can open their contact card or professional profile, so a quick scan replaces swapping business cards.",
+        text: "Yes, if attendees agree to share their details: badges are a natural home for networking codes. A code on an attendee's badge can open their contact card or professional profile, so a quick scan replaces swapping business cards.",
       },
       {
         type: "ul",
@@ -792,10 +807,10 @@ export const GUIDES_USES: Guide[] = [
           "Give people time. Show the code before the final questions, not as the lights come up.",
         ],
       },
-      { type: "h2", id: "dynamic-codes-for-changing-schedules", text: "Why dynamic codes suit changing schedules" },
+      { type: "h2", id: "dynamic-codes-for-changing-schedules", text: "What if the event schedule changes after printing?" },
       {
         type: "p",
-        text: "Event plans change after the print deadline. Speakers drop out, rooms swap and sessions move. A static code that points at a specific PDF breaks the moment you upload a new file with a new name, and signs and badges printed weeks earlier then lead to the wrong agenda.",
+        text: "Use a dynamic code, so you can point it at the new schedule without reprinting. Event plans change after the print deadline. Speakers drop out, rooms swap and sessions move. A static code that points at a specific PDF breaks the moment you upload a new file with a new name, and signs and badges printed weeks earlier then lead to the wrong agenda.",
       },
       {
         type: "p",

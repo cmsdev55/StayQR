@@ -51,10 +51,10 @@ const GUIDES_CORE: Guide[] = [
         type: "p",
         text: "No, a QR code itself never expires. A **static** QR code stores your link or text directly in the pattern, so it scans for as long as the print survives. A **dynamic** QR code is different: it points to a short link run by a service, and it stops working if that service switches the link off. When people say a QR code has expired, it is almost always a dynamic code whose trial, subscription or account has ended.",
       },
-      { type: "h2", id: "how-qr-codes-store-information", text: "How a QR code stores information" },
+      { type: "h2", id: "how-qr-codes-store-information", text: "How does a QR code store information?" },
       {
         type: "p",
-        text: "A QR code is a grid of dark and light squares called modules. The pattern follows an international standard, ISO/IEC 18004, and any phone camera can decode it without an internet connection. The data sits inside the pattern itself. Nothing in the standard includes an expiry date, a licence check or a way to switch a code off.",
+        text: "A QR code stores its data inside the pattern itself, as a grid of dark and light squares called modules. The pattern follows an international standard, [ISO/IEC 18004](https://www.qrcode.com/en/about/standards.html), and any phone camera can decode it without an internet connection. Nothing in the standard includes an expiry date, a licence check or a way to switch a code off.",
       },
       {
         type: "p",
@@ -63,7 +63,7 @@ const GUIDES_CORE: Guide[] = [
       {
         type: "ul",
         items: [
-          "**Static codes** hold the final content: a full web address, a WiFi password, a phone number or plain text. Scan one and the phone acts on that content directly.",
+          "**Static codes** hold the final content: a full web address, a WiFi password, a phone number or plain text, each written in a [common content format](https://github.com/zxing/zxing/wiki/Barcode-Contents) that phones recognise. Scan one and the phone acts on that content directly.",
           "**Dynamic codes** hold a short redirect link owned by a QR service. Scan one and the phone visits the service first, which then forwards it to the real destination.",
         ],
       },
@@ -71,10 +71,10 @@ const GUIDES_CORE: Guide[] = [
         type: "p",
         text: "A static code has no middleman, so there is nothing to switch off. A dynamic code depends on the service staying online and choosing to keep forwarding your scans.",
       },
-      { type: "h2", id: "why-dynamic-codes-stop-working", text: "Why dynamic QR codes stop working" },
+      { type: "h2", id: "why-dynamic-codes-stop-working", text: "Why do dynamic QR codes stop working?" },
       {
         type: "p",
-        text: "Dynamic codes are useful. You can change where they point after printing and see how often they are scanned. But the redirect lives on someone else's server, and that creates several ways for a printed code to go dead.",
+        text: "Dynamic QR codes stop working when the service behind their redirect stops forwarding scans. They are useful, because you can change where they point after printing and see how often they are scanned. But the redirect lives on someone else's server, and that creates several ways for a printed code to go dead.",
       },
       {
         type: "ul",
@@ -91,10 +91,10 @@ const GUIDES_CORE: Guide[] = [
         type: "p",
         text: "In each case the ink on the poster is fine. The problem is the link behind it.",
       },
-      { type: "h2", id: "how-to-check-a-qr-code", text: "How to check if a QR code will stop working" },
+      { type: "h2", id: "how-to-check-a-qr-code", text: "How can you tell if a QR code will stop working?" },
       {
         type: "p",
-        text: "You can usually tell what kind of code you have in under a minute.",
+        text: "Check whether the code is static or dynamic, then check the plan behind it. You can usually tell what kind of code you have in under a minute.",
       },
       {
         type: "ol",
@@ -177,15 +177,15 @@ const GUIDES_CORE: Guide[] = [
       { type: "h2", id: "what-is-a-static-qr-code", text: "What is a static QR code?" },
       {
         type: "p",
-        text: "A static code is the original kind of QR code. The content is encoded straight into the pattern of modules, following the ISO/IEC 18004 standard. When a phone scans it, the phone reads the content and acts on it. Nothing else is involved.",
+        text: "A static code is the original kind of QR code. The content is encoded straight into the pattern of modules, following the [ISO/IEC 18004 standard](https://www.qrcode.com/en/about/standards.html). When a phone scans it, the phone reads the content and acts on it. Nothing else is involved.",
       },
       {
         type: "p",
-        text: "That simplicity has real benefits. A static code cannot be switched off by anyone, has no scan limits and costs nothing to make. It can also hold more than web links: plain text, WiFi login details, contact cards, email drafts, text messages, phone numbers and map locations all work.",
+        text: "That simplicity has real benefits. A static code cannot be switched off by anyone, has no scan limits and costs nothing to make. It can also hold [more than web links](https://github.com/zxing/zxing/wiki/Barcode-Contents): plain text, WiFi login details, contact cards, email drafts, text messages, phone numbers and map locations all work.",
       },
       {
         type: "p",
-        text: "The trade-off is that the content is permanent. If the web address changes, the code is wrong forever. Long content also makes the pattern denser. QR codes come in versions 1 to 40, from 21 by 21 modules up to 177 by 177. More characters push the code to a higher version with smaller modules, which needs a larger print size to scan reliably.",
+        text: "The trade-off is that the content is permanent. If the web address changes, the code is wrong forever. Long content also makes the pattern denser. QR codes come in [versions 1 to 40](https://www.qrcode.com/en/about/version.html), from 21 by 21 modules up to 177 by 177. More characters push the code to a higher version with smaller modules, which needs a larger print size to scan reliably.",
       },
       { type: "h2", id: "what-is-a-dynamic-qr-code", text: "What is a dynamic QR code?" },
       {
@@ -234,10 +234,10 @@ const GUIDES_CORE: Guide[] = [
           "**Plain information.** Serial numbers, short instructions or labels that do not need a website at all.",
         ],
       },
-      { type: "h2", id: "when-to-use-dynamic", text: "When a dynamic code is worth paying for" },
+      { type: "h2", id: "when-to-use-dynamic", text: "When is a dynamic QR code worth paying for?" },
       {
         type: "p",
-        text: "Choose dynamic when the print will outlive the destination, or when you want to know whether the code is being used.",
+        text: "A dynamic code is worth paying for when the print will outlive the destination, or when you want to know whether the code is being used.",
       },
       {
         type: "ul",
@@ -316,10 +316,10 @@ const GUIDES_CORE: Guide[] = [
         type: "p",
         text: "The minimum practical size for a printed QR code is about **2 x 2 cm (0.8 x 0.8 in)**, for something scanned from close up, like a business card. For anything scanned from further away, use the **10:1 rule**: the code should be at least one tenth as wide as the scanning distance. A poster read from 2 metres needs a code about 20 cm wide.",
       },
-      { type: "h2", id: "the-10-to-1-rule", text: "The 10:1 rule for scan distance" },
+      { type: "h2", id: "the-10-to-1-rule", text: "How big should a QR code be for printing?" },
       {
         type: "p",
-        text: "Phone cameras need each module of the code to cover enough pixels to tell dark from light. The further away the phone, the bigger the modules need to be. A widely used rule of thumb is a ratio of about 10 to 1 between distance and code width. Use the table below as a starting point.",
+        text: "A printed QR code should be at least one tenth as wide as the distance people scan it from. Phone cameras need each module of the code to cover enough pixels to tell dark from light, so the further away the phone, the bigger the modules need to be. This ratio of about 10 to 1 between distance and code width is a widely used rule of thumb. Use the table below as a starting point.",
       },
       {
         type: "table",
@@ -342,16 +342,16 @@ const GUIDES_CORE: Guide[] = [
         type: "p",
         text: "Base the distance on where people will really stand, not where you hope they will. A poster across a train platform is read from further away than one beside a ticket machine, even if both are the same size.",
       },
-      { type: "h2", id: "content-length-and-density", text: "Why content length changes the size you need" },
+      { type: "h2", id: "content-length-and-density", text: "Why does content length change the size you need?" },
       {
         type: "p",
-        text: "QR codes come in 40 versions. Version 1 is a grid of 21 by 21 modules, and each version adds 4 modules per side, up to 177 by 177 for version 40. The more characters you encode, the higher the version and the smaller each module becomes at the same print size.",
+        text: "More content means more modules, so at the same print size each module gets smaller and harder to scan. QR codes come in [40 versions](https://www.qrcode.com/en/about/version.html). Version 1 is a grid of 21 by 21 modules, and each version adds 4 modules per side, up to 177 by 177 for version 40. The more characters you encode, the higher the version.",
       },
       {
         type: "ul",
         items: [
           "**Long web addresses make dense codes.** A link with tracking parameters can double the module count compared with a short one.",
-          "**Error correction adds modules.** Levels L, M, Q and H can recover roughly 7%, 15%, 25% and 30% of damaged data. Higher levels are more robust but make the pattern denser.",
+          "**Error correction adds modules.** [Levels L, M, Q and H](https://www.qrcode.com/en/about/error_correction.html) can recover roughly 7%, 15%, 25% and 30% of damaged data. Higher levels are more robust but make the pattern denser.",
           "**Short links keep codes simple.** A dynamic code encodes a short redirect link, so the pattern stays light even when the destination is long. This is one reason dynamic codes on [paid plans](/pricing) often scan better at small sizes.",
         ],
       },
@@ -359,10 +359,10 @@ const GUIDES_CORE: Guide[] = [
         type: "p",
         text: "If a code has to be small, shorten the content first. Use a clean URL without tracking parameters, or move text onto a web page and link to it.",
       },
-      { type: "h2", id: "quiet-zone", text: "Leave a quiet zone around the code" },
+      { type: "h2", id: "quiet-zone", text: "How much blank space does a QR code need around it?" },
       {
         type: "p",
-        text: "The standard calls for a **quiet zone** of 4 modules on every side: a plain, light margin with no text, lines or images. Scanners use it to find where the code starts. On a 2 cm code with 25 modules per side, each module is 0.8 mm, so the quiet zone should be about 3.2 mm.",
+        text: "A QR code needs a **quiet zone** of 4 modules on every side, as [the standard calls for](https://www.qrcode.com/en/howto/code.html): a plain, light margin with no text, lines or images. Scanners use it to find where the code starts. On a 2 cm code with 25 modules per side, each module is 0.8 mm, so the quiet zone should be about 3.2 mm.",
       },
       {
         type: "p",
@@ -464,10 +464,10 @@ const GUIDES_CORE: Guide[] = [
         type: "p",
         text: "If you choose a static code, link to a page whose address will never change, such as a /menu page on your own website, and update the content on that page instead of changing the link. This gives you some of the flexibility of a dynamic code, as long as the page stays in place.",
       },
-      { type: "h2", id: "why-dynamic-suits-menus", text: "Why a dynamic code suits a changing menu" },
+      { type: "h2", id: "why-dynamic-suits-menus", text: "Should a menu QR code be static or dynamic?" },
       {
         type: "p",
-        text: "Menus are one of the clearest cases for a dynamic code. Prices move, dishes rotate with the seasons, and many places run separate lunch, dinner and brunch menus. With a static code, every change of address means new table tents. A common trap is uploading a new PDF with a new file name, which quietly breaks every static code pointing at the old one.",
+        text: "If your menu changes, use a dynamic code. Menus are one of the clearest cases for one. Prices move, dishes rotate with the seasons, and many places run separate lunch, dinner and brunch menus. With a static code, every change of address means new table tents. A common trap is uploading a new PDF with a new file name, which quietly breaks every static code pointing at the old one.",
       },
       {
         type: "p",
@@ -477,16 +477,27 @@ const GUIDES_CORE: Guide[] = [
         type: "p",
         text: "EndureQR dynamic codes cost $29 a year or $3.99 a month on Pro, or $79 once on Lifetime, and they keep working even if you cancel. See [pricing](/pricing), or read more about [QR codes for restaurants](/industries/restaurants).",
       },
-      { type: "h2", id: "table-tent-tips", text: "Table tent and placement tips" },
+      { type: "h2", id: "table-tent-tips", text: "How big should a menu QR code be, and where should it go?" },
+      {
+        type: "p",
+        text: "Print it at least 5 cm wide on a table tent facing the guest's seat, with a short label that says what it does.",
+      },
+      { type: "h3", text: "What to print on the table tent" },
       {
         type: "ul",
         items: [
           "**Size for the table.** Guests scan from roughly 30 to 50 cm away, so a code 5 cm wide or larger is a safe choice.",
           "**Say what the code does.** A frame with \"Scan for menu\" or \"Scan to order\" removes doubt. A bare code gets fewer scans because people are not sure what it is.",
           "**Print a short link as text.** Put a short web address under the code for guests whose camera will not cooperate.",
+          "**One code per surface.** If a tent also carries a WiFi code, label both clearly so guests scan the right one.",
+        ],
+      },
+      { type: "h3", text: "Where and how to place it" },
+      {
+        type: "ul",
+        items: [
           "**Fight glare.** Overhead lights reflect off glossy laminate. A matte finish or a slightly angled tent keeps the code readable.",
           "**Keep it wipeable.** Codes on tables get splashed and cleaned constantly. Lamination or a hard acrylic holder protects the print.",
-          "**One code per surface.** If a tent also carries a WiFi code, label both clearly so guests scan the right one.",
           "**Mind the light.** Candlelit and dim rooms make scanning harder. Go larger, and use very dark modules on a white background.",
           "**Use the front window.** A code in the window lets passers-by read the menu before they come in. Size it for the distance from the pavement, roughly one tenth of how far away people stand.",
         ],
@@ -495,17 +506,17 @@ const GUIDES_CORE: Guide[] = [
         type: "tip",
         text: "Put the code on the side of the table tent that faces the seat, at the height of a phone held at the table. Codes facing the aisle or pressed flat under a glass top are harder to scan.",
       },
-      { type: "h2", id: "make-the-menu-page-work", text: "Make the menu page easy to read on a phone" },
+      { type: "h2", id: "make-the-menu-page-work", text: "How do you make a menu page easy to read on a phone?" },
       {
         type: "p",
-        text: "The code only gets guests to the page. The page decides whether they enjoy using it.",
+        text: "Keep the page light, the text large and the menu free of app downloads or sign-ups. The code only gets guests to the page. The page decides whether they enjoy using it.",
       },
       {
         type: "ul",
         items: [
           "Make it load quickly on mobile data. Large photos and heavy PDFs slow everything down.",
-          "Use large, readable text. A PDF designed for an A4 page often needs pinching and zooming on a phone.",
-          "Show prices and allergen information clearly.",
+          "Use large, readable text. A PDF designed for an A4 page often needs [pinching and zooming](https://www.w3.org/WAI/WCAG22/Understanding/reflow.html) on a phone.",
+          "Show prices and [allergen information](https://www.gov.uk/government/publications/allergen-guidance-for-food-businesses) clearly.",
           "Do not ask guests to download an app or sign up to see the menu.",
           "Offer other languages if many of your guests need them.",
           "Keep the menu current. An online menu that lists sold-out dishes frustrates guests more than a paper one.",
@@ -564,10 +575,10 @@ const GUIDES_CORE: Guide[] = [
         type: "p",
         text: "To make a WiFi QR code, enter your network name (SSID), password and security type into a WiFi QR code generator, then download and print the code. The code stores those details in a standard text format, **WIFI:T:WPA;S:NetworkName;P:password;;**, and recent iPhone and Android cameras offer to join the network when they scan it. Nobody has to type the password.",
       },
-      { type: "h2", id: "how-wifi-qr-codes-work", text: "How a WiFi QR code works" },
+      { type: "h2", id: "how-wifi-qr-codes-work", text: "How does a WiFi QR code work?" },
       {
         type: "p",
-        text: "A WiFi code is plain text in a format phones recognise. It starts with WIFI: and lists each setting as a letter, a colon and a value, with a semicolon after each one and a double semicolon at the end.",
+        text: "A WiFi QR code holds your network details as plain text in a [format phones recognise](https://github.com/zxing/zxing/wiki/Barcode-Contents), so the camera can offer to join the network. It starts with WIFI: and lists each setting as a letter, a colon and a value, with a semicolon after each one and a double semicolon at the end.",
       },
       {
         type: "ul",
@@ -590,10 +601,10 @@ const GUIDES_CORE: Guide[] = [
         type: "p",
         text: "WiFi codes are always **static**. The phone needs the real password to join, so the details live in the pattern itself and the code works without any internet connection. It also means a WiFi code never expires, and there is no reason to pay for one. You can make it with the free [WiFi QR code generator](/qr-code-generator/wifi), with no sign-up and no watermark.",
       },
-      { type: "h2", id: "choosing-a-security-type", text: "Choosing the right security type" },
+      { type: "h2", id: "choosing-a-security-type", text: "Which security type should a WiFi QR code use?" },
       {
         type: "p",
-        text: "The security type in the code must match your router, or the phone will fail to join. You can find it in your router's admin page or on the label of many routers.",
+        text: "Use the security type your router uses, which for most homes, cafés and small offices is WPA. If the type in the code does not match your router, the phone will fail to join. You can find it in your router's admin page or on the label of many routers.",
       },
       {
         type: "ul",
@@ -608,10 +619,10 @@ const GUIDES_CORE: Guide[] = [
         type: "p",
         text: "Networks that ask each person for their own username and password, common in larger offices and universities, are not a good fit for this format.",
       },
-      { type: "h2", id: "hidden-networks", text: "Hidden networks" },
+      { type: "h2", id: "hidden-networks", text: "Does a WiFi QR code work with a hidden network?" },
       {
         type: "p",
-        text: "A hidden network does not broadcast its name, so phones will not see it in the list. The format supports this with H:true, which tells the phone to look for the network even though it is not advertised. The [EndureQR WiFi generator](/qr-code-generator/wifi) has a hidden-network switch that adds it for you. Phones still handle hidden networks with varying success, so test on the devices your guests use.",
+        text: "Yes, though phones handle it with varying success. A hidden network does not broadcast its name, so phones will not see it in the list. The format supports this with H:true, which tells the phone to look for the network even though it is not advertised. The [EndureQR WiFi generator](/qr-code-generator/wifi) has a hidden-network switch that adds it for you. Test it on the devices your guests use.",
       },
       {
         type: "p",
@@ -620,7 +631,7 @@ const GUIDES_CORE: Guide[] = [
       { type: "h2", id: "use-a-guest-network", text: "Use a separate guest network" },
       {
         type: "p",
-        text: "A WiFi code puts your password in front of everyone who can see it. Anyone can photograph it, and some phones let a connected user share the network on. Plan for that.",
+        text: "A WiFi code puts your password in front of everyone who can see it. Anyone can photograph it, and some phones let a connected user [share the network on](https://support.google.com/android/answer/9075847). Plan for that.",
       },
       {
         type: "ul",
@@ -692,10 +703,10 @@ const GUIDES_CORE: Guide[] = [
         type: "p",
         text: "A custom QR code scans reliably when it has **strong contrast**, uses **dark modules on a light background**, keeps a **clear margin** around the edge, and limits any logo to roughly **20 to 25% of the code's area** with high error correction. Add a frame with a short call to action, then test on several phones before you print.",
       },
-      { type: "h2", id: "contrast-and-colour", text: "Contrast and colour" },
+      { type: "h2", id: "contrast-and-colour", text: "What colours can a QR code be?" },
       {
         type: "p",
-        text: "Scanners convert the image to light and dark. They care about brightness, not hue. A deep navy, forest green or wine red on white scans as well as black on white. A pale yellow or light grey does not, however good it looks.",
+        text: "A QR code can be almost any colour, as long as the modules are much darker than the background. Scanners convert the image to light and dark. They care about brightness, not hue. A deep navy, forest green or wine red on white scans as well as black on white. A pale yellow or light grey does not, however good it looks.",
       },
       {
         type: "ul",
@@ -711,14 +722,14 @@ const GUIDES_CORE: Guide[] = [
         type: "p",
         text: "Your brand colour does not have to disappear. Use it for the frame, the call to action and the logo, and keep the modules a darker shade. The code still reads as yours.",
       },
-      { type: "h2", id: "adding-a-logo", text: "Adding a logo without breaking the code" },
+      { type: "h2", id: "adding-a-logo", text: "How big can a logo in a QR code be?" },
       {
         type: "p",
-        text: "A logo in the centre covers modules, so part of the data is missing. Error correction is what lets the code survive this. QR codes have four levels, L, M, Q and H, which can recover roughly 7%, 15%, 25% and 30% of the data.",
+        text: "Keep a logo to around 20 to 25% of the code's area at most, and smaller is safer. A logo in the centre covers modules, so part of the data is missing. Error correction is what lets the code survive this. QR codes have [four levels, L, M, Q and H](https://www.qrcode.com/en/about/error_correction.html), which can recover roughly 7%, 15%, 25% and 30% of the data.",
       },
       {
         type: "p",
-        text: "That recovery budget also has to cover scratches, dirt, glare and print defects. So do not spend all of it on the logo. Keep the logo to around 20 to 25% of the code's area at most, and smaller is safer. Use a high error correction level when you add one. The [EndureQR generator](/qr-code-generator/url) switches to level H automatically as soon as you upload a logo.",
+        text: "That recovery budget also has to cover scratches, dirt, glare and print defects, so do not spend all of it on the logo. Use a high error correction level when you add one. The [EndureQR generator](/qr-code-generator/url) switches to level H automatically as soon as you upload a logo.",
       },
       {
         type: "ul",
@@ -751,17 +762,17 @@ const GUIDES_CORE: Guide[] = [
         type: "p",
         text: "Whatever style you choose, apply it evenly to every module. Mixing shapes inside one code makes the pattern harder to read.",
       },
-      { type: "h2", id: "frames-and-calls-to-action", text: "Frames and calls to action" },
+      { type: "h2", id: "frames-and-calls-to-action", text: "Does a QR code need a call to action?" },
       {
         type: "p",
-        text: "A code on its own does not tell anyone what will happen. A short instruction gets more scans and builds trust, because people know what to expect.",
+        text: "Yes. A code on its own does not tell anyone what will happen. A short instruction gets more scans and builds trust, because people know what to expect.",
       },
       {
         type: "ul",
         items: [
           "Use a verb and a benefit: \"Scan for the menu\", \"Scan to join WiFi\", \"Scan to book a viewing\".",
           "Keep it to a few words and set it in a frame or label next to the code.",
-          "Keep the frame outside the quiet zone, the clear margin of 4 modules around the code.",
+          "Keep the frame outside the quiet zone, the [clear margin of 4 modules](https://www.qrcode.com/en/howto/code.html) around the code.",
           "Print a short web address too, for anyone who cannot or prefers not to scan.",
         ],
       },

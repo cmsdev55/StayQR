@@ -40,10 +40,11 @@ ID (Web). Authorised redirect URI: `https://endureqr.com/auth/google/callback`. 
 
 ## 5. Vercel (app)
 
-Done: project **stayqr** (team "Hamza Akram's projects"; rename in Vercel → Settings → General if you like), live at **https://endureqr.vercel.app** (the old stayqr-six.vercel.app address redirects there with a 301), connected to
+Done: project **endureqr** (team "Hamza Akram's projects"), live at **https://endureqr.com** (bought through Vercel,
+renews yearly, DNS on Vercel). `www.endureqr.com`, `endureqr.vercel.app` and `stayqr-six.vercel.app` all redirect
+(308) to the same path on endureqr.com, so short links printed on the older hosts keep working. Connected to
 `github.com/cmsdev55/StayQR` (pushes to `main` deploy automatically). Set: `DATABASE_URL`, `NEXT_PUBLIC_SITE_URL`,
-`CRON_SECRET`, `EMAIL_FROM`. Still to add: Resend, Lemon Squeezy and (optionally) Google keys, then the domain.
-When `endureqr.com` is connected, change `NEXT_PUBLIC_SITE_URL` to it and redeploy.
+`CRON_SECRET`, `EMAIL_FROM`, `LEMONSQUEEZY_API_KEY` (test), `LEMONSQUEEZY_STORE_ID`, `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`.
 
 
 1. Import `github.com/cmsdev55/StayQR`, framework Next.js.

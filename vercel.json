@@ -14,10 +14,54 @@
       "has": [
         {
           "type": "host",
+          "value": "www.endureqr.com"
+        }
+      ],
+      "destination": "https://endureqr.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:path+",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.endureqr.com"
+        }
+      ],
+      "destination": "https://endureqr.com/:path+",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "endureqr.vercel.app"
+        }
+      ],
+      "destination": "https://endureqr.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:path+",
+      "has": [
+        {
+          "type": "host",
+          "value": "endureqr.vercel.app"
+        }
+      ],
+      "destination": "https://endureqr.com/:path+",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
           "value": "stayqr-six.vercel.app"
         }
       ],
-      "destination": "https://endureqr.vercel.app/",
+      "destination": "https://endureqr.com/",
       "permanent": true
     },
     {
@@ -28,7 +72,7 @@
           "value": "stayqr-six.vercel.app"
         }
       ],
-      "destination": "https://endureqr.vercel.app/:path+",
+      "destination": "https://endureqr.com/:path+",
       "permanent": true
     }
   ]

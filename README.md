@@ -18,7 +18,7 @@ EndureQR is a QR code generator with two parts:
 - **A free generator.** Make static QR codes for 17 content types (links, WiFi, contact cards, calendar events, social
   profiles and more). Add your logo and a frame, then download PNG, SVG, JPEG or PDF up to 4096 px. There's no sign-up
   and no watermark. Codes are drawn in the browser, so what you type never reaches our servers.
-- **Dynamic QR codes (paid).** The printed code points to a short link, so you can change where it goes after printing.
+- **Dynamic QR codes (first one free).** The printed code points to a short link, so you can change where it goes after printing.
   Plans include unlimited codes and scans, scan analytics (device, city, time of day), separate iPhone and Android
   destinations, and bulk creation from CSV.
 
@@ -29,7 +29,7 @@ never replaced with an ad or an upgrade page.
 
 | Plan | Price | Includes |
 |---|---|---|
-| Free | $0 | Unlimited static codes, logo and frame, all download formats |
+| Free | $0 | Unlimited static codes and 1 dynamic code, logo and frame, all download formats |
 | Pro | $3.99 / month or $29 / year | Unlimited dynamic codes and scans, analytics, smart redirects, bulk create |
 | Lifetime | $79 once | Everything in Pro, with no renewals |
 

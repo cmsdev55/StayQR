@@ -72,7 +72,7 @@ export const TERMS: LegalDoc = {
       body: [
         "A free account includes one dynamic code, with the same features as Pro except folders and bulk create. It follows section 6 like any other dynamic code.",
         "Pro is billed monthly or yearly in advance and renews automatically until you cancel. Lifetime is a single payment for access to Pro features for as long as EndureQR operates the Service.",
-        "Our order process is run by our online reseller **Lemon Squeezy**, which is the merchant of record for all orders. Lemon Squeezy handles payment, sales tax and VAT, invoices and billing questions. Prices are shown before tax; the tax due is shown at checkout.",
+        "Our order process is run by our online reseller **Creem**, which is the merchant of record for all orders. Creem handles payment, sales tax and VAT, invoices and billing questions. Prices are shown before tax; the tax due is shown at checkout.",
         `**Refunds:** if EndureQR isn't right for you, email ${email.hello} within 14 days of your first Pro payment or your Lifetime purchase for a full refund. Renewals can be cancelled at any time and are not refunded for the period already started, unless the law where you live says otherwise.`,
         "We may change prices for future billing periods with at least 30 days' notice by email. A price change never applies to a Lifetime purchase already made.",
       ],
@@ -145,7 +145,7 @@ export const PRIVACY: LegalDoc = {
       body: [
         "**Free generator:** what you type and any logo you upload are processed in your browser to draw the code and build the file. They are not sent to our servers, and we don't store them.",
         "**Account data:** your name, email address, organisation name, settings and, if you use a password, a secure hash of it.",
-        "**Billing data:** your plan, order history and the country used for tax. Card and payment details are handled by Lemon Squeezy; we never see your full card number.",
+        "**Billing data:** your plan, order history and the country used for tax. Card and payment details are handled by Creem; we never see your full card number.",
         "**Code data:** the destinations, names, folders and designs of the dynamic codes you create.",
         "**Scan data:** when a dynamic code is scanned, we record the time, the approximate location to city level, device type, operating system and browser. We use the IP address only to work out the approximate location, then discard it; we don't store full IP addresses with scan records.",
         "**Messages:** what you send when you email us.",
@@ -196,7 +196,7 @@ export const PRIVACY: LegalDoc = {
       body: [
         "**Account and code data:** while your account is open. When you delete your account, we delete it within 30 days, and it is gone from backups within 90 days, except that a cancelled code's redirect record is kept so the code keeps working (see Terms, section 6).",
         "**Scan analytics:** 12 months on Pro, and for as long as your account exists on Lifetime.",
-        "**Order records:** held by Lemon Squeezy and by us for as long as tax law requires, usually up to 7 years.",
+        "**Order records:** held by Creem and by us for as long as tax law requires, usually up to 7 years.",
         "**Emails with us:** up to 2 years after the conversation ends.",
       ],
     },

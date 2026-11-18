@@ -11,9 +11,9 @@ ANALYZE=true npm run build   # bundle analyzer
 
 ## Accounts, billing and dynamic codes
 Postgres on Railway (`db/migrations`), the app (pages + API) on Vercel. Own auth: email + password (scrypt), hashed
-session tokens, verify/reset emails via Resend, optional Google sign-in. Lemon Squeezy checkout and webhooks. Short links at `/r/[slug]`.
+session tokens, verify/reset emails via Resend, optional Google sign-in. Creem checkout and webhooks. Short links at `/r/[slug]`.
 - Local: `scripts/db-local.sh start` (Postgres on :54329, no Docker), `node scripts/db-seed.mjs`, then log in as
-  `demo@endureqr.local` / `demo-password`. Without a Resend key, emails print to the server log; without Lemon Squeezy keys,
+  `demo@endureqr.local` / `demo-password`. Without a Resend key, emails print to the server log; without Creem keys,
   checkout is simulated (localhost only).
 - Server code lives in `src/lib/server/` (auth, password, email, plan, codes, analytics, billing); dashboard mutations in `src/app/dashboard/actions.ts`.
 - Going live: [LAUNCH.md](LAUNCH.md). Variables: `.env.example`.
@@ -35,7 +35,7 @@ session tokens, verify/reset emails via Resend, optional Google sign-in. Lemon S
 | `/opengraph-image`, `/twitter-image` | 1200×630 social image (`next/og`, fonts in `src/assets/og`) |
 | `/dashboard` | Codes, folders, search (`?q=`) · `/dashboard/codes/[id]` editor (`/new`, `/bulk`) · `/dashboard/analytics` (`?range=&code=`) · `/dashboard/billing` · `/dashboard/settings` |
 | `/r/[slug]` | Dynamic-code redirect (records the scan after responding) · `/p/[slug]` paused page |
-| `/api/checkout`, `/api/webhooks/lemonsqueezy`, `/api/export/*`, `/api/cron/retention` | Billing, exports, daily retention |
+| `/api/checkout`, `/api/webhooks/creem`, `/api/export/*`, `/api/cron/retention` | Billing, exports, daily retention |
 
 Content lives in `src/content/` (plans, FAQ, industries, legal, competitor facts with sources and `confirmed` flags, dashboard fake data).
 Never invent customers, quotes, logos or numbers. A competitor fact without a source on the vendor's own site stays `confirmed: false` and shows a [verify] tag.

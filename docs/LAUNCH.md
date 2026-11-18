@@ -1,4 +1,4 @@
-# Going live: Railway (Postgres) + Vercel (app) + Lemon Squeezy + Resend
+# Going live: Railway (Postgres) + Vercel (app) + Creem + Resend
 
 The whole Next.js app (pages, API, redirects, webhooks) runs on Vercel. Railway runs only Postgres.
 Keep both in the same part of the world. The Railway database runs in **US West (California)**, so `vercel.json` pins
@@ -21,17 +21,21 @@ US East, `fra1` for EU West).
 1. resend.com → Domains → add `endureqr.com` and the DNS records it shows (SPF/DKIM). Wait for "Verified".
 2. API Keys → create a key with sending access. `EMAIL_FROM=EndureQR <hello@endureqr.com>`.
 
-## 3. Lemon Squeezy (payments, tax, invoices)
+## 3. Creem (payments, tax, invoices)
 
-1. Create a store and complete identity verification. Before launch, confirm under Settings → Payouts that a payout
-   method is available for your country and add it.
-2. Product **EndureQR Pro** with two subscription variants: **Monthly $3.99** and **Yearly $29**. Product **EndureQR Lifetime**:
-   single payment **$79**. Copy each **variant id**.
-3. Settings → Webhooks → `https://endureqr.com/api/webhooks/lemonsqueezy`, a long random signing secret, and these events:
-   `order_created`, `order_refunded`, `subscription_created`, `subscription_updated`, `subscription_cancelled`,
-   `subscription_resumed`, `subscription_expired`, `subscription_paused`, `subscription_unpaused`,
-   `subscription_payment_success`, `subscription_payment_failed`, `subscription_payment_recovered`, `subscription_payment_refunded`.
-4. Settings → API → create a key. Test everything in **Test mode** (card `4242 4242 4242 4242`) before switching live.
+Lemon Squeezy stopped taking new sellers and closes on 31 March 2027, and its successor (Stripe Managed Payments) does
+not support sellers in Pakistan, so EndureQR uses Creem as merchant of record. Creem pays out to a local bank account in
+Pakistan (its bank partner may accept personal accounts only).
+
+1. Store **EndureQR** (individual seller, Pakistan). Business details, identity verification, then **Balance → Payout
+   Account** submits the store for review (1–2 working days). A rejected store is not reviewed again for 3 months, so
+   the live site must already match the Terms (Creem named as reseller) before submitting.
+2. Products, in test mode first and again in live mode: **EndureQR Pro monthly** $3.99 every month, **EndureQR Pro
+   yearly** $29 every year, **EndureQR Lifetime** $79 one-time; tax category SaaS. Copy each **product id** (`prod_…`).
+3. Developers → Webhooks → `https://endureqr.com/api/webhooks/creem`; copy the signing secret. All events can stay on;
+   the app uses `checkout.completed`, `subscription.*` and `refund.created`.
+4. Developers → API keys. A `creem_test_…` key talks to Creem's test API automatically. Test with card
+   `4242 4242 4242 4242` before switching to the live key and live product ids.
 
 ## 4. Google sign-in (optional)
 
@@ -44,7 +48,8 @@ Done: project **endureqr** (team "Hamza Akram's projects"), live at **https://en
 renews yearly, DNS on Vercel). `www.endureqr.com`, `endureqr.vercel.app` and `stayqr-six.vercel.app` all redirect
 (308) to the same path on endureqr.com, so short links printed on the older hosts keep working. Connected to
 `github.com/cmsdev55/StayQR` (pushes to `main` deploy automatically). Set: `DATABASE_URL`, `NEXT_PUBLIC_SITE_URL`,
-`CRON_SECRET`, `EMAIL_FROM`, `LEMONSQUEEZY_API_KEY` (test), `LEMONSQUEEZY_STORE_ID`, `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`.
+`CRON_SECRET`, `EMAIL_FROM`, `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`. Creem: `CREEM_API_KEY`, `CREEM_WEBHOOK_SECRET` and the three
+`CREEM_PRODUCT_*` ids.
 
 
 1. Import `github.com/cmsdev55/StayQR`, framework Next.js.
@@ -57,7 +62,7 @@ renews yearly, DNS on Vercel). `www.endureqr.com`, `endureqr.vercel.app` and `st
 
 - [ ] Sign up → the confirmation email arrives → the link confirms the address.
 - [ ] Forgot password → email → new password → signed in.
-- [ ] Choose Pro yearly → Lemon Squeezy test checkout → back on Billing showing "Pro · yearly".
+- [ ] Choose Pro yearly → Creem test checkout → back on Billing showing "Pro · yearly".
 - [ ] Create a code, scan it with an iPhone and an Android phone: both open the destination; scans appear in
       Analytics with a city.
 - [ ] Change the destination, scan again: the new page opens. Pause it: the paused page shows.
@@ -69,8 +74,8 @@ renews yearly, DNS on Vercel). `www.endureqr.com`, `endureqr.vercel.app` and `st
 - **Harmful code reported** (abuse@endureqr.com): disable it; scanners then see a warning page.
   `update public.codes set disabled_at = now(), disabled_reason = 'phishing report <date>' where slug = 'abc123';`
 - **Failed webhooks:** `select * from public.webhook_events where error is not null order by received_at desc;`
-  Lemon Squeezy retries automatically and can resend from its dashboard.
-- **Refunds:** issue them in Lemon Squeezy; the refund webhook updates EndureQR.
+  Creem retries up to five times and can resend from its dashboard.
+- **Refunds:** issue them in Creem; the `refund.created` webhook marks the invoice refunded in EndureQR.
 - **Connections:** each Vercel function instance opens at most 3 connections. If Railway reports "too many
   connections" under heavy load, add a PgBouncer service on Railway and point `DATABASE_URL` at it.
 - **Local development:** `scripts/db-local.sh start`, `node scripts/db-seed.mjs`, `npm run dev -- -p 3100`, log in as

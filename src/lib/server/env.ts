@@ -7,14 +7,15 @@ export const env = {
   resendKey: process.env.RESEND_API_KEY,
   emailFrom: process.env.EMAIL_FROM ?? "EndureQR <hello@endureqr.com>",
   google: { clientId: process.env.GOOGLE_CLIENT_ID, clientSecret: process.env.GOOGLE_CLIENT_SECRET },
-  lemon: {
-    apiKey: process.env.LEMONSQUEEZY_API_KEY,
-    storeId: process.env.LEMONSQUEEZY_STORE_ID,
-    webhookSecret: process.env.LEMONSQUEEZY_WEBHOOK_SECRET,
-    variants: {
-      "pro-monthly": process.env.LEMONSQUEEZY_VARIANT_PRO_MONTHLY,
-      "pro-yearly": process.env.LEMONSQUEEZY_VARIANT_PRO_YEARLY,
-      lifetime: process.env.LEMONSQUEEZY_VARIANT_LIFETIME,
+  creem: {
+    apiKey: process.env.CREEM_API_KEY,
+    webhookSecret: process.env.CREEM_WEBHOOK_SECRET,
+    // test keys only work against Creem's test API
+    apiBase: process.env.CREEM_API_KEY?.startsWith("creem_test_") ? "https://test-api.creem.io/v1" : "https://api.creem.io/v1",
+    products: {
+      "pro-monthly": process.env.CREEM_PRODUCT_PRO_MONTHLY,
+      "pro-yearly": process.env.CREEM_PRODUCT_PRO_YEARLY,
+      lifetime: process.env.CREEM_PRODUCT_LIFETIME,
     },
   },
   cronSecret: process.env.CRON_SECRET,
@@ -24,10 +25,10 @@ export const env = {
 /** Google sign-in shows up once both OAuth keys are set. */
 export const googleEnabled = () => !!(env.google.clientId && env.google.clientSecret);
 
-/** Real billing with Lemon Squeezy keys; simulated checkout only in development without them. */
-export const billingMode: "lemonsqueezy" | "dev" | "off" =
-  env.lemon.apiKey && env.lemon.storeId && env.lemon.webhookSecret
-    ? "lemonsqueezy"
+/** Real billing with Creem keys; simulated checkout only in development without them. */
+export const billingMode: "creem" | "dev" | "off" =
+  env.creem.apiKey && env.creem.webhookSecret
+    ? "creem"
     : process.env.NODE_ENV !== "production" || process.env.ALLOW_SIMULATED_BILLING === "1"
       ? "dev"
       : "off";

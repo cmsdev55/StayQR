@@ -28,7 +28,7 @@ export type DashCode = {
 export type Plan = {
   tier: "free" | "pro" | "lifetime";
   plan: "pro-monthly" | "pro-yearly" | "lifetime" | null;
-  status: string | null; // Lemon Squeezy status for subscriptions
+  status: string | null; // subscription status (see billing.ts localStatus)
   renewsAt: string | null;
   endsAt: string | null;
   /** Pro or Lifetime: unlimited codes, folders and bulk create. */

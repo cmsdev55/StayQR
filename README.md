@@ -45,7 +45,7 @@ Every paid plan has a 14-day money-back guarantee.
 | QR rendering | qr-code-styling, qrcode-generator |
 | Database | PostgreSQL on [Railway](https://railway.com) |
 | Sign-in | Email and password, plus Google sign-in |
-| Payments | [Lemon Squeezy](https://www.lemonsqueezy.com) (merchant of record) |
+| Payments | [Creem](https://www.creem.io) (merchant of record) |
 | Email | [Resend](https://resend.com) |
 | Hosting | [Vercel](https://vercel.com) |
 
@@ -61,7 +61,7 @@ node scripts/db-seed.mjs         # demo account: demo@endureqr.local / demo-pass
 npm run dev                      # http://localhost:3000
 ```
 
-Locally, emails print to the server log and checkout is simulated, so you don't need Resend or Lemon Squeezy keys
+Locally, emails print to the server log and checkout is simulated, so you don't need Resend or Creem keys
 to try the app.
 
 ## Project structure

@@ -135,7 +135,7 @@ export async function switchPlanAction(plan: "pro-monthly" | "pro-yearly"): Prom
   });
 }
 
-/** Lemon Squeezy's customer portal: card, invoices, billing address. */
+/** Creem's customer portal: card, invoices, billing address. */
 export async function portalAction() {
   const { user, id } = await ownSub();
   redirect(await portalUrl(user.id, id));

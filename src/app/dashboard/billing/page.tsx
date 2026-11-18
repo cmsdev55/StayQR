@@ -31,7 +31,7 @@ export default async function BillingPage({ searchParams }: { searchParams: Prom
     <BillingView
       plan={plan}
       card={sub ? { brand: sub.card_brand, last4: sub.card_last_four } : null}
-      hasPortal={!!sub && billingMode === "lemonsqueezy"}
+      hasPortal={!!sub && billingMode === "creem"}
       invoices={invoices.map((i) => ({
         id: i.id,
         date: i.created_at.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }),

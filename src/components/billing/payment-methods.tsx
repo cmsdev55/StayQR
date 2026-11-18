@@ -18,7 +18,7 @@ export function PaymentMethods({ className, align = "left" }: { className?: stri
           </span>
         ))}
       </span>
-      <span>Secure checkout by Lemon Squeezy. We never see your card number. 14-day money-back guarantee.</span>
+      <span>Secure checkout by Creem. We never see your card number. 14-day money-back guarantee.</span>
     </div>
   );
 }

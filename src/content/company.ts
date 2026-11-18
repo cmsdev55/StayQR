@@ -42,8 +42,8 @@ export const PROVIDERS = [
   { name: "Vercel", role: "website hosting and delivery" },
   { name: "Railway", role: "database hosting" },
   { name: "Resend", role: "account emails (confirmation and password reset)" },
-  { name: "Lemon Squeezy", role: "checkout, payments, tax and invoices (merchant of record)" },
+  { name: "Creem", role: "checkout, payments, tax and invoices (merchant of record)" },
   { name: "Google", role: "optional sign-in with a Google account, and AdSense advertising on the free generator and guide pages" },
 ];
 
-export const LEGAL_EFFECTIVE = "3 November 2026";
+export const LEGAL_EFFECTIVE = "19 November 2026";

@@ -342,7 +342,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
       },
       {
         type: "p",
-        text: "Pro and Lifetime both include unlimited dynamic codes and unlimited scans. You pay by card through Lemon Squeezy, and you can get a refund within 14 days of your first Pro payment or a Lifetime purchase. Full details are on the [pricing page](/pricing).",
+        text: "Pro and Lifetime both include unlimited dynamic codes and unlimited scans. You pay by card through Creem, and you can get a refund within 14 days of your first Pro payment or a Lifetime purchase. Full details are on the [pricing page](/pricing).",
       },
     ],
     faq: [

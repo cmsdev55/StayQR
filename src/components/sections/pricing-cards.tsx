@@ -47,7 +47,7 @@ export function PricingCards({ headingLevel = 3 }: { headingLevel?: 2 | 3 }) {
           name="Free"
           blurb="Static codes, plus one dynamic code to try."
           price={<span className="font-display text-display-md font-semibold text-fg">$0</span>}
-          note="Free forever. Account only for the dynamic code"
+          note="Free, no time limit. Account only for the dynamic code"
           features={PLAN_FEATURES.free}
           cta={<ButtonLink href="/qr-code-generator" variant="secondary" className="w-full">Create free QR</ButtonLink>}
         />
@@ -88,7 +88,7 @@ export function PricingCards({ headingLevel = 3 }: { headingLevel?: 2 | 3 }) {
       </Pausable>
 
       <p className="mt-8 text-center font-mono text-[12px] text-fg-subtle">
-        Every plan: unlimited scans · codes never expire · no ads on your codes
+        Every plan: unlimited scans · static codes never expire · dynamic codes keep working if you cancel · no ads on your codes
       </p>
       <PaymentMethods align="center" className="mt-4" />
     </div>

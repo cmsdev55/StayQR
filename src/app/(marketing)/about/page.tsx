@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/content/breadcrumbs";
-import { JsonLd, SITE, breadcrumbLd, founderLd, organizationLd } from "@/components/content/json-ld";
+import { JsonLd, ORG_ID, breadcrumbLd, founderLd, pageGraph, webPageLd } from "@/components/content/json-ld";
 import { CtaBand } from "@/components/sections/cta-band";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { COMPANY, FOUNDER } from "@/content/company";
@@ -29,8 +29,7 @@ export default function AboutPage() {
   return (
     <main>
       <JsonLd data={breadcrumbLd(CRUMBS)} />
-      <JsonLd data={{ "@context": "https://schema.org", "@type": "AboutPage", url: `${SITE}/about`, name: `About ${COMPANY.name}`, mainEntity: organizationLd() }} />
-      <JsonLd data={{ "@context": "https://schema.org", ...founderLd() }} />
+      <JsonLd data={pageGraph(founderLd(), webPageLd({ path: "/about", name: `About ${COMPANY.name}`, type: "AboutPage", mainEntity: ORG_ID }))} />
       <section aria-labelledby="about-title" className="noise bg-grid relative isolate overflow-hidden pb-20 pt-28 sm:pt-36 lg:pb-28">
         <div className="mx-auto max-w-container px-4 sm:px-6">
           <Breadcrumbs items={CRUMBS} />
@@ -40,7 +39,7 @@ export default function AboutPage() {
             immediate
             className="mt-6"
             title="QR codes that *keep working.*"
-            intro="EndureQR exists because too many printed QR codes stop working the day a subscription ends. We build codes you can print once and trust for years."
+            intro={`EndureQR is a web-based QR code generator run by ${FOUNDER.name} in ${FOUNDER.city}, ${FOUNDER.country}. Its free generator makes static QR codes in ${QR_TYPES.length} types that never expire, with no sign-up or watermark. Its paid plans add dynamic QR codes you can edit after printing, and those codes keep redirecting to their last destination even after you cancel.`}
           />
         </div>
       </section>
@@ -56,7 +55,7 @@ export default function AboutPage() {
               EndureQR takes the opposite position. If you cancel, your dynamic codes keep redirecting to the last destination you set, with no service page and no ads. You only lose the ability to edit them and see new analytics until you come back.
             </p>
             <p>
-              For everything that never needs to change, such as WiFi details, contact cards or a link to a page you own, we offer a free static generator. Static codes store their content in the pattern itself, so they work forever without us. Read more in our guide to{" "}
+              For everything that never needs to change, such as WiFi details, contact cards or a link to a page you own, we offer a free static generator. Static codes store their content in the pattern itself, so they never expire and don't depend on us. Read more in our guide to{" "}
               <Link href="/guides/static-vs-dynamic-qr-codes" className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">static vs dynamic QR codes</Link>.
             </p>
           </div>

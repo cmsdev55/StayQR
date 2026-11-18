@@ -34,15 +34,15 @@ const mono = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "EndureQR: Dynamic QR codes that never stop working",
+    default: "EndureQR: QR Codes That Keep Working After You Cancel",
     template: "%s · EndureQR",
   },
   description:
-    "Create dynamic QR codes you can edit after printing, with unlimited scans and real analytics. Cancel any time: your codes keep working.",
+    "Free static QR codes with no sign-up, plus dynamic codes you can edit after printing. Pro is $29 a year, and codes keep working if you cancel. Start free.",
   openGraph: {
     type: "website",
     siteName: "EndureQR",
-    title: "QR codes that never stop working",
+    title: "QR codes that keep working after you cancel",
     description: "Edit after printing. Unlimited scans. Your codes keep working even if you cancel.",
   },
   twitter: { card: "summary_large_image" },

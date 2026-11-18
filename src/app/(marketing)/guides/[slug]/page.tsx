@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { AD_SLOTS, AdSlot } from "@/components/ads/ad-slot";
 import { Breadcrumbs } from "@/components/content/breadcrumbs";
 import { GuideCards } from "@/components/content/guide-cards";
-import { JsonLd, ORG_REF, SITE, breadcrumbLd, founderLd } from "@/components/content/json-ld";
+import { FOUNDER_ID, JsonLd, ORG_ID, SITE, WEBSITE_ID, breadcrumbLd, founderLd, pageGraph } from "@/components/content/json-ld";
 import { Block } from "@/components/content/blocks";
 import { RelatedTypes } from "@/components/content/type-grid";
 import { CtaBand } from "@/components/sections/cta-band";
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: g.description,
       publishedTime: g.published,
       modifiedTime: g.updated,
-      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "EndureQR: QR codes that never stop working" }],
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "EndureQR: QR codes that keep working after you cancel" }],
     },
   };
 }
@@ -63,18 +63,20 @@ export default async function GuidePage({ params }: Props) {
     <main>
       <JsonLd data={breadcrumbLd(crumbs)} />
       <JsonLd
-        data={{
-          "@context": "https://schema.org",
+        data={pageGraph(founderLd(), {
           "@type": "Article",
+          "@id": `${SITE}/guides/${g.slug}#article`,
           headline: g.h1,
           description: g.description,
-          datePublished: g.published,
-          dateModified: g.updated,
-          mainEntityOfPage: `${SITE}/guides/${g.slug}`,
+          datePublished: `${g.published}T09:00:00+05:00`,
+          dateModified: `${g.updated}T09:00:00+05:00`,
+          mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE}/guides/${g.slug}` },
+          isPartOf: { "@id": WEBSITE_ID },
+          inLanguage: "en",
           image: `${SITE}/opengraph-image`,
-          author: founderLd(),
-          publisher: ORG_REF,
-        }}
+          author: { "@id": FOUNDER_ID },
+          publisher: { "@id": ORG_ID },
+        })}
       />
 
       <article aria-labelledby="guide-title" className="pb-16 pt-28 sm:pt-36">

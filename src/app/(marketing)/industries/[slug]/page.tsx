@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JsonLd, breadcrumbLd } from "@/components/content/json-ld";
+import { APP_ID, JsonLd, breadcrumbLd, pageGraph, softwareAppLd, webPageLd } from "@/components/content/json-ld";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { IndustryIcon } from "@/components/industry-icon";
@@ -21,11 +21,6 @@ export function generateStaticParams() {
 export const dynamicParams = false;
 
 /** Google shows about 155–160 characters: add the suffix only if it fits, and cut long intros at a word. */
-function fitDescription(intro: string, suffix: string, max = 158) {
-  if ((intro + suffix).length <= max) return intro + suffix;
-  if (intro.length <= max) return intro;
-  return intro.slice(0, intro.lastIndexOf(" ", max - 1)).replace(/[,;:]$/, "") + "…";
-}
 
 /** Guides most relevant to each industry (internal links for the weakest-linked guides). */
 const INDUSTRY_GUIDES: Record<string, string[]> = {
@@ -43,8 +38,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ind = industryBySlug((await params).slug);
   if (!ind) return {};
   return {
-    title: `Dynamic QR codes for ${ind.name.toLowerCase()}`,
-    description: fitDescription(ind.intro, " Unlimited scans, and codes keep working if you cancel."),
+    title: ind.seoTitle.length + " · EndureQR".length > 60 ? { absolute: ind.seoTitle } : ind.seoTitle,
+    description: ind.metaDescription,
     alternates: { canonical: `/industries/${ind.slug}` },
   };
 }
@@ -52,6 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function IndustryPage({ params }: Props) {
   const ind = industryBySlug((await params).slug);
   if (!ind) notFound();
+  const meta = await generateMetadata({ params });
   const words = ind.headline.split(" ");
   const m = qrMatrix(`https://${ind.destinations[0].split("/")[0]}`, 0);
   const others = INDUSTRIES.filter((i) => i.slug !== ind.slug);
@@ -60,14 +56,17 @@ export default async function IndustryPage({ params }: Props) {
   return (
     <main>
       <JsonLd data={breadcrumbLd([{ name: "Home", path: "/" }, { name: ind.name, path: `/industries/${ind.slug}` }])} />
+      <JsonLd data={pageGraph(softwareAppLd(), webPageLd({ path: `/industries/${ind.slug}`, name: `QR codes for ${ind.name.toLowerCase()}`, description: String(meta.description), about: APP_ID }))} />
       {/* Hero */}
       <section aria-labelledby="ind-title" className="noise bg-grid relative isolate overflow-hidden pb-24 pt-32 sm:pt-40 lg:pb-32">
         <div className="mx-auto grid max-w-container items-center gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
           <div>
-            <p className="fade-up inline-flex items-center gap-2.5 font-mono text-label uppercase text-fg-subtle" style={{ ["--d" as string]: "0ms" }}>
-              <IndustryIcon slug={ind.slug} size={16} /> EndureQR for {ind.name.toLowerCase()}
-            </p>
-            <h1 id="ind-title" className="mt-5 max-w-[16ch] font-display text-display-lg font-semibold text-fg [text-wrap:balance]">
+            <h1 id="ind-title">
+              <span className="fade-up flex items-center gap-2.5 font-mono text-label font-normal uppercase text-fg-subtle" style={{ ["--d" as string]: "0ms" }}>
+                <IndustryIcon slug={ind.slug} size={16} /> {ind.keyword}
+                <span className="sr-only">: </span>
+              </span>
+              <span className="mt-5 block max-w-[16ch] font-display text-display-lg font-semibold text-fg [text-wrap:balance]">
               {words.map((w, i) => (
                 <span key={i}>
                   <span className="mask-word">
@@ -76,6 +75,7 @@ export default async function IndustryPage({ params }: Props) {
                   {i < words.length - 1 ? " " : null}
                 </span>
               ))}
+              </span>
             </h1>
             <p className="fade-up mt-6 max-w-[52ch] text-body-lg text-fg-muted" style={{ ["--d" as string]: "300ms" }}>{ind.intro}</p>
             <div className="fade-up mt-8 flex flex-col gap-3 sm:flex-row" style={{ ["--d" as string]: "380ms" }}>
@@ -114,7 +114,7 @@ export default async function IndustryPage({ params }: Props) {
       {/* Use cases */}
       <section aria-labelledby="uses-title" className="border-t border-line py-24 lg:py-32">
         <div className="mx-auto max-w-container px-4 sm:px-6">
-          <SectionHeading id="uses-title" eyebrow="Use cases" title={`${ind.name}: how teams use *EndureQR.*`} />
+          <SectionHeading id="uses-title" eyebrow="Use cases" title={`What QR codes do for *${ind.name.toLowerCase()}.*`} intro={ind.answer} />
           <div className="mt-12 grid gap-4 md:grid-cols-3 lg:gap-5">
             {ind.useCases.map((u, i) => (
               <article key={u.title} className="glass rounded-lg p-6 sm:p-8" data-reveal="" style={{ ["--stagger" as string]: i }}>

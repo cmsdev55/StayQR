@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JsonLd, SITE, organizationLd } from "@/components/content/json-ld";
+import { APP_ID, JsonLd, pageGraph, softwareAppLd, webPageLd } from "@/components/content/json-ld";
 import { Prewarm } from "@/components/motion/prewarm";
 import { Compare } from "@/components/sections/compare";
 import { Faq } from "@/components/sections/faq";
@@ -20,15 +20,7 @@ export const metadata: Metadata = { alternates: { canonical: "/" } };
 export default function Home() {
   return (
     <main>
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@graph": [
-            { "@type": "WebSite", "@id": `${SITE}/#website`, url: SITE, name: "EndureQR", publisher: { "@id": `${SITE}/#organization` }, inLanguage: "en" },
-            organizationLd(),
-          ],
-        }}
-      />
+      <JsonLd data={pageGraph(softwareAppLd(), webPageLd({ path: "/", name: "EndureQR: QR codes that keep working after you cancel", about: APP_ID }))} />
       <Hero />
       <NeverDies />
       <Generator />

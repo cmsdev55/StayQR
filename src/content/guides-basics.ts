@@ -7,7 +7,7 @@ export const GUIDES_BASICS: Guide[] = [
     title: "What is a QR code? How it works, explained simply",
     h1: "What is a QR code? How the pattern works and what it can hold",
     description:
-      "A QR code is a square barcode that stores links, text or data in a grid of modules. Learn how it works, its parts, its versions and error correction levels.",
+      "A QR code is a square barcode that stores links, text or data in a grid of modules. Learn how it works, its parts, versions and error correction levels.",
     category: "Basics",
     published: "2026-10-26",
     updated: "2026-11-02",
@@ -17,7 +17,7 @@ export const GUIDES_BASICS: Guide[] = [
     body: [
       {
         type: "p",
-        text: "A **QR code** (short for Quick Response code) is a two-dimensional barcode that stores information in a square grid of dark and light squares called **modules**. A phone camera reads the pattern and turns it back into text, such as a web address, a WiFi login, a contact card or a short message. QR codes were invented in 1994 by Denso Wave, a Japanese company, to track car parts through factories. Today the built-in camera on most smartphones can read them.",
+        text: "A QR code (Quick Response code) is a two-dimensional barcode that stores data in a square grid of dark and light modules. A phone camera decodes the pattern back into text, such as a web address, WiFi login or contact card. Denso Wave developed it in 1994 to track car parts, and the format is an international standard, ISO/IEC 18004. The largest version holds up to 7,089 digits or 2,953 bytes.",
       },
       { type: "h2", id: "how-a-qr-code-works", text: "How does a QR code work?" },
       {
@@ -136,7 +136,7 @@ export const GUIDES_BASICS: Guide[] = [
       { type: "h2", id: "static-and-dynamic-qr-codes", text: "Static and dynamic QR codes" },
       {
         type: "p",
-        text: "Every QR code is read in the same way. What differs is the content stored inside.",
+        text: "Every QR code is read in the same way. What differs is the content stored inside. You can try a [dynamic QR code generator](/dynamic-qr-code-generator) free for one code.",
       },
       {
         type: "ul",
@@ -191,7 +191,7 @@ export const GUIDES_BASICS: Guide[] = [
     body: [
       {
         type: "p",
-        text: "To scan a QR code, open the **Camera** app on your phone, point it at the code so the whole square is on screen, and hold still for a moment. A link or button appears. Read what it says, then tap it. Recent iPhones and most recent Android phones do this with the built-in camera, so you do not need a separate app. To scan a code that is already on your screen, such as a screenshot, use Photos on an iPhone or Google Lens on Android.",
+        text: "To scan a QR code, open your phone's Camera app, point it at the code so the whole square and its margin are in view, and hold still. A link or button appears; check the address, then tap it. iPhones and most Android phones do this without an extra app. For a code already on your screen, use Photos on iPhone or Google Lens on Android.",
       },
       { type: "h2", id: "scan-on-iphone", text: "How to scan a QR code on an iPhone" },
       {
@@ -345,7 +345,7 @@ export const GUIDES_BASICS: Guide[] = [
     title: "How to make a QR code: free step-by-step guide",
     h1: "How to make a QR code: a step-by-step guide",
     description:
-      "Make a QR code in minutes: pick a type, enter your link or details, style it, add a logo, test it and download PNG, SVG or PDF. Free, with no sign-up needed.",
+      "Make a QR code in minutes: pick a type, enter your link or details, style it, add a logo, test it and download PNG, SVG or PDF. Free, with no sign-up.",
     category: "Basics",
     published: "2026-10-26",
     updated: "2026-11-02",
@@ -355,7 +355,7 @@ export const GUIDES_BASICS: Guide[] = [
     body: [
       {
         type: "p",
-        text: "To make a QR code, open a QR code generator, choose what the code should do (open a link, join WiFi, save a contact), enter your content and download the image. Before you print, add a short call to action, scan it with a couple of phones, and pick a file format that suits where it will appear. With a free generator the whole process takes a few minutes, and a static code made this way never expires.",
+        text: "To make a QR code, open a QR code generator, choose what the code should do (open a link, join WiFi, save a contact), enter the content, and download the image as SVG or PDF for print or PNG for screens. Before printing, add a short call to action, keep a clear margin and test it on an iPhone and an Android phone. A static code made this way never expires.",
       },
       { type: "h2", id: "steps-at-a-glance", text: "What are the steps to make a QR code?" },
       {
@@ -436,7 +436,7 @@ export const GUIDES_BASICS: Guide[] = [
       },
       {
         type: "p",
-        text: "Scanners read brightness, not colour. Keep the modules dark and the background light, with strong contrast between them. A deep navy or dark green on white works as well as black. Avoid light modules on a dark background, which some scanners cannot read. Rounded dots and softened corner squares usually scan well, but keep the three corner squares easy to recognise.",
+        text: "Scanners read brightness, not colour. Keep the modules dark and the background light, with strong contrast between them. A deep navy or dark green on white works as well as black. Avoid light modules on a dark background, which some scanners cannot read. Rounded dots and softened corner squares usually scan well, but keep the three corner squares easy to recognise. To brand it, [add a logo](/qr-code-with-logo) in the centre; the generator raises error correction automatically.",
       },
       {
         type: "h3",
@@ -554,7 +554,7 @@ export const GUIDES_BASICS: Guide[] = [
     title: "QR code not scanning? A checklist of common fixes",
     h1: "QR code not working or not scanning? A troubleshooting checklist",
     description:
-      "QR code not scanning? Work through this checklist: contrast, size, quiet zone, data density, logo size, glare, curves, blur, broken links and expired codes.",
+      "QR code not scanning? Work through this checklist: contrast, size, quiet zone, data density, logo size, glare, curves, blur, dead links and expired codes.",
     category: "Printing",
     published: "2026-10-26",
     updated: "2026-11-02",
@@ -601,7 +601,7 @@ export const GUIDES_BASICS: Guide[] = [
         type: "ul",
         items: [
           "**A missing quiet zone.** The standard calls for a [plain margin 4 modules wide](https://www.qrcode.com/en/howto/code.html) on every side. Text, borders or a crop too close to the code remove it. Fix: restore the margin and keep everything else outside it.",
-          "**A logo that is too big.** A logo covers modules and uses up error correction. Fix: shrink it to no more than about 20 to 25% of the code's area, keep it off the corner squares and use [level H error correction](https://www.qrcode.com/en/about/error_correction.html). The EndureQR generator sets level H automatically when you add a logo.",
+          "**A logo that is too big.** A logo covers modules and uses up error correction. Fix: shrink it to no more than about 20 to 25% of the code's width, keep it off the corner squares and use [level H error correction](https://www.qrcode.com/en/about/error_correction.html). The EndureQR generator sets level H automatically when you add a logo.",
           "**Unusual shapes.** Tiny dots, gaps between modules or corner squares redrawn as other shapes can defeat older scanners. Fix: return to square or rounded modules and standard corners.",
         ],
       },
@@ -696,7 +696,7 @@ export const GUIDES_BASICS: Guide[] = [
     title: "Are QR codes safe? How to spot QR code scams",
     h1: "Are QR codes safe? How to spot and avoid QR code scams",
     description:
-      "QR codes are safe to scan, but the link can be risky. Learn how quishing and fake parking codes work, what to check before you tap and how to protect codes.",
+      "QR codes are safe to scan; the link can be risky. Learn how quishing and fake parking codes work, what to check before you tap and how to protect yours.",
     category: "Basics",
     published: "2026-10-26",
     updated: "2026-11-02",
@@ -706,7 +706,7 @@ export const GUIDES_BASICS: Guide[] = [
     body: [
       {
         type: "p",
-        text: "Scanning a QR code is generally safe in itself. A QR code only stores text, usually a web address, and your phone shows you what it contains before anything happens. The risk is where the code sends you. Scammers use fake codes, often stickers placed over real ones, to send people to look-alike websites that steal passwords or card details. This is called **quishing**. Check the address in the preview before you tap, and take extra care with any code that asks you to pay or log in.",
+        text: "Scanning a QR code is generally safe in itself: a QR code only stores text, usually a web address, and your phone shows it before anything opens. The risk is the destination. Scammers place fake codes, often stickers over real ones, that lead to look-alike sites that steal logins or card details, a scam called quishing. Check the address in the preview, and be most careful with codes that ask you to pay or log in.",
       },
       { type: "h2", id: "what-a-qr-code-can-do", text: "What can a QR code do to your phone?" },
       {

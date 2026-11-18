@@ -20,7 +20,7 @@ const { email } = COMPANY;
 export const TERMS: LegalDoc = {
   slug: "terms",
   title: "Terms of Service",
-  description: "The agreement between you and EndureQR for using the website, the free QR code generator and paid plans.",
+  description: "Plain-English EndureQR terms: plans, 14-day refunds, acceptable use, what keeps working after you cancel, and 90 days' notice if the service ever closes.",
   effective: LEGAL_EFFECTIVE,
   updated: LEGAL_EFFECTIVE,
   summary: [
@@ -120,7 +120,7 @@ export const TERMS: LegalDoc = {
 export const PRIVACY: LegalDoc = {
   slug: "privacy",
   title: "Privacy Policy",
-  description: "What EndureQR collects, why, how long we keep it, who we share it with, and the choices you have.",
+  description: "Our free generator runs in your browser, so what you type never reaches us. See what scan data dynamic codes record, how long we keep it and your rights.",
   effective: LEGAL_EFFECTIVE,
   updated: LEGAL_EFFECTIVE,
   summary: [

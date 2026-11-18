@@ -37,7 +37,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       "Turn any link into a QR code for free. No sign-up, no watermark, unlimited scans and no expiry. Add your logo and colours, then download PNG, SVG or PDF.",
     h1: "URL QR code generator",
     intro:
-      "Turn any website link into a QR code that opens in one scan. It's free, needs no account, and the code never expires or runs out of scans. Style it with your colours and logo, then download it ready for print or screen.",
+      "A URL QR code stores a web address in the pattern itself, so any phone camera opens that page in one scan. Made with EndureQR's free generator, it is a static code with no sign-up, no watermark, no scan limit and no expiry, though it only works while the page it points to stays online. Shorter links make simpler patterns. Changing the link after printing needs a dynamic code.",
     steps: [
       { title: "Paste your link", body: "Copy the full address from your browser and paste it into the website field. Open it once to check it lands on the exact page you want, not a login screen or a search result." },
       { title: "Style the code", body: "Pick your colours, dot and corner styles, and add your logo or a \"Scan me\" frame. Keep the dots clearly darker than the background so every phone can read them." },
@@ -77,7 +77,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       "Put a short message inside a QR code. It shows on screen when scanned and works with no internet. Free, no sign-up, no watermark, up to 300 characters.",
     h1: "Text QR code generator",
     intro:
-      "Put a short message inside a QR code and it appears on screen when someone scans it. Nothing opens and no connection is needed, because the words are stored in the code itself. Free, with no sign-up and no watermark.",
+      "A text QR code stores a short plain-text message in the pattern, and a phone shows that message on screen when it scans the code. Nothing opens and no internet is needed, because the words are inside the code. EndureQR's free text codes hold up to 300 characters; the QR standard allows far more, about 3 KB, but long messages make dense patterns that are hard to scan from print.",
     steps: [
       { title: "Write your message", body: "Type up to 300 characters into the text field. Words, numbers and line breaks all work." },
       { title: "Style it", body: "Add your colours, logo or a \"Scan me\" frame. Simple styling helps, because longer messages already make a busier pattern." },
@@ -110,12 +110,12 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
   // ── wifi ─────────────────────────────────────────────────────────────
   {
     slug: "wifi",
-    title: "WiFi QR Code Generator: Free, No Sign-Up",
+    title: "WiFi QR Code Generator: Free, Private, No Sign-Up",
     description:
-      "Make a WiFi QR code so guests join your network in one scan, with no password to type. Works on iPhone and Android. Free, no sign-up, and it never expires.",
+      "Make a WiFi QR code guests join in one scan, no password to type. Your password never leaves your browser. Works on iPhone and Android. Free, no sign-up.",
     h1: "WiFi QR code generator",
     intro:
-      "Let guests join your WiFi by pointing their camera at a code, with no password to read out or type. The network name and password are stored in the code, so it works offline and never expires. Free, with no sign-up.",
+      "A WiFi QR code stores your network name, password and security type as text in the format WIFI:T:WPA;S:NetworkName;P:password;; which iPhone and Android cameras recognise and offer to join. Nobody types the password, and reading the code needs no internet. Because the password is inside the code, anyone who can see it can join, so use a guest network and reprint whenever the password changes.",
     steps: [
       { title: "Enter the network name", body: "Type the network name (SSID) exactly as it appears in your phone's WiFi list. Capital letters and spaces count." },
       { title: "Add the password and security type", body: "Enter the password and choose WPA/WPA2/WPA3, WEP, or none for an open network. Turn on hidden network if your router doesn't broadcast its name." },
@@ -155,7 +155,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       "Create a vCard QR code that saves your name, phone, email and company to contacts in one scan. Free, no sign-up, no watermark, and the code never expires.",
     h1: "vCard QR code generator",
     intro:
-      "Share your contact details in one scan. A vCard QR code holds your name, phone, email, company and more, and the phone offers to save them straight to contacts. Free, with no sign-up, and the code never expires.",
+      "A vCard QR code stores a contact card, with your name, phone, email, company, job title, website and address, in the vCard 3.0 text format defined in RFC 2426. When scanned, iPhone and Android phones show the details and offer to save them to contacts, with no internet needed. The details are fixed once printed, and each extra field adds modules, so include only what people need.",
     steps: [
       { title: "Fill in your details", body: "Enter your name, phone, email, company, job title, website and address. Leave out anything you don't want strangers to have." },
       { title: "Check the formats", body: "Write your phone number with the + and country code so it works for contacts abroad, and double-check the spelling of your email address." },
@@ -194,7 +194,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       "Make an email QR code that opens a new message with your address, subject and text already filled in. Free, no account needed, no watermark and no expiry.",
     h1: "Email QR code generator",
     intro:
-      "Make a QR code that opens a new email with the address, subject and message already filled in. People scan it, check the draft and press send. Free, with no account and no expiry.",
+      "An email QR code stores a mailto: link, the standard email address format defined in RFC 6068, with an optional subject and message. Scanning it opens the phone's mail app with a new draft addressed to you. Nothing is sent until the person taps send, and it only works if they have a mail app set up, so print your email address beside the code as well.",
     steps: [
       { title: "Enter the recipient", body: "Type the address that should receive the emails. Check the spelling carefully, because it can't be corrected after printing." },
       { title: "Add a subject and message", body: "Both are optional. A clear subject helps you sort replies, and the message can be up to 400 characters." },
@@ -219,7 +219,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       { q: "Can I prefill the subject and body?", a: "Yes. Both are optional, and the person scanning can edit them before sending." },
       { q: "What if the person has no mail app set up?", a: "Their phone may not be able to open the draft. Print your address under the code so they can still reach you." },
       { q: "Can I see who scanned it?", a: "A static email code can't count scans. You'll see who wrote to you in your inbox, and a unique subject line shows which code they used." },
-      { q: "Do email QR codes expire?", a: "No. They work forever, with unlimited scans." },
+      { q: "Do email QR codes expire?", a: "No. Email codes are static: they hold the address themselves, so they never expire and have no scan limit." },
     ],
     related: ["sms", "vcard", "phone", "whatsapp"],
   },
@@ -227,12 +227,12 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
   // ── sms ──────────────────────────────────────────────────────────────
   {
     slug: "sms",
-    title: "SMS QR Code Generator: Free Prefilled Text Messages",
+    title: "SMS QR Code Generator: Free Prefilled Texts",
     description:
       "Create an SMS QR code that opens a text message with your number and message ready to send. Works on iPhone and Android. Free, no sign-up, no watermark.",
     h1: "SMS QR code generator",
     intro:
-      "Create a QR code that opens a text message with your number and message ready to go. One scan, one tap on send. Free, with no sign-up and no watermark.",
+      "An SMS QR code stores a phone number and an optional message in the SMSTO: format that phone scanners recognise. Scanning it opens the messaging app with the number and text filled in; the person still has to tap send, and pays their usual rate. Write the number with the + and country code, and keep the message short so the code stays simple to scan.",
     steps: [
       { title: "Enter the number", body: "Type the mobile number that should receive the texts, with the + and country code, for example +44." },
       { title: "Write the message", body: "Add up to 300 characters to prefill, such as a keyword, a booking request or \"Please call me back\". Short is better." },
@@ -271,7 +271,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       "Make a phone number QR code that offers to call you as soon as it's scanned. No typing and no misdialled digits. Free, no sign-up, and it never expires.",
     h1: "Phone number QR code generator",
     intro:
-      "Make a QR code that offers to call your number as soon as it's scanned. No typing and no misdialled digits. Free, with no sign-up, and it never expires.",
+      "A phone QR code stores a number as a tel: link, the standard telephone address format defined in RFC 3966. When scanned, the phone shows the number and asks whether to call it; it never dials automatically. Include the + and country code so it works from foreign SIMs. The code holds very little data, so it scans well when small, but a new number means a new code.",
     steps: [
       { title: "Enter the number", body: "Type the full number with the + and country code, such as +1 for the US or +44 for the UK. That way it dials correctly from any phone." },
       { title: "Style the code", body: "Add your colours, logo or a \"Scan me\" frame to match your sign, card or advert." },
@@ -304,12 +304,12 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
   // ── whatsapp ─────────────────────────────────────────────────────────
   {
     slug: "whatsapp",
-    title: "WhatsApp QR Code Generator: Free Chat Link QR Codes",
+    title: "WhatsApp QR Code Generator: Free Click-to-Chat",
     description:
-      "Make a WhatsApp QR code that opens a chat with you and a message already typed. Customers scan, tap send and you're talking. Free, no sign-up, no watermark.",
+      "Make a WhatsApp QR code that opens a chat with your message already typed. Customers scan, tap send and you're talking. Free, no sign-up, no watermark.",
     h1: "WhatsApp QR code generator",
     intro:
-      "Make a QR code that opens a WhatsApp chat with you, with a message already typed. Customers scan, tap send and the conversation starts. Free, with no sign-up and no watermark.",
+      "A WhatsApp QR code stores a wa.me click-to-chat link containing your number in international format and an optional prefilled message. Scanning it opens a WhatsApp chat with you, without the person saving your number first. They can edit the message before tapping send. It works with personal and WhatsApp Business numbers, and opens in the browser if WhatsApp is not installed.",
     steps: [
       { title: "Enter your WhatsApp number", body: "Type the number registered to WhatsApp, including the country code, for example +44 7700 900123. EndureQR removes spaces and the + for you." },
       { title: "Write an opening message", body: "Add up to 300 characters, such as \"Hi, I'd like to book a table\". It's optional, and people can edit it before sending." },
@@ -347,7 +347,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       "Make a location QR code that opens a map at your address or exact coordinates, ready for directions. Free, no sign-up, no watermark, and it never expires.",
     h1: "Location QR code generator",
     intro:
-      "Make a QR code that opens a map at the place you choose, ready for directions. Use an address, or exact coordinates for spots that don't have one. Free, with no sign-up, and it never expires.",
+      "A location QR code opens a map at an address or exact coordinates, so the person scanning can get directions. EndureQR encodes it as a Google Maps search link, which opens in the maps app or browser on both iPhone and Android; the older geo: format is ignored by the iPhone camera. Coordinates give the most precise pin. Enter latitude first, then longitude.",
     steps: [
       { title: "Choose the spot", body: "Decide where people should arrive. For large venues, that's usually the entrance or car park, not the middle of the building." },
       { title: "Enter an address or coordinates", body: "Type an address or place name, or leave that empty and enter the latitude and longitude for a precise pin." },
@@ -385,7 +385,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       "Create an event QR code that adds your event to a phone's calendar with the title, time, place and details filled in. Free, no sign-up and no watermark.",
     h1: "Event QR code generator",
     intro:
-      "Make a QR code that adds your event to someone's calendar, with the title, time, place and details filled in. Nobody forgets the date or copies the time down wrong. Free, with no sign-up.",
+      "An event QR code stores a calendar entry (title, start and end time, place and details) in the iCalendar VEVENT format defined in RFC 5545. The iPhone Camera offers to add it to the calendar directly; on Android, support varies and Google Lens is often needed. Reading it needs no internet, but the details are fixed once printed, so link to an event page if plans might change.",
     steps: [
       { title: "Enter the event details", body: "Add a title, start time, end time, location and up to 300 characters of details. Only the title and start time are required." },
       { title: "Check the date and times", body: "These are the details people rely on most. Read them back twice, including am and pm." },
@@ -423,7 +423,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       "Make an Instagram QR code that opens your profile, post or reel in one scan. Add your logo and colours. Free, no sign-up, no watermark, never expires.",
     h1: "Instagram QR code generator",
     intro:
-      "Turn your Instagram username into a QR code that opens your profile in one scan. Put it on packaging, menus and posters so people in the room can follow you on the spot. Free, with no sign-up and no watermark.",
+      "An Instagram QR code stores a link to your Instagram profile, post or reel and opens it in the Instagram app if installed, or in the browser if not. Unlike the code inside the Instagram app, EndureQR's version uses your own colours, logo and frame and downloads as PNG, SVG, JPEG or PDF for print. If you change your username, a static code stops reaching you.",
     steps: [
       { title: "Enter your username", body: "Type your Instagram username, with or without the @, or paste a link to your profile, a post or a reel." },
       { title: "Check the account is public", body: "If the account is private, people who scan will only see a follow request screen, not your posts." },
@@ -462,7 +462,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       "Create a Facebook QR code that opens your page, profile, group or event in one scan. Free, no sign-up and no watermark. Download PNG, SVG, JPEG or PDF.",
     h1: "Facebook QR code generator",
     intro:
-      "Make a QR code that opens your Facebook page, profile, group or event. It's a simple way to turn people who know you offline into followers, members and guests. Free, with no sign-up, and it never expires.",
+      "A Facebook QR code stores the link to a Facebook page, profile, group, event or post and opens it in the Facebook app or the browser. It is a standard URL QR code, so it is free, never expires and has no scan limit. Set a page username first for a shorter link, and check what logged-out visitors see, because groups and private profiles need an account.",
     steps: [
       { title: "Copy your link", body: "Type your page username, or open the page, group or event on Facebook and copy its address." },
       { title: "Check what visitors see", body: "Open the link in a private browser window. If you can't see it while logged out, some people who scan won't either." },
@@ -500,7 +500,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       "Make a YouTube QR code that opens your channel or a specific video. Put how-to videos on packaging and trailers on posters. Free, no sign-up, no watermark.",
     h1: "YouTube QR code generator",
     intro:
-      "Make a QR code that opens your YouTube channel or one particular video. Put a how-to on the box, a trailer on the poster or your channel on your merch. Free, with no sign-up and no watermark.",
+      "A YouTube QR code stores a link to a YouTube channel, video, Short or playlist and opens it in the YouTube app or the browser. Link a specific video when the code has one job, such as a setup guide on packaging, and your channel for discovery. Unlisted videos play for anyone with the link, but private ones do not, and a deleted video leaves the code opening an unavailable page.",
     steps: [
       { title: "Choose a channel or a video", body: "Type your channel handle, such as @yourchannel, or paste a video link to send people straight to one video." },
       { title: "Check the video is viewable", body: "Unlisted videos play for anyone with the link. Private videos won't play for the people who scan." },
@@ -538,7 +538,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       "Create a LinkedIn QR code for your profile or company page, so people you meet can connect in one scan. Free, no sign-up, no watermark, never expires.",
     h1: "LinkedIn QR code generator",
     intro:
-      "Make a QR code that opens your LinkedIn profile or company page. People you meet can connect before the conversation ends. Free, with no sign-up and no watermark.",
+      "A LinkedIn QR code stores the link to your LinkedIn profile (linkedin.com/in/your-name) or company page (linkedin.com/company/name), so people you meet can open it and connect in one scan. It opens in the LinkedIn app if installed, otherwise in the browser, showing what your public profile settings allow. Set a custom public profile URL before printing, because changing it later breaks a static code.",
     steps: [
       { title: "Choose profile or company page", body: "Pick personal profile or company page, then type your username, the part after linkedin.com/in/ or linkedin.com/company/. You can also paste the full link." },
       { title: "Tidy your URL first", body: "If your profile address ends in a string of numbers, set a custom public URL in LinkedIn before you make the code. It's cleaner and makes a simpler pattern." },
@@ -576,7 +576,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       "Make an X (Twitter) QR code that opens your profile or a single post in one scan. Add your logo and colours. Free, no sign-up, no watermark, no expiry.",
     h1: "X (Twitter) QR code generator",
     intro:
-      "Make a QR code that opens your X profile, or one post you want people to read. Scan, open, follow. Free, with no sign-up and no watermark.",
+      "An X (Twitter) QR code stores a link to an X profile or a single post and opens it in the X app or the browser. EndureQR builds x.com links from a handle, and older twitter.com links currently redirect to x.com. Link a profile for follows and a post for one specific message. Renaming the handle breaks a static code, so use a dynamic code if it might change.",
     steps: [
       { title: "Enter your handle", body: "Type your username, with or without the @, or paste a link to your profile or a post." },
       { title: "Check what visitors see", body: "Open the link in a private browser window. Protected accounts only show posts to approved followers." },
@@ -615,7 +615,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       "Create a TikTok QR code that opens your profile or a video in one scan. Use it on products, packaging and merch. Free, no sign-up, no watermark, no expiry.",
     h1: "TikTok QR code generator",
     intro:
-      "Make a QR code that opens your TikTok profile or a specific video. Put it on products, packaging and shop counters to bring people from the real world to your videos. Free, with no sign-up and no watermark.",
+      "A TikTok QR code stores a link to your TikTok profile (tiktok.com/@username) or a single video and opens it in the TikTok app if installed, otherwise in the browser. Unlike the code in the TikTok app, EndureQR's version uses your colours, logo and frame and downloads as PNG, SVG, JPEG or PDF for print, free and without a watermark. Private accounts show little to people who scan.",
     steps: [
       { title: "Enter your username or a video link", body: "Type your username, with or without the @, and EndureQR builds the tiktok.com/@username link. To open one video, paste its link instead." },
       { title: "Check the account is public", body: "Private accounts only show videos to approved followers, so people who scan may see very little." },
@@ -653,7 +653,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       "Make a PayPal QR code that opens your PayPal.Me link, with or without a set amount. Great for stalls, tips and invoices. Free, no sign-up, no watermark.",
     h1: "PayPal QR code generator",
     intro:
-      "Make a QR code that opens your PayPal.Me link so people can pay you in a few taps. Add an amount for a fixed price, or leave it blank for tips and donations. Free, with no sign-up and no watermark.",
+      "A PayPal QR code stores your PayPal.Me link, optionally with a fixed amount and currency, and opens your PayPal payment page in the PayPal app or the browser. The payment happens entirely in PayPal: EndureQR never sees it or takes a cut, and any fees are PayPal's. Leave the amount blank for tips and donations, and check codes on public display regularly for stickers.",
     steps: [
       { title: "Find your PayPal.Me username", body: "Check you have a PayPal.Me link set up in your PayPal account. Your username is the part after paypal.me/." },
       { title: "Add an amount and currency", body: "Enter an amount and pick USD, EUR, GBP, AUD or CAD for a fixed price. Leave the amount empty to let people choose." },

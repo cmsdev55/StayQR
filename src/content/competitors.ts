@@ -29,6 +29,9 @@ export type Competitor = {
   cancelLong: string;
   /** Verbatim from the vendor's own help/FAQ page, shown on /alternatives as "in their words". */
   quote: { text: string[]; source: string; url: string };
+  /** /alternatives page <title> and meta description. */
+  seoTitle: string;
+  metaDescription: string;
   /** /alternatives page: headline (*asterisks* = accent), pitch, closing CTA. */
   headline: string;
   pitch: string;
@@ -39,6 +42,8 @@ export type Competitor = {
 export const COMPETITORS: Competitor[] = [
   {
     slug: "bitly",
+    seoTitle: "Bitly Alternative for QR Codes: $29 a Year, Unlimited Edits",
+    metaDescription: "Bitly Core is $120 a year for 5 QR codes and 5 edits a month. EndureQR Pro is $29 a year for unlimited codes, edits and scans; codes work if you cancel.",
     name: "Bitly",
     short: "Bitly",
     plan: "Core",
@@ -58,9 +63,9 @@ export const COMPETITORS: Competitor[] = [
       source: "Bitly Support: What happens when I downgrade to a lower subscription plan?",
       url: "https://support.bitly.com/hc/en-us/articles/360029870551-What-happens-when-I-downgrade-to-a-lower-subscription-plan",
     },
-    headline: "The Bitly alternative with *unlimited edits* after printing",
+    headline: "The Bitly QR code alternative with *unlimited edits* after printing",
     pitch:
-      "Bitly Core is $120 a year, makes 5 QR codes a month, and lets you change where they point only 5 times a month. EndureQR Pro is $29 a year with unlimited codes and unlimited edits, and your codes keep working if you cancel.",
+      "EndureQR is an alternative to Bitly for QR codes you need to edit after printing. According to Bitly's pricing page, checked 26 October 2026, Bitly Core costs $120 a year billed yearly and allows 5 QR codes and 5 destination changes a month. EndureQR Pro costs $29 a year with unlimited dynamic codes, edits and scans, and its codes keep redirecting if you cancel.",
     ctaTitle: "Change your codes as often as you like.",
     sources: [
       { label: "Pricing", url: "https://bitly.com/pages/pricing" },
@@ -69,6 +74,8 @@ export const COMPETITORS: Competitor[] = [
   },
   {
     slug: "qrfy",
+    seoTitle: "QRFY Alternative: Unlimited Dynamic QR Codes for $29 a Year",
+    metaDescription: "QRFY costs $228 a year, and cancelling locks you out of your codes and data. EndureQR Pro is $29 a year or $79 once, and codes keep working if you cancel.",
     name: "QRFY",
     short: "QRFY",
     plan: "12-month",
@@ -91,7 +98,7 @@ export const COMPETITORS: Competitor[] = [
     },
     headline: "The QRFY alternative that stays *yours* after you cancel",
     pitch:
-      "QRFY is $228 a year on its 12-month plan, or $39 a month if you pay quarterly. Cancel, and you lose access to your codes and their data until you pay again. EndureQR Pro is $29 a year, or $79 once, and your codes keep working after you cancel.",
+      "EndureQR is an alternative to QRFY for dynamic QR codes that stay usable after you stop paying. QRFY's 12-month plan costs $228 a year ($19 a month), and its FAQ says cancelled accounts cannot access their codes or data until they pay again (checked 26 October 2026). EndureQR Pro costs $29 a year, or $79 once, and its dynamic codes keep redirecting after you cancel.",
     ctaTitle: "Keep your codes, and $199 a year.",
     sources: [
       { label: "Pricing", url: "https://qrfy.com/pricing" },

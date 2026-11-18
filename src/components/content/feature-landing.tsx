@@ -5,7 +5,7 @@ import { Block } from "@/components/content/blocks";
 import { Breadcrumbs } from "@/components/content/breadcrumbs";
 import { DynamicTry } from "@/components/content/dynamic-try";
 import { GuideCards } from "@/components/content/guide-cards";
-import { JsonLd, ORG_ID, SITE, breadcrumbLd, softwareAppLd } from "@/components/content/json-ld";
+import { APP_ID, JsonLd, breadcrumbLd, pageGraph, softwareAppLd, toolLd, webPageLd } from "@/components/content/json-ld";
 import { RelatedTypes } from "@/components/content/type-grid";
 import { CtaBand } from "@/components/sections/cta-band";
 import { Faq } from "@/components/sections/faq";
@@ -20,7 +20,7 @@ import { qrType } from "@/lib/qr-types";
 export function featureMetadata(slug: FeatureSlug): Metadata {
   const p = featurePage(slug);
   return {
-    title: { absolute: p.title },
+    title: p.title.length + " · EndureQR".length > 60 ? { absolute: p.title } : p.title,
     description: p.description,
     alternates: { canonical: `/${p.slug}` },
     openGraph: { title: p.title, description: p.description, url: `/${p.slug}`, images: [{ url: "/opengraph-image", width: 1200, height: 630 }] },
@@ -44,8 +44,8 @@ export function FeatureLanding({ slug }: { slug: FeatureSlug }) {
       <JsonLd
         data={
           p.tool
-            ? { "@context": "https://schema.org", "@type": "WebApplication", name: p.title, url: `${SITE}/${p.slug}`, description: p.description, applicationCategory: "UtilitiesApplication", operatingSystem: "Any (runs in the browser)", offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }, publisher: { "@id": ORG_ID } }
-            : { "@context": "https://schema.org", ...softwareAppLd(), description: p.description }
+            ? pageGraph(...toolLd({ path: `/${p.slug}`, name: p.title, description: p.description }))
+            : pageGraph(softwareAppLd(), webPageLd({ path: `/${p.slug}`, name: p.title, description: p.description, about: APP_ID }))
         }
       />
 

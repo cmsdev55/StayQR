@@ -4,7 +4,7 @@ import { ImageResponse } from "next/og";
 import qrcode from "qrcode-generator";
 import { SITE_HOST } from "@/lib/site";
 
-export const alt = "EndureQR: QR codes that never stop working";
+export const alt = "EndureQR: QR codes that keep working after you cancel";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -76,8 +76,8 @@ export default async function OpengraphImage() {
 
         <div style={{ position: "absolute", left: 72, top: 178, display: "flex", flexDirection: "column", fontFamily: "Clash Display", fontSize: 84, lineHeight: 0.96, letterSpacing: -3.4, color: INK }}>
           <span>QR codes that</span>
-          <span>never stop</span>
-          <span style={{ color: LIME }}>working.</span>
+          <span>keep working</span>
+          <span style={{ color: LIME }}>after you cancel.</span>
         </div>
 
         <div style={{ position: "absolute", left: 72, bottom: 64, display: "flex", gap: 12 }}>

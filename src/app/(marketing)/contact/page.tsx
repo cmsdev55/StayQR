@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/content/breadcrumbs";
-import { JsonLd, ORG_REF, SITE, breadcrumbLd } from "@/components/content/json-ld";
+import { JsonLd, ORG_ID, breadcrumbLd, pageGraph, webPageLd } from "@/components/content/json-ld";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { COMPANY, FOUNDER } from "@/content/company";
 
@@ -26,15 +26,7 @@ export default function ContactPage() {
   return (
     <main>
       <JsonLd data={breadcrumbLd(CRUMBS)} />
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "ContactPage",
-          url: `${SITE}/contact`,
-          name: `Contact ${COMPANY.name}`,
-          mainEntity: { ...ORG_REF, contactPoint: CHANNELS.map((c) => ({ "@type": "ContactPoint", contactType: c.title.toLowerCase(), email: c.email, availableLanguage: "en" })) },
-        }}
-      />
+      <JsonLd data={pageGraph(webPageLd({ path: "/contact", name: `Contact ${COMPANY.name}`, type: "ContactPage", mainEntity: ORG_ID }))} />
       <section aria-labelledby="contact-title" className="noise bg-grid relative isolate overflow-hidden pb-24 pt-28 sm:pt-36 lg:pb-32">
         <div className="mx-auto max-w-container px-4 sm:px-6">
           <Breadcrumbs items={CRUMBS} />
@@ -43,7 +35,7 @@ export default function ContactPage() {
             id="contact-title"
             immediate
             className="mt-6"
-            title="Talk to a *person.*"
+            title="Contact EndureQR: *talk to a person.*"
             intro={`Email the right address below and a person will reply within ${COMPANY.replyWithin}.`}
           />
           <ul className="mt-14 grid gap-4 md:grid-cols-3 lg:gap-5">

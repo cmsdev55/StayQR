@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JsonLd, breadcrumbLd } from "@/components/content/json-ld";
+import { APP_ID, JsonLd, breadcrumbLd, pageGraph, softwareAppLd, webPageLd } from "@/components/content/json-ld";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Logo } from "@/components/logo";
@@ -28,8 +28,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const c = competitorBySlug((await params).slug);
   if (!c) return {};
   return {
-    title: `${c.name} alternative`,
-    description: `Looking for a ${c.name} alternative? EndureQR is $${ENDUREQR_ROW.pricePerYear}/year with unlimited codes and scans, and your codes keep working if you cancel.`,
+    title: { absolute: c.seoTitle },
+    description: c.metaDescription,
     alternates: { canonical: `/alternatives/${c.slug}` },
   };
 }
@@ -37,6 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function AlternativePage({ params }: Props) {
   const c = competitorBySlug((await params).slug);
   if (!c) notFound();
+  const meta = await generateMetadata({ params });
   const saving = c.pricePerYear - ENDUREQR_ROW.pricePerYear;
   const words = c.headline.split(" ");
   let accentOn = false;
@@ -60,6 +61,7 @@ export default async function AlternativePage({ params }: Props) {
   return (
     <main>
       <JsonLd data={breadcrumbLd([{ name: "Home", path: "/" }, { name: `${c.name} alternative`, path: `/alternatives/${c.slug}` }])} />
+      <JsonLd data={pageGraph(softwareAppLd(), webPageLd({ path: `/alternatives/${c.slug}`, name: `${c.name} alternative`, description: String(meta.description), about: APP_ID }))} />
       <section aria-labelledby="alt-title" className="noise bg-grid relative isolate overflow-hidden pb-24 pt-32 sm:pt-40 lg:pb-32">
         <div className="mx-auto max-w-container px-4 sm:px-6">
           <p className="fade-up eyebrow" style={{ ["--d" as string]: "0ms" }}>{c.name} alternative</p>

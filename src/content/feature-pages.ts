@@ -38,9 +38,9 @@ export const FEATURE_PAGES: FeaturePage[] = [
   // ── 1. QR code with logo ────────────────────────────────────────────
   {
     slug: "qr-code-with-logo",
-    title: "QR Code with Logo: Free Custom QR Code Generator",
+    title: "QR Code with Logo: Free Generator, No Sign-Up",
     description:
-      "Make a free QR code with your logo in the centre. Upload PNG, SVG, JPEG or WebP, pick colours and a frame, then download print-ready files. No sign-up.",
+      "Put your logo in the centre of a free QR code. Upload PNG, SVG or JPEG and pick colours. Error correction goes to H so it still scans. No watermark.",
     eyebrow: "Free logo QR codes",
     h1: "Make a QR code with *your logo*",
     intro:
@@ -215,13 +215,13 @@ export const FEATURE_PAGES: FeaturePage[] = [
   // ── 2. Dynamic QR code generator ────────────────────────────────────
   {
     slug: "dynamic-qr-code-generator",
-    title: "Dynamic QR Code Generator: Edit Links After Printing",
+    title: "Dynamic QR Code Generator: Free Code, Edit After Printing",
     description:
-      "Create a dynamic QR code free and edit it after printing. Pro adds unlimited codes, with unlimited scans, analytics and iPhone/Android links.",
+      "Your first dynamic QR code is free: edit the link after printing and see its scans. Pro is $29 a year for unlimited codes, and they work after you cancel.",
     eyebrow: "Dynamic QR codes",
     h1: "Dynamic QR codes you can *edit after printing*",
     intro:
-      "A dynamic QR code points to a short link, so you can change where it goes after the code is printed. Your first dynamic code is free, with editing and scan analytics. EndureQR Pro gives you unlimited dynamic codes for $29 a year. If you ever cancel, your codes keep redirecting to their last destination.",
+      "EndureQR's dynamic QR codes point to a short link, so you can change where they go after printing and see how often they are scanned. A free account includes one dynamic code; Pro costs $3.99 a month or $29 a year for unlimited codes and scans, and Lifetime is $79 once. If you cancel, codes keep redirecting to their last destination.",
     tool: false,
     cta: { label: "Create a free dynamic code", href: "/signup?next=%2Fdashboard%2Fcodes%2Fnew&from=dynamic" },
     benefits: [
@@ -282,7 +282,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
       { type: "h2", id: "static-vs-dynamic", text: "Static and dynamic codes compared" },
       {
         type: "table",
-        head: ["Feature", "Static (free)", "Dynamic (Pro or Lifetime)"],
+        head: ["Feature", "Static (free)", "Dynamic (1 free; unlimited on Pro or Lifetime)"],
         rows: [
           ["Change the destination after printing", "No", "Yes, from the next scan"],
           ["Scan analytics", "No", "Daily scans, devices, location, time of day"],
@@ -380,7 +380,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
     slug: "app-download-qr-code",
     title: "App Download QR Code for App Store and Google Play",
     description:
-      "Make one app download QR code that sends iPhone users to the App Store and Android users to Google Play. Change the links any time and see scans by device.",
+      "One QR code sends iPhones to the App Store and Android phones to Google Play. Your first one is free; edit the store links after printing and track scans.",
     eyebrow: "App download codes",
     h1: "One QR code for the *App Store and Google Play*",
     intro:
@@ -534,11 +534,11 @@ export const FEATURE_PAGES: FeaturePage[] = [
   // ── 4. Bulk QR code generator ───────────────────────────────────────
   {
     slug: "bulk-qr-code-generator",
-    title: "Bulk QR Code Generator: Create QR Codes from CSV",
+    title: "Bulk QR Code Generator: 500 Codes from One CSV",
     description:
-      "Upload a CSV and create up to 500 dynamic QR codes at once. Download a ZIP of print-ready SVGs and a CSV of short links. Edit any code after printing.",
+      "Upload a CSV and create up to 500 dynamic QR codes at once. Get a ZIP of print-ready SVGs and a CSV of short links; edit any code later. Pro, $29 a year.",
     eyebrow: "Bulk creation",
-    h1: "Create hundreds of QR codes *from one CSV*",
+    h1: "Bulk QR code generator: *hundreds of codes from one CSV*",
     intro:
       "Upload a CSV with a name and a destination on each row, and EndureQR creates one dynamic QR code per row, up to 500 per upload. You then download a ZIP of print-ready SVG files and a CSV of the short links. Every code can be edited after printing and has its own scan analytics.",
     tool: false,

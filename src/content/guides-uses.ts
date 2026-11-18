@@ -17,7 +17,7 @@ export const GUIDES_USES: Guide[] = [
     body: [
       {
         type: "p",
-        text: "To put a QR code on a business card, first decide what the scan should do. A **vCard QR code** stores your contact details in the pattern itself, so one scan offers to save you straight into the phone's contacts, with no internet needed. A **link QR code** opens a profile page, such as your website or LinkedIn, which you can update at any time. Print the code about **2.5 cm (1 in) wide** on the back of a standard 85 x 55 mm card, and test a printed proof on an iPhone and an Android phone before you order.",
+        text: "To put a QR code on a business card, choose a vCard code, which saves your name, number and email straight to the phone's contacts with no internet, or a link code that opens a profile page you can update later. Print it about 2.5 cm (1 in) wide on the back of an 85 x 55 mm or 3.5 x 2 in card, and test a printed proof on iPhone and Android.",
       },
       { type: "h2", id: "vcard-or-link", text: "vCard or a link to a profile page?" },
       {
@@ -151,7 +151,7 @@ export const GUIDES_USES: Guide[] = [
       { type: "h2", id: "add-a-call-to-action", text: "Tell people what the code does" },
       {
         type: "p",
-        text: "A bare square on a card can look like decoration. Add a few words beside it, such as \"Scan to save my contact\" or \"Scan for my portfolio\", so people know what will happen. A frame with a short label does this neatly. Keep your name, number and email printed on the card as well. Some people prefer to type details by hand, and a card that relies only on a code fails the moment a phone will not scan.",
+        text: "A bare square on a card can look like decoration. Add a few words beside it, such as \"Scan to save my contact\" or \"Scan for my portfolio\", so people know what will happen. A frame with a short label does this neatly. Keep your name, number and email printed on the card as well. Some people prefer to type details by hand, and a card that relies only on a code fails the moment a phone will not scan. You can make a [business card QR code with your logo](/qr-code-with-logo) free, with no sign-up.",
       },
       {
         type: "p",
@@ -189,7 +189,7 @@ export const GUIDES_USES: Guide[] = [
     title: "QR code error correction levels: L, M, Q and H explained",
     h1: "QR code error correction: how the L, M, Q and H levels work",
     description:
-      "QR codes have four error correction levels, L, M, Q and H, which recover about 7, 15, 25 and 30% of damage. Learn the density trade-off and when to use each.",
+      "QR codes have four error correction levels, L, M, Q and H, which recover about 7, 15, 25 and 30% of damage. Learn the density trade-off and which to use.",
     category: "Basics",
     published: "2026-10-26",
     updated: "2026-11-02",
@@ -296,7 +296,7 @@ export const GUIDES_USES: Guide[] = [
       { type: "h2", id: "logos-and-level-h", text: "Logos and why they need level H" },
       {
         type: "p",
-        text: "A logo in the middle of a QR code hides real modules. The scanner treats them as damage and rebuilds the missing data from the error correction codewords. That is why logos work at all, and why they need the highest level.",
+        text: "A logo in the middle of a QR code hides real modules. The scanner treats them as damage and rebuilds the missing data from the error correction codewords. That is why logos work at all, and why they need the highest level. The free [QR code with a logo](/qr-code-with-logo) generator switches to level H as soon as you add one.",
       },
       {
         type: "p",
@@ -305,7 +305,7 @@ export const GUIDES_USES: Guide[] = [
       {
         type: "ul",
         items: [
-          "Keep the logo to around 20 to 25% of the code's area at most, and smaller where you can.",
+          "Keep the logo to around 20 to 25% of the code's width at most, and smaller where you can.",
           "Place it in the centre, well away from the three corner squares.",
           "Give it a light border so its edge does not blur into the modules around it.",
           "Keep the content short, so the grid stays coarse even at level H.",
@@ -545,7 +545,7 @@ export const GUIDES_USES: Guide[] = [
     title: "How to track QR code scans: UTM links and analytics",
     h1: "How to track QR code scans",
     description:
-      "Static QR codes cannot count scans. Track them with UTM parameters and web analytics, or dynamic codes that log time, city and device. Privacy tips included.",
+      "Static QR codes cannot count scans. Track them with UTM tags and web analytics, or use dynamic codes that log time, city and device. Privacy tips included.",
     category: "Basics",
     published: "2026-10-26",
     updated: "2026-11-02",
@@ -610,7 +610,7 @@ export const GUIDES_USES: Guide[] = [
       { type: "h2", id: "dynamic-qr-codes", text: "Option 2: dynamic QR codes with scan analytics" },
       {
         type: "p",
-        text: "A dynamic QR code encodes a short link run by a QR service. Each scan reaches the service first, which records it and then forwards the phone to your destination. Because the measurement happens in the redirect, it counts scans whatever the destination is: your website, a menu PDF, a booking page or a social profile.",
+        text: "A dynamic QR code encodes a short link run by a QR service. Each scan reaches the service first, which records it and then forwards the phone to your destination. Because the measurement happens in the redirect, it counts scans whatever the destination is: your website, a menu PDF, a booking page or a social profile. A [dynamic QR code with scan analytics](/dynamic-qr-code-generator) counts scans for you, with no UTM setup.",
       },
       {
         type: "p",
@@ -723,7 +723,7 @@ export const GUIDES_USES: Guide[] = [
     body: [
       {
         type: "p",
-        text: "QR codes help at every stage of an event. Use them on posters and invitations to open the event page or add the date to a calendar, at the venue for the agenda, WiFi and directions, and at the end for a feedback form. Tickets are different: each attendee needs a unique code issued by a ticketing system. For anything that may change after printing, such as the schedule, use a dynamic code so you can update the link without reprinting.",
+        text: "Use QR codes at every stage of an event: on posters and invitations to open the event page or add the date to a calendar, at the venue for the agenda, WiFi and directions, and at the end for a feedback form. Tickets are different, because each attendee needs a unique code from a ticketing system. Use a dynamic code for anything that may change after printing.",
       },
       { type: "h2", id: "tickets-vs-information-codes", text: "What is the difference between ticket and information QR codes?" },
       {
@@ -810,7 +810,7 @@ export const GUIDES_USES: Guide[] = [
       { type: "h2", id: "dynamic-codes-for-changing-schedules", text: "What if the event schedule changes after printing?" },
       {
         type: "p",
-        text: "Use a dynamic code, so you can point it at the new schedule without reprinting. Event plans change after the print deadline. Speakers drop out, rooms swap and sessions move. A static code that points at a specific PDF breaks the moment you upload a new file with a new name, and signs and badges printed weeks earlier then lead to the wrong agenda.",
+        text: "Use a dynamic code, so you can point it at the new schedule without reprinting. Event plans change after the print deadline. Speakers drop out, rooms swap and sessions move. A static code that points at a specific PDF breaks the moment you upload a new file with a new name, and signs and badges printed weeks earlier then lead to the wrong agenda. With a dynamic code you can [update the agenda after printing](/dynamic-qr-code-generator) without new badges.",
       },
       {
         type: "p",

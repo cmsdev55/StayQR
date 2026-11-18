@@ -11,8 +11,8 @@ export const SITE = SITE_URL;
 
 /** One EndureQR entity: every page refers to this @id, so search engines see a single organisation. */
 export const ORG_ID = `${SITE}/#organization`;
+export const WEBSITE_ID = `${SITE}/#website`;
 export const APP_ID = `${SITE}/#app`;
-export const ORG_REF = { "@type": "Organization", "@id": ORG_ID, name: COMPANY.name, url: SITE };
 export const FOUNDER_ID = `${SITE}/about#founder`;
 
 /** The founder, who also writes the guides (Article author). */
@@ -23,6 +23,8 @@ export function founderLd() {
     name: FOUNDER.name,
     jobTitle: FOUNDER.role,
     url: `${SITE}/about#founder`,
+    description: `Founder of ${COMPANY.name}. Builds the product and writes the guides, checking each fact against its primary source.`,
+    knowsAbout: ["QR codes", "Dynamic QR codes", "QR code printing"],
     worksFor: { "@id": ORG_ID },
     homeLocation: { "@type": "Place", address: { "@type": "PostalAddress", addressLocality: FOUNDER.city, addressCountry: FOUNDER.countryCode } },
   };
@@ -33,6 +35,7 @@ export function organizationLd() {
     "@type": "Organization",
     "@id": ORG_ID,
     name: COMPANY.name,
+    alternateName: "StayQR",
     url: SITE,
     description: "EndureQR makes QR codes that keep working: free static codes that never expire, and dynamic codes that keep redirecting even after you cancel.",
     logo: { "@type": "ImageObject", "@id": `${SITE}/#logo`, url: `${SITE}/logo-512.png`, width: 512, height: 512, caption: COMPANY.name },
@@ -43,8 +46,62 @@ export function organizationLd() {
     contactPoint: [
       { "@type": "ContactPoint", contactType: "customer support", email: COMPANY.email.hello, availableLanguage: "en" },
       { "@type": "ContactPoint", contactType: "privacy", email: COMPANY.email.privacy, availableLanguage: "en" },
+      { "@type": "ContactPoint", contactType: "abuse reports", email: COMPANY.email.abuse, availableLanguage: "en" },
     ],
   };
+}
+
+export function websiteLd() {
+  // no SearchAction: the site has no search
+  return { "@type": "WebSite", "@id": WEBSITE_ID, url: SITE, name: COMPANY.name, alternateName: "StayQR", publisher: { "@id": ORG_ID }, inLanguage: "en" };
+}
+
+/**
+ * A page's structured data as one @graph that also carries the WebSite and Organization nodes. Google resolves @id
+ * only within a document, so a bare reference to #organization on another page tells it nothing.
+ */
+export function pageGraph(...nodes: object[]) {
+  return { "@context": "https://schema.org", "@graph": [websiteLd(), organizationLd(), ...nodes] };
+}
+
+type PageType = "WebPage" | "CollectionPage" | "AboutPage" | "ContactPage";
+
+export function webPageLd(o: { path: string; name: string; description?: string; type?: PageType; about?: string; mainEntity?: string }) {
+  const url = `${SITE}${o.path === "/" ? "" : o.path}`;
+  return {
+    "@type": o.type ?? "WebPage",
+    "@id": `${url}#webpage`,
+    url,
+    name: o.name,
+    ...(o.description ? { description: o.description } : {}),
+    isPartOf: { "@id": WEBSITE_ID },
+    publisher: { "@id": ORG_ID },
+    inLanguage: "en",
+    ...(o.about ? { about: { "@id": o.about } } : {}),
+    ...(o.mainEntity ? { mainEntity: { "@id": o.mainEntity } } : {}),
+  };
+}
+
+/** A free browser tool page (generator hub, type pages, QR code with logo): the tool plus the page it lives on. */
+export function toolLd(o: { path: string; name: string; description: string }) {
+  const url = `${SITE}${o.path}`;
+  return [
+    {
+      "@type": "WebApplication",
+      "@id": `${url}#app`,
+      name: o.name,
+      url,
+      description: o.description,
+      applicationCategory: "UtilitiesApplication",
+      operatingSystem: "Any (runs in the browser)",
+      browserRequirements: "Requires JavaScript",
+      isAccessibleForFree: true,
+      inLanguage: "en",
+      publisher: { "@id": ORG_ID },
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD", availability: "https://schema.org/InStock", url },
+    },
+    webPageLd({ path: o.path, name: o.name, description: o.description, mainEntity: `${url}#app` }),
+  ];
 }
 
 /** The product, with per-plan prices (subscriptions carry a billing period). */
@@ -63,8 +120,11 @@ export function softwareAppLd() {
     "@id": APP_ID,
     name: COMPANY.name,
     url: SITE,
+    description: "QR code generator with free static codes that never expire and dynamic codes you can edit after printing, with unlimited scans and analytics.",
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
+    inLanguage: "en",
+    featureList: ["Unlimited free static QR codes", "Dynamic QR codes you can edit after printing", "Scan analytics", "Bulk creation from CSV", "Codes keep redirecting after you cancel"],
     publisher: { "@id": ORG_ID },
     offers: [
       { "@type": "Offer", name: "Free", description: "Unlimited static QR codes and one dynamic QR code", price: "0", priceCurrency: "USD", availability: "https://schema.org/InStock", url: `${SITE}/qr-code-generator` },

@@ -2,19 +2,20 @@ import type { Metadata } from "next";
 import { AD_SLOTS, AdSlot } from "@/components/ads/ad-slot";
 import { Breadcrumbs } from "@/components/content/breadcrumbs";
 import { GuideCards } from "@/components/content/guide-cards";
-import { JsonLd, SITE, breadcrumbLd } from "@/components/content/json-ld";
+import { JsonLd, SITE, breadcrumbLd, pageGraph, toolLd } from "@/components/content/json-ld";
 import { TypeGrid } from "@/components/content/type-grid";
 import { CtaBand } from "@/components/sections/cta-band";
 import { Faq } from "@/components/sections/faq";
 import { GeneratorApp } from "@/components/sections/generator-app";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { GUIDES } from "@/content/guides";
+import { QR_TYPE_PAGES } from "@/content/qr-type-pages";
 import { qrMatrix } from "@/lib/qr";
 import { QR_TYPES, qrType } from "@/lib/qr-types";
 
 export const metadata: Metadata = {
-  title: "Free QR Code Generator That Never Expires: No Sign-Up",
-  description: `Make a free QR code for a link, WiFi, vCard, WhatsApp and ${QR_TYPES.length - 4} more types. Add a logo and frame, download PNG, SVG, JPEG or PDF. Static codes never expire.`,
+  title: "Free QR Code Generator: No Sign-Up, Never Expires",
+  description: `Make a free QR code for a link, WiFi, vCard and ${QR_TYPES.length - 3} more types. Add your logo and a frame, download PNG, SVG or PDF. No sign-up, no watermark, no expiry.`,
   alternates: { canonical: "/qr-code-generator" },
 };
 
@@ -38,15 +39,12 @@ export default function GeneratorHubPage() {
     <main>
       <JsonLd data={breadcrumbLd(CRUMBS)} />
       <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "WebApplication",
-          name: "EndureQR free QR code generator",
-          url: `${SITE}/qr-code-generator`,
-          applicationCategory: "UtilitiesApplication",
-          operatingSystem: "Any (runs in the browser)",
-          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-        }}
+        data={pageGraph(...toolLd({ path: "/qr-code-generator", name: "EndureQR free QR code generator", description: String(metadata.description) }), {
+          "@type": "ItemList",
+          "@id": `${SITE}/qr-code-generator#types`,
+          name: "QR code generators by type",
+          itemListElement: QR_TYPE_PAGES.map((t, i) => ({ "@type": "ListItem", position: i + 1, name: t.h1, url: `${SITE}/qr-code-generator/${t.slug}` })),
+        })}
       />
       <section aria-labelledby="hub-title" className="noise bg-grid relative isolate overflow-hidden pb-16 pt-28 sm:pt-36 lg:pb-24">
         <div className="mx-auto max-w-container px-4 sm:px-6">
@@ -56,8 +54,8 @@ export default function GeneratorHubPage() {
             id="hub-title"
             immediate
             className="mt-6"
-            title="Free QR code *generator.*"
-            intro={`${QR_TYPES.length} types, your logo, a frame, and print-ready downloads. No sign-up, no watermark, and static codes never expire.`}
+            title="Free QR code generator: *no sign-up, no expiry.*"
+            intro={`EndureQR's free QR code generator makes static QR codes in ${QR_TYPES.length} types, including website links, WiFi, contact cards (vCard), WhatsApp, email, SMS, calendar events and social profiles. Add a logo, colours and a frame, then download PNG, SVG, JPEG or PDF up to 4096 px. There is no sign-up, watermark or scan limit, the code is built in your browser, and static codes never expire.`}
           />
           <h2 className="sr-only">Create your QR code</h2>
           <div className="mt-12">

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AD_SLOTS, AdSlot } from "@/components/ads/ad-slot";
 import { Breadcrumbs } from "@/components/content/breadcrumbs";
-import { JsonLd, SITE, breadcrumbLd } from "@/components/content/json-ld";
+import { JsonLd, breadcrumbLd, pageGraph, toolLd } from "@/components/content/json-ld";
 import { RelatedTypes } from "@/components/content/type-grid";
 import { CtaBand } from "@/components/sections/cta-band";
 import { Faq } from "@/components/sections/faq";
@@ -25,7 +25,7 @@ export const dynamicParams = false;
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = qrTypePage((await params).type);
   if (!page) return {};
-  return { title: { absolute: page.title }, description: page.description, alternates: { canonical: `/qr-code-generator/${page.slug}` } };
+  return { title: page.title.length + " · EndureQR".length > 60 ? { absolute: page.title } : page.title, description: page.description, alternates: { canonical: `/qr-code-generator/${page.slug}` } };
 }
 
 export default async function QrTypePageRoute({ params }: Props) {
@@ -47,18 +47,7 @@ export default async function QrTypePageRoute({ params }: Props) {
   return (
     <main>
       <JsonLd data={breadcrumbLd(crumbs)} />
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "WebApplication",
-          name: `EndureQR ${def.name} QR code generator`,
-          url: `${SITE}/qr-code-generator/${page.slug}`,
-          description: page.description,
-          applicationCategory: "UtilitiesApplication",
-          operatingSystem: "Any (runs in the browser)",
-          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-        }}
-      />
+      <JsonLd data={pageGraph(...toolLd({ path: `/qr-code-generator/${page.slug}`, name: `EndureQR ${def.name} QR code generator`, description: page.description }))} />
 
       <section aria-labelledby="type-title" className="noise bg-grid relative isolate overflow-hidden pb-16 pt-28 sm:pt-36 lg:pb-24">
         <div className="mx-auto max-w-container px-4 sm:px-6">
@@ -75,7 +64,7 @@ export default async function QrTypePageRoute({ params }: Props) {
 
       <section aria-labelledby="steps-title" className="border-t border-line py-24 lg:py-32">
         <div className="mx-auto max-w-container px-4 sm:px-6">
-          <SectionHeading id="steps-title" eyebrow="How it works" title={`How to make ${/^(Email|SMS)$/.test(def.name) ? "an" : "a"} ${def.name} QR code`} />
+          <SectionHeading id="steps-title" eyebrow="How it works" title={`How to make ${/^([AEIOU]|SMS$|X\b)/.test(def.name) ? "an" : "a"} ${def.name} QR code`} />
           <ol className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-5">
             {page.steps.map((s, i) => (
               <li key={s.title} className="glass rounded-lg p-6 sm:p-7" data-reveal="" style={{ ["--stagger" as string]: i }}>

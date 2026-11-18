@@ -5,12 +5,12 @@ import { Pricing } from "@/components/sections/pricing";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { FAQ } from "@/content/faq";
 import { LIFETIME, MATRIX, PRO } from "@/content/plans";
-import { JsonLd, breadcrumbLd, softwareAppLd } from "@/components/content/json-ld";
+import { APP_ID, JsonLd, breadcrumbLd, pageGraph, softwareAppLd, webPageLd } from "@/components/content/json-ld";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Pricing",
-  description: `Free static QR codes, Pro at $${PRO.monthly}/month or $${PRO.yearly}/year, or $${LIFETIME} once for life. Unlimited scans on every plan, and codes keep working if you cancel.`,
+  title: { absolute: `QR Code Generator Pricing: Free, $${PRO.yearly} a Year or $${LIFETIME} Once` },
+  description: `Static QR codes are free. Pro is $${PRO.monthly}/month or $${PRO.yearly}/year for unlimited dynamic codes, analytics and bulk. Lifetime: $${LIFETIME} once. Codes work after you cancel.`,
   alternates: { canonical: "/pricing" },
 };
 
@@ -26,7 +26,7 @@ const BILLING_FAQ = [
 export default function PricingPage() {
   return (
     <main>
-      <JsonLd data={{ "@context": "https://schema.org", ...softwareAppLd() }} />
+      <JsonLd data={pageGraph(softwareAppLd(), webPageLd({ path: "/pricing", name: "EndureQR pricing", description: String(metadata.description), about: APP_ID }))} />
       <JsonLd data={breadcrumbLd([{ name: "Home", path: "/" }, { name: "Pricing", path: "/pricing" }])} />
       <Pricing page />
 

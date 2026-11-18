@@ -3,8 +3,16 @@ export type Industry = {
   name: string;
   /** Short line used in the marquee. */
   line: string;
+  /** The search phrase, shown above the headline inside the H1 ("Menu QR codes"). */
+  keyword: string;
+  /** <title>, without the brand suffix when that would pass 60 characters. */
+  seoTitle: string;
+  /** Meta description, 140–155 characters. */
+  metaDescription: string;
   headline: string;
   intro: string;
+  /** 40–80 word answer to "How do {industry} use QR codes?", the first section after the hero. */
+  answer: string;
   /** Destinations the code points at over time (the URL morph). */
   destinations: string[];
   useCases: { title: string; body: string }[];
@@ -17,6 +25,10 @@ export type Industry = {
 export const INDUSTRIES: Industry[] = [
   {
     slug: "restaurants",
+    answer: "Restaurants use QR codes to open the menu, ordering page, WiFi and review page from table tents, receipts and windows. A dynamic code lets you print the table card once and change the menu it opens, for brunch, a new season or new prices, without reprinting. A free static WiFi code lets guests join without asking for the password. Keep printed menus for guests who prefer them.",
+    keyword: "Menu QR codes",
+    seoTitle: "QR Code for Restaurant Menus: Update Without Reprinting",
+    metaDescription: "Print one QR code on your table tents, point it at tonight's menu and swap to brunch on Sunday. See which tables scan most. First dynamic code free.",
     name: "Restaurants",
     line: "Menus that change nightly",
     headline: "Print the table tent once. Change the menu every night.",
@@ -48,6 +60,10 @@ export const INDUSTRIES: Industry[] = [
   },
   {
     slug: "real-estate",
+    answer: "Estate agents use QR codes on sign riders, flyers and brochures to open a listing's photos, price and viewing times. With a dynamic code, the same printed sign rider can point at each new listing, or at your available-properties page once a home goes under offer, and scan counts show which signs draw interest. A free vCard code lets buyers save your contact details.",
+    keyword: "Real estate QR codes",
+    seoTitle: "Real Estate QR Codes for Yard Signs and Listings",
+    metaDescription: "Put one QR code on your sign rider, point it at the current listing, then switch to the next one when it sells. See which signs bring buyers. Start free.",
     name: "Real estate",
     line: "Signs that outlive the listing",
     headline: "One yard sign. Every listing you'll ever have.",
@@ -78,6 +94,10 @@ export const INDUSTRIES: Industry[] = [
   },
   {
     slug: "events",
+    answer: "Event organisers use QR codes on posters, badges and signs to open the agenda, venue map, WiFi and feedback form. Because schedules change after the print deadline, a dynamic code lets the same printed badge open the live agenda during the event and the recordings afterwards. Tickets need a unique code per attendee from a ticketing system. EndureQR makes information codes, not tickets.",
+    keyword: "Conference QR codes",
+    seoTitle: "QR Codes for Conferences: Badges, Agendas, Maps",
+    metaDescription: "Print QR codes on badges, posters and lanyards that always open the latest agenda, venue map or feedback form, even after the schedule changes. Start free.",
     name: "Events",
     line: "Schedules that move with the day",
     headline: "The schedule changed. Your badges didn't need to.",
@@ -109,6 +129,10 @@ export const INDUSTRIES: Industry[] = [
   },
   {
     slug: "retail",
+    answer: "Retailers use QR codes on packaging, shelf talkers and windows to open care guides, manuals, promotions and app downloads. Packaging stays on shelves long after a web page changes, so a dynamic code lets you update where on-pack codes point without new packaging, and send iPhone and Android shoppers to different app stores. Send the printer an SVG or PDF so the code stays sharp.",
+    keyword: "Packaging QR codes",
+    seoTitle: "QR Codes for Product Packaging and Retail",
+    metaDescription: "Put QR codes on packaging, shelves and windows that open the right page today and next season. Edit the link after printing; see scans by city and device.",
     name: "Retail",
     line: "Packaging that stays current",
     headline: "Packaging lasts for years. Your links should too.",
@@ -140,6 +164,10 @@ export const INDUSTRIES: Industry[] = [
   },
   {
     slug: "healthcare",
+    answer: "Clinics and practices use QR codes on posters, leaflets and appointment cards to open public pages: check-in forms on their own systems, booking pages, aftercare guidance and directions. A dynamic code keeps every printed leaflet pointing at the current version. Keep personal and clinical details out of the code and its link. EndureQR counts only anonymous scans and holds no compliance certification such as HIPAA.",
+    keyword: "Healthcare QR codes",
+    seoTitle: "Healthcare QR Codes for Patient Forms and Leaflets",
+    metaDescription: "QR codes on leaflets, waiting-room posters and appointment cards that always open the current form, guidance or booking page. Update them, no reprinting.",
     name: "Healthcare",
     line: "Forms and guidance that update",
     headline: "Patient leaflets that never point to an old form.",
@@ -171,6 +199,10 @@ export const INDUSTRIES: Industry[] = [
   },
   {
     slug: "hotels",
+    answer: "Hotels use QR codes on room cards, lift posters and reception signs to open guest information, WiFi, spa or restaurant bookings and checkout pages. With dynamic codes, one card per room stays in place all year while the page it opens changes, and room codes can be created in bulk from a CSV. A free WiFi code connects guests without typing, but needs reprinting when the password changes.",
+    keyword: "Hotel room QR codes",
+    seoTitle: "Hotel QR Codes for Room Cards, WiFi and Check-Out",
+    metaDescription: "One QR code per room card for WiFi, breakfast hours, spa bookings and check-out. Change what it opens from your phone, with no reprinting. Start free.",
     name: "Hotels",
     line: "Room cards guests actually use",
     headline: "Every room card, always up to date.",
@@ -202,6 +234,10 @@ export const INDUSTRIES: Industry[] = [
   },
   {
     slug: "education",
+    answer: "Schools and universities use QR codes on handouts, noticeboards and slides to open reading lists, timetables, sign-up forms and open-day pages. A dynamic code lets a handout printed once point at each new term's resources, and pausing it shows a message when a link should stop working. Scanning needs no app or account, and EndureQR analytics record anonymous counts, not student details.",
+    keyword: "QR codes for schools",
+    seoTitle: "QR Codes for Schools and Teachers: Reuse Every Term",
+    metaDescription: "QR codes on worksheets, noticeboards and textbooks that open this term's reading list, timetable or sign-up form. Update the link and keep the printout.",
     name: "Education",
     line: "Handouts that point to this term",
     headline: "Handouts that point to this term, not last year's.",
@@ -233,6 +269,10 @@ export const INDUSTRIES: Industry[] = [
   },
   {
     slug: "agencies",
+    answer: "Agencies use QR codes across client print campaigns, moving one printed code from a teaser page to the launch page to a thank-you page. EndureQR lets an agency keep each client's codes in a folder, create a campaign's codes from a CSV of up to 500 rows, and export scans as CSV for client reports. Codes keep redirecting if the agency stops paying.",
+    keyword: "QR codes for agencies",
+    seoTitle: "QR Code Generator for Agencies: Codes by Client",
+    metaDescription: "Create QR codes for every campaign, sort them by client and send the analytics. Unlimited codes, $29 a year; if a client leaves, their codes keep working.",
     name: "Agencies",
     line: "Client codes you can hand over",
     headline: "Run every client's codes from one place.",

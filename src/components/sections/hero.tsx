@@ -3,7 +3,7 @@ import { preload } from "react-dom";
 import { ButtonLink, Magnetic } from "@/components/ui/button";
 import { HeroVisual } from "./hero-visual";
 
-const HEADLINE = [["QR", "codes", "that", "never"], ["stop", "working."]];
+const HEADLINE = [["QR", "codes", "that", "keep"], ["working", "after", "you", "cancel."]];
 
 /** Server component: all copy is real HTML, rendered before any 3D loads. */
 export function Hero() {
@@ -34,7 +34,7 @@ export function Hero() {
             <span key={li} className="block">
               {line.map((w, wi) => {
                 const idx = i++;
-                const last = w === "working.";
+                const last = w === "cancel.";
                 return (
                   <span key={w}>
                     <span className="mask-word">

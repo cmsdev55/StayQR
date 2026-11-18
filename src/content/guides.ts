@@ -113,7 +113,7 @@ const GUIDES_CORE: Guide[] = [
       { type: "h2", id: "how-to-avoid-expiring-codes", text: "How to avoid QR codes that stop working" },
       {
         type: "p",
-        text: "Match the type of code to how long the print needs to last and whether the destination will change.",
+        text: "Match the type of code to how long the print needs to last and whether the destination will change. EndureQR offers [dynamic codes that keep working after you cancel](/dynamic-qr-code-generator).",
       },
       {
         type: "ul",
@@ -172,7 +172,7 @@ const GUIDES_CORE: Guide[] = [
     body: [
       {
         type: "p",
-        text: "A **static** QR code stores its content, such as a web address or WiFi password, directly in the pattern. It is free, works without a service behind it and never expires, but it cannot be changed after printing. A **dynamic** QR code stores a short redirect link, so you can change the destination at any time and track scans, but it relies on a provider to keep the redirect running. Use static for content that will not change and dynamic for anything you may need to update.",
+        text: "A static QR code stores its content, such as a web address or WiFi password, directly in the pattern: it is free, needs no service and never expires, but cannot be changed after printing. A dynamic QR code stores a short redirect link, so you can change the destination and count scans, but it depends on the provider keeping that redirect running. Use static for fixed content, dynamic for anything that may change.",
       },
       { type: "h2", id: "what-is-a-static-qr-code", text: "What is a static QR code?" },
       {
@@ -237,7 +237,7 @@ const GUIDES_CORE: Guide[] = [
       { type: "h2", id: "when-to-use-dynamic", text: "When is a dynamic QR code worth paying for?" },
       {
         type: "p",
-        text: "A dynamic code is worth paying for when the print will outlive the destination, or when you want to know whether the code is being used.",
+        text: "A dynamic code is worth paying for when the print will outlive the destination, or when you want to know whether the code is being used. To try one, [create a dynamic QR code](/dynamic-qr-code-generator): your first one is free.",
       },
       {
         type: "ul",
@@ -467,7 +467,7 @@ const GUIDES_CORE: Guide[] = [
       { type: "h2", id: "why-dynamic-suits-menus", text: "Should a menu QR code be static or dynamic?" },
       {
         type: "p",
-        text: "If your menu changes, use a dynamic code. Menus are one of the clearest cases for one. Prices move, dishes rotate with the seasons, and many places run separate lunch, dinner and brunch menus. With a static code, every change of address means new table tents. A common trap is uploading a new PDF with a new file name, which quietly breaks every static code pointing at the old one.",
+        text: "If your menu changes, use a dynamic code. Menus are one of the clearest cases for one. Prices move, dishes rotate with the seasons, and many places run separate lunch, dinner and brunch menus. With a static code, every change of address means new table tents. A common trap is uploading a new PDF with a new file name, which quietly breaks every static code pointing at the old one. For a [menu QR code you can update](/dynamic-qr-code-generator), your first dynamic code is free.",
       },
       {
         type: "p",
@@ -691,7 +691,7 @@ const GUIDES_CORE: Guide[] = [
     title: "QR code design best practices: logos, colours, frames",
     h1: "QR code design best practices: custom codes that still scan",
     description:
-      "Design a custom QR code with a logo that still scans: strong contrast, a light background, a logo under 25% of the area, clear frames and real phone tests.",
+      "Design a custom QR code with a logo that still scans: strong contrast, a light background, a logo under 25% of the width, clear frames and real phone tests.",
     category: "Design",
     published: "2026-10-26",
     updated: "2026-11-02",
@@ -701,7 +701,7 @@ const GUIDES_CORE: Guide[] = [
     body: [
       {
         type: "p",
-        text: "A custom QR code scans reliably when it has **strong contrast**, uses **dark modules on a light background**, keeps a **clear margin** around the edge, and limits any logo to roughly **20 to 25% of the code's area** with high error correction. Add a frame with a short call to action, then test on several phones before you print.",
+        text: "A custom QR code scans reliably when its modules are much darker than the background, it keeps a clear margin of four modules, and any logo stays small, around 20 to 25% of the code's width, with error correction level H. Rounded dots and brand colours are fine if contrast stays high. Add a short call to action, then test a printed proof on several phones.",
       },
       { type: "h2", id: "contrast-and-colour", text: "What colours can a QR code be?" },
       {
@@ -725,7 +725,7 @@ const GUIDES_CORE: Guide[] = [
       { type: "h2", id: "adding-a-logo", text: "How big can a logo in a QR code be?" },
       {
         type: "p",
-        text: "Keep a logo to around 20 to 25% of the code's area at most, and smaller is safer. A logo in the centre covers modules, so part of the data is missing. Error correction is what lets the code survive this. QR codes have [four levels, L, M, Q and H](https://www.qrcode.com/en/about/error_correction.html), which can recover roughly 7%, 15%, 25% and 30% of the data.",
+        text: "Keep a logo to about 20 to 25% of the code's width, which covers only around 4 to 6% of its area, and smaller is safer. A logo in the centre covers modules, so part of the data is missing. Error correction is what lets the code survive this. QR codes have [four levels, L, M, Q and H](https://www.qrcode.com/en/about/error_correction.html), which can recover roughly 7%, 15%, 25% and 30% of the data. You can [add your logo to a QR code](/qr-code-with-logo) free, and the generator raises error correction for you.",
       },
       {
         type: "p",
@@ -817,7 +817,7 @@ const GUIDES_CORE: Guide[] = [
       },
       {
         q: "How big can the logo in a QR code be?",
-        a: "Keep it to roughly 20 to 25% of the code's area at most, with high error correction, and keep it away from the three corner squares. Smaller logos are more reliable.",
+        a: "Keep it to roughly 20 to 25% of the code's width (about 4 to 6% of its area), with high error correction, and keep it away from the three corner squares. Smaller logos are more reliable.",
       },
       {
         q: "Does adding a logo make a QR code harder to scan?",

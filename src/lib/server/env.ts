@@ -19,6 +19,8 @@ export const env = {
     },
   },
   cronSecret: process.env.CRON_SECRET,
+  /** Who may open /admin: comma-separated, matched case-insensitively against a confirmed account email. */
+  adminEmails: (process.env.ADMIN_EMAILS ?? "").split(",").map((e) => e.trim().toLowerCase()).filter(Boolean),
   safeBrowsingKey: process.env.GOOGLE_SAFE_BROWSING_KEY,
 };
 

@@ -5,6 +5,7 @@ import { useActionState, useState } from "react";
 import { resetRequestAction, signInAction, signUpAction, type AuthState } from "@/app/(auth)/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { COMPANY } from "@/content/company";
 
 const PLAN_LABEL: Record<string, string> = {
   "pro-yearly": "Pro · $29 a year",
@@ -16,6 +17,7 @@ const PLAN_LABEL: Record<string, string> = {
 const ERRORS: Record<string, string> = {
   link: "That link has expired or was already used. Log in, or ask for a new one.",
   google: "Google sign-in isn't available right now. Use your email instead.",
+  suspended: `This account is suspended. If you think that's a mistake, email ${COMPANY.email.hello}.`,
 };
 
 /** Sign up / log in with email + password (or Google). A plan chosen on /pricing goes straight to checkout after. */

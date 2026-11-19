@@ -83,6 +83,14 @@ export async function resumeSubscription(userId: string, id: string) {
   await upsertSubscription(userId, sub);
 }
 
+/** End a subscription now instead of at the period end (admin only). Polar revokes it; refunds stay a separate step in Polar. */
+export async function revokeSubscription(userId: string, id: string) {
+  await ownSubscription(userId, id);
+  if (billingMode === "dev") return devSubscriptionChange(id, { status: "expired" });
+  const sub = await polar<Sub>(`/subscriptions/${id}`, { method: "DELETE" });
+  await upsertSubscription(userId, sub);
+}
+
 /** Monthly ⇄ yearly. Polar invoices the prorated difference straight away. */
 export async function switchPlan(userId: string, id: string, plan: "pro-monthly" | "pro-yearly") {
   await ownSubscription(userId, id);
@@ -290,9 +298,10 @@ export async function devCheckout(userId: string, plan: PlanKey) {
   await sql`insert into public.invoices (id, user_id, description, total_cents, currency, status, created_at) values (${`inv-${id}`}, ${userId}, ${PLAN_NAME[plan]}, ${PLAN_CENTS[plan]}, 'USD', 'paid', ${now})`;
 }
 
-async function devSubscriptionChange(id: string, change: { status?: "cancelled" | "active"; plan?: PlanKey }) {
+async function devSubscriptionChange(id: string, change: { status?: "cancelled" | "active" | "expired"; plan?: PlanKey }) {
   const sql = db();
   if (change.status === "cancelled") await sql`update public.subscriptions set status = 'cancelled', ends_at = renews_at, updated_at = now() where id = ${id}`;
+  if (change.status === "expired") await sql`update public.subscriptions set status = 'expired', ends_at = now(), renews_at = null, updated_at = now() where id = ${id}`;
   if (change.status === "active") await sql`update public.subscriptions set status = 'active', ends_at = null, updated_at = now() where id = ${id}`;
   if (change.plan) await sql`update public.subscriptions set plan = ${change.plan}, updated_at = now() where id = ${id}`;
 }

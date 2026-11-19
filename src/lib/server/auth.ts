@@ -22,7 +22,7 @@ export const getUser = cache(async (): Promise<SessionUser | null> => {
   const [row] = await db()<(Omit<SessionUser, "verified" | "hasPassword"> & { verified_at: Date | null; has_password: boolean; last_seen_at: Date; sid: string })[]>`
     select p.id, p.email, p.name, p.timezone, p.email_verified_at as verified_at, p.password_hash is not null as has_password, s.last_seen_at, s.id as sid
       from public.sessions s join public.profiles p on p.id = s.user_id
-     where s.id = ${sha256(token)} and s.expires_at > now()`;
+     where s.id = ${sha256(token)} and s.expires_at > now() and p.suspended_at is null`;
   if (!row) return null;
   // sliding expiry, written at most once an hour
   if (Date.now() - row.last_seen_at.getTime() > 3600_000) {
@@ -37,8 +37,10 @@ export async function requireUser(next = "/dashboard") {
   return u;
 }
 
-/** Start a session: random token in an httpOnly cookie, its hash in the database. */
+/** Start a session: random token in an httpOnly cookie, its hash in the database. Suspended accounts go back to login. */
 export async function startSession(userId: string) {
+  const [p] = await db()<{ suspended: boolean }[]>`select suspended_at is not null as suspended from public.profiles where id = ${userId}`;
+  if (p?.suspended) redirect("/login?error=suspended");
   const token = newToken();
   const ua = (await headers()).get("user-agent")?.slice(0, 300) ?? null;
   await db()`insert into public.sessions (id, user_id, expires_at, user_agent)

@@ -19,7 +19,7 @@ const BILLING_FAQ = [
   FAQ[4],
   { q: "Can I switch between monthly, yearly and lifetime?", a: "Yes, any time from Billing. Moving up is prorated to the day; moving to lifetime credits what's left of your current period." },
   { q: "Do you offer refunds?", a: "Yes. If EndureQR isn't right for you, email us within 14 days of your first Pro payment or your Lifetime purchase for a full refund. You can cancel renewals any time, and your codes keep working either way." },
-  { q: "Which payment methods do you accept?", a: "Visa, Mastercard and American Express, through Creem's secure checkout. Depending on your country, checkout may offer other local methods too. We never see your card number." },
+  { q: "Which payment methods do you accept?", a: "Visa, Mastercard and American Express, through Polar's secure checkout. Depending on your country, checkout may offer other local methods too. We never see your card number." },
   FAQ[2],
 ];
 

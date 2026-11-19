@@ -67,7 +67,7 @@ export function BillingView({ plan, card, hasPortal, invoices, codes, scans30, c
       <p className="mt-1 text-fg-muted">Manage your plan and invoices.</p>
       {testMode && (
         <p role="note" className="mt-4 rounded-sm border border-dashed border-warning/40 bg-warning/[0.06] px-4 py-3 text-fg-muted">
-          <span className="font-medium text-warning">Local development.</span> Creem isn&apos;t configured, so checkout is simulated and no money moves.
+          <span className="font-medium text-warning">Local development.</span> Polar isn&apos;t configured, so checkout is simulated and no money moves.
         </p>
       )}
       {checkout === "unavailable" && <p role="alert" className="mt-4 rounded-sm bg-danger/[0.08] px-4 py-3 text-fg">Checkout isn&apos;t available right now. Please try again later or email {COMPANY.email.hello}.</p>}
@@ -128,7 +128,7 @@ export function BillingView({ plan, card, hasPortal, invoices, codes, scans30, c
               <span className="grid h-10 w-14 place-items-center rounded-[6px] border border-line bg-bg font-mono text-[12px] font-semibold uppercase tracking-[0.08em] text-fg">{card.brand ?? "Card"}</span>
               <div>
                 <h2 id="pm-title" className="font-medium text-fg">{card.brand ? card.brand.charAt(0).toUpperCase() + card.brand.slice(1) : "Card"} ending {card.last4}</h2>
-                <p className="text-fg-subtle">Payments are processed by Creem.</p>
+                <p className="text-fg-subtle">Payments are processed by Polar.</p>
               </div>
             </div>
             {hasPortal && (
@@ -212,7 +212,7 @@ export function BillingView({ plan, card, hasPortal, invoices, codes, scans30, c
       )}
 
       <p className="mt-6 text-[13px] text-fg-subtle">
-        Refunds: email {COMPANY.email.hello} within 14 days of your first payment or a Lifetime purchase. Prices are before tax; Creem adds any VAT or sales tax at checkout.
+        Refunds: email {COMPANY.email.hello} within 14 days of your first payment or a Lifetime purchase. Prices are before tax; Polar adds any VAT or sales tax at checkout.
       </p>
 
       <Toast message={toast} />

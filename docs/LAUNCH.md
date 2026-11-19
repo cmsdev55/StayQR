@@ -1,4 +1,4 @@
-# Going live: Railway (Postgres) + Vercel (app) + Creem + Resend
+# Going live: Railway (Postgres) + Vercel (app) + Polar + Resend
 
 The whole Next.js app (pages, API, redirects, webhooks) runs on Vercel. Railway runs only Postgres.
 Keep both in the same part of the world. The Railway database runs in **US West (California)**, so `vercel.json` pins
@@ -21,21 +21,23 @@ US East, `fra1` for EU West).
 1. resend.com → Domains → add `endureqr.com` and the DNS records it shows (SPF/DKIM). Wait for "Verified".
 2. API Keys → create a key with sending access. `EMAIL_FROM=EndureQR <hello@endureqr.com>`.
 
-## 3. Creem (payments, tax, invoices)
+## 3. Polar (payments, tax, invoices)
 
-Lemon Squeezy stopped taking new sellers and closes on 31 March 2027, and its successor (Stripe Managed Payments) does
-not support sellers in Pakistan, so EndureQR uses Creem as merchant of record. Creem pays out to a local bank account in
-Pakistan (its bank partner may accept personal accounts only).
+Lemon Squeezy stopped taking new sellers and closes on 31 March 2027; Stripe and PayPal don't serve sellers in
+Pakistan, and Creem rejected the identity check (19 Nov 2026). EndureQR uses **Polar** (Polar Software, Inc.) as
+merchant of record: Pakistan is on its payout list, and payouts go through Stripe Connect Express to a local bank
+account. Fees: about 4–5% + 40–50¢ per sale, plus payout fees.
 
-1. Store **EndureQR** (individual seller, Pakistan). Business details, identity verification, then **Balance → Payout
-   Account** submits the store for review (1–2 working days). A rejected store is not reviewed again for 3 months, so
-   the live site must already match the Terms (Creem named as reseller) before submitting.
-2. Products, in test mode first and again in live mode: **EndureQR Pro monthly** $3.99 every month, **EndureQR Pro
-   yearly** $29 every year, **EndureQR Lifetime** $79 one-time; tax category SaaS. Copy each **product id** (`prod_…`).
-3. Developers → Webhooks → `https://endureqr.com/api/webhooks/creem`; copy the signing secret. All events can stay on;
-   the app uses `checkout.completed`, `subscription.*` and `refund.created`.
-4. Developers → API keys. A `creem_test_…` key talks to Creem's test API automatically. Test with card
-   `4242 4242 4242 4242` before switching to the live key and live product ids.
+1. polar.sh → Sign in with Google → organisation **EndureQR** (slug `endureqr`, individual). Finance → Account:
+   verify identity (photo ID, through Stripe), connect the payout account, support email, social links, then
+   **Submit for review**. The live site must already name Polar in the Terms before submitting.
+2. Products: **EndureQR Pro (monthly)** $3.99 every month, **EndureQR Pro (yearly)** $29 every year, **EndureQR
+   Lifetime** $79 one-time. Copy each product id (a UUID) into `POLAR_PRODUCT_*`.
+3. Settings → Webhooks → `https://endureqr.com/api/webhooks/polar`, format Raw; copy the secret. The app uses
+   `subscription.*`, `order.paid` and `order.refunded`.
+4. Settings → Developers → organisation access token (scopes: checkouts, subscriptions, customer sessions, orders,
+   products read) → `POLAR_ACCESS_TOKEN`. For a sandbox token (sandbox.polar.sh) also set `POLAR_SERVER=sandbox`.
+   Test the flow with a 100% discount code before the first real sale.
 
 ## 4. Google sign-in (optional)
 
@@ -48,8 +50,8 @@ Done: project **endureqr** (team "Hamza Akram's projects"), live at **https://en
 renews yearly, DNS on Vercel). `www.endureqr.com`, `endureqr.vercel.app` and `stayqr-six.vercel.app` all redirect
 (308) to the same path on endureqr.com, so short links printed on the older hosts keep working. Connected to
 `github.com/cmsdev55/StayQR` (pushes to `main` deploy automatically). Set: `DATABASE_URL`, `NEXT_PUBLIC_SITE_URL`,
-`CRON_SECRET`, `EMAIL_FROM`, `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`. Creem: `CREEM_API_KEY`, `CREEM_WEBHOOK_SECRET` and the three
-`CREEM_PRODUCT_*` ids.
+`CRON_SECRET`, `EMAIL_FROM`, `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`. Polar: `POLAR_ACCESS_TOKEN`, `POLAR_WEBHOOK_SECRET` and the three
+`POLAR_PRODUCT_*` ids.
 
 
 1. Import `github.com/cmsdev55/StayQR`, framework Next.js.
@@ -62,7 +64,7 @@ renews yearly, DNS on Vercel). `www.endureqr.com`, `endureqr.vercel.app` and `st
 
 - [ ] Sign up → the confirmation email arrives → the link confirms the address.
 - [ ] Forgot password → email → new password → signed in.
-- [ ] Choose Pro yearly → Creem test checkout → back on Billing showing "Pro · yearly".
+- [ ] Choose Pro yearly → Polar checkout (100% discount code) → back on Billing showing "Pro · yearly".
 - [ ] Create a code, scan it with an iPhone and an Android phone: both open the destination; scans appear in
       Analytics with a city.
 - [ ] Change the destination, scan again: the new page opens. Pause it: the paused page shows.
@@ -74,8 +76,10 @@ renews yearly, DNS on Vercel). `www.endureqr.com`, `endureqr.vercel.app` and `st
 - **Harmful code reported** (abuse@endureqr.com): disable it; scanners then see a warning page.
   `update public.codes set disabled_at = now(), disabled_reason = 'phishing report <date>' where slug = 'abc123';`
 - **Failed webhooks:** `select * from public.webhook_events where error is not null order by received_at desc;`
-  Creem retries up to five times and can resend from its dashboard.
-- **Refunds:** issue them in Creem; the `refund.created` webhook marks the invoice refunded in EndureQR.
+  Polar retries up to 10 times and can redeliver from Settings → Webhooks. After 10 straight failures it disables the
+  endpoint and emails you; re-enable it there.
+- **Refunds:** issue them in Polar (Sales → order → Refund); the `order.refunded` webhook marks the invoice refunded
+  in EndureQR (a full Lifetime refund removes Lifetime).
 - **Connections:** each Vercel function instance opens at most 3 connections. If Railway reports "too many
   connections" under heavy load, add a PgBouncer service on Railway and point `DATABASE_URL` at it.
 - **Local development:** `scripts/db-local.sh start`, `node scripts/db-seed.mjs`, `npm run dev -- -p 3100`, log in as

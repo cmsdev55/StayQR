@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
-/** Sends the user to Creem's secure hosted checkout; Creem returns them to /dashboard/billing?checkout=done. */
+/** Sends the user to Polar's secure hosted checkout; Polar returns them to /dashboard/billing?checkout=done. */
 export function CheckoutButton({ plan, children, variant, size = "sm", className }: { plan: "pro-monthly" | "pro-yearly" | "lifetime"; children: React.ReactNode; variant?: "primary" | "secondary"; size?: "sm" | "md" | "lg"; className?: string }) {
   const [busy, setBusy] = useState(false);
 

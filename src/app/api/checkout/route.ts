@@ -7,7 +7,7 @@ import { getPlan } from "@/lib/server/plan";
 export const dynamic = "force-dynamic";
 
 /**
- * GET /api/checkout?plan=pro-yearly → Creem hosted checkout (signs in first if needed).
+ * GET /api/checkout?plan=pro-yearly → Polar hosted checkout (signs in first if needed).
  * With &format=json it answers { url } instead, for CheckoutButton.
  */
 export async function GET(req: Request) {
@@ -23,11 +23,11 @@ export async function GET(req: Request) {
   if (current.tier === "lifetime" || (current.tier === "pro" && plan !== "lifetime" && current.status !== "cancelled")) {
     return go("/dashboard/billing");
   }
-  if (billingMode === "creem") {
+  if (billingMode === "polar") {
     try {
       return go(await createCheckout(user, plan));
     } catch (e) {
-      // e.g. a product id not configured yet, or Creem unreachable: never show a raw error page
+      // e.g. a product id not configured yet, or Polar unreachable: never show a raw error page
       console.error("checkout failed", plan, e);
       return go("/dashboard/billing?checkout=unavailable");
     }

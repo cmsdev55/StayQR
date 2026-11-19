@@ -7,15 +7,15 @@ export const env = {
   resendKey: process.env.RESEND_API_KEY,
   emailFrom: process.env.EMAIL_FROM ?? "EndureQR <hello@endureqr.com>",
   google: { clientId: process.env.GOOGLE_CLIENT_ID, clientSecret: process.env.GOOGLE_CLIENT_SECRET },
-  creem: {
-    apiKey: process.env.CREEM_API_KEY,
-    webhookSecret: process.env.CREEM_WEBHOOK_SECRET,
-    // test keys only work against Creem's test API
-    apiBase: process.env.CREEM_API_KEY?.startsWith("creem_test_") ? "https://test-api.creem.io/v1" : "https://api.creem.io/v1",
+  polar: {
+    accessToken: process.env.POLAR_ACCESS_TOKEN,
+    webhookSecret: process.env.POLAR_WEBHOOK_SECRET,
+    // sandbox tokens only work against Polar's sandbox API
+    apiBase: process.env.POLAR_SERVER === "sandbox" ? "https://sandbox-api.polar.sh/v1" : "https://api.polar.sh/v1",
     products: {
-      "pro-monthly": process.env.CREEM_PRODUCT_PRO_MONTHLY,
-      "pro-yearly": process.env.CREEM_PRODUCT_PRO_YEARLY,
-      lifetime: process.env.CREEM_PRODUCT_LIFETIME,
+      "pro-monthly": process.env.POLAR_PRODUCT_PRO_MONTHLY,
+      "pro-yearly": process.env.POLAR_PRODUCT_PRO_YEARLY,
+      lifetime: process.env.POLAR_PRODUCT_LIFETIME,
     },
   },
   cronSecret: process.env.CRON_SECRET,
@@ -25,10 +25,10 @@ export const env = {
 /** Google sign-in shows up once both OAuth keys are set. */
 export const googleEnabled = () => !!(env.google.clientId && env.google.clientSecret);
 
-/** Real billing with Creem keys; simulated checkout only in development without them. */
-export const billingMode: "creem" | "dev" | "off" =
-  env.creem.apiKey && env.creem.webhookSecret
-    ? "creem"
+/** Real billing with Polar keys; simulated checkout only in development without them. */
+export const billingMode: "polar" | "dev" | "off" =
+  env.polar.accessToken && env.polar.webhookSecret
+    ? "polar"
     : process.env.NODE_ENV !== "production" || process.env.ALLOW_SIMULATED_BILLING === "1"
       ? "dev"
       : "off";

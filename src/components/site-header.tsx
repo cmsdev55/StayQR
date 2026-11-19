@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { AccountMenu, accountLinks, Avatar, LogoutButton, useSession } from "@/components/account-menu";
 import { ButtonLink } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
@@ -40,6 +41,7 @@ export function ThemeToggle() {
 }
 
 export function SiteHeader() {
+  const user = useSession();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -72,9 +74,14 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-1 sm:gap-2">
           <ThemeToggle />
-          <Link href="/login" className="hidden h-10 items-center px-3.5 text-body-sm font-medium text-fg-muted transition-colors hover:text-fg sm:inline-flex">
-            Log in
-          </Link>
+          {user ? (
+            <div className="hidden sm:block"><AccountMenu user={user} /></div>
+          ) : (
+            // kept in place (invisible) while the session check runs, so neither state flashes the wrong button
+            <Link href="/login" className={cn("hidden h-10 items-center px-3.5 text-body-sm font-medium text-fg-muted transition-colors hover:text-fg sm:inline-flex", user === undefined && "invisible")}>
+              Log in
+            </Link>
+          )}
           <ButtonLink href="/qr-code-generator" size="sm" className="hidden sm:inline-flex">
             Create free QR
           </ButtonLink>
@@ -104,7 +111,25 @@ export function SiteHeader() {
               {n.label}
             </Link>
           ))}
-          <Link href="/login" className="flex h-12 items-center text-body font-medium text-fg-muted">Log in</Link>
+          {user ? (
+            <div className="mt-4 rounded-md border border-line p-3">
+              <div className="flex items-center gap-3">
+                <Avatar user={user} />
+                <div className="min-w-0">
+                  {user.name && <p className="truncate text-body-sm font-medium text-fg">{user.name}</p>}
+                  <p className="truncate text-[13px] text-fg-subtle">{user.email} · {user.plan}</p>
+                </div>
+              </div>
+              <div className="mt-2 flex flex-col">
+                {accountLinks(user).map((l) => (
+                  <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="flex h-11 items-center text-body font-medium text-fg">{l.label}</Link>
+                ))}
+                <LogoutButton className="flex h-11 w-full items-center text-left text-body font-medium text-fg-muted" />
+              </div>
+            </div>
+          ) : (
+            <Link href="/login" className={cn("flex h-12 items-center text-body font-medium text-fg-muted", user === undefined && "invisible")}>Log in</Link>
+          )}
           <ButtonLink href="/qr-code-generator" className="mt-3 w-full">Create free QR</ButtonLink>
         </nav>
       </div>

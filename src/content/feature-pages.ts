@@ -5,7 +5,13 @@ import type { QrTypeSlug } from "@/lib/qr-types";
  * Landing pages for features EndureQR already has (from the SEO audit's content gaps).
  * Facts must match the product: see docs/ROADMAP.md. No statistics, customer names or competitor names.
  */
-export type FeatureSlug = "qr-code-with-logo" | "dynamic-qr-code-generator" | "app-download-qr-code" | "bulk-qr-code-generator";
+export type FeatureSlug =
+  | "qr-code-with-logo"
+  | "dynamic-qr-code-generator"
+  | "app-download-qr-code"
+  | "bulk-qr-code-generator"
+  | "qr-code-generator-no-watermark"
+  | "qr-code-generator-no-expiration";
 
 export type FeaturePage = {
   slug: FeatureSlug;
@@ -696,6 +702,270 @@ export const FEATURE_PAGES: FeaturePage[] = [
     ],
     relatedTools: ["url", "vcard", "location"],
     relatedGuides: ["qr-code-size-for-printing", "qr-code-for-restaurant-menu", "track-qr-code-scans"],
+  },
+  // ── 5. QR code generator with no watermark ──────────────────────────
+  {
+    slug: "qr-code-generator-no-watermark",
+    title: "QR Code Generator With No Watermark: Free, No Sign-Up",
+    description:
+      "Make QR codes with no watermark and no sign-up. Download full-size PNG, SVG or PDF free, use them commercially without credit, and they never expire.",
+    eyebrow: "No-watermark QR codes",
+    h1: "A free QR code generator with *no watermark*",
+    intro:
+      "Make a QR code below and download it clean: no watermark, no generator logo, no sign-up and no account. Every download is full quality, up to 4096 px or vector SVG and PDF, and you can use the code commercially without crediting anyone. The codes are static, so they never expire and have no scan limit.",
+    tool: true,
+    cta: { label: "Make a QR code", href: "#generator" },
+    benefits: [
+      {
+        title: "Nothing added to your code",
+        body: "No watermark, no badge in the frame and no generator logo in the centre. The only logo in your code is one you upload yourself.",
+      },
+      {
+        title: "Full quality without an account",
+        body: "PNG, JPEG, SVG and PDF at 512 to 4096 px, straight away. There is no sign-up wall and no low-resolution preview to pay your way out of.",
+      },
+      {
+        title: "Yours to use, for good",
+        body: "Static codes never expire and have no scan limit. Use them on products, packaging and ads without crediting EndureQR.",
+      },
+    ],
+    steps: [
+      { title: "Pick a type", body: "Choose from 17 types, including website links, WiFi, contact cards, WhatsApp, email and social profiles." },
+      { title: "Enter your content", body: "Fill in the link or details. The preview updates as you type, and nothing you enter leaves your browser." },
+      { title: "Make it yours", body: "Add your own logo, brand colours and a frame with your own text, such as \"Scan for the menu\"." },
+      { title: "Download", body: "Save SVG or PDF for print, or PNG or JPEG for screens and documents, with no watermark on any of them." },
+    ],
+    body: [
+      {
+        type: "p",
+        text: "Yes, you can make a QR code with no watermark for free, and without creating an account. The EndureQR generator above builds the code in your browser and lets you download it at full quality in four formats. Nothing is stamped on the code or its frame, and because it is a **static** code, it holds your content directly and works without us.",
+      },
+      { type: "h2", id: "what-counts-as-a-watermark", text: "What counts as a watermark on a QR code?" },
+      {
+        type: "p",
+        text: "On QR codes, a watermark is anything that puts the generator's brand on your printed code, or keeps a clean version behind a paywall. It is not always a faint logo across the image.",
+      },
+      {
+        type: "ul",
+        items: [
+          "**A logo in the centre.** Some free tools put their own icon where your logo would go.",
+          "**A branded frame or caption.** A line such as \"made with\" printed under the code, or a frame that can only be removed on a paid plan.",
+          "**A low-resolution download.** A small, blurry PNG for free, with SVG, PDF or large sizes only after you sign up or pay.",
+          "**A branded redirect.** The code points to the generator's own short link instead of your content. Scanners may see the generator's name, a splash page or ads before they reach you, and the code can stop working when a trial ends.",
+        ],
+      },
+      { type: "h2", id: "how-to-check-a-generator", text: "How to check a generator before you print" },
+      {
+        type: "ol",
+        items: [
+          "Download the largest size you can without signing in, and zoom in on the code and its frame.",
+          "Scan the download with your phone camera and read the preview before you tap. Your own address means a static code; an unfamiliar short link means the code depends on that service.",
+          "Check which formats are free. Print work needs SVG or PDF, so a free plan that only offers a small PNG is a hidden cost.",
+          "Read the terms for two things: whether commercial use is allowed, and what happens to your codes when a trial or plan ends.",
+        ],
+      },
+      { type: "h2", id: "why-static-codes-are-clean", text: "Why static codes have nothing to remove" },
+      {
+        type: "p",
+        text: "A static QR code stores its content in the pattern itself: the full web address, the WiFi password or the contact details. When someone scans it, their phone acts on that content directly. There is no short link, no server in between and nothing that could add branding later. Once you have downloaded it, the code works without EndureQR, and we have no way to change, track or disable it.",
+      },
+      {
+        type: "p",
+        text: "That is also why static codes never expire and have no scan limit: nothing is counting. The [static vs dynamic guide](/guides/static-vs-dynamic-qr-codes) explains the difference in more detail.",
+      },
+      { type: "h2", id: "which-file-to-download", text: "Which file to download" },
+      {
+        type: "table",
+        head: ["Format", "Best for", "Good to know"],
+        rows: [
+          ["SVG", "Print, signage and sending to a designer", "Vector, so it stays sharp at any size"],
+          ["PDF", "Print shops and documents", "Set at 300 dpi"],
+          ["PNG", "Websites, slides and email", "Pick 2048 or 4096 px if it may be printed later"],
+          ["JPEG", "Apps and tools that only accept JPEG", "No transparency"],
+        ],
+      },
+      {
+        type: "p",
+        text: "Every format is free at 512, 1024, 2048 or 4096 px. Leave a clear border around the code when you place it, and print it large enough for the scanning distance; [QR code size for printing](/guides/qr-code-size-for-printing) has the numbers.",
+      },
+      { type: "h2", id: "adding-your-own-branding", text: "Adding your own branding instead" },
+      {
+        type: "p",
+        text: "The space other tools use for their brand is yours. Upload a PNG, JPEG, SVG or WebP logo and the generator places it in the centre, switching error correction to level H so the code still scans. Pick dark brand colours on a light background, add a frame with your own call to action, and watch the contrast warning while you design. The [QR code with logo](/qr-code-with-logo) page covers sizes and file formats.",
+      },
+      { type: "h2", id: "when-you-need-more", text: "When you need more than a static code" },
+      {
+        type: "p",
+        text: "A static code can't be changed after printing, and it can't count scans. If you need either, a [dynamic QR code](/dynamic-qr-code-generator) points to a short endureqr.com link that you can redirect any time, with scan analytics. Scanners go straight to your page, with no splash page or ads in between. A free account includes one dynamic code; Pro makes them unlimited, and the codes keep working even if you cancel.",
+      },
+    ],
+    faq: [
+      {
+        q: "Is this QR code generator really free with no watermark?",
+        a: "Yes. There is no watermark on any download, no generator logo in the code or frame, and no sign-up. You can make as many static codes as you like.",
+      },
+      {
+        q: "Do I need an account to download?",
+        a: "No. Every format and size downloads straight from this page without an account.",
+      },
+      {
+        q: "Can I use the QR codes commercially?",
+        a: "Yes. Free static codes can be used for any lawful purpose, including products, packaging and advertising, with no credit to EndureQR.",
+      },
+      {
+        q: "Will people see ads when they scan my code?",
+        a: "No. A static code opens your content directly, so there is no page in between where ads or branding could appear.",
+      },
+      {
+        q: "Do the codes expire or have a scan limit?",
+        a: "No. Static codes store your content in the pattern, so nothing can switch them off and nothing counts the scans.",
+      },
+      {
+        q: "Can I get a high-resolution or vector file for free?",
+        a: "Yes. SVG and PDF are vector-ready for print, and PNG and JPEG go up to 4096 px, all free.",
+      },
+    ],
+    relatedTools: ["url", "wifi", "vcard", "whatsapp"],
+    relatedGuides: ["static-vs-dynamic-qr-codes", "qr-code-design-best-practices", "qr-code-size-for-printing"],
+  },
+
+  // ── 6. QR code generator with no expiration ─────────────────────────
+  {
+    slug: "qr-code-generator-no-expiration",
+    title: "QR Code Generator With No Expiration: Free Permanent Codes",
+    description:
+      "Create free QR codes that never expire. Your content is stored in the pattern itself, so there's no trial, no scan limit and nothing to switch off.",
+    eyebrow: "Permanent QR codes",
+    h1: "Free QR codes that *never expire*",
+    intro:
+      "Codes from this generator are static: your link, WiFi password or contact details are stored in the pattern itself. There is no trial, no subscription and no server that can switch them off, and nothing counts the scans. Phones read them without ever contacting EndureQR. Make one below without signing up.",
+    tool: true,
+    cta: { label: "Make a permanent QR code", href: "#generator" },
+    benefits: [
+      {
+        title: "No trial to run out",
+        body: "There is no account and no countdown. The code you download today scans exactly the same way years from now.",
+      },
+      {
+        title: "No redirect in between",
+        body: "No short link and no splash page. The phone acts on what is in the pattern, so the code doesn't depend on any service staying online.",
+      },
+      {
+        title: "Unlimited scans",
+        body: "Nothing counts or caps the scans, so a code on a busy poster, menu or package never hits a limit.",
+      },
+    ],
+    steps: [
+      { title: "Pick a type", body: "Choose a website link, WiFi network, contact card, text, email or one of 12 other types." },
+      { title: "Enter content that lasts", body: "For links, use a page on your own website that you plan to keep, rather than a temporary or shortened address." },
+      { title: "Style and test", body: "Add your logo, colours and a frame, then scan the preview and check it opens the right thing." },
+      { title: "Download and print", body: "Save SVG or PDF for print, or PNG or JPEG for screens. The file is yours to keep and reprint." },
+    ],
+    body: [
+      {
+        type: "p",
+        text: "A QR code with no expiration is a **static** code: the content is written into the pattern of squares, so there is nothing to renew and nothing that can be switched off. Every code made with the free generator on this page is static. It keeps scanning as long as the print is readable and, for links, as long as the page it points to stays online.",
+      },
+      { type: "h2", id: "why-free-codes-expire", text: "Why some free QR codes expire" },
+      {
+        type: "p",
+        text: "When a QR code \"expires\", the code itself hasn't changed. It was a **dynamic** code that pointed to a short link on the generator's server, and the service stopped forwarding scans. That usually happens for one of these reasons:",
+      },
+      {
+        type: "ul",
+        items: [
+          "The generator made a dynamic code by default, and the free trial behind it ended.",
+          "The plan has a scan limit, and the code stopped once it was reached.",
+          "The subscription was cancelled or the account was closed, and the short links went with it.",
+          "The service shut down, taking its short domain with it.",
+        ],
+      },
+      {
+        type: "p",
+        text: "A static code avoids all four, because it never depends on a service. Our guide [Do QR codes expire?](/guides/do-qr-codes-expire) goes through each case and how to check a code you already have.",
+      },
+      { type: "h2", id: "how-to-make-a-permanent-code", text: "How to make sure a QR code never expires" },
+      {
+        type: "ol",
+        items: [
+          "Use a static code whenever the content won't change, such as your main website, a WiFi network or a contact card.",
+          "Scan your download and read the preview. It should show your own content, not an unfamiliar short link.",
+          "For links, point to a stable page on a domain you own, and keep the domain renewed.",
+          "If the page moves, set up a redirect from the old address on your own site, so the printed code keeps landing somewhere useful.",
+          "Print a test at the real size and scan it before the full run.",
+        ],
+      },
+      { type: "h2", id: "what-a-permanent-code-can-hold", text: "What a permanent QR code can hold" },
+      {
+        type: "table",
+        head: ["Type", "What it stores", "Works offline?"],
+        rows: [
+          ["Website link", "The full web address", "No, it opens a web page"],
+          ["WiFi", "Network name, password and security type", "Yes, the phone joins directly"],
+          ["Contact card", "Name, phone, email and address", "Yes, it saves to contacts"],
+          ["Text", "Up to 300 characters", "Yes, it shows on screen"],
+          ["Email, SMS and phone", "Address or number, and an optional message", "Yes, it opens the right app"],
+          ["WhatsApp", "A wa.me chat link with your number", "No, it opens a chat online"],
+        ],
+      },
+      {
+        type: "p",
+        text: "WiFi, contact and text codes work even with no signal, which makes them a good fit for printed materials that will be around for years.",
+      },
+      { type: "h2", id: "where-permanent-codes-work-best", text: "Where permanent QR codes work best" },
+      {
+        type: "p",
+        text: "Static codes suit anything printed once and expected to last, where the content stays the same:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**WiFi signs** in holiday rentals, offices and waiting rooms, as long as the password stays the same.",
+          "**Business cards and name badges** with a contact card, so people save your details in one scan.",
+          "**Product packaging and labels** that link to your main website or a manual page you'll keep online.",
+          "**Equipment and asset labels** with short text instructions or a support email, which work even with no signal.",
+          "**Plaques, signs and engraved items**, where reprinting is expensive or impossible.",
+        ],
+      },
+      { type: "h2", id: "what-can-still-break", text: "The one thing that can still break: the destination" },
+      {
+        type: "p",
+        text: "A permanent code is only as permanent as what it points to. If a link code leads to a page that is deleted, moved or left on a domain that lapses, the code still scans but lands on an error. A WiFi code stops connecting if you change the network password. Plan for this before you print: use addresses you control, and keep a note of where each code is and what it holds.",
+      },
+      { type: "h2", id: "permanent-and-editable", text: "Permanent and editable: dynamic codes that survive cancelling" },
+      {
+        type: "p",
+        text: "If the destination will change, such as a menu, an event page or a listing, a static code means reprinting. A [dynamic QR code](/dynamic-qr-code-generator) lets you change the link after printing and see scan analytics. Some services switch dynamic codes off when you stop paying. EndureQR doesn't: if you cancel, your dynamic codes keep sending scans to the last destination you set. Your first dynamic code is free with an account.",
+      },
+    ],
+    faq: [
+      {
+        q: "Do QR codes from this generator expire?",
+        a: "No. They are static codes with your content stored in the pattern, so there is no trial, subscription or server that can switch them off.",
+      },
+      {
+        q: "Is there a scan limit?",
+        a: "No. Nothing counts the scans of a static code, so it works no matter how many times it's scanned.",
+      },
+      {
+        q: "What happens to my codes if EndureQR shuts down?",
+        a: "Nothing. Static codes don't contact EndureQR when scanned, so they keep working without us.",
+      },
+      {
+        q: "Can I change a permanent QR code after printing?",
+        a: "No. The content is fixed in the pattern. Make a new code, or use a dynamic code if you expect the destination to change.",
+      },
+      {
+        q: "Do I need an account to make one?",
+        a: "No. Make and download as many permanent codes as you like without signing up.",
+      },
+      {
+        q: "What is a QR code with no redirect?",
+        a: "It's the same thing as a static code: scanning opens your link directly, with no short link or service in between.",
+      },
+    ],
+    relatedTools: ["url", "wifi", "vcard", "text"],
+    relatedGuides: ["do-qr-codes-expire", "static-vs-dynamic-qr-codes", "qr-code-not-scanning"],
   },
 ];
 

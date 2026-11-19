@@ -304,12 +304,12 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
   // ── whatsapp ─────────────────────────────────────────────────────────
   {
     slug: "whatsapp",
-    title: "WhatsApp QR Code Generator: Free Click-to-Chat",
+    title: "Free WhatsApp QR Code Generator With Message",
     description:
-      "Make a WhatsApp QR code that opens a chat with your message already typed. Customers scan, tap send and you're talking. Free, no sign-up, no watermark.",
-    h1: "WhatsApp QR code generator",
+      "Free WhatsApp QR code generator: people scan and a chat with you opens, your message already typed. No sign-up, no watermark, and the code never expires.",
+    h1: "Free WhatsApp QR code generator",
     intro:
-      "A WhatsApp QR code stores a wa.me click-to-chat link containing your number in international format and an optional prefilled message. Scanning it opens a WhatsApp chat with you, without the person saving your number first. They can edit the message before tapping send. It works with personal and WhatsApp Business numbers, and opens in the browser if WhatsApp is not installed.",
+      "Make a free WhatsApp QR code that opens a chat with you, with a message already typed. The code stores a wa.me click-to-chat link containing your number in international format and an optional prefilled message. Scanning it opens a WhatsApp chat with you, without the person saving your number first. They can edit the message before tapping send. It works with personal and WhatsApp Business numbers, and opens in the browser if WhatsApp is not installed.",
     steps: [
       { title: "Enter your WhatsApp number", body: "Type the number registered to WhatsApp, including the country code, for example +44 7700 900123. EndureQR removes spaces and the + for you." },
       { title: "Write an opening message", body: "Add up to 300 characters, such as \"Hi, I'd like to book a table\". It's optional, and people can edit it before sending." },
@@ -335,6 +335,8 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       { q: "What if they don't have WhatsApp installed?", a: "The link opens in their browser instead, on a WhatsApp page that offers ways to continue. Show your number in text too, for people who'd rather call." },
       { q: "Does it work with WhatsApp Business?", a: "Yes. A wa.me link works with any WhatsApp number, personal or business." },
       { q: "Can I change the message after printing?", a: "Not on a free static code, because the link is stored in the pattern. A dynamic code (Pro from $3.99 a month) lets you change the destination after printing." },
+      { q: "WhatsApp already has a QR code. Why make one here?", a: "WhatsApp's own code, in Settings next to your name, shares your profile, and resetting it in the app stops the old code working. A code made here is a wa.me link that opens a chat with your chosen message, and you can add your logo, colours and a frame, then download print-ready SVG or PDF." },
+      { q: "Can I make a QR code for a WhatsApp group?", a: "Yes. In the group, open Group info, choose Invite via link and copy the link, then paste it into the URL QR code generator. Anyone who scans can ask to join or join directly, and resetting the link in WhatsApp switches the old code off." },
     ],
     related: ["sms", "phone", "facebook", "instagram"],
   },

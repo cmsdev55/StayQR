@@ -118,7 +118,7 @@ const GUIDES_CORE: Guide[] = [
       {
         type: "ul",
         items: [
-          "**Use a static code when the content will not change.** A home [WiFi network](/qr-code-generator/wifi), a contact card or the address of your main website are good candidates. Our [free QR code generator](/qr-code-generator) makes static codes with no sign-up and no watermark, and they never expire.",
+          "**Use a static code when the content will not change.** A home [WiFi network](/qr-code-generator/wifi), a contact card or the address of your main website are good candidates. Our [free QR code generator](/qr-code-generator) makes [static codes that never expire](/qr-code-generator-no-expiration), with no sign-up and no watermark.",
           "**Use a dynamic code when the destination will change.** Menus, event pages and property listings change often. A dynamic code lets you update the link without reprinting.",
           "**Check the cancellation policy before you print.** This matters more than the monthly price. A cheap plan that switches off your codes when you cancel can cost you a full reprint.",
           "**Point static codes at pages you control.** Link to a stable page on your own domain, and set up a redirect yourself if the content moves.",
@@ -274,7 +274,7 @@ const GUIDES_CORE: Guide[] = [
       },
       {
         type: "p",
-        text: "EndureQR's free generator makes static codes with no sign-up and no watermark. Paid dynamic codes add editing after printing, scan analytics by city, device and time of day, iPhone and Android smart redirects, and pausing with a friendly page. Pro is $29 a year or $3.99 a month, Lifetime is $79 once, and your codes keep working even if you cancel. Compare plans on the [pricing page](/pricing).",
+        text: "EndureQR's free generator makes static codes with no sign-up and [no watermark](/qr-code-generator-no-watermark). Paid dynamic codes add editing after printing, scan analytics by city, device and time of day, iPhone and Android smart redirects, and pausing with a friendly page. Pro is $29 a year or $3.99 a month, Lifetime is $79 once, and your codes keep working even if you cancel. Compare plans on the [pricing page](/pricing).",
       },
     ],
     faq: [
@@ -388,7 +388,7 @@ const GUIDES_CORE: Guide[] = [
       },
       {
         type: "p",
-        text: "The [EndureQR free generator](/qr-code-generator) downloads PNG, SVG, JPEG and PDF with no watermark, so you can hand your printer a vector file straight away. For a web link, start with the [URL QR code generator](/qr-code-generator/url).",
+        text: "The [EndureQR free generator](/qr-code-generator) downloads PNG, SVG, JPEG and PDF with [no watermark](/qr-code-generator-no-watermark), so you can hand your printer a vector file straight away. For a web link, start with the [URL QR code generator](/qr-code-generator/url).",
       },
       { type: "h2", id: "printing-checklist", text: "A quick checklist before you print" },
       {
@@ -452,7 +452,7 @@ const GUIDES_CORE: Guide[] = [
       {
         type: "ol",
         items: [
-          "**Put the menu online.** A page on your website or ordering system works best. A PDF is fine, but host it somewhere you control and keep the file name stable.",
+          "**Put the menu online.** A page on your website or ordering system works best. A PDF is fine, but host it somewhere you control and keep the file name stable; see [how to make a QR code for a PDF](/guides/qr-code-for-pdf).",
           "**Decide static or dynamic.** A static code is free and points at one fixed link. A dynamic code lets you change that link later and see when tables scan. More on this below.",
           "**Create the code.** Paste your menu link into the [URL QR code generator](/qr-code-generator/url). Add your logo, set your brand colours and choose a frame with a short call to action like \"Scan for menu\".",
           "**Download a print file.** Send your printer an SVG or PDF. For printing in house, use a high resolution PNG.",

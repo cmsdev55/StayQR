@@ -863,4 +863,130 @@ export const GUIDES_USES: Guide[] = [
     ],
     relatedTools: ["event", "location", "wifi"],
   },
+  // ── 6. QR code for a PDF ────────────────────────────────────────────
+  {
+    slug: "qr-code-for-pdf",
+    title: "How to make a QR code for a PDF: free, step by step",
+    h1: "How to make a QR code for a PDF",
+    description:
+      "To make a QR code for a PDF, put the file online, copy a link anyone can open and turn it into a QR code. Free steps for Google Drive or your own site.",
+    category: "Use cases",
+    published: "2026-11-20",
+    updated: "2026-11-20",
+    readMinutes: 5,
+    summary:
+      "A QR code can't hold a PDF itself. It holds a link to the PDF, so the real work is putting the file somewhere that stays online and opens well on a phone.",
+    body: [
+      {
+        type: "p",
+        text: "To make a QR code for a PDF, upload the PDF somewhere anyone can open it, copy the file's link, and paste that link into a [URL QR code generator](/qr-code-generator/url). A QR code holds just under 3 KB of data at most, so the file never goes inside the code: the code opens a link, and the link opens the PDF. That makes where you host the file the most important decision.",
+      },
+      { type: "h2", id: "put-the-pdf-online", text: "Step 1: Put the PDF online" },
+      {
+        type: "table",
+        head: ["Where", "Good for", "Watch out for"],
+        rows: [
+          ["Your own website", "Menus, brochures and manuals you'll keep for years", "Keep the same file address when you update it"],
+          ["Google Drive", "Quick sharing without a website", "Set access to \"Anyone with the link\"; it opens in Drive's viewer"],
+          ["Dropbox or OneDrive", "Teams that already store files there", "Use a view link that doesn't need signing in"],
+        ],
+      },
+      {
+        type: "p",
+        text: "Whichever you choose, open the link in a private browser window before you make the code. If it asks you to sign in or request access, everyone who scans will hit the same wall.",
+      },
+      { type: "h2", id: "copy-a-public-link", text: "Step 2: Copy a link that works for everyone" },
+      {
+        type: "p",
+        text: "In Google Drive, the steps are:",
+      },
+      {
+        type: "ol",
+        items: [
+          "Right-click the PDF and choose **Share**.",
+          "Under **General access**, change **Restricted** to **Anyone with the link**, with the role set to **Viewer**.",
+          "Click **Copy link**.",
+          "Paste the link into a private browser window and check the PDF opens without signing in.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Dropbox and OneDrive work the same way: share the file, choose a link that anyone can view, and copy it.",
+      },
+      { type: "h2", id: "turn-the-link-into-a-qr-code", text: "Step 3: Turn the link into a QR code" },
+      {
+        type: "ol",
+        items: [
+          "Open the [URL QR code generator](/qr-code-generator/url) and paste the link.",
+          "Add your logo and colours, and a frame with a clear call to action such as \"Scan for the brochure\".",
+          "Scan the on-screen preview with your phone and check the PDF opens.",
+          "Download SVG or PDF for print, or PNG for screens.",
+        ],
+      },
+      {
+        type: "p",
+        text: "The generator is free, needs no sign-up and adds [no watermark](/qr-code-generator-no-watermark). The code it makes is static, so it never expires.",
+      },
+      { type: "h2", id: "updating-the-pdf", text: "Will the code still work if I update the PDF?" },
+      {
+        type: "p",
+        text: "Only if the link stays the same. A static QR code stores the link itself, so if the new version of your PDF ends up at a new address, the printed code keeps opening the old file, or nothing at all if you deleted it. There are three ways to update the file without reprinting:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**On your own website,** upload the new file with exactly the same name and location, replacing the old one.",
+          "**In Google Drive,** right-click the file, open **File information**, then **Manage versions**, and upload the new version. The link stays the same.",
+          "**With a dynamic QR code,** point the code at whichever link is current and change it from your dashboard when the file moves. Your first [dynamic QR code](/dynamic-qr-code-generator) is free with an EndureQR account, and paid dynamic codes keep working even if you cancel.",
+        ],
+      },
+      { type: "h2", id: "make-it-readable-on-a-phone", text: "Make the PDF easy to read on a phone" },
+      {
+        type: "p",
+        text: "Most people will open your PDF on a phone, often on mobile data. A file designed for an A4 printer can be hard work on a small screen.",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Keep the file small.** Compress large photos so the PDF opens quickly; a few megabytes is plenty for most brochures and menus.",
+          "**Use portrait pages and large text.** Tiny print and several columns force people to pinch and zoom.",
+          "**Put the key information on page one.** Prices, opening times or the main instructions should not be on page six.",
+          "**Give the file a clear name.** Some phones show the file name at the top of the viewer.",
+          "**Consider a web page instead.** For things that change often, like a restaurant menu, a simple web page is easier to read and update. Our [restaurant menu guide](/guides/qr-code-for-restaurant-menu) compares the two.",
+        ],
+      },
+      { type: "h2", id: "printing-the-code", text: "Printing the code" },
+      {
+        type: "p",
+        text: "Print the code at least 2 cm (0.8 in) wide for something scanned up close, and larger for posters and signs; [QR code size for printing](/guides/qr-code-size-for-printing) has the distance rule. Use dark modules on a light background, leave a clear margin around the code, and tell people what they'll get, for example \"Scan for the full price list (PDF)\".",
+      },
+      {
+        type: "tip",
+        text: "Before a big print run, scan a test print with both an iPhone and an Android phone, on mobile data rather than WiFi, to see what customers will see.",
+      },
+    ],
+    faq: [
+      {
+        q: "Can a QR code hold a PDF file directly?",
+        a: "No. A QR code holds just under 3 KB of data at most, far too little for a PDF. It holds a link to the file instead.",
+      },
+      {
+        q: "Is it free to make a QR code for a PDF?",
+        a: "Yes. Host the file for free on Google Drive or your own website, then make the code with the free URL QR code generator, with no sign-up.",
+      },
+      {
+        q: "Why does my PDF QR code ask people to sign in?",
+        a: "The file's sharing setting is restricted. Change it to \"Anyone with the link\" with view access, then scan the code again.",
+      },
+      {
+        q: "Can I change the PDF after printing the QR code?",
+        a: "Yes, if the link stays the same: replace the file at the same address, or upload a new version in Google Drive. A dynamic QR code lets you point to a different link instead.",
+      },
+      {
+        q: "Do PDF QR codes expire?",
+        a: "A static code never expires, but it only works while the file stays online. Some services that host the PDF for you remove it when a trial or plan ends, so check before you print.",
+      },
+    ],
+    relatedTools: ["url", "email"],
+  },
 ];

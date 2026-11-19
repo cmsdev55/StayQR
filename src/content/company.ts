@@ -37,6 +37,13 @@ export const FOUNDER = {
   ],
 };
 
+/** EndureQR's own public profiles: linked in the footer and listed as `sameAs` on the Organization. Live profiles only. */
+export const SOCIAL: { name: string; handle?: string; url: string }[] = [
+  { name: "X", handle: "@endureqr_app", url: "https://x.com/endureqr_app" },
+  { name: "Instagram", handle: "@getendureqr", url: "https://www.instagram.com/getendureqr/" },
+  { name: "Facebook", url: "https://www.facebook.com/profile.php?id=61596007687246" },
+];
+
 /** Sub-processors named in the Privacy Policy. */
 export const PROVIDERS = [
   { name: "Vercel", role: "website hosting and delivery" },

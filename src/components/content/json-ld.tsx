@@ -1,4 +1,4 @@
-import { COMPANY, FOUNDER } from "@/content/company";
+import { COMPANY, FOUNDER, SOCIAL } from "@/content/company";
 import { LIFETIME, PRO } from "@/content/plans";
 import { SITE_URL } from "@/lib/site";
 
@@ -43,6 +43,7 @@ export function organizationLd() {
     email: COMPANY.email.hello,
     founder: { "@id": FOUNDER_ID },
     address: { "@type": "PostalAddress", addressLocality: FOUNDER.city, addressCountry: FOUNDER.countryCode },
+    sameAs: SOCIAL.map((s) => s.url),
     contactPoint: [
       { "@type": "ContactPoint", contactType: "customer support", email: COMPANY.email.hello, availableLanguage: "en" },
       { "@type": "ContactPoint", contactType: "privacy", email: COMPANY.email.privacy, availableLanguage: "en" },

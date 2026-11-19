@@ -2,6 +2,7 @@ import Link from "next/link";
 import { PrivacySettingsLink } from "@/components/ads/privacy-settings-link";
 import { Logo } from "@/components/logo";
 import { Pausable } from "@/components/motion/pausable";
+import { SOCIAL } from "@/content/company";
 import { COMPETITORS } from "@/content/competitors";
 import { INDUSTRIES } from "@/content/industries";
 import { QR_TYPES } from "@/lib/qr-types";
@@ -64,6 +65,16 @@ export function SiteFooter() {
             <p className="mt-4 text-body-sm text-fg-muted">
               Dynamic QR codes that keep working, even if you cancel. Edit after printing, scan without limits.
             </p>
+            <ul className="mt-5 flex flex-wrap gap-x-4 gap-y-2">
+              {SOCIAL.map((s) => (
+                <li key={s.url}>
+                  <a href={s.url} rel="me noopener" target="_blank" className="text-body-sm text-fg-muted transition-colors duration-fast ease-stay hover:text-fg">
+                    {s.name}
+                    {s.handle && <span className="ml-1 font-mono text-[12px] text-fg-subtle">{s.handle}</span>}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:col-span-5 lg:grid-cols-5">
             {COLUMNS.map((col) => (

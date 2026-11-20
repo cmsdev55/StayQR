@@ -38,7 +38,8 @@ export default async function AlternativePage({ params }: Props) {
   const c = competitorBySlug((await params).slug);
   if (!c) notFound();
   const meta = await generateMetadata({ params });
-  const saving = c.pricePerYear - ENDUREQR_ROW.pricePerYear;
+  const saving = Math.round(c.pricePerYear - ENDUREQR_ROW.pricePerYear);
+  const checked = c.checked ?? CHECKED;
   const words = c.headline.split(" ");
   let accentOn = false;
 
@@ -51,9 +52,9 @@ export default async function AlternativePage({ params }: Props) {
     ["What happens when you cancel", c.cancel, ENDUREQR_ROW.cancel, true],
   ];
 
-  const faq = [
-    { q: `Is EndureQR affiliated with ${c.name}?`, a: `No. EndureQR is an independent product. ${c.name} is a trademark of its owner; we compare plans using their public pricing and help pages, checked ${CHECKED}.` },
-    { q: `What happens to my ${c.name} codes if I cancel?`, a: `${c.cancelLong} (Checked ${CHECKED}; confirm with ${c.name} before relying on it.)` },
+  const faq = c.faq ? [...c.faq, FAQ[0]] : [
+    { q: `Is EndureQR affiliated with ${c.name}?`, a: `No. EndureQR is an independent product. ${c.name} is a trademark of its owner; we compare plans using their public pricing and help pages, checked ${checked}.` },
+    { q: `What happens to my ${c.name} codes if I cancel?`, a: `${c.cancelLong} (Checked ${checked}; confirm with ${c.name} before relying on it.)` },
     { q: `Can I import my ${c.name} codes?`, a: `You can't move a code that points at ${c.name}'s short links, but you can export your destinations, import them into EndureQR as a CSV and reprint once. After that, you never need to reprint again.` },
     FAQ[0],
   ];
@@ -84,7 +85,7 @@ export default async function AlternativePage({ params }: Props) {
             {c.pitch}
           </p>
           <div className="fade-up mt-8 flex flex-col gap-3 sm:flex-row" style={{ ["--d" as string]: "380ms" }}>
-            <ButtonLink href={`/signup?from=${c.slug}`} size="lg">Switch to EndureQR</ButtonLink>
+            <ButtonLink href={c.primaryCta?.href ?? `/signup?from=${c.slug}`} size="lg">{c.primaryCta?.label ?? "Switch to EndureQR"}</ButtonLink>
             <ButtonLink href="/#compare" size="lg" variant="secondary">Compare all services</ButtonLink>
           </div>
         </div>
@@ -97,17 +98,17 @@ export default async function AlternativePage({ params }: Props) {
             id="after-title"
             eyebrow="After cancelling"
             title="What a printed code does once you *stop paying.*"
-            intro={`What ${c.name}'s own help pages say happens to your codes, next to what you'd see in EndureQR after cancelling.`}
+            intro={`What ${c.quoteFrom ?? c.name}'s own help pages say happens to your codes, next to what you'd see in EndureQR after cancelling.`}
           />
           <div className="mt-12 grid gap-4 lg:grid-cols-2 lg:gap-5">
             <figure className="flex flex-col" data-reveal="">
               <div className="glass flex aspect-[4/3] flex-col justify-between rounded-xl p-6 sm:p-8">
-                <p className="eyebrow">In {c.name}&apos;s own words</p>
+                <p className="eyebrow">In {c.quoteFrom ?? c.name}&apos;s own words</p>
                 <blockquote cite={c.quote.url} className="flex flex-col gap-4 font-display text-[clamp(1.05rem,0.95rem+0.5vw,1.35rem)] font-medium leading-snug text-fg [text-wrap:pretty]">
                   {c.quote.text.map((t) => <p key={t}>&ldquo;{t}&rdquo;</p>)}
                 </blockquote>
                 <a href={c.quote.url} target="_blank" rel="nofollow noopener noreferrer" className="font-mono text-[11px] text-fg-subtle underline decoration-line-strong underline-offset-2 hover:text-fg">
-                  {c.quote.source} · read {CHECKED}
+                  {c.quote.source} · read {checked}
                 </a>
               </div>
               <figcaption className="mt-4 text-body-sm text-fg-muted">
@@ -159,20 +160,20 @@ export default async function AlternativePage({ params }: Props) {
                 <p className="eyebrow">You save every year</p>
                 <AnimatedCounter value={saving} from={0} prefix="$" duration={1600} label={`$${saving} per year`} className="mt-4 font-display text-display-lg font-semibold text-accent-text" />
                 <p className="mt-3 text-body-sm text-fg-muted">
-                  Comparing {c.name} {c.plan} with EndureQR Pro, both billed yearly. Or pay $79 once and never renew.
+                  {c.savingNote ?? `Comparing ${c.name} ${c.plan} with EndureQR Pro, both billed yearly. Or pay $79 once and never renew.`}
                   {c.priceNote && <span className="mt-2 block text-fg-subtle">{c.priceNote}</span>}
                 </p>
               </div>
               <p className="mt-8 border-t border-line pt-6 text-body-sm text-fg-subtle">
-                Every {c.name} fact here comes from {c.name}&apos;s own pricing, help or FAQ pages, linked below.
+                Every {c.name} fact here comes from {c.quoteFrom ? `${c.name}'s and ${c.quoteFrom}'s` : `${c.name}'s`} own pricing, help or FAQ pages, linked below.
               </p>
             </div>
           </div>
           <p className="mt-6 text-body-sm text-fg-subtle">
-            Checked {CHECKED}:{" "}
+            Checked {checked}:{" "}
             {c.sources.map((src, i) => (
               <span key={src.url}>
-                <a href={src.url} target="_blank" rel="nofollow noopener noreferrer" className="underline decoration-line-strong underline-offset-2 hover:text-fg">{c.short} {src.label.toLowerCase()}</a>
+                <a href={src.url} target="_blank" rel="nofollow noopener noreferrer" className="underline decoration-line-strong underline-offset-2 hover:text-fg">{src.by ?? c.short} {src.label.toLowerCase()}</a>
                 {i < c.sources.length - 1 ? ", " : "."}
               </span>
             ))}{" "}
@@ -185,11 +186,11 @@ export default async function AlternativePage({ params }: Props) {
         <div className="mx-auto max-w-container px-4 sm:px-6">
           <SectionHeading id="switch-title" eyebrow="Switching" title="Move over in an *afternoon.*" />
           <ol className="mt-12 grid gap-4 md:grid-cols-3 lg:gap-5">
-            {[
+            {(c.switchSteps ?? [
               ["Export your destinations", `Download the list of links your ${c.name} codes point to.`],
               ["Import a CSV", "Upload it to EndureQR and get a print-ready code for every row."],
               ["Reprint once", "Swap the codes on your next print run. After that, change where they point without reprinting."],
-            ].map(([t, b], i) => (
+            ]).map(([t, b], i) => (
               <li key={t} className="glass rounded-lg p-6 sm:p-8" data-reveal="" style={{ ["--stagger" as string]: i }}>
                 <span className="grid size-8 place-items-center rounded-full border border-line-strong font-mono text-[12px] text-fg">{i + 1}</span>
                 <h3 className="mt-6 font-display text-h3 font-semibold text-fg">{t}</h3>

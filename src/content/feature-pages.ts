@@ -153,7 +153,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
           "**Avoid inverted codes.** Light dots on a dark background fail on some phone cameras.",
           "**Pick a dot style that suits your brand.** Square, rounded, soft, dots and classy all scan well when the contrast is strong.",
           "**Match the corners.** Square, rounded or circle corner styles let the code echo the shape of your logo.",
-          "**Add a frame.** A label, box or pill frame with your own text, such as \"Scan me\" or \"See the menu\", tells people what to expect.",
+          "**Add a frame.** A label, box or pill frame with your own text, such as \"Scan me\" or \"See the menu\", tells people what to expect. See [how to add text to a QR code](/guides/add-text-to-qr-code).",
         ],
       },
       {

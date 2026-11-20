@@ -36,7 +36,21 @@ export type Competitor = {
   headline: string;
   pitch: string;
   ctaTitle: string;
-  sources: { label: string; url: string; thirdParty?: boolean }[];
+  sources: { label: string; url: string; thirdParty?: boolean; /** Whose page it is, when not the competitor's own. */ by?: string }[];
+  /** When this competitor's facts were read, if later than CHECKED. */
+  checked?: string;
+  /** false = only on its /alternatives page, not in the home comparison table (e.g. a free tool, not a paid plan). */
+  homeTable?: false;
+  /** Whose words `quote` is, when it isn't the competitor itself (e.g. the paid product it sends users to). */
+  quoteFrom?: string;
+  /** Replaces the hero's main button (default: "Switch to EndureQR" → sign-up). */
+  primaryCta?: { label: string; href: string };
+  /** Replaces the sentence under the yearly saving. */
+  savingNote?: string;
+  /** Replaces the three "Switching" steps. */
+  switchSteps?: [string, string][];
+  /** Replaces the competitor-specific FAQ items (the general EndureQR item is still added). */
+  faq?: { q: string; a: string }[];
 };
 
 export const COMPETITORS: Competitor[] = [
@@ -105,6 +119,71 @@ export const COMPETITORS: Competitor[] = [
       { label: "FAQ", url: "https://qrfy.com/faq" },
     ],
   },
+  {
+    slug: "qr-code-monkey",
+    checked: "21 Nov 2026",
+    homeTable: false,
+    seoTitle: "QR Code Monkey Alternative With Editable Codes, $29 a Year",
+    metaDescription: "QR Code Monkey makes free static codes you can't edit. EndureQR makes the same free codes, plus editable ones for $29 a year that keep working if you cancel.",
+    name: "QR Code Monkey",
+    short: "QR Code Monkey",
+    plan: "Starter (QR Code Generator PRO)",
+    pricePerYear: 119.88,
+    priceNote:
+      "QR Code Monkey itself is free for static codes. The price is the Starter plan of QR Code Generator PRO, where QR Code Monkey sends you for editable codes, in US dollars: $9.99 a month billed yearly or $19.99 billed monthly. Some countries see a lower regional price, from $60 a year. VAT excluded.",
+    price: { text: "Free for static codes. Editable codes: $119.88 (QR Code Generator PRO Starter)", confirmed: true },
+    codes: { text: "Unlimited static codes; 2 dynamic codes on PRO Starter", verdict: "partial", confirmed: true },
+    scans: { text: "Unlimited on static codes; 10,000 on PRO Starter", verdict: "partial", confirmed: true },
+    edit: { text: "Static codes can't be edited; 2 dynamic codes on PRO Starter", verdict: "partial", confirmed: true },
+    cancel: { text: "Static codes keep working; PRO dynamic codes go to a service page 30 days after the contract ends", confirmed: true },
+    cancelLong:
+      "QR Code Monkey's free codes are static: its site says they \u201cdo not expire and will work forever\u201d, but you can't edit them. For editable codes it points you to QR Code Generator PRO. That product's help pages say dynamic codes point to a service page when the 14-day trial ends, and 30 days after a cancelled contract ends.",
+    quoteFrom: "QR Code Generator PRO",
+    quote: {
+      text: [
+        "Dynamic QR Codes are deactivated and point to a service page rather than the original destination.",
+        "Once the 30 days are over, your account is locked and your Dynamic QR Codes redirect to a service page instead of their original destination.",
+      ],
+      source: "QRCG by Bitly Help: when the trial expires, and after you cancel",
+      url: "https://support.qr-code-generator.com/hc/en-us/articles/7665399659277-How-do-I-cancel-my-QRCG-by-Bitly-subscription",
+    },
+    headline: "The QR Code Monkey alternative with codes you can *edit after printing*",
+    pitch:
+      "EndureQR is an alternative to QR Code Monkey for people who want the same free QR codes with a logo, plus codes they can change after printing. QR Code Monkey's codes are static, and its site says you \u201ccan't edit the QR code again\u201d. For editable codes it sends you to QR Code Generator PRO, whose Starter plan costs $119.88 a year in US dollars for 2 dynamic codes (checked 21 November 2026). EndureQR Pro costs $29 a year for unlimited editable codes that keep redirecting if you cancel.",
+    ctaTitle: "Free codes today, editable ones when you need them.",
+    primaryCta: { label: "Make a free QR code", href: "/qr-code-generator" },
+    savingNote:
+      "Comparing QR Code Generator PRO Starter, where QR Code Monkey sends you for editable codes, with EndureQR Pro, both billed yearly in US dollars. Or pay $79 once and never renew.",
+    switchSteps: [
+      ["Keep your printed codes", "QR Code Monkey's static codes encode your link directly, so they keep working wherever they're printed. There's nothing to move."],
+      ["Make new codes for free", "Use the free EndureQR generator with your logo and colours, no account needed. Download PNG, SVG, JPEG or a 300 dpi PDF."],
+      ["Go dynamic when you need to", "Upgrade to Pro for codes you can edit and track after printing. They keep redirecting even if you cancel."],
+    ],
+    faq: [
+      {
+        q: "Is EndureQR affiliated with QR Code Monkey?",
+        a: "No. EndureQR is an independent product. QR Code Monkey and QR Code Generator PRO (\u201cQRCG by Bitly\u201d) are trademarks of their owners. We compare them using their public pages, checked 21 Nov 2026.",
+      },
+      {
+        q: "Do QR Code Monkey codes expire?",
+        a: "No. QR Code Monkey's site says its codes are static and \u201cdo not expire and will work forever\u201d. EndureQR's free codes work the same way: both encode your link directly, so they don't depend on either company staying in business.",
+      },
+      {
+        q: "When do I need a QR Code Monkey alternative?",
+        a: "When you want to change where a printed code points, or count how many people scanned it. Static codes can't do either. QR Code Monkey sends you to QR Code Generator PRO for that, whose dynamic codes stop redirecting when the trial ends, or 30 days after you cancel. EndureQR Pro's codes keep redirecting after you cancel.",
+      },
+      {
+        q: "Does the PDF download keep my logo?",
+        a: "On EndureQR, yes: the PDF is a 300 dpi print file of the full design, logo and colours included. QR Code Monkey's site says its .pdf and .eps formats \u201conly support classic QR codes without the design and logo options\u201d; its SVG keeps them.",
+      },
+    ],
+    sources: [
+      { label: "Generator and FAQ", url: "https://www.qrcode-monkey.com/" },
+      { label: "Pricing", by: "QR Code Generator PRO", url: "https://www.qr-code-generator.com/pricing/" },
+      { label: "Help: trial ends", by: "QR Code Generator PRO", url: "https://support.qr-code-generator.com/hc/en-us/articles/7665046137613-What-happens-to-my-account-and-QR-Codes-when-the-trial-expires" },
+      { label: "Help: cancelling", by: "QR Code Generator PRO", url: "https://support.qr-code-generator.com/hc/en-us/articles/7665399659277-How-do-I-cancel-my-QRCG-by-Bitly-subscription" },
+    ],
+  },
 ];
 
 export const ENDUREQR_ROW = {
@@ -117,5 +196,8 @@ export const ENDUREQR_ROW = {
   edit: "Unlimited",
   cancel: "Keep working after you cancel",
 };
+
+/** Competitors in the home comparison table (paid plans only). */
+export const COMPARE_TABLE = COMPETITORS.filter((c) => c.homeTable !== false);
 
 export const competitorBySlug = (slug: string) => COMPETITORS.find((c) => c.slug === slug);

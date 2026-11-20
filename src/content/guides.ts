@@ -301,20 +301,49 @@ const GUIDES_CORE: Guide[] = [
   // ── 3. Size for printing ────────────────────────────────────────────
   {
     slug: "qr-code-size-for-printing",
-    title: "QR code size for printing: minimum size and DPI",
-    h1: "QR code size for printing: minimum sizes, distance and resolution",
+    title: "Minimum QR code size for printing: cm, inches, DPI",
+    h1: "Minimum QR code size: how small can a printed QR code be?",
     description:
-      "The minimum printed QR code size is about 2 cm (0.8 in). Use the 10:1 distance rule, the right DPI and vector files so your code scans every time.",
+      "The minimum QR code size is about 2 cm (0.8 in) for close-up scans, and 1 to 1.5 cm at the very least. Tables by distance and content, plus DPI and file tips.",
     category: "Printing",
     published: "2026-10-26",
-    updated: "2026-11-02",
-    readMinutes: 6,
+    updated: "2026-11-21",
+    readMinutes: 8,
     summary:
-      "How big a QR code needs to be depends on how far away people stand and how much data it holds. Here are the numbers, plus the file and print settings that matter.",
+      "How small a QR code can be depends on how far away people stand and how much data it holds. Here are the minimum sizes in centimetres and inches, plus the file and print settings that matter.",
     body: [
       {
         type: "p",
         text: "The minimum practical size for a printed QR code is about **2 x 2 cm (0.8 x 0.8 in)**, for something scanned from close up, like a business card. For anything scanned from further away, use the **10:1 rule**: the code should be at least one tenth as wide as the scanning distance. A poster read from 2 metres needs a code about 20 cm wide.",
+      },
+      {
+        type: "p",
+        text: "With very short content and sharp, professional printing, a code can shrink to about **1 to 1.5 cm (0.4 to 0.6 in)**, but that is the absolute floor, and it needs testing on several phones. The table below shows where that floor sits for different kinds of content.",
+      },
+      { type: "h2", id: "minimum-size-by-content", text: "What is the minimum QR code size?" },
+      {
+        type: "p",
+        text: "The minimum size of a QR code is its number of modules (the small squares) multiplied by the smallest module a phone can reliably read. The module count depends on what the code holds, so a short link can be printed much smaller than a contact card. We encoded six typical examples with medium error correction (level M), the default on most generators, including ours, and counted the modules:",
+      },
+      {
+        type: "table",
+        head: ["What the code holds", "Modules per side", "Absolute minimum (0.4 mm modules)", "Recommended (0.8 mm modules)"],
+        rows: [
+          ["Homepage, like www.example.com (23 characters)", "25", "1.0 cm (0.39 in)", "2.0 cm (0.8 in)"],
+          ["Short link, like a dynamic code (27 characters)", "29", "1.2 cm (0.45 in)", "2.3 cm (0.9 in)"],
+          ["Wi-Fi login (41 characters)", "29", "1.2 cm (0.45 in)", "2.3 cm (0.9 in)"],
+          ["Page link with a path (52 characters)", "33", "1.3 cm (0.52 in)", "2.6 cm (1.0 in)"],
+          ["Long link with tracking tags (116 characters)", "45", "1.8 cm (0.70 in)", "3.6 cm (1.4 in)"],
+          ["Contact card with 6 fields (168 characters)", "53", "2.1 cm (0.83 in)", "4.2 cm (1.7 in)"],
+        ],
+      },
+      {
+        type: "p",
+        text: "The widths are for the code itself; add the blank margin described below. The absolute minimum column uses **0.396 mm**, the smallest module size GS1 allows for QR codes scanned at retail checkouts. GS1's own worked example, a 29-module code with its margin, comes to [14.6 by 14.6 mm](https://www.gs1uk.org/knowledge-hub/qr-codes-powered-by-gs1/how-big-should-a-qr-code-powered-by-gs1-be). That figure assumes professional printing and a scanner held close. The recommended column uses 0.8 mm modules, which leaves room for office printers, textured paper and older phones. It's the size we suggest for anything you can't test widely first.",
+      },
+      {
+        type: "p",
+        text: "**A logo makes the minimum bigger.** Generators raise error correction to level H when you add a logo, so the code can still be read with its centre covered. That adds modules: in our examples, between 15% and 30% more width for the same content. A short link goes from 29 to 33 modules, a contact card from 53 to 69.",
       },
       { type: "h2", id: "the-10-to-1-rule", text: "How big should a QR code be for printing?" },
       {
@@ -413,6 +442,18 @@ const GUIDES_CORE: Guide[] = [
       {
         q: "What is the smallest QR code that will scan?",
         a: "Around 2 cm (0.8 in) wide is a practical minimum for short content scanned up close. Smaller codes can work with very short data and sharp printing, but test them carefully.",
+      },
+      {
+        q: "What is the minimum QR code size in inches?",
+        a: "About 0.8 inches (2 cm) wide for a short link or a homepage scanned from close up. With very short content and sharp professional printing it can go down to roughly 0.4 to 0.6 inches, but test it on several phones first.",
+      },
+      {
+        q: "Can a QR code be 1 cm wide?",
+        a: "Only with very short content, like a homepage link, and sharp professional printing. At 1 cm, each module of a 25-module code is 0.4 mm, close to the smallest size GS1 allows for checkout scanners. For everyday print, 2 cm is much safer.",
+      },
+      {
+        q: "What is the minimum QR code size in pixels?",
+        a: "For print, export at 300 DPI at the final size: a 2 cm (0.8 in) code needs at least 240 by 240 pixels, or use a vector SVG or PDF. On a screen, what matters is the physical size the code appears at, so the same distance rule applies.",
       },
       {
         q: "How big should a QR code be on a business card?",
@@ -651,7 +692,7 @@ const GUIDES_CORE: Guide[] = [
       {
         type: "ul",
         items: [
-          "**Add a clear label.** A frame with \"Scan to join WiFi\" tells people what the code does before they scan.",
+          "**Add a clear label.** A frame with \"Scan to join WiFi\" tells people what the code does before they scan; see [how to add text to a QR code](/guides/add-text-to-qr-code).",
           "**Print the details as text too.** Show the network name and password under the code for laptops and older phones that cannot scan.",
           "**Pick a sensible size.** A card on a counter or table needs a code about 3 to 5 cm wide. A sign on the wall needs more, roughly one tenth of the distance people stand from it.",
           "**Put it where people need it.** In a café, the counter, the menu or the table. In a holiday rental, the welcome book, near the router or by the front door. In an office, the reception desk and meeting rooms.",

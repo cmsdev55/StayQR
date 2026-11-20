@@ -10,7 +10,7 @@ import { SITE_URL } from "@/lib/site";
 const BASE = SITE_URL;
 
 /** When the marketing pages' copy last changed. Bump it with the content, not on every deploy (guides carry their own date). */
-const PAGES_UPDATED = "2026-11-20";
+const PAGES_UPDATED = "2026-11-21";
 /** Terms and Privacy follow their effective date. */
 const LEGAL_UPDATED = "2026-11-19";
 

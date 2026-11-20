@@ -989,4 +989,112 @@ export const GUIDES_USES: Guide[] = [
     ],
     relatedTools: ["url", "email"],
   },
+  // ── 7. Text on a QR code ────────────────────────────────────────────
+  {
+    slug: "add-text-to-qr-code",
+    title: "How to add text to a QR code (below, above or inside)",
+    h1: "How to add text to a QR code without breaking it",
+    description:
+      "Add text below a QR code with a frame like \u201cScan for the menu\u201d, keep it out of the blank margin, and learn when text inside the code is safe. Free steps.",
+    category: "Design",
+    published: "2026-11-21",
+    updated: "2026-11-21",
+    readMinutes: 5,
+    summary:
+      "A line of text tells people why they should scan. Where you put it decides whether the code still works, so here's the safe way to do it, free.",
+    body: [
+      {
+        type: "p",
+        text: "To add text to a QR code, put it **below or above the code, outside the blank margin around it**, ideally in a frame. Text there never affects scanning. In the [free EndureQR generator](/qr-code-generator), open **Frame**, choose Label, Box or Pill, and type up to 28 characters, such as \u201cScan for the menu\u201d. The text is built into every download, PNG, SVG, JPEG or PDF, so it can't slip out of place in your layout.",
+      },
+      { type: "h2", id: "where-text-can-go", text: "Where can you put text on a QR code?" },
+      {
+        type: "table",
+        head: ["Where", "Does it affect scanning?", "Best for"],
+        rows: [
+          ["Below or above the code, in a frame", "No", "A call to action, like \u201cScan to join our Wi-Fi\u201d"],
+          ["Below the code, as plain text in your design", "No, if it stays outside the margin", "A short web address as a backup"],
+          ["Inside the code, over the pattern", "Yes: it covers part of the code", "One short word or a logo, kept small"],
+          ["In the blank margin around the code", "Yes: scanners need that margin empty", "Nothing. Keep it clear"],
+        ],
+      },
+      {
+        type: "p",
+        text: "The blank margin is the **quiet zone**: a light border at least 4 modules wide on every side, which the [QR code standard](https://www.qrcode.com/en/howto/code.html) requires so scanners can find where the code starts. Text, lines or crop marks inside it are a common reason a well-made code fails. Frames solve this by adding space for the text outside the margin, so the code keeps its full border.",
+      },
+      { type: "h2", id: "add-text-free", text: "How to add text below a QR code for free" },
+      {
+        type: "ol",
+        items: [
+          "Open the [free QR code generator](/qr-code-generator) and choose what the code should open, such as a [website link](/qr-code-generator/url) or [Wi-Fi network](/qr-code-generator/wifi). No account is needed.",
+          "Under **Frame**, choose **Label** for plain text under the code, or **Box** or **Pill** for a solid frame with the text reversed out in the background colour.",
+          "Type your text in **Frame text**. It can be up to 28 characters, and the preview updates as you type.",
+          "Pick colours, and add a logo if you like. The text uses the code's colours, so it always matches.",
+          "Download as PNG, SVG, JPEG or a 300 dpi PDF. The frame and text are part of the same file, with [no watermark](/qr-code-generator-no-watermark).",
+          "Scan a test print with an iPhone and an Android phone before printing the full run.",
+        ],
+      },
+      {
+        type: "tip",
+        text: "If your layout already has a caption, you can skip the frame and type the text in your design tool instead. Leave a gap below the code at least as wide as its blank margin, and keep the text the same dark colour as the code.",
+      },
+      { type: "h2", id: "what-to-write", text: "What should the text say?" },
+      {
+        type: "p",
+        text: "Say what happens when people scan, in a few words. \u201cScan me\u201d works, but it doesn't say why. Text that names the result tells people what they'll get, and it reassures anyone wary of scanning an unknown code.",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Restaurants:** \u201cScan for the menu\u201d or \u201cScan to order\u201d. See [QR code menus](/guides/qr-code-for-restaurant-menu).",
+          "**Cafés and rentals:** \u201cScan to join our Wi-Fi\u201d. See the [Wi-Fi QR code guide](/guides/wifi-qr-code).",
+          "**Shops and services:** \u201cScan to leave a review\u201d. See [QR codes for Google reviews](/guides/qr-code-for-google-reviews).",
+          "**Events:** \u201cScan for tickets\u201d or \u201cScan to RSVP\u201d.",
+          "**Business cards:** \u201cScan to save my number\u201d. See [QR codes on business cards](/guides/qr-code-business-card).",
+        ],
+      },
+      {
+        type: "p",
+        text: "On printed material, it also helps to add the web address in small text nearby, like example.com/menu. People whose camera won't scan, or who are reading a photo of your poster, can still get there.",
+      },
+      { type: "h2", id: "text-inside-the-code", text: "Can you put text inside a QR code?" },
+      {
+        type: "p",
+        text: "Yes, but only a little, and it works the same way as a logo. Text over the pattern hides some modules, and the code relies on **error correction** to fill them back in. At [level H](https://www.qrcode.com/en/about/error_correction.html), a code can recover about 30% of its data, which is why generators switch to H when you add a logo.",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Save the word as an image** (PNG or SVG with a light background) and upload it as the logo. EndureQR then uses level H automatically.",
+          "**Keep it small.** One short word or a monogram is fine. The logo size slider goes from 15% to 35% of the code's width; stay near the middle of that range for text.",
+          "**Never cover the three corner squares.** Scanners use them to find and line up the code.",
+          "**Test on several phones.** If any phone struggles, make the text smaller or move it below the code instead.",
+        ],
+      },
+      { type: "h2", id: "text-vs-text-qr-code", text: "Adding text to a code vs a text QR code" },
+      {
+        type: "p",
+        text: "These are different things. Adding text puts printed words **next to** the code for people to read. A **text QR code** stores a message **inside** the code, which appears on the phone when someone scans it, with no internet needed. To make one of those, use the [text QR code generator](/qr-code-generator/text). It suits short notes, serial numbers or instructions, up to a few hundred characters.",
+      },
+    ],
+    faq: [
+      {
+        q: "Does adding text to a QR code stop it from scanning?",
+        a: "Not if the text sits below or above the code, outside its blank margin. Text in the margin or over the pattern can stop it scanning, so keep it in a frame or with a clear gap.",
+      },
+      {
+        q: "How do I put text under a QR code for free?",
+        a: "In the free EndureQR generator, open Frame, choose Label, Box or Pill, and type up to 28 characters. The text is part of the PNG, SVG, JPEG or PDF you download, with no sign-up or watermark.",
+      },
+      {
+        q: "What is the best text to put on a QR code?",
+        a: "A short phrase that says what happens when people scan, like \u201cScan for the menu\u201d or \u201cScan to join our Wi-Fi\u201d. Adding the web address nearby helps people who can't scan.",
+      },
+      {
+        q: "Can I change the text after printing?",
+        a: "No. The printed words are fixed, like the rest of the print. With a dynamic QR code you can change where the code points, so the text can name a purpose, like \u201cToday's specials\u201d, while the page behind it changes.",
+      },
+    ],
+    relatedTools: ["url", "wifi", "text"],
+  },
 ];

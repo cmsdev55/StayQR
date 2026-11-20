@@ -2,7 +2,7 @@ import { Logo } from "@/components/logo";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { VerifyTag } from "@/components/ui/placeholder";
-import { CHECKED, COMPETITORS, ENDUREQR_ROW, type Competitor, type Verdict } from "@/content/competitors";
+import { CHECKED, COMPARE_TABLE, ENDUREQR_ROW, type Competitor, type Verdict } from "@/content/competitors";
 import { cn } from "@/lib/utils";
 
 type Cell = { text: string; verdict?: Verdict; confirmed?: boolean };
@@ -30,11 +30,11 @@ export function Compare() {
         {/* md+: a real table */}
         <div className="mt-12 hidden overflow-hidden md:block lg:mt-16">
           <table className="w-full table-fixed border-separate border-spacing-0 text-left">
-            <caption className="sr-only">EndureQR compared with {COMPETITORS.map((c) => c.name).join(" and ")}</caption>
+            <caption className="sr-only">EndureQR compared with {COMPARE_TABLE.map((c) => c.name).join(" and ")}</caption>
             <colgroup>
               <col className="w-[22%]" />
               <col className="w-[26%]" />
-              {COMPETITORS.map((c) => (
+              {COMPARE_TABLE.map((c) => (
                 <col key={c.slug} />
               ))}
             </colgroup>
@@ -46,7 +46,7 @@ export function Compare() {
                   <span className="mt-0.5 block font-mono text-[12px] font-normal text-fg-subtle">{ENDUREQR_ROW.plan} · or $79 once</span>
                   <AnimatedCounter value={ENDUREQR_ROW.pricePerYear} from={300} prefix="$" duration={1800} label={`$${ENDUREQR_ROW.pricePerYear} per year`} className="mt-4 font-display text-display-md font-semibold text-accent-text" />
                 </th>
-                {COMPETITORS.map((c) => (
+                {COMPARE_TABLE.map((c) => (
                   <th key={c.slug} scope="col" className="px-5 pb-6 align-bottom">
                     <span className="block text-body font-semibold text-fg">{c.name}</span>
                     <span className="mt-0.5 block font-mono text-[12px] font-normal text-fg-subtle">{c.plan}</span>
@@ -62,7 +62,7 @@ export function Compare() {
                   <td className={cn("border-x border-t border-line-strong bg-glass-strong px-5 py-5", i === ROWS.length - 1 && "rounded-b-xl border-b")}>
                     <Value cell={row.ours} delay={i} strong />
                   </td>
-                  {COMPETITORS.map((c) => (
+                  {COMPARE_TABLE.map((c) => (
                     <td key={c.slug} className="border-t border-line px-5 py-5">
                       <Value cell={row.theirs(c)} delay={i} />
                     </td>
@@ -82,7 +82,7 @@ export function Compare() {
                 <dt className="flex items-center gap-1.5 text-body-sm font-semibold text-fg"><Logo size={14} /> EndureQR</dt>
                 <dd><AnimatedCounter value={ENDUREQR_ROW.pricePerYear} from={300} prefix="$" duration={1800} label={`$${ENDUREQR_ROW.pricePerYear} per year`} className="font-display text-[34px] font-semibold text-accent-text" /></dd>
               </div>
-              {COMPETITORS.map((c) => (
+              {COMPARE_TABLE.map((c) => (
                 <div key={c.slug}>
                   <dt className="truncate text-body-sm text-fg-muted">{c.short}</dt>
                   <dd><AnimatedCounter value={c.pricePerYear} from={0} prefix="$" duration={1800} label={`$${c.pricePerYear} per year`} className="font-display text-[34px] font-semibold text-fg-muted" /></dd>
@@ -98,7 +98,7 @@ export function Compare() {
                   <dt className="text-body-sm font-semibold text-fg">EndureQR</dt>
                   <dd><Value cell={row.ours} delay={0} strong /></dd>
                 </div>
-                {COMPETITORS.map((c) => (
+                {COMPARE_TABLE.map((c) => (
                   <div key={c.slug} className="flex items-start justify-between gap-4 px-3">
                     <dt className="shrink-0 text-body-sm text-fg-muted">{c.short}</dt>
                     <dd className="text-right"><Value cell={row.theirs(c)} delay={0} align="right" /></dd>
@@ -112,7 +112,7 @@ export function Compare() {
         <p className="mt-8 max-w-[90ch] text-body-sm text-fg-subtle">
           Cheapest paid plan that includes editable (dynamic) codes, billed annually, in USD before tax.{" "}
           Sources:{" "}
-          {COMPETITORS.flatMap((c) => c.sources.map((s) => ({ ...s, who: c.name }))).map((s, i, all) => (
+          {COMPARE_TABLE.flatMap((c) => c.sources.map((s) => ({ ...s, who: c.name }))).map((s, i, all) => (
             <span key={s.url}>
               <a href={s.url} rel="nofollow noopener noreferrer" target="_blank" className="underline decoration-line-strong underline-offset-2 transition-colors hover:text-fg">
                 {s.who} {s.label.toLowerCase()}

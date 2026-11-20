@@ -1,4 +1,5 @@
 import { GUIDES_BASICS } from "./guides-basics";
+import { GUIDES_RESEARCH } from "./guides-research";
 import { GUIDES_USES } from "./guides-uses";
 
 /** Inline text supports **bold** and [link text](/path) only. */
@@ -19,7 +20,7 @@ export type Guide = {
   h1: string;
   /** meta description 140–158 chars */
   description: string;
-  category: "Basics" | "Printing" | "Design" | "Use cases";
+  category: "Basics" | "Printing" | "Design" | "Use cases" | "Research";
   /** ISO date */
   published: string;
   updated: string;
@@ -120,7 +121,7 @@ const GUIDES_CORE: Guide[] = [
         items: [
           "**Use a static code when the content will not change.** A home [WiFi network](/qr-code-generator/wifi), a contact card or the address of your main website are good candidates. Our [free QR code generator](/qr-code-generator) makes [static codes that never expire](/qr-code-generator-no-expiration), with no sign-up and no watermark.",
           "**Use a dynamic code when the destination will change.** Menus, event pages and property listings change often. A dynamic code lets you update the link without reprinting.",
-          "**Check the cancellation policy before you print.** This matters more than the monthly price. A cheap plan that switches off your codes when you cancel can cost you a full reprint.",
+          "**Check the cancellation policy before you print.** This matters more than the monthly price. A cheap plan that switches off your codes when you cancel can cost you a full reprint. When [we tested 20 free generators](/guides/free-qr-code-generators-tested), 10 of the 17 services offering dynamic codes said some of them stop, pause or change when a trial or plan ends.",
           "**Point static codes at pages you control.** Link to a stable page on your own domain, and set up a redirect yourself if the content moves.",
           "**Keep a record of every code you print.** Note where it is, what it points to and which account owns it, so a staff change does not leave it stranded.",
         ],
@@ -874,6 +875,6 @@ const GUIDES_CORE: Guide[] = [
 ];
 
 /** Every guide; basics first, so the hub and home page lead with the broadest answers. */
-export const GUIDES: Guide[] = [...GUIDES_BASICS.slice(0, 3), ...GUIDES_CORE, ...GUIDES_BASICS.slice(3), ...GUIDES_USES];
+export const GUIDES: Guide[] = [...GUIDES_BASICS.slice(0, 3), ...GUIDES_CORE, ...GUIDES_BASICS.slice(3), ...GUIDES_USES, ...GUIDES_RESEARCH];
 
 export const guideBySlug = (slug: string) => GUIDES.find((g) => g.slug === slug);

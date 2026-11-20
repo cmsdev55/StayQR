@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/guides" },
 };
 
-const CATEGORIES = ["Basics", "Use cases", "Printing", "Design"] as const;
+const CATEGORIES = ["Research", "Basics", "Use cases", "Printing", "Design"] as const;
 
 const CRUMBS = [
   { name: "Home", path: "/" },

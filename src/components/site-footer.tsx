@@ -77,6 +77,16 @@ export function SiteFooter() {
                 </li>
               ))}
             </ul>
+            {/* Launch-directory badge (StartupBase asks for it to be visible on the site) */}
+            <a
+              href="https://startupbase.io/products/endureqr?utm_source=startupbase&utm_medium=badge&utm_campaign=launch-badge-neutral"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-block"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="https://statics.startupbase.io/site/badges/launched-on-sb-neutral.svg" alt="Launched on StartupBase" height={55} style={{ height: 55, width: "auto" }} />
+            </a>
           </div>
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:col-span-5 lg:grid-cols-5">
             {COLUMNS.map((col) => (

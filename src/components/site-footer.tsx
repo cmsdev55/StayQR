@@ -77,16 +77,26 @@ export function SiteFooter() {
                 </li>
               ))}
             </ul>
-            {/* Launch-directory badge (StartupBase asks for it to be visible on the site) */}
-            <a
-              href="https://startupbase.io/products/endureqr?utm_source=startupbase&utm_medium=badge&utm_campaign=launch-badge-neutral"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-block"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="https://statics.startupbase.io/site/badges/launched-on-sb-neutral.svg" alt="Launched on StartupBase" height={55} style={{ height: 55, width: "auto" }} />
-            </a>
+            {/* Launch-directory badges. Each directory checks the server-rendered HTML for its
+                badge, so keep the hrefs and image URLs exactly as given and leave out nofollow. */}
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <a
+                href="https://startupbase.io/products/endureqr?utm_source=startupbase&utm_medium=badge&utm_campaign=launch-badge-neutral"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="https://statics.startupbase.io/site/badges/launched-on-sb-neutral.svg" alt="Launched on StartupBase" height={48} style={{ height: 48, width: "auto" }} />
+              </a>
+              <a href="https://www.scrolllaunch.com/products/endureqr?ref=badge" target="_blank" rel="noopener">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="https://www.scrolllaunch.com/api/badge/endureqr?variant=launched&theme=light" alt="EndureQR - Featured on ScrollLaunch" width={220} height={48} />
+              </a>
+              <a href="https://fazier.com" target="_blank" rel="noopener">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=launched&theme=light" width={120} alt="Fazier badge" />
+              </a>
+            </div>
           </div>
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:col-span-5 lg:grid-cols-5">
             {COLUMNS.map((col) => (

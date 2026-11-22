@@ -41,7 +41,7 @@ export const FOUNDER = {
 export const SOCIAL: { name: string; handle?: string; url: string }[] = [
   { name: "X", handle: "@endureqr_app", url: "https://x.com/endureqr_app" },
   { name: "Instagram", handle: "@getendureqr", url: "https://www.instagram.com/getendureqr/" },
-  { name: "Facebook", url: "https://www.facebook.com/profile.php?id=61596007687246" },
+  { name: "Facebook", url: "https://www.facebook.com/endureqr" },
   { name: "YouTube", handle: "@endureqr", url: "https://www.youtube.com/@endureqr" },
 ];
 

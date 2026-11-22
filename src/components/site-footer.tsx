@@ -96,10 +96,6 @@ export function SiteFooter() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=launched&theme=light" width={120} alt="Fazier badge" />
               </a>
-              <a href="https://auraplusplus.com/projects/endureqr" target="_blank" rel="noopener" title="View this project on Aura++">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="https://auraplusplus.com/images/badges/featured-on-light.svg" alt="Featured on Aura++" width={150} height={44} />
-              </a>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:col-span-5 lg:grid-cols-5">

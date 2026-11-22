@@ -10,7 +10,9 @@ export type GuideBlock =
   | { type: "ul"; items: string[] }
   | { type: "ol"; items: string[] }
   | { type: "table"; head: string[]; rows: string[][] }
-  | { type: "tip"; text: string };
+  | { type: "tip"; text: string }
+  /** an image from /public; `href` makes it a download link (e.g. the SVG itself) */
+  | { type: "figure"; src: string; alt: string; width: number; height: number; caption: string; href?: string };
 
 export type Guide = {
   slug: string;

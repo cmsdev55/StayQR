@@ -140,6 +140,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       { q: "How do I scan a WiFi QR code on iPhone?", a: "Open the Camera app, point it at the code and tap the banner that appears. The iPhone asks to join the network and connects without anyone typing the password." },
       { q: "Does it work on Android?", a: "Yes. Most Android phones read WiFi codes from the camera. On some models you scan from the WiFi settings screen or with Google Lens instead." },
       { q: "Does it work with WPA3 or hidden networks?", a: "Yes. EndureQR supports WPA, WPA2 and WPA3 personal networks, WEP, open networks and hidden networks. It doesn't support WPA-Enterprise networks that need a username." },
+      { q: "Can I make a WiFi QR code without a password?", a: "Yes, for an open network. Choose None (open network) as the security type and any password is left out; the code holds only the network name, so phones join without asking for one. A network that has a password needs it in the code, because the phone can't join without it." },
       { q: "Is a WiFi QR code secure?", a: "It's as secure as sharing the password, because the password is inside the code. Use a guest network and display the code only where guests can see it." },
       { q: "What happens if I change my WiFi password?", a: "The old code stops working, because it holds the old password. Make a new code with the new password and reprint it." },
       { q: "Do I need internet to scan it?", a: "No. The details are stored in the code, so a phone can read it and join the network without mobile data." },
@@ -344,7 +345,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
   // ── location ─────────────────────────────────────────────────────────
   {
     slug: "location",
-    title: "Location QR Code Generator: Free Map Pin QR Codes",
+    title: "Location QR Code Generator: Address or Map Pin, Free",
     description:
       "Make a location QR code that opens a map at your address or exact coordinates, ready for directions. Free, no sign-up, no watermark, and it never expires.",
     h1: "Location QR code generator",

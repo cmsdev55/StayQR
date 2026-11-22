@@ -43,5 +43,14 @@ export function Block({ b }: { b: GuideBlock }) {
           <RichText text={b.text} />
         </aside>
       );
+    case "figure": {
+      const img = <img src={b.src} alt={b.alt} width={b.width} height={b.height} loading="lazy" decoding="async" className="mx-auto h-auto w-full max-w-[560px] rounded-md bg-white" />;
+      return (
+        <figure className="flex flex-col gap-3">
+          <div className="rounded-lg border border-line bg-white p-3">{b.href ? <a href={b.href} download>{img}</a> : img}</div>
+          <figcaption className="text-center text-body-sm text-fg-subtle"><RichText text={b.caption} /></figcaption>
+        </figure>
+      );
+    }
   }
 }

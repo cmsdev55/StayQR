@@ -349,7 +349,7 @@ export const GUIDES_BASICS: Guide[] = [
       "Make a QR code in minutes: pick a type, enter your link or details, style it, add a logo, test it and download PNG, SVG or PDF. Free, with no sign-up.",
     category: "Basics",
     published: "2026-10-26",
-    updated: "2026-11-02",
+    updated: "2026-11-23",
     readMinutes: 7,
     summary:
       "Making a QR code takes a few minutes. Making one that scans first time, looks right and prints sharply takes a few extra checks. Here is the whole process.",
@@ -522,6 +522,10 @@ export const GUIDES_BASICS: Guide[] = [
       {
         type: "tip",
         text: "Keep a simple record of every code you print: what it points to, where it is displayed and the file you used. Save the SVG with a clear file name. When something changes later, you will know exactly which codes to update or replace.",
+      },
+      {
+        type: "p",
+        text: "No printer to hand? A short code can even be [drawn by hand](/guides/how-to-draw-a-qr-code) on a printable grid, and it scans like any other.",
       },
     ],
     faq: [
@@ -863,5 +867,149 @@ export const GUIDES_BASICS: Guide[] = [
       },
     ],
     relatedTools: ["url", "paypal", "wifi"],
+  },
+
+  // ── 6. How to draw a QR code by hand ────────────────────────────────
+  {
+    slug: "how-to-draw-a-qr-code",
+    title: "How to Draw a QR Code by Hand (Free Printable Grid)",
+    h1: "How to draw a QR code by hand that actually scans",
+    description:
+      "Yes, you can draw a working QR code by hand. Generate a 21×21 code, copy it square by square onto our free printable grid, then test it with your phone.",
+    category: "Design",
+    published: "2026-11-23",
+    updated: "2026-11-23",
+    readMinutes: 6,
+    summary:
+      "A hand-drawn QR code scans just like a printed one, as long as every square is in the right place. The trick is to copy a real code rather than invent one, and to keep it small.",
+    body: [
+      {
+        type: "p",
+        text: "You can draw a QR code by hand, and it will scan, but you shouldn't try to work out the pattern yourself. Make a small code with a generator, then copy it square by square onto a grid. The smallest QR code is 21 × 21 squares, and our free printable grid already has 203 of those 441 squares filled in, so you only copy the rest. The whole job takes about 20 to 40 minutes.",
+      },
+      { type: "h2", id: "can-you-draw-a-qr-code", text: "Can you draw a QR code by hand?" },
+      {
+        type: "p",
+        text: "Yes. A phone camera doesn't care whether the squares were printed or coloured in with a pen. It looks for three large corner squares, measures the grid between them and reads each square as dark or light. If your drawing has the right squares filled in, with enough contrast and a clear border, it scans like any other code.",
+      },
+      {
+        type: "p",
+        text: "What is hard is designing the pattern from scratch. The data is protected by Reed-Solomon error correction, then one of eight mask patterns is applied and scored, and the result is written into 15 bits of format information. You can do it with pen and paper, and [Thonky's QR code tutorial](https://www.thonky.com/qr-code-tutorial/) walks through every step, but it takes hours of arithmetic and one mistake breaks the code. Copying a generated code avoids all of that.",
+      },
+      { type: "h2", id: "what-you-need", text: "What you need" },
+      {
+        type: "ul",
+        items: [
+          "**A small code to copy.** Short text of up to 14 characters fits the smallest 21 × 21 size. The steps below show how to make one.",
+          "**A grid.** Print our [21 × 21 drawing grid](/guides/qr-code-drawing-grid-21x21.svg), or use graph paper. On 5 mm squares the code is about 10.5 cm wide.",
+          "**A black fine-liner or marker.** Pencil and coloured pens often lack the contrast cameras need.",
+          "**A ruler**, to keep your place along each row.",
+        ],
+      },
+      {
+        type: "figure",
+        src: "/guides/qr-code-drawing-grid-21x21.svg",
+        href: "/guides/qr-code-drawing-grid-21x21.svg",
+        alt: "A 21 by 21 grid with the three corner squares, the dotted timing lines and one dark square already filled in, and the format information squares shaded blue",
+        width: 698,
+        height: 732,
+        caption: "The printable grid. Black squares are the same in every 21 × 21 code. Blue squares change from code to code, so copy them too. Select the image to download the SVG and print it.",
+      },
+      { type: "h2", id: "step-by-step", text: "How to draw a QR code, step by step" },
+      {
+        type: "ol",
+        items: [
+          "**Make the code.** Open the [text QR code generator](/qr-code-generator/text) and type a short message, such as a name or \"Table 12\". Keep it to 14 characters or fewer at the default error correction.",
+          "**Make it easy to copy.** Under style, choose square dots and square corners, black on white, and no logo or frame. Scan the preview to check it reads your text.",
+          "**Check the size.** Count the squares along the top edge. You want 21. If you count 25 or more, shorten the text.",
+          "**Print the grid** and download the code as a large PNG so you can zoom in on screen.",
+          "**Copy one row at a time.** Lay the ruler under the row you're working on, read the row from left to right on screen and fill in the dark squares. Tick the row number when it's done.",
+          "**Don't skip the blue squares.** They hold the format information: the error correction level and the mask. If they're wrong, scanners can't read anything else.",
+          "**Fill each square completely**, right to its edges, without spilling into the next one. Leave the white margin inside the dashed line empty.",
+        ],
+      },
+      {
+        type: "figure",
+        src: "/guides/qr-code-drawing-example-21x21.svg",
+        alt: "A finished 21 by 21 QR code drawn on the numbered grid, which reads Drawn by hand when scanned",
+        width: 698,
+        height: 732,
+        caption: "A finished example. Scan it with your phone: it reads \"Drawn by hand\".",
+      },
+      { type: "h2", id: "how-much-fits", text: "How much fits in a hand-drawn QR code?" },
+      {
+        type: "p",
+        text: "The smallest QR code, Version 1, has 208 squares left for your data once the fixed patterns and format information are in place. That is 26 bytes, shared between your text and the error correction that lets damaged codes still scan. The more error correction you choose, the less text fits:",
+      },
+      {
+        type: "table",
+        head: ["Error correction", "Characters in a 21 × 21 code", "Damage it can recover"],
+        rows: [
+          ["L (low)", "17", "About 7%"],
+          ["M (medium, our default)", "14", "About 15%"],
+          ["Q (quartile)", "11", "About 25%"],
+          ["H (high)", "7", "About 30%"],
+        ],
+      },
+      {
+        type: "p",
+        text: "For hand drawing, more error correction forgives a few wobbly squares. If your text is 7 characters or fewer, choose H in the generator's style options. A web link takes more room: \"https://\" alone uses 8 characters, so most links need a 25 × 25 code or larger. That size adds a small 5 × 5 alignment square near the bottom-right corner. It can still be drawn; it just takes longer. The [error correction guide](/guides/qr-code-error-correction) explains the levels in more detail.",
+      },
+      { type: "h2", id: "test-it", text: "Test your drawing" },
+      {
+        type: "p",
+        text: "Scan the finished drawing with your phone camera in good, even light, holding the phone flat above the paper. You can also take a photo and upload it to our free [QR code scanner](/qr-code-scanner), which shows exactly what the code contains. If it doesn't scan, check these in order:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**A shifted row.** The most common mistake is one row drawn a square to the left or right. Compare each row's first and last dark square with the original.",
+          "**The blue format squares.** Check every one, top-left, top-right and bottom-left.",
+          "**Contrast.** Go over light or patchy squares again with a darker pen.",
+          "**The border.** Stray marks in the four-square quiet zone around the code confuse scanners. See [why QR codes don't scan](/guides/qr-code-not-scanning) for more fixes.",
+        ],
+      },
+      { type: "h2", id: "ideas", text: "Ideas for hand-drawn QR codes" },
+      {
+        type: "ul",
+        items: [
+          "**Teaching.** Drawing a code is a hands-on way to show how binary data and error correction work: smudge a few squares and watch it still scan.",
+          "**Cross-stitch, mosaics and pixel art.** Each square becomes one stitch, tile or block. Keep strong contrast and square shapes.",
+          "**Chalkboards and window signs.** Draw at a large size with a ruler, and test from where people will stand.",
+          "**Puzzles and treasure hunts.** A short hidden message makes a good clue.",
+        ],
+      },
+      {
+        type: "p",
+        text: "A hand-drawn code is a static code: the text is in the pattern itself, so it never expires and works with no internet connection. If you just need a code to print, it's quicker to [make one with the free generator](/qr-code-generator) and download it with [no watermark](/qr-code-generator-no-watermark).",
+      },
+    ],
+    faq: [
+      {
+        q: "Can a hand-drawn QR code really scan?",
+        a: "Yes. Phones read the pattern of dark and light squares, not how it was made. If every square matches a real code and the contrast is strong, a drawing scans like a printed code.",
+      },
+      {
+        q: "What is the smallest QR code I can draw?",
+        a: "21 × 21 squares, called Version 1. It holds up to 17 characters at the lowest error correction, or 14 at the default medium level.",
+      },
+      {
+        q: "Can I draw a QR code for a website link?",
+        a: "Yes, but a link usually needs a 25 × 25 code or larger, because \"https://\" alone uses 8 characters. A very short address can still fit 21 × 21 at low error correction.",
+      },
+      {
+        q: "Do I have to copy the blue squares on the grid?",
+        a: "Yes. They hold the format information that tells the scanner which error correction level and mask the code uses. They differ from code to code, so copy them from your generated code.",
+      },
+      {
+        q: "How long does it take to draw a QR code?",
+        a: "About 20 to 40 minutes for a 21 × 21 code on our grid, since 203 of the 441 squares are already printed. A 25 × 25 code on blank graph paper takes longer.",
+      },
+      {
+        q: "Will a hand-drawn QR code expire?",
+        a: "No. The text is stored in the drawing itself, so it works for as long as the squares stay readable.",
+      },
+    ],
+    relatedTools: ["text", "url", "wifi"],
   },
 ];

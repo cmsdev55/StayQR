@@ -11,7 +11,8 @@ export type FeatureSlug =
   | "app-download-qr-code"
   | "bulk-qr-code-generator"
   | "qr-code-generator-no-watermark"
-  | "qr-code-generator-no-expiration";
+  | "qr-code-generator-no-expiration"
+  | "qr-code-generator-no-sign-up";
 
 export type FeaturePage = {
   slug: FeatureSlug;
@@ -44,13 +45,13 @@ export const FEATURE_PAGES: FeaturePage[] = [
   // ── 1. QR code with logo ────────────────────────────────────────────
   {
     slug: "qr-code-with-logo",
-    title: "QR Code with Logo: Free Generator, No Sign-Up",
+    title: "QR Code with Logo in the Middle: Free, No Sign-Up",
     description:
       "Put your logo in the centre of a free QR code. Upload PNG, SVG or JPEG and pick colours. Error correction goes to H so it still scans. No watermark.",
     eyebrow: "Free logo QR codes",
     h1: "Make a QR code with *your logo*",
     intro:
-      "Upload your logo, choose your colours and download a custom QR code that still scans on any phone. The generator below is free, needs no sign-up and adds no watermark. Error correction switches to level H as soon as you add a logo, so the code keeps plenty of spare data.",
+      "Upload your logo, place it in the middle of the code, choose your colours and download a custom QR code that still scans on any phone. The generator below is free, needs no sign-up and adds no watermark. Error correction switches to level H as soon as you add a logo, so the code keeps plenty of spare data.",
     tool: true,
     cta: { label: "Make a QR code with your logo", href: "#generator" },
     benefits: [
@@ -706,7 +707,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
   // ── 5. QR code generator with no watermark ──────────────────────────
   {
     slug: "qr-code-generator-no-watermark",
-    title: "QR Code Generator With No Watermark: Free, No Sign-Up",
+    title: "QR Code Generator With No Watermark: Free, Full Quality",
     description:
       "Make QR codes with no watermark and no sign-up. Download full-size PNG, SVG or PDF free, use them commercially without credit, and they never expire.",
     eyebrow: "No-watermark QR codes",
@@ -884,6 +885,15 @@ export const FEATURE_PAGES: FeaturePage[] = [
         type: "p",
         text: "A static code avoids all four, because it never depends on a service. When [we tested 20 free QR code generators](/guides/free-qr-code-generators-tested), only 6 gave a direct code without an account; two gave codes that stop after 7 days or 100 scans. Our guide [Do QR codes expire?](/guides/do-qr-codes-expire) goes through each case and how to check a code you already have.",
       },
+      { type: "h2", id: "no-redirect", text: "A QR code with no redirect: how to check" },
+      {
+        type: "p",
+        text: "A QR code with no redirect opens your link directly: the phone reads your own address from the pattern and goes straight there. A code with a redirect holds someone else's short link instead, so every scan passes through their server first. That server is what lets a code be edited or tracked, and also what lets it be switched off.",
+      },
+      {
+        type: "p",
+        text: "To check any code, scan it and read the address your phone shows before you tap. Your own domain means no redirect. A short address you don't recognise means the code depends on that service. You can also upload a photo or screenshot of the code to our free [QR code scanner](/qr-code-scanner), which shows the full content and flags well-known short-link services. Every code made on this page encodes your link exactly as you typed it.",
+      },
       { type: "h2", id: "how-to-make-a-permanent-code", text: "How to make sure a QR code never expires" },
       {
         type: "ol",
@@ -970,6 +980,143 @@ export const FEATURE_PAGES: FeaturePage[] = [
     ],
     relatedTools: ["url", "wifi", "vcard", "text"],
     relatedGuides: ["do-qr-codes-expire", "static-vs-dynamic-qr-codes", "qr-code-not-scanning"],
+  },
+  // ── 7. QR code generator with no sign-up ────────────────────────────
+  {
+    slug: "qr-code-generator-no-sign-up",
+    title: "QR Code Generator With No Sign-Up, No Account, No Login",
+    description:
+      "Make a QR code with no sign-up, no account and no email. Download PNG, SVG or PDF straight away, free. Codes never expire and work without us.",
+    eyebrow: "No account needed",
+    h1: "A free QR code generator with *no sign-up*",
+    intro:
+      "Make a QR code below and download it straight away: no account, no email address, no login and no trial. Every format is free at full quality, the code is built in your browser, and it never expires because it doesn't depend on an account that could be closed.",
+    tool: true,
+    cta: { label: "Make a QR code now", href: "#generator" },
+    benefits: [
+      {
+        title: "No email, no password",
+        body: "Nothing to fill in except your content. There is no sign-up form between you and the download, and no account to remember later.",
+      },
+      {
+        title: "Your details stay with you",
+        body: "The code is built in your browser. The link, WiFi password or contact details you type are not sent to us or stored anywhere.",
+      },
+      {
+        title: "Codes that don't need an account",
+        body: "Static codes hold your content directly, so they keep working whether or not you ever sign up, and even if EndureQR disappears.",
+      },
+    ],
+    steps: [
+      { title: "Pick a type", body: "Website link, WiFi, contact card, WhatsApp, email, text or one of 11 other types." },
+      { title: "Enter your content", body: "The preview updates as you type. Scan it with your phone to check it opens the right thing." },
+      { title: "Style it", body: "Choose colours and dot styles, upload your logo and add a frame with your own text." },
+      { title: "Download", body: "Save PNG, JPEG, SVG or PDF at up to 4096 px. No account, no email, no watermark." },
+    ],
+    body: [
+      {
+        type: "p",
+        text: "Yes, you can make a QR code without signing up. The generator on this page works with no account, no email address and no login: choose a type, enter your content and download the file. It is free for any number of codes, and the codes are **static**, so they keep working without an account behind them.",
+      },
+      { type: "h2", id: "why-generators-ask-you-to-sign-up", text: "Why do so many QR code generators ask you to sign up?" },
+      {
+        type: "p",
+        text: "Usually because the code they make is **dynamic**. Instead of your link, it holds a short link on the generator's server, and the account is how they keep track of it. That model works when you need it, but it also means the code depends on the account. When [we tested 20 free QR code generators](/guides/free-qr-code-generators-tested), 11 needed an account before you could download anything, and only 6 gave a direct code without one.",
+      },
+      {
+        type: "p",
+        text: "A sign-up wall often comes with other strings: a free trial that ends, a scan limit, a low-resolution download unless you upgrade, or marketing emails. None of that is needed for a code that only has to open a link or share details.",
+      },
+      { type: "h2", id: "what-you-get-without-an-account", text: "What you get without an account" },
+      {
+        type: "table",
+        head: ["Feature", "Without an account", "With a free account"],
+        rows: [
+          ["Static QR codes, all 17 types", "Unlimited", "Unlimited"],
+          ["PNG, JPEG, SVG and PDF up to 4096 px", "Yes", "Yes"],
+          ["Logo, colours, dot styles and frames", "Yes", "Yes"],
+          ["Watermark", "None", "None"],
+          ["Codes kept in a dashboard", "No, keep your files", "Your dynamic code"],
+          ["Edit the link after printing", "No", "One dynamic code"],
+          ["Scan analytics", "No", "For your dynamic code"],
+        ],
+      },
+      {
+        type: "p",
+        text: "Most people never need the right-hand column. If your content won't change, a static code made here is the simplest and most durable option.",
+      },
+      { type: "h2", id: "what-people-make", text: "What you can make in a minute, without signing up" },
+      {
+        type: "ul",
+        items: [
+          "**A link to your website or online menu**, for flyers, table tents and shop windows. Start with the [URL QR code generator](/qr-code-generator/url).",
+          "**A WiFi sign** so guests join without typing the password, using the [WiFi QR code generator](/qr-code-generator/wifi).",
+          "**A contact card** for business cards and name badges that saves your details in one scan, with the [vCard generator](/qr-code-generator/vcard).",
+          "**A WhatsApp chat link**, an email draft or a text message that opens ready to send.",
+          "**A one-off code** for a school project, a wedding table or a test print, where an account would be overkill.",
+        ],
+      },
+      { type: "h2", id: "is-it-safe", text: "Is a no-sign-up QR code safe to use?" },
+      {
+        type: "p",
+        text: "Yes. Check two things with any generator, including this one. First, scan the download and read the preview: it should show your own link or details, not an unfamiliar short link that redirects through someone else's server. Second, check whether the tool needs to send your content anywhere. Here it doesn't. The code is drawn in your browser, which matters for things like WiFi passwords and personal contact details.",
+      },
+      {
+        type: "p",
+        text: "For people scanning your code, a static code is also the safer kind: it opens your content directly, with no page in between where ads or tracking could appear. Our guide [are QR codes safe?](/guides/are-qr-codes-safe) covers how to spot a fake code.",
+      },
+      { type: "h2", id: "keep-your-files", text: "Without an account, keep your own copy" },
+      {
+        type: "p",
+        text: "Because nothing is saved to an account, the downloaded file is your record. A few habits help:",
+      },
+      {
+        type: "ul",
+        items: [
+          "Download an **SVG or PDF** as your master copy, since vector files scale to any print size.",
+          "Name the file after what the code does, such as \"wifi-guest-2026.svg\", and keep it with the design files it appears in.",
+          "Write down what each printed code contains and where it's used, so you know which ones to reprint if a link or password changes.",
+          "If you lose the file, you can make an identical code again by entering the same content and settings.",
+        ],
+      },
+      { type: "h2", id: "when-an-account-helps", text: "When an account is worth it" },
+      {
+        type: "p",
+        text: "Create a free account only if you need to change where a code points after printing, or want to see how often it's scanned. That needs a [dynamic QR code](/dynamic-qr-code-generator), and the free account includes one. Pro makes them unlimited and adds [bulk creation](/bulk-qr-code-generator). If you ever cancel, your dynamic codes keep redirecting to their last destination.",
+      },
+      {
+        type: "p",
+        text: "For everything else, stay here: make the code, download it [with no watermark](/qr-code-generator-no-watermark), and print it knowing it [will never expire](/qr-code-generator-no-expiration).",
+      },
+    ],
+    faq: [
+      {
+        q: "Can I make a QR code without signing up?",
+        a: "Yes. Choose a type, enter your content and download. There is no account, email or login step anywhere on this page.",
+      },
+      {
+        q: "Is it really free?",
+        a: "Yes. Static codes are free with no limit on how many you make, in every format and size, with no watermark and no trial.",
+      },
+      {
+        q: "Will my QR code stop working because I don't have an account?",
+        a: "No. A static code holds your content in the pattern itself and never contacts EndureQR when scanned, so it doesn't depend on any account.",
+      },
+      {
+        q: "Do you store what I type?",
+        a: "No. The code is generated in your browser, so your links, passwords and contact details are not sent to our servers.",
+      },
+      {
+        q: "Can I edit the QR code later without an account?",
+        a: "No. A static code is fixed once downloaded. To change it, make a new one. If you need to edit after printing, a free account includes one dynamic code.",
+      },
+      {
+        q: "Can I use the codes for my business?",
+        a: "Yes. You can use them commercially, on products, menus, packaging and ads, with no credit to EndureQR.",
+      },
+    ],
+    relatedTools: ["url", "wifi", "vcard", "text"],
+    relatedGuides: ["free-qr-code-generators-tested", "are-qr-codes-safe", "static-vs-dynamic-qr-codes"],
   },
 ];
 

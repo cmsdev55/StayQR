@@ -738,7 +738,7 @@ const GUIDES_CORE: Guide[] = [
       "Design a custom QR code with a logo that still scans: strong contrast, a light background, a logo under 25% of the width, clear frames and real phone tests.",
     category: "Design",
     published: "2026-10-26",
-    updated: "2026-11-02",
+    updated: "2026-11-23",
     readMinutes: 6,
     summary:
       "A branded QR code can look good and scan first time. The trick is knowing which design choices are safe and which ones quietly break the code.",
@@ -805,6 +805,24 @@ const GUIDES_CORE: Guide[] = [
       {
         type: "p",
         text: "Whatever style you choose, apply it evenly to every module. Mixing shapes inside one code makes the pattern harder to read.",
+      },
+      { type: "h2", id: "round-qr-codes", text: "Can a QR code be round or circular?" },
+      {
+        type: "p",
+        text: "The code itself is always a square grid: scanners find it by its three square corner markers. A \"round\" or circular QR code is a square code placed inside a circle, with a coloured ring or decoration filling the space around it. It scans as long as the real code keeps its four-module quiet zone and nothing decorative touches the corner markers.",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Rounded dots and corners** give a softer, circular look without changing the grid. Choose them in the [free QR code generator](/qr-code-generator).",
+          "**A circular frame** works best as a plain light disc behind the code, sized so the code's margin stays clear.",
+          "**Avoid fake modules near the code.** Random dots that look like modules can confuse scanners if they sit inside the quiet zone.",
+        ],
+      },
+      { type: "h2", id: "background-colour", text: "What background colour can a QR code have?" },
+      {
+        type: "p",
+        text: "A light one. The background can be a pale tint of your brand colour, such as light blue, cream or soft grey, as long as the modules are clearly darker. If your design is dark, don't print the code straight onto it: put the code on a white or very light panel at least as wide as the quiet zone. Transparent PNGs need the same care, because the code takes on whatever colour sits behind it.",
       },
       { type: "h2", id: "frames-and-calls-to-action", text: "Does a QR code need a call to action?" },
       {

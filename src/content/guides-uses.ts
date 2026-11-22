@@ -363,13 +363,13 @@ export const GUIDES_USES: Guide[] = [
   // ── 3. Google reviews ───────────────────────────────────────────────
   {
     slug: "qr-code-for-google-reviews",
-    title: "QR code for Google reviews: how to make one",
-    h1: "How to make a QR code for Google reviews",
+    title: "Google review link and QR code: how to make one",
+    h1: "How to get your Google review link and make a QR code",
     description:
-      "Make a QR code for Google reviews from your Business Profile review link. Where to place it, how to test it, and Google's rules on incentives and gating.",
+      "Find your Google review link in your Business Profile, then turn it into a QR code for reviews. Where to place it, how to test it, and Google's review rules.",
     category: "Use cases",
     published: "2026-10-26",
-    updated: "2026-11-02",
+    updated: "2026-11-23",
     readMinutes: 6,
     summary:
       "A review QR code takes customers straight to your Google review form. Here is how to get the link, where the code works best and which rules you must not break.",
@@ -814,7 +814,7 @@ export const GUIDES_USES: Guide[] = [
       },
       {
         type: "p",
-        text: "A dynamic code solves this. The printed code holds a short link, and you change where it points from your account. Before the event, it can open the booking page. On the day, the live agenda. Afterwards, the feedback form or session recordings. The same printed sign does all three jobs.",
+        text: "A dynamic code solves this. The printed code holds a short link, and you change where it points from your account. Before the event, it can open the booking page. On the day, the live agenda. Afterwards, the feedback form or session recordings. The same printed sign does all three jobs. For sign-ups and feedback, a free form works well: see [how to make a QR code for a Google Form](/guides/google-form-qr-code).",
       },
       {
         type: "p",
@@ -866,13 +866,13 @@ export const GUIDES_USES: Guide[] = [
   // ── 6. QR code for a PDF ────────────────────────────────────────────
   {
     slug: "qr-code-for-pdf",
-    title: "How to make a QR code for a PDF: free, step by step",
-    h1: "How to make a QR code for a PDF",
+    title: "PDF to QR code: how to make a QR code for a PDF, free",
+    h1: "PDF to QR code: how to make a QR code for a PDF",
     description:
-      "To make a QR code for a PDF, put the file online, copy a link anyone can open and turn it into a QR code. Free steps for Google Drive or your own site.",
+      "To turn a PDF into a QR code, put the file online, copy a link anyone can open (PDF to link) and make it a QR code. Free steps for Google Drive or your site.",
     category: "Use cases",
     published: "2026-11-20",
-    updated: "2026-11-20",
+    updated: "2026-11-23",
     readMinutes: 5,
     summary:
       "A QR code can't hold a PDF itself. It holds a link to the PDF, so the real work is putting the file somewhere that stays online and opens well on a phone.",
@@ -881,7 +881,7 @@ export const GUIDES_USES: Guide[] = [
         type: "p",
         text: "To make a QR code for a PDF, upload the PDF somewhere anyone can open it, copy the file's link, and paste that link into a [URL QR code generator](/qr-code-generator/url). A QR code holds just under 3 KB of data at most, so the file never goes inside the code: the code opens a link, and the link opens the PDF. That makes where you host the file the most important decision.",
       },
-      { type: "h2", id: "put-the-pdf-online", text: "Step 1: Put the PDF online" },
+      { type: "h2", id: "put-the-pdf-online", text: "Step 1: Turn the PDF into a link" },
       {
         type: "table",
         head: ["Where", "Good for", "Watch out for"],
@@ -1049,7 +1049,7 @@ export const GUIDES_USES: Guide[] = [
           "**Restaurants:** \u201cScan for the menu\u201d or \u201cScan to order\u201d. See [QR code menus](/guides/qr-code-for-restaurant-menu).",
           "**Cafés and rentals:** \u201cScan to join our Wi-Fi\u201d. See the [Wi-Fi QR code guide](/guides/wifi-qr-code).",
           "**Shops and services:** \u201cScan to leave a review\u201d. See [QR codes for Google reviews](/guides/qr-code-for-google-reviews).",
-          "**Events:** \u201cScan for tickets\u201d or \u201cScan to RSVP\u201d.",
+          "**Events:** \u201cScan for tickets\u201d or \u201cScan to RSVP\u201d. See [wedding QR codes](/guides/wedding-qr-codes) for RSVP and photo-sharing ideas.",
           "**Business cards:** \u201cScan to save my number\u201d. See [QR codes on business cards](/guides/qr-code-business-card).",
         ],
       },
@@ -1096,5 +1096,189 @@ export const GUIDES_USES: Guide[] = [
       },
     ],
     relatedTools: ["url", "wifi", "text"],
+  },
+  // ── 8. Google Form ──────────────────────────────────────────────────
+  {
+    slug: "google-form-qr-code",
+    title: "How to make a QR code for a Google Form (free)",
+    h1: "How to make a QR code for a Google Form",
+    description:
+      "Make a Google Form QR code in a minute: copy the short link from Send, paste it into a free QR generator and test it, plus the settings that block people.",
+    category: "Use cases",
+    published: "2026-11-23",
+    updated: "2026-11-23",
+    readMinutes: 5,
+    summary:
+      "A QR code is the quickest way to get people from a poster, a slide or a classroom wall into your form. Here's how to make one, and the form settings to check so nobody hits a sign-in wall.",
+    body: [
+      {
+        type: "p",
+        text: "To make a QR code for a Google Form, open the form, click **Send**, choose the link tab, tick **Shorten URL** and copy the forms.gle link. Paste it into a free [URL QR code generator](/qr-code-generator/url), download the code and scan it with your phone before you print. The whole thing takes about a minute, and a static code made this way never expires.",
+      },
+      { type: "h2", id: "copy-the-form-link", text: "Step 1: Copy your form's link" },
+      {
+        type: "ol",
+        items: [
+          "Open the form in Google Forms and click **Send** in the top-right corner.",
+          "Choose the **link** tab (the chain icon) next to the email option.",
+          "Tick **Shorten URL**. The link changes to a short forms.gle address, which makes a simpler, easier-to-scan QR code.",
+          "Click **Copy**.",
+        ],
+      },
+      {
+        type: "tip",
+        text: "Copy the link from Send, not from your browser's address bar. The address bar shows the editing link, which only works for people you've shared the form with as editors.",
+      },
+      { type: "h2", id: "check-settings", text: "Step 2: Check the settings that block people" },
+      {
+        type: "p",
+        text: "Most \"the QR code doesn't work\" complaints about forms are really settings problems. Open the form's **Settings** and **Responses** tabs and check these before you print:",
+      },
+      {
+        type: "ul",
+        items: [
+          "**Limit to 1 response** makes everyone sign in to a Google account. Turn it off if people without one need to answer.",
+          "**Restrict to users in your organisation** (work and school accounts) blocks everyone outside it.",
+          "**Collect email addresses** set to verified also asks people to sign in.",
+          "**Accepting responses** must be switched on in the Responses tab, or scanners see a \"no longer accepting responses\" page.",
+        ],
+      },
+      { type: "h2", id: "make-the-code", text: "Step 3: Turn the link into a QR code" },
+      {
+        type: "ol",
+        items: [
+          "Open the free [QR code generator](/qr-code-generator/url) and paste the forms.gle link.",
+          "Add your logo or colours if you like, and a frame with text such as \"Scan to sign up\". See [how to add text to a QR code](/guides/add-text-to-qr-code).",
+          "Download SVG or PDF for print, or PNG for slides and screens. There's no sign-up and no watermark.",
+          "Scan the code with your phone, in a private browser window if you can, to see exactly what respondents will see.",
+        ],
+      },
+      { type: "h2", id: "prefilled-links", text: "Pre-fill answers for each poster or table" },
+      {
+        type: "p",
+        text: "Google Forms can build a link with some answers already filled in. Open the form, click the three-dot menu, choose **Get pre-filled link**, answer the questions you want to preset (a room number, a class or an event name) and click **Get link**. Make a separate QR code from each pre-filled link, so you know which poster or table every response came from, without asking people to type it.",
+      },
+      { type: "h2", id: "static-or-dynamic", text: "Static or dynamic code for a Google Form?" },
+      {
+        type: "p",
+        text: "A static code is fine for one form that stays open. The forms.gle link keeps working as long as the form exists, and a static code never expires. Use a [dynamic QR code](/dynamic-qr-code-generator) if you'll replace the form later, such as a new sign-up sheet each term, or if you want to count scans per poster. You can then point the printed code at the new form instead of reprinting.",
+      },
+      { type: "h2", id: "ideas", text: "Ways people use Google Form QR codes" },
+      {
+        type: "ul",
+        items: [
+          "**Event registration and check-in** at the door or on the invitation.",
+          "**Feedback forms** on tables, receipts and the last slide of a talk.",
+          "**Classroom quizzes, exit tickets and sign-up sheets** on the board or a worksheet.",
+          "**Volunteer and waitlist sign-ups** on posters and flyers.",
+          "**RSVPs** for parties and weddings. See our guide to [QR codes for weddings](/guides/wedding-qr-codes).",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Does Google Forms have a QR code option?",
+        a: "Not inside Forms itself. Copy the form's link from Send and paste it into a QR code generator. In Chrome you can also open the form and use Share, then Create QR code, but that code has no logo or vector download.",
+      },
+      {
+        q: "Why does my Google Form QR code ask people to sign in?",
+        a: "The form is set to limit people to one response, restricted to your organisation, or set to collect verified email addresses. Each of those needs a Google sign-in. Change the setting and the same QR code will work without one.",
+      },
+      {
+        q: "Will my Google Form QR code expire?",
+        a: "A static code never expires. It keeps working while the form exists and is accepting responses. If you delete the form or stop accepting responses, scanners see an error or a closed message.",
+      },
+      {
+        q: "Can I change the form after printing the QR code?",
+        a: "Yes, edit the same form freely and the code still opens it. To switch to a completely different form, use a dynamic QR code, which you can point at the new link.",
+      },
+    ],
+    relatedTools: ["url", "text", "event"],
+  },
+  // ── 9. Weddings ─────────────────────────────────────────────────────
+  {
+    slug: "wedding-qr-codes",
+    title: "Wedding QR codes: RSVP, photos and schedule, free",
+    h1: "Wedding QR codes for RSVPs, photos and the big day",
+    description:
+      "Use QR codes on wedding invitations and signs: RSVP, a shared photo album, the schedule, WiFi and the registry. Free to make, with printing tips.",
+    category: "Use cases",
+    published: "2026-11-23",
+    updated: "2026-11-23",
+    readMinutes: 6,
+    summary:
+      "A small QR code on the invitation can handle RSVPs, and one on the tables can collect every guest's photos. Here's what to link, how to set each one up for free, and how to print them so they scan.",
+    body: [
+      {
+        type: "p",
+        text: "Wedding QR codes link guests to something online: an RSVP form, a shared photo album, the day's schedule, the venue WiFi or your registry. Make each one by copying the link (or WiFi details) into a free [QR code generator](/qr-code-generator), then print it on the invitation, table cards or a welcome sign. Keep each code at least 2 cm wide, test it on a few phones, and add a line of text so guests know what it does.",
+      },
+      { type: "h2", id: "rsvp-qr-code", text: "How to make an RSVP QR code" },
+      {
+        type: "ol",
+        items: [
+          "Create your RSVP form. A free [Google Form](/guides/google-form-qr-code) works well; many wedding website builders also have an RSVP page.",
+          "Copy the form's share link, not the editing link.",
+          "Paste it into the [URL QR code generator](/qr-code-generator/url) and add a frame with text such as \"Scan to RSVP\".",
+          "Print it on the invitation or the RSVP card, with the RSVP date and the web address underneath for guests who prefer to type.",
+        ],
+      },
+      {
+        type: "tip",
+        text: "Check the form doesn't require a Google sign-in. Many guests, especially older relatives, won't have or want to use an account. In Google Forms, turn off \"Limit to 1 response\".",
+      },
+      { type: "h2", id: "photo-sharing", text: "A QR code for sharing wedding photos" },
+      {
+        type: "p",
+        text: "Put a QR code on each table that opens a shared album, and guests can add their photos from the day in one place. Create an album in Google Photos or iCloud Photos, turn on sharing and copy its link, then turn that link into a QR code. Viewing a shared album usually works in any browser; adding photos often needs the matching account, so say on the card how guests can send photos if they can't upload.",
+      },
+      { type: "h2", id: "other-ideas", text: "More ways to use QR codes at a wedding" },
+      {
+        type: "ul",
+        items: [
+          "**Wedding website or schedule:** directions, timings, dress code and accommodation on the invitation.",
+          "**Venue WiFi:** a [WiFi QR code](/qr-code-generator/wifi) on a table sign lets guests join without typing a password.",
+          "**Registry or gift list:** a code on the information card instead of a long web address.",
+          "**Map to the venue:** a [location QR code](/qr-code-generator/location) that opens directions.",
+          "**Song requests:** a code that opens a shared playlist or a short request form.",
+          "**Order of service or menu:** a code for the full text, which saves printing long pages.",
+        ],
+      },
+      { type: "h2", id: "one-code-two-jobs", text: "One printed code, two jobs" },
+      {
+        type: "p",
+        text: "A [dynamic QR code](/dynamic-qr-code-generator) can be changed after printing. Print one code on the invitation that opens the RSVP form until the deadline, then switch it to the photo album after the wedding, so guests who keep the invitation can still find the pictures. EndureQR's dynamic codes keep redirecting even if you cancel the plan later, which matters for something people keep for years.",
+      },
+      { type: "h2", id: "printing", text: "Printing wedding QR codes so they scan" },
+      {
+        type: "ul",
+        items: [
+          "**Size:** at least 2 cm (0.8 in) wide on invitations, and about 5 cm on table cards read from a chair. Our [QR code size guide](/guides/qr-code-size-for-printing) has the details.",
+          "**Contrast:** dark ink on a light card. Gold foil, pale blush or white-on-kraft codes often fail; test a proof first.",
+          "**Finish:** avoid glossy foil over the code, which reflects phone lights.",
+          "**Margin:** keep a clear border around the code, free of flourishes and lettering.",
+          "**Test:** scan the printed proof with an iPhone and an Android phone before ordering the full run.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "How do I make a QR code for wedding RSVPs?",
+        a: "Create an RSVP form (a free Google Form works), copy its share link, paste it into a free QR code generator and print the code on the invitation with the RSVP date. Test it on a phone first.",
+      },
+      {
+        q: "Can guests upload wedding photos with a QR code?",
+        a: "Yes. Make a shared album in Google Photos or iCloud, copy its link and turn it into a QR code for the tables. Adding photos may need the matching account, so offer another way to send them too.",
+      },
+      {
+        q: "How big should a QR code be on a wedding invitation?",
+        a: "At least 2 cm (0.8 in) wide, with a clear margin around it, in dark ink on a light background. Print a proof and scan it before ordering.",
+      },
+      {
+        q: "Will a wedding QR code still work years later?",
+        a: "A static code never expires, as long as the page it opens stays online. Dynamic codes depend on the service; EndureQR's keep redirecting even if you cancel.",
+      },
+    ],
+    relatedTools: ["url", "wifi", "location"],
   },
 ];

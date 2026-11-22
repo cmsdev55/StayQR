@@ -5,7 +5,7 @@ import { Pricing } from "@/components/sections/pricing";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { FAQ } from "@/content/faq";
 import { LIFETIME, MATRIX, PRO } from "@/content/plans";
-import { APP_ID, JsonLd, breadcrumbLd, pageGraph, softwareAppLd, webPageLd } from "@/components/content/json-ld";
+import { APP_ID, JsonLd, breadcrumbLd, pageGraph, webPageLd } from "@/components/content/json-ld";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -26,7 +26,7 @@ const BILLING_FAQ = [
 export default function PricingPage() {
   return (
     <main>
-      <JsonLd data={pageGraph(softwareAppLd(), webPageLd({ path: "/pricing", name: "EndureQR pricing", description: String(metadata.description), about: APP_ID }))} />
+      <JsonLd data={pageGraph(webPageLd({ path: "/pricing", name: "EndureQR pricing", description: String(metadata.description), about: APP_ID }))} />
       <JsonLd data={breadcrumbLd([{ name: "Home", path: "/" }, { name: "Pricing", path: "/pricing" }])} />
       <Pricing page />
 

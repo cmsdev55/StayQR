@@ -139,7 +139,8 @@ export default async function QrTypePageRoute({ params }: Props) {
           <p className="mt-4 text-body-sm text-fg-muted">
             Will your free code keep working?{" "}
             <Link href="/guides/free-qr-code-generators-tested" className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">We tested 20 free QR code generators</Link>
-            {" "}to find out which ones stop.
+            {" "}to find out which ones stop. Already have a code?{" "}
+            <Link href="/qr-code-scanner" className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">Check it with our free scanner</Link>.
           </p>
         </div>
       </section>

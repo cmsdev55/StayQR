@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { APP_ID, JsonLd, breadcrumbLd, pageGraph, softwareAppLd, webPageLd } from "@/components/content/json-ld";
+import { APP_ID, JsonLd, breadcrumbLd, pageGraph, webPageLd } from "@/components/content/json-ld";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { IndustryIcon } from "@/components/industry-icon";
@@ -56,7 +56,7 @@ export default async function IndustryPage({ params }: Props) {
   return (
     <main>
       <JsonLd data={breadcrumbLd([{ name: "Home", path: "/" }, { name: ind.name, path: `/industries/${ind.slug}` }])} />
-      <JsonLd data={pageGraph(softwareAppLd(), webPageLd({ path: `/industries/${ind.slug}`, name: `QR codes for ${ind.name.toLowerCase()}`, description: String(meta.description), about: APP_ID }))} />
+      <JsonLd data={pageGraph(webPageLd({ path: `/industries/${ind.slug}`, name: `QR codes for ${ind.name.toLowerCase()}`, description: String(meta.description), about: APP_ID }))} />
       {/* Hero */}
       <section aria-labelledby="ind-title" className="noise bg-grid relative isolate overflow-hidden pb-24 pt-32 sm:pt-40 lg:pb-32">
         <div className="mx-auto grid max-w-container items-center gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">

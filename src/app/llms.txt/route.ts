@@ -23,6 +23,8 @@ Pricing: free static codes and one free dynamic code; Pro $${PRO.monthly}/month 
 ## Free QR code generators
 
 - [QR code generator](${SITE_URL}/qr-code-generator): every type, logo, frames, PNG/SVG/JPEG/PDF downloads
+- [QR code scanner](${SITE_URL}/qr-code-scanner): read a QR code from an image or screenshot in the browser (nothing uploaded) and see whether it is a direct code or a QR service's short link
+- [Sample QR codes](${SITE_URL}/sample-qr-codes): free static test codes for every type (link, WiFi, vCard, email, phone, SMS, location, event, text) with placeholder data
 ${QR_TYPE_PAGES.map((p) => `- [${p.h1}](${SITE_URL}/qr-code-generator/${p.slug}): ${p.description}`).join("\n")}
 
 ## Dynamic codes and features

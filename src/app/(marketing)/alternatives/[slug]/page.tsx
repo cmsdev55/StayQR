@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { APP_ID, JsonLd, breadcrumbLd, pageGraph, softwareAppLd, webPageLd } from "@/components/content/json-ld";
+import { APP_ID, JsonLd, breadcrumbLd, pageGraph, webPageLd } from "@/components/content/json-ld";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Logo } from "@/components/logo";
@@ -62,7 +62,7 @@ export default async function AlternativePage({ params }: Props) {
   return (
     <main>
       <JsonLd data={breadcrumbLd([{ name: "Home", path: "/" }, { name: `${c.name} alternative`, path: `/alternatives/${c.slug}` }])} />
-      <JsonLd data={pageGraph(softwareAppLd(), webPageLd({ path: `/alternatives/${c.slug}`, name: `${c.name} alternative`, description: String(meta.description), about: APP_ID }))} />
+      <JsonLd data={pageGraph(webPageLd({ path: `/alternatives/${c.slug}`, name: `${c.name} alternative`, description: String(meta.description), about: APP_ID }))} />
       <section aria-labelledby="alt-title" className="noise bg-grid relative isolate overflow-hidden pb-24 pt-32 sm:pt-40 lg:pb-32">
         <div className="mx-auto max-w-container px-4 sm:px-6">
           <p className="fade-up eyebrow" style={{ ["--d" as string]: "0ms" }}>{c.name} alternative</p>

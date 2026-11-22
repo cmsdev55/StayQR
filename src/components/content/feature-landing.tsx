@@ -5,7 +5,7 @@ import { Block } from "@/components/content/blocks";
 import { Breadcrumbs } from "@/components/content/breadcrumbs";
 import { DynamicTry } from "@/components/content/dynamic-try";
 import { GuideCards } from "@/components/content/guide-cards";
-import { APP_ID, JsonLd, breadcrumbLd, pageGraph, softwareAppLd, toolLd, webPageLd } from "@/components/content/json-ld";
+import { APP_ID, JsonLd, breadcrumbLd, pageGraph, toolLd, webPageLd } from "@/components/content/json-ld";
 import { RelatedTypes } from "@/components/content/type-grid";
 import { CtaBand } from "@/components/sections/cta-band";
 import { Faq } from "@/components/sections/faq";
@@ -45,7 +45,7 @@ export function FeatureLanding({ slug }: { slug: FeatureSlug }) {
         data={
           p.tool
             ? pageGraph(...toolLd({ path: `/${p.slug}`, name: p.title, description: p.description }))
-            : pageGraph(softwareAppLd(), webPageLd({ path: `/${p.slug}`, name: p.title, description: p.description, about: APP_ID }))
+            : pageGraph(webPageLd({ path: `/${p.slug}`, name: p.title, description: p.description, about: APP_ID }))
         }
       />
 

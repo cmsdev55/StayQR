@@ -944,6 +944,10 @@ export const FEATURE_PAGES: FeaturePage[] = [
         a: "No. They are static codes with your content stored in the pattern, so there is no trial, subscription or server that can switch them off.",
       },
       {
+        q: "Is there a free QR code generator that doesn't expire?",
+        a: "Yes: this one. Codes made here are static and free, with no sign-up and no trial, so they never expire. Generators that make dynamic codes by default can switch them off when a trial or plan ends, so check before you print.",
+      },
+      {
         q: "Is there a scan limit?",
         a: "No. Nothing counts the scans of a static code, so it works no matter how many times it's scanned.",
       },

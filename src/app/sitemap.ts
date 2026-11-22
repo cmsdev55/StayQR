@@ -10,7 +10,7 @@ import { SITE_URL } from "@/lib/site";
 const BASE = SITE_URL;
 
 /** When the marketing pages' copy last changed. Bump it with the content, not on every deploy (guides carry their own date). */
-const PAGES_UPDATED = "2026-11-21";
+const PAGES_UPDATED = "2026-11-23";
 /** Terms and Privacy follow their effective date. */
 const LEGAL_UPDATED = "2026-11-19";
 
@@ -20,6 +20,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page(""),
     page("/pricing"),
     page("/qr-code-generator"),
+    page("/qr-code-scanner"),
+    page("/sample-qr-codes"),
     ...FEATURE_PAGES.map((p) => page(`/${p.slug}`)),
     ...QR_TYPES.map((t) => page(`/qr-code-generator/${t.slug}`)),
     page("/guides", GUIDES.reduce((a, g) => (g.updated > a ? g.updated : a), "")),

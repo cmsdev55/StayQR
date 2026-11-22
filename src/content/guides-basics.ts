@@ -246,6 +246,7 @@ export const GUIDES_BASICS: Guide[] = [
           "**On Android:** open the image in Google Photos and tap **Lens**. Or open Google Lens and choose the image from your gallery.",
           "**With Circle to Search:** where available, circle the code wherever it appears on screen.",
           "**With a second device:** show the image full screen on one device and scan it with another phone.",
+          "**On a computer:** drop or paste the screenshot into our free [QR code scanner](/qr-code-scanner). It reads the code in your browser without uploading the image.",
         ],
       },
       { type: "h2", id: "scan-on-a-laptop", text: "Can you scan a QR code on a laptop or desktop?" },

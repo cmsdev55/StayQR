@@ -85,24 +85,10 @@ export function webPageLd(o: { path: string; name: string; description?: string;
 
 /** A free browser tool page (generator hub, type pages, QR code with logo): the tool plus the page it lives on. */
 export function toolLd(o: { path: string; name: string; description: string }) {
-  const url = `${SITE}${o.path}`;
-  return [
-    {
-      "@type": "WebApplication",
-      "@id": `${url}#app`,
-      name: o.name,
-      url,
-      description: o.description,
-      applicationCategory: "UtilitiesApplication",
-      operatingSystem: "Any (runs in the browser)",
-      browserRequirements: "Requires JavaScript",
-      isAccessibleForFree: true,
-      inLanguage: "en",
-      publisher: { "@id": ORG_ID },
-      offers: { "@type": "Offer", price: "0", priceCurrency: "USD", availability: "https://schema.org/InStock", url },
-    },
-    webPageLd({ path: o.path, name: o.name, description: o.description, mainEntity: `${url}#app` }),
-  ];
+  // The product itself is described once (SoftwareApplication on the homepage, APP_ID). Repeating a
+  // SoftwareApplication/WebApplication node on every tool page without ratings is flagged as an invalid
+  // rich-result item by audit tools, so tool pages reference the app instead.
+  return [webPageLd({ path: o.path, name: o.name, description: o.description, about: APP_ID })];
 }
 
 /** The product, with per-plan prices (subscriptions carry a billing period). */

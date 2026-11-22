@@ -55,7 +55,7 @@ export default function GeneratorHubPage() {
             immediate
             className="mt-6"
             title="Free QR code generator: *no sign-up, no expiry.*"
-            intro={`EndureQR's free QR code generator makes static QR codes in ${QR_TYPES.length} types, including website links, WiFi, contact cards (vCard), WhatsApp, email, SMS, calendar events and social profiles. Add a logo, colours and a frame, then download PNG, SVG, JPEG or PDF up to 4096 px. There is no sign-up, watermark or scan limit, the code is built in your browser, and static codes never expire.`}
+            intro={`EndureQR's free QR code generator makes static QR codes in ${QR_TYPES.length} types, including website links, WiFi, contact cards (vCard), WhatsApp, email, SMS, calendar events and social profiles. Add a logo, colours and a frame, then download PNG, SVG, JPEG or PDF up to 4096 px. There is no sign-up, watermark or scan limit, the code is built in your browser, and static codes never expire. It's the quickest way to create a free QR code online, on a phone or a computer.`}
           />
           <h2 className="sr-only">Create your QR code</h2>
           <div className="mt-12">

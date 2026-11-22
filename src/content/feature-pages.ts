@@ -832,13 +832,13 @@ export const FEATURE_PAGES: FeaturePage[] = [
   // ── 6. QR code generator with no expiration ─────────────────────────
   {
     slug: "qr-code-generator-no-expiration",
-    title: "QR Code Generator With No Expiration: Free Permanent Codes",
+    title: "Free QR Code Generator: No Expiration, No Redirect",
     description:
-      "Create free QR codes that never expire. Your content is stored in the pattern itself, so there's no trial, no scan limit and nothing to switch off.",
+      "Create free QR codes that never expire and have no redirect. Your link is stored in the pattern itself: no trial, no scan limit, nothing to switch off.",
     eyebrow: "Permanent QR codes",
     h1: "Free QR codes that *never expire*",
     intro:
-      "Codes from this generator are static: your link, WiFi password or contact details are stored in the pattern itself. There is no trial, no subscription and no server that can switch them off, and nothing counts the scans. Phones read them without ever contacting EndureQR. Make one below without signing up.",
+      "Codes from this generator are static: your link, WiFi password or contact details are stored in the pattern itself. There is no redirect, no trial, no subscription and no server that can switch them off, and nothing counts the scans. Phones read them without ever contacting EndureQR. Make one below without signing up.",
     tool: true,
     cta: { label: "Make a permanent QR code", href: "#generator" },
     benefits: [

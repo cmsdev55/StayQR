@@ -31,6 +31,8 @@ export type Guide = {
   faq: { q: string; a: string }[];
   /** 2–3 slugs of free tools from the list above, e.g. ["wifi"] */
   relatedTools: string[];
+  /** Original research only: the published data file, rendered as schema.org Dataset next to the Article. */
+  dataset?: { name: string; description: string; csv: string; keywords: string[]; license: string };
 };
 
 const GUIDES_CORE: Guide[] = [

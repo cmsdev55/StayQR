@@ -178,13 +178,13 @@ export const GUIDES_BASICS: Guide[] = [
   // ── 2. How to scan a QR code ────────────────────────────────────────
   {
     slug: "how-to-scan-a-qr-code",
-    title: "How to scan a QR code on iPhone, Android or laptop",
+    title: "How to scan a QR code on your phone or screen",
     h1: "How to scan a QR code on any phone, tablet or computer",
     description:
-      "To scan a QR code, open your phone's camera, point it at the code and tap the link that appears. Steps for iPhone, Android, screenshots and laptops.",
+      "To scan a QR code, open your phone's camera, point it at the code and tap the link that appears. Steps for iPhone, Android, codes on a screen and laptops.",
     category: "Basics",
     published: "2026-10-26",
-    updated: "2026-11-02",
+    updated: "2026-11-23",
     readMinutes: 6,
     summary:
       "Most phones can scan a QR code with the built-in camera. Here is how to do it on iPhone and Android, how to read a code that is already on your screen, and what to do on a laptop.",

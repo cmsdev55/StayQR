@@ -15,7 +15,7 @@ export const GUIDES_RESEARCH: Guide[] = [
       "We made a QR code on 20 popular free generators with no account and decoded each one. Only 6 gave a direct code; 2 others stop after 7 days or 100 scans.",
     category: "Research",
     published: "2026-11-21",
-    updated: "2026-11-21",
+    updated: "2026-11-23",
     readMinutes: 9,
     summary:
       "“Free QR code” can mean a code that works forever, a code that stops after a week, or a sign-up form. We tested 20 popular generators to see which is which, and read what each company says happens when a trial or plan ends.",
@@ -23,6 +23,17 @@ export const GUIDES_RESEARCH: Guide[] = [
       {
         type: "p",
         text: "On 21 November 2026 we made a QR code for a website link on 20 popular free QR code generators, without creating an account, and decoded every code to see what it really contains. **Only 6 gave a free code that points straight to the link**, so it keeps working whatever happens to the company. **3 gave a code that runs through the company's own short link**, and 2 of those come with a limit: 7 days, or 100 scans. **The other 11 asked for an account or an email address before the download.**",
+      },
+      {
+        type: "table",
+        head: ["At a glance (21 November 2026)", "Result"],
+        rows: [
+          ["Free generators tested", "20"],
+          ["Gave a direct code with no account", "6 of 20"],
+          ["Gave a code through their own short link", "3 of 20 (limits: 7 days, 100 scans, ads after 10 scans)"],
+          ["Needed an account or email first", "11 of 20"],
+          ["Dynamic-code services that say some codes stop, pause or change when a trial or plan ends", "10 of 17"],
+        ],
       },
       { type: "h2", id: "key-findings", text: "Key findings" },
       {
@@ -156,7 +167,7 @@ export const GUIDES_RESEARCH: Guide[] = [
       },
       {
         type: "tip",
-        text: "You're welcome to quote these results or use the tables. Please link to this page as the source.",
+        text: "You're welcome to quote these results or reuse the data under CC BY 4.0: [download the full results as a CSV file](/research/free-qr-code-generators-2026-11-21.csv). Please link to this page as the source.",
       },
     ],
     faq: [
@@ -178,5 +189,13 @@ export const GUIDES_RESEARCH: Guide[] = [
       },
     ],
     relatedTools: ["url", "wifi", "vcard"],
+    dataset: {
+      name: "Free QR code generators tested: what the free code contains (November 2026)",
+      description:
+        "For 20 popular free QR code generators: whether a code could be downloaded without an account, whether the code held the destination URL directly or the vendor's own short link (decoded with jsQR), and what each vendor's own pages say happens to dynamic codes when a trial or plan ends, with sources. Tested 21 November 2026.",
+      csv: "/research/free-qr-code-generators-2026-11-21.csv",
+      keywords: ["QR code", "QR code generator", "dynamic QR code", "static QR code", "QR code expiry", "free trial"],
+      license: "https://creativecommons.org/licenses/by/4.0/",
+    },
   },
 ];

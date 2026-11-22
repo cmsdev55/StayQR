@@ -72,7 +72,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
   // ── text ─────────────────────────────────────────────────────────────
   {
     slug: "text",
-    title: "Text QR Code Generator: Free Plain-Text QR Codes",
+    title: "Text to QR Code Generator: Free Plain-Text QR Codes",
     description:
       "Put a short message inside a QR code. It shows on screen when scanned and works with no internet. Free, no sign-up, no watermark, up to 300 characters.",
     h1: "Text QR code generator",
@@ -459,7 +459,7 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
   // ── facebook ─────────────────────────────────────────────────────────
   {
     slug: "facebook",
-    title: "Facebook QR Code Generator: Free Page and Profile QR",
+    title: "Facebook QR Code Generator (FB Page, Profile, Group)",
     description:
       "Create a Facebook QR code that opens your page, profile, group or event in one scan. Free, no sign-up and no watermark. Download PNG, SVG, JPEG or PDF.",
     h1: "Facebook QR code generator",

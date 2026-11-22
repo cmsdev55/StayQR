@@ -78,6 +78,27 @@ export default async function GuidePage({ params }: Props) {
           publisher: { "@id": ORG_ID },
         })}
       />
+      {g.dataset && (
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "Dataset",
+            "@id": `${SITE}/guides/${g.slug}#dataset`,
+            name: g.dataset.name,
+            description: g.dataset.description,
+            url: `${SITE}/guides/${g.slug}`,
+            keywords: g.dataset.keywords,
+            license: g.dataset.license,
+            isAccessibleForFree: true,
+            datePublished: g.published,
+            dateModified: g.updated,
+            temporalCoverage: g.published,
+            creator: { "@type": "Organization", "@id": ORG_ID, name: "EndureQR", url: SITE },
+            isBasedOn: `${SITE}/guides/${g.slug}#article`,
+            distribution: [{ "@type": "DataDownload", encodingFormat: "text/csv", contentUrl: `${SITE}${g.dataset.csv}` }],
+          }}
+        />
+      )}
 
       <article aria-labelledby="guide-title" className="pb-16 pt-28 sm:pt-36">
         <header className="mx-auto max-w-container px-4 sm:px-6">

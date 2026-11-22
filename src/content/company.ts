@@ -45,6 +45,18 @@ export const SOCIAL: { name: string; handle?: string; url: string }[] = [
   { name: "YouTube", handle: "@endureqr", url: "https://www.youtube.com/@endureqr" },
 ];
 
+/**
+ * Third-party listings of EndureQR (directories, review sites, company databases). Not shown in the footer; listed only as
+ * `sameAs` on the Organization so search engines and AI assistants connect these profiles to this site. Live, public pages only.
+ */
+export const PROFILES: { name: string; url: string }[] = [
+  { name: "Crunchbase", url: "https://www.crunchbase.com/organization/endureqr" },
+  { name: "G2", url: "https://www.g2.com/products/endureqr" },
+  { name: "Wellfound", url: "https://wellfound.com/company/endureqr" },
+  { name: "Fazier", url: "https://fazier.com/launches/endureqr" },
+  { name: "SaaSHub", url: "https://www.saashub.com/endureqr" },
+];
+
 /** Sub-processors named in the Privacy Policy. */
 export const PROVIDERS = [
   { name: "Vercel", role: "website hosting and delivery" },

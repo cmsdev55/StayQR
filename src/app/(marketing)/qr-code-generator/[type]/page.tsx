@@ -12,7 +12,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { GUIDES } from "@/content/guides";
 import { QR_TYPE_PAGES, qrTypePage } from "@/content/qr-type-pages";
 import { qrMatrix } from "@/lib/qr";
-import { qrType } from "@/lib/qr-types";
+import { QR_TYPES, qrType } from "@/lib/qr-types";
 import { SITE_URL } from "@/lib/site";
 
 type Props = { params: Promise<{ type: string }> };
@@ -125,6 +125,21 @@ export default async function QrTypePageRoute({ params }: Props) {
                 ))}
               </>
             )}
+          </p>
+          {/* every other type, so each generator page is reachable from all the others */}
+          <p className="mt-4 text-body-sm text-fg-muted">
+            {"All free generators: "}
+            {QR_TYPES.filter((t) => t.slug !== page.slug).map((t, i, all) => (
+              <span key={t.slug}>
+                <Link href={`/qr-code-generator/${t.slug}`} className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">{t.name}</Link>
+                {i < all.length - 1 ? " · " : ""}
+              </span>
+            ))}
+          </p>
+          <p className="mt-4 text-body-sm text-fg-muted">
+            Will your free code keep working?{" "}
+            <Link href="/guides/free-qr-code-generators-tested" className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">We tested 20 free QR code generators</Link>
+            {" "}to find out which ones stop.
           </p>
         </div>
       </section>

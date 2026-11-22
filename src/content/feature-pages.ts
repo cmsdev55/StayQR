@@ -882,7 +882,7 @@ export const FEATURE_PAGES: FeaturePage[] = [
       },
       {
         type: "p",
-        text: "A static code avoids all four, because it never depends on a service. Our guide [Do QR codes expire?](/guides/do-qr-codes-expire) goes through each case and how to check a code you already have.",
+        text: "A static code avoids all four, because it never depends on a service. When [we tested 20 free QR code generators](/guides/free-qr-code-generators-tested), only 6 gave a direct code without an account; two gave codes that stop after 7 days or 100 scans. Our guide [Do QR codes expire?](/guides/do-qr-codes-expire) goes through each case and how to check a code you already have.",
       },
       { type: "h2", id: "how-to-make-a-permanent-code", text: "How to make sure a QR code never expires" },
       {

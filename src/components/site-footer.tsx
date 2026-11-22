@@ -28,6 +28,8 @@ const COLUMNS = [
       { href: "/qr-code-generator-no-watermark", label: "No-watermark QR codes" },
       { href: "/qr-code-generator-no-expiration", label: "QR codes that never expire" },
       ...QR_TYPES.filter((t) => ["url", "wifi", "vcard", "whatsapp", "instagram"].includes(t.slug)).map((t) => ({ href: `/qr-code-generator/${t.slug}`, label: `${t.name} QR code` })),
+      { href: "/qr-code-scanner", label: "QR code scanner" },
+      { href: "/sample-qr-codes", label: "Sample QR codes" },
     ],
   },
   {

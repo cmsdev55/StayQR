@@ -123,6 +123,8 @@ export default async function QrTypePageRoute({ params }: Props) {
             <Link href="/qr-code-with-logo" className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">Add your logo</Link>
             {" · "}
             <Link href="/dynamic-qr-code-generator" className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">Make it editable after printing</Link>
+            {" · "}
+            <Link href="/qr-code-templates" className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">Printable sign templates</Link>
             {guides.length > 0 && (
               <>
                 {" · Guides: "}

@@ -526,7 +526,7 @@ const GUIDES_CORE: Guide[] = [
       { type: "h2", id: "table-tent-tips", text: "How big should a menu QR code be, and where should it go?" },
       {
         type: "p",
-        text: "Print it at least 5 cm wide on a table tent facing the guest's seat, with a short label that says what it does.",
+        text: "Print it at least 5 cm wide on a table tent facing the guest's seat, with a short label that says what it does. Our free [printable table tent template](/qr-code-templates) folds from one sheet and shows the code on both sides.",
       },
       { type: "h3", text: "What to print on the table tent" },
       {
@@ -697,6 +697,7 @@ const GUIDES_CORE: Guide[] = [
       {
         type: "ul",
         items: [
+          "**Use a ready-made sign.** Our free [printable WiFi sign template](/qr-code-templates) puts the code, network name and password on one page, ready to print.",
           "**Add a clear label.** A frame with \"Scan to join WiFi\" tells people what the code does before they scan; see [how to add text to a QR code](/guides/add-text-to-qr-code).",
           "**Print the details as text too.** Show the network name and password under the code for laptops and older phones that cannot scan.",
           "**Pick a sensible size.** A card on a counter or table needs a code about 3 to 5 cm wide. A sign on the wall needs more, roughly one tenth of the distance people stand from it.",

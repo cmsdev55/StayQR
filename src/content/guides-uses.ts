@@ -441,7 +441,7 @@ export const GUIDES_USES: Guide[] = [
       { type: "h2", id: "where-to-place-it", text: "Where should you put a Google review QR code?" },
       {
         type: "p",
-        text: "Put it where customers finish their visit, while the experience is fresh and they have a spare minute. That is usually at the end of the visit or soon after it.",
+        text: "Put it where customers finish their visit, while the experience is fresh and they have a spare minute. That is usually at the end of the visit or soon after it. Our [printable review card template](/qr-code-templates) prints four cards per sheet for counters, receipts and bags.",
       },
       {
         type: "table",

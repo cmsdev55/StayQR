@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AD_SLOTS, AdSlot } from "@/components/ads/ad-slot";
+import { Block } from "@/components/content/blocks";
 import { Breadcrumbs } from "@/components/content/breadcrumbs";
 import { JsonLd, breadcrumbLd, pageGraph, toolLd } from "@/components/content/json-ld";
 import { RelatedTypes } from "@/components/content/type-grid";
@@ -103,6 +104,14 @@ export default async function QrTypePageRoute({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {page.inDepth && (
+        <section aria-label="In depth" className="border-t border-line py-20 lg:py-28">
+          <div className="mx-auto flex max-w-[68ch] flex-col gap-5 px-4 sm:px-6">
+            {page.inDepth.map((b, i) => <Block key={i} b={b} />)}
+          </div>
+        </section>
+      )}
 
       <section aria-labelledby="related-title" className="border-t border-line py-24 lg:py-32">
         <div className="mx-auto max-w-container px-4 sm:px-6">

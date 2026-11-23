@@ -1,3 +1,4 @@
+import type { GuideBlock } from "@/content/guides";
 import type { QrTypeSlug } from "@/lib/qr-types";
 
 /**
@@ -26,6 +27,8 @@ export type QrTypePage = {
   faq: { q: string; a: string }[];
   /** 3–4 other slugs from the list below, most related first */
   related: QrTypeSlug[];
+  /** optional long-form section under the tips (app's own code vs ours, which link to use…) */
+  inDepth?: GuideBlock[];
 };
 
 export const QR_TYPE_PAGES: QrTypePage[] = [
@@ -421,9 +424,9 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
   // ── instagram ────────────────────────────────────────────────────────
   {
     slug: "instagram",
-    title: "Instagram QR Code Generator: Free, No Sign-Up",
+    title: "Instagram QR Code Generator: Free Profile, Post & Reel QR",
     description:
-      "Make an Instagram QR code that opens your profile, post or reel in one scan. Add your logo and colours. Free, no sign-up, no watermark, never expires.",
+      "Instagram QR code generator: make a QR code for your Instagram profile, post or reel, with your logo and colours. No sign-up, no watermark, never expires.",
     h1: "Instagram QR code generator",
     intro:
       "An Instagram QR code stores a link to your Instagram profile, post or reel and opens it in the Instagram app if installed, or in the browser if not. Unlike the code inside the Instagram app, EndureQR's version uses your own colours, logo and frame and downloads as PNG, SVG, JPEG or PDF for print. If you change your username, a static code stops reaching you.",
@@ -453,8 +456,60 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       { q: "What happens if I change my username?", a: "A static code keeps pointing at the old username. Make a new code, or use a dynamic code so you can change the destination without reprinting." },
       { q: "How is this different from the code inside the Instagram app?", a: "EndureQR lets you use your own colours, logo, dot styles and frame, and download print files in PNG, SVG, JPEG or PDF up to 4096 px." },
       { q: "Do Instagram QR codes expire?", a: "No. Static codes from EndureQR never expire and have unlimited scans." },
+      { q: "Where is my Instagram QR code in the app?", a: "Go to your profile and tap Share profile, or on some versions open the menu and choose QR code. It's quick for sharing on screen; use a generator for print files and your own logo." },
+      { q: "Can I put my logo in an Instagram QR code?", a: "Yes. Upload your logo in the generator above and it sits in the middle of the code. Keep good contrast and scan the preview before printing." },
+      { q: "Does it work for business and creator accounts?", a: "Yes. A QR code just opens your profile link, so it works the same for personal, business and creator accounts, as long as the account is public." },
     ],
     related: ["tiktok", "facebook", "youtube", "url"],
+    inDepth: [
+      { type: "h2", id: "instagram-app-qr-code", text: "How to find your QR code in the Instagram app" },
+      {
+        type: "ol",
+        items: [
+          "Open Instagram and go to your profile.",
+          "Tap **Share profile** under your bio. On some app versions, open the menu (three lines, top right) and choose **QR code** instead.",
+          "Tap the colour or emoji background to change the style, then save the image or share it.",
+          "For a single post or reel, tap the share or three-dot menu on it and look for **QR code**.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Menu names change between app versions, so yours may look slightly different. Instagram's own code is fine for a phone screen or a quick share. For anything you print, a code from a generator gives you more control.",
+      },
+      { type: "h2", id: "instagram-app-vs-generator", text: "Instagram's own QR code or a generator?" },
+      {
+        type: "table",
+        head: ["", "Instagram app code", "EndureQR generator"],
+        rows: [
+          ["Opens", "Your profile, a post or a reel", "Your profile, a post, a reel, or any link you choose"],
+          ["Design", "Instagram's styles and backgrounds", "Your colours, your logo, dot styles and a frame with text"],
+          ["Download", "Image saved from the app", "PNG, JPEG, SVG or PDF up to 4096 px, for sharp print"],
+          ["Made on", "Phone only", "Phone or computer, no account needed"],
+          ["Change the link later", "No", "Yes, with a dynamic code"],
+          ["Scan counts", "No", "Yes, with a dynamic code"],
+        ],
+      },
+      { type: "h2", id: "which-instagram-link", text: "Which Instagram link should the QR code open?" },
+      {
+        type: "table",
+        head: ["To open", "Enter or paste", "Best for"],
+        rows: [
+          ["Your profile", "Your username, e.g. **@yourname**, or instagram.com/yourname", "Shop counters, business cards, packaging"],
+          ["One post", "The post link, instagram.com/p/…", "A product launch, an offer, a menu photo"],
+          ["One reel", "The reel link, instagram.com/reel/…", "A how-to or a recipe for the product in the box"],
+          ["Several places at once", "Your link-in-bio page, with the [URL QR code generator](/qr-code-generator/url)", "When you want followers to also reach your shop or booking page"],
+        ],
+      },
+      {
+        type: "p",
+        text: "To get a post or reel link, tap the share button on it and choose **Copy link**, then paste it into the generator above. The username box accepts full links too.",
+      },
+      { type: "h2", id: "scan-instagram-qr-code", text: "How people scan an Instagram QR code" },
+      {
+        type: "p",
+        text: "With the phone's normal camera: point it at the code and tap the link that appears. It opens in the Instagram app if it's installed. If someone sends you an Instagram QR code as a screenshot, you can read it with our [QR code scanner from image](/qr-code-scanner). More ways in [how to scan a QR code](/guides/how-to-scan-a-qr-code).",
+      },
+    ],
   },
 
   // ── facebook ─────────────────────────────────────────────────────────
@@ -498,9 +553,9 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
   // ── youtube ──────────────────────────────────────────────────────────
   {
     slug: "youtube",
-    title: "YouTube QR Code Generator: Free Channel and Video QR",
+    title: "YouTube QR Code Generator: Free Channel, Video & Shorts QR",
     description:
-      "Make a YouTube QR code that opens your channel or a specific video. Put how-to videos on packaging and trailers on posters. Free, no sign-up, no watermark.",
+      "Make a YouTube QR code for your channel, a video, a Short or a playlist, with your logo. Free, no sign-up, no watermark, and static codes never expire.",
     h1: "YouTube QR code generator",
     intro:
       "A YouTube QR code stores a link to a YouTube channel, video, Short or playlist and opens it in the YouTube app or the browser. Link a specific video when the code has one job, such as a setup guide on packaging, and your channel for discovery. Unlisted videos play for anyone with the link, but private ones do not, and a deleted video leaves the code opening an unavailable page.",
@@ -529,8 +584,66 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       { q: "Can I link to a playlist or a Short?", a: "Yes. Paste the full link, and check the preview opens it on your phone." },
       { q: "What happens if I delete the video?", a: "The code still scans, but it opens a video that's no longer available. Keep the video live, or use a dynamic code so you can point it at a replacement." },
       { q: "Can I see how many people scanned it?", a: "Static codes can't count scans. Dynamic codes add scan analytics by city, device and time." },
+      { q: "Does YouTube have a QR code for my channel?", a: "Yes. In the YouTube app tap You, then Share channel, then QR code. It only covers channels and YouTube's own design; use a generator for videos, Shorts, playlists or your own logo." },
+      { q: "Is a YouTube QR code free?", a: "Yes. The generator above makes static YouTube QR codes for free, with no sign-up, no watermark, unlimited scans and no expiry." },
+      { q: "Can a QR code make people subscribe to my channel?", a: "It can open a subscribe prompt: add ?sub_confirmation=1 to your channel link before making the code. In the app it may just open the channel, so test it first." },
     ],
     related: ["tiktok", "instagram", "url"],
+    inDepth: [
+      { type: "h2", id: "youtube-app-qr-code", text: "Does YouTube have its own QR code?" },
+      {
+        type: "p",
+        text: "Yes, for channels. In the YouTube app, tap **You**, then **Share channel** under your handle, and choose **QR code**. To share someone else's channel, open it, tap the three-dot menu, then **Share** and **QR code**. Menu names can vary by app version.",
+      },
+      {
+        type: "p",
+        text: "YouTube's code only opens a channel, comes in YouTube's own design and is saved as an image from the phone. To make a QR code for one video, a Short or a playlist, or to use your own logo and print files, use the generator above.",
+      },
+      { type: "h2", id: "youtube-app-vs-generator", text: "YouTube's own QR code or a generator?" },
+      {
+        type: "table",
+        head: ["", "YouTube app code", "EndureQR generator"],
+        rows: [
+          ["Opens", "A channel", "A channel, video, Short, playlist or a video at a set time"],
+          ["Design", "YouTube's layout with the channel picture", "Your colours, your logo, dot styles and a frame with text"],
+          ["Download", "Image saved from the app", "PNG, JPEG, SVG or PDF up to 4096 px"],
+          ["Made on", "Phone app only", "Phone or computer, no account needed"],
+          ["Change the link later", "No", "Yes, with a dynamic code"],
+          ["Scan counts", "No", "Yes, with a dynamic code"],
+        ],
+      },
+      { type: "h2", id: "which-youtube-link", text: "Which YouTube link should the QR code open?" },
+      {
+        type: "table",
+        head: ["To open", "Enter or paste", "Best for"],
+        rows: [
+          ["Your channel", "Your handle, e.g. **@yourchannel**", "Merch, business cards, shop windows"],
+          ["One video", "The video link, youtu.be/… or youtube.com/watch?v=…", "Setup guides on packaging, recipe cards, trailers"],
+          ["A Short", "The Short link, youtube.com/shorts/…", "Quick tips and product demos"],
+          ["A playlist", "The playlist link, youtube.com/playlist?list=…", "A course, a lesson series, every video for one product"],
+          ["A video at a set moment", "A share link with **Start at** ticked (it ends in ?t=…)", "Skipping straight to the step that matters"],
+        ],
+      },
+      {
+        type: "p",
+        text: "To get a link, tap **Share** under the video, Short or playlist and choose **Copy link**, then paste it into the box above, which accepts full links as well as handles.",
+      },
+      { type: "h3", text: "A QR code that asks people to subscribe" },
+      {
+        type: "p",
+        text: "Add **?sub_confirmation=1** to the end of your channel link, for example youtube.com/@yourchannel?sub_confirmation=1, and paste the whole link into the generator. In a browser this usually opens a subscribe prompt; in the YouTube app it may simply open your channel. Test it on your own phone before printing.",
+      },
+      { type: "h2", id: "youtube-qr-ideas", text: "Where YouTube QR codes work best" },
+      {
+        type: "ul",
+        items: [
+          "**On the box:** a setup or unboxing video saves support emails. An unlisted video keeps it for customers only.",
+          "**In classrooms:** a code on a worksheet that opens the lesson video. See [QR codes for teachers](/industries/education) for more ideas.",
+          "**At events and on posters:** a trailer or a highlights reel, printed large enough to scan from a few steps away. Our [QR code size guide](/guides/qr-code-size-for-printing) has the numbers.",
+          "**On menus and recipe cards:** a short video of the dish being made.",
+        ],
+      },
+    ],
   },
 
   // ── linkedin ─────────────────────────────────────────────────────────

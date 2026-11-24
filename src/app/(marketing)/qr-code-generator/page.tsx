@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { AD_SLOTS, AdSlot } from "@/components/ads/ad-slot";
 import { Breadcrumbs } from "@/components/content/breadcrumbs";
 import { GuideCards } from "@/components/content/guide-cards";
+import { RichText } from "@/components/content/rich-text";
 import { JsonLd, SITE, breadcrumbLd, pageGraph, toolLd } from "@/components/content/json-ld";
 import { TypeGrid } from "@/components/content/type-grid";
 import { CtaBand } from "@/components/sections/cta-band";
@@ -14,8 +15,10 @@ import { qrMatrix } from "@/lib/qr";
 import { QR_TYPES, qrType } from "@/lib/qr-types";
 
 export const metadata: Metadata = {
-  title: "Free QR Code Generator: No Sign-Up, Never Expires",
-  description: `Make a free QR code for a link, WiFi, vCard and ${QR_TYPES.length - 3} more types. Add your logo and a frame, download PNG, SVG or PDF. No sign-up, no watermark, no expiry.`,
+  // The hub owns the head term and the types. "No sign-up" and "never expires" have their own pages
+  // (/qr-code-generator-no-sign-up, /qr-code-generator-no-expiration): keep them out of this title so the pages don't compete.
+  title: "Free QR Code Generator: Link, WiFi, vCard & More",
+  description: `Make a free QR code for a link, WiFi, vCard, WhatsApp and ${QR_TYPES.length - 4} more types. Add your logo, colours and a frame, then download PNG, SVG or PDF up to 4096 px.`,
   alternates: { canonical: "/qr-code-generator" },
 };
 
@@ -54,8 +57,12 @@ export default function GeneratorHubPage() {
             id="hub-title"
             immediate
             className="mt-6"
-            title="Free QR code generator: *no sign-up, no expiry.*"
-            intro={`EndureQR's free QR code generator makes static QR codes in ${QR_TYPES.length} types, including website links, WiFi, contact cards (vCard), WhatsApp, email, SMS, calendar events and social profiles. Add a logo, colours and a frame, then download PNG, SVG, JPEG or PDF up to 4096 px. There is no sign-up, watermark or scan limit, the code is built in your browser, and static codes never expire. It's the quickest way to create a free QR code online, on a phone or a computer.`}
+            title="Free QR code generator for *links, WiFi, vCards and more.*"
+            intro={
+              <RichText
+                text={`EndureQR's free QR code generator makes static QR codes in ${QR_TYPES.length} types, including website links, WiFi, contact cards (vCard), WhatsApp, email, SMS, calendar events and social profiles. Add a logo, colours and a frame, then download PNG, SVG, JPEG or PDF up to 4096 px. It's [free with no sign-up](/qr-code-generator-no-sign-up) and [no watermark](/qr-code-generator-no-watermark), the code is built in your browser, and static codes [never expire](/qr-code-generator-no-expiration).`}
+              />
+            }
           />
           <h2 className="sr-only">Create your QR code</h2>
           <div className="mt-12">

@@ -19,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     page(""),
     page("/pricing"),
-    page("/qr-code-generator"),
+    page("/qr-code-generator", "2026-11-25"),
     page("/qr-code-scanner"),
     page("/sample-qr-codes"),
     page("/qr-code-templates", "2026-11-24"),

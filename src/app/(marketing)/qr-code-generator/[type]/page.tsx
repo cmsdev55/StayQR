@@ -125,6 +125,8 @@ export default async function QrTypePageRoute({ params }: Props) {
             <Link href="/dynamic-qr-code-generator" className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">Make it editable after printing</Link>
             {" · "}
             <Link href="/qr-code-templates" className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">Printable sign templates</Link>
+            {" · "}
+            <Link href="/qr-code-size-calculator" className="text-fg underline decoration-line-strong underline-offset-4 hover:decoration-fg">What size to print it</Link>
             {guides.length > 0 && (
               <>
                 {" · Guides: "}

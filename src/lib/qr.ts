@@ -1,8 +1,8 @@
 import qrcode from "qrcode-generator";
 
 /** Real QR module matrix, so the 3D hero code actually scans. */
-export function qrMatrix(text: string, typeNumber: TypeNumber = 4): boolean[][] {
-  const qr = qrcode(typeNumber, "M");
+export function qrMatrix(text: string, typeNumber: TypeNumber = 4, level: ErrorCorrectionLevel = "M"): boolean[][] {
+  const qr = qrcode(typeNumber, level);
   qr.addData(text);
   qr.make();
   const n = qr.getModuleCount();

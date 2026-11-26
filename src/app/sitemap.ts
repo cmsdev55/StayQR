@@ -23,6 +23,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/qr-code-scanner"),
     page("/sample-qr-codes"),
     page("/qr-code-templates", "2026-11-24"),
+    page("/qr-code-size-calculator", "2026-11-26"),
+    page("/whatsapp-link-generator", "2026-11-26"),
     ...FEATURE_PAGES.map((p) => page(`/${p.slug}`)),
     ...QR_TYPES.map((t) => page(`/qr-code-generator/${t.slug}`)),
     page("/guides", GUIDES.reduce((a, g) => (g.updated > a ? g.updated : a), "")),

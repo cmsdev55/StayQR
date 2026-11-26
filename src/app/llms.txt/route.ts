@@ -26,6 +26,8 @@ Pricing: free static codes and one free dynamic code; Pro $${PRO.monthly}/month 
 - [QR code scanner](${SITE_URL}/qr-code-scanner): read a QR code from an image or screenshot in the browser (nothing uploaded) and see whether it is a direct code or a QR service's short link
 - [Sample QR codes](${SITE_URL}/sample-qr-codes): free static test codes for every type (link, WiFi, vCard, email, phone, SMS, location, event, text) with placeholder data
 - [Printable QR code templates](${SITE_URL}/qr-code-templates): free print-ready signs made in the browser: WiFi sign, folding table tent for menus, review cards (4 per sheet), scan-to-pay sign; A4 or US Letter, print/PDF or SVG
+- [QR code size calculator](${SITE_URL}/qr-code-size-calculator): minimum print size from the real module count of your content and the scanning distance (10:1 rule; 0.8 mm modules everyday, 0.4 mm professional), with margin and 300 DPI pixels
+- [WhatsApp link generator](${SITE_URL}/whatsapp-link-generator): makes a wa.me click-to-chat link (number in international format, optional prefilled message, or a no-number share link) with copy, test and a QR code
 ${QR_TYPE_PAGES.map((p) => `- [${p.h1}](${SITE_URL}/qr-code-generator/${p.slug}): ${p.description}`).join("\n")}
 
 ## Dynamic codes and features

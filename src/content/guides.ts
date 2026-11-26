@@ -319,7 +319,7 @@ const GUIDES_CORE: Guide[] = [
     body: [
       {
         type: "p",
-        text: "The minimum practical size for a printed QR code is about **2 x 2 cm (0.8 x 0.8 in)**, for something scanned from close up, like a business card. For anything scanned from further away, use the **10:1 rule**: the code should be at least one tenth as wide as the scanning distance. A poster read from 2 metres needs a code about 20 cm wide.",
+        text: "The minimum practical size for a printed QR code is about **2 x 2 cm (0.8 x 0.8 in)**, for something scanned from close up, like a business card. For anything scanned from further away, use the **10:1 rule**: the code should be at least one tenth as wide as the scanning distance. A poster read from 2 metres needs a code about 20 cm wide. To work it out for your own link, use the [QR code size calculator](/qr-code-size-calculator).",
       },
       {
         type: "p",

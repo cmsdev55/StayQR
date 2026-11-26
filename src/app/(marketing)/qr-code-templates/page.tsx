@@ -55,7 +55,7 @@ const BODY: GuideBlock[] = [
   {
     type: "ul",
     items: [
-      "**Size.** The templates print the code at about 12 cm on a sign, 8 cm on a table tent and 6 cm on a card, so it scans from a comfortable distance. As a rule, a code should be at least a tenth of the scanning distance wide. Our guide to [QR code size for printing](/guides/qr-code-size-for-printing) has the full table.",
+      "**Size.** The templates print the code at about 12 cm on a sign, 8 cm on a table tent and 6 cm on a card, so it scans from a comfortable distance. As a rule, a code should be at least a tenth of the scanning distance wide. Our guide to [QR code size for printing](/guides/qr-code-size-for-printing) has the full table, and the [QR code size calculator](/qr-code-size-calculator) works it out for your own link.",
       "**Scale.** Print at 100% or \"Actual size\". \"Fit to page\" works too, but don't shrink review cards further, or the codes get small.",
       "**Contrast.** The code itself is always printed dark on white, which every phone can read. Your colour goes on the heading and the trim.",
       "**Quiet zone.** The white border around each code is part of it. Don't trim into it when cutting cards, and keep stickers and tape off it.",

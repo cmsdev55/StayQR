@@ -343,6 +343,13 @@ export const QR_TYPE_PAGES: QrTypePage[] = [
       { q: "Can I make a QR code for a WhatsApp group?", a: "Yes. In the group, open Group info, choose Invite via link and copy the link, then paste it into the URL QR code generator. Anyone who scans can ask to join or join directly, and resetting the link in WhatsApp switches the old code off." },
     ],
     related: ["sms", "phone", "facebook", "instagram"],
+    inDepth: [
+      { type: "h2", id: "whatsapp-link-only", text: "Need the WhatsApp link without a QR code?" },
+      {
+        type: "p",
+        text: "For your Instagram bio, a website button or an ad, you need the link itself, not a code. Our free [WhatsApp link generator](/whatsapp-link-generator) makes the same wa.me link with your message, with a copy button and a test button, and checks the number is in international format. Use this page when the link is going on paper: posters, flyers, menus, packaging or a shop window.",
+      },
+    ],
   },
 
   // ── location ─────────────────────────────────────────────────────────

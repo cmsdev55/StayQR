@@ -32,6 +32,8 @@ const COLUMNS = [
       { href: "/qr-code-scanner", label: "QR code scanner" },
       { href: "/sample-qr-codes", label: "Sample QR codes" },
       { href: "/qr-code-templates", label: "Printable QR templates" },
+      { href: "/qr-code-size-calculator", label: "QR size calculator" },
+      { href: "/whatsapp-link-generator", label: "WhatsApp link generator" },
     ],
   },
   {
